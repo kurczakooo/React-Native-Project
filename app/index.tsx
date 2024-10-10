@@ -38,6 +38,7 @@ export default function Index() {
                 backgroundColor: bgColor,
             }}
         >
+<<<<<<< HEAD
             {/* 1. Zmiana koloru tła */}
             <Button
                 title="Change Background Color"
@@ -89,6 +90,9 @@ export default function Index() {
                     {isEnabled ? 'Enabled' : 'Disabled'}
                 </Text>
             </View>
+=======
+            <Text>REACT JEST SUPER</Text>
+>>>>>>> 73192df19b6f51bad0f173a0484239524269d853
         </View>
     );
 }
