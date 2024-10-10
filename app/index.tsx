@@ -9,7 +9,7 @@ export default function Index() {
                 alignItems: 'center',
             }}
         >
-            <Text>CHUJ</Text>
+            <Text>REACT JEST SUPER</Text>
         </View>
     );
 }
