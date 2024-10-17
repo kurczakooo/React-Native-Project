@@ -1,0 +1,73 @@
+Temat projektu: Aplikacja do treningu
+
+
+Funkcjonalności:
+- logowanie, rejestracja
+- edycja danych logowania
+- śledzenie statystyk dotyczących ćwiczeń i treningów
+- przeglądanie predefiniowanych ćwiczeń
+- tworzenie treningu z gotowych ćwiczeń
+- zapisywanie treningów w kalendarzu
+
+
+Ekrany:
+
+- logowanie / rejestracja
+    - standardowy formularz login/hasło
+    - przełączenie na rejestracje
+
+- homescreen
+    - ostanie treningi
+    - przycisk do zaczęcia nowego treningu
+
+- aktualny trening
+    - przycisk początkujący ćwiczenia
+    - wpisywanie wagi i ilości powtorzeń
+    - dodawanie serii ćwiczeń
+    - wynik/podsumwoanie z ostatniego treningu
+    - licznik czasu treningu
+    - dodawanie zdjęcia po zakończeniu treningu
+    - odliczanie czasu odpoczynku
+
+- wykonany trening
+    - lista wykonanych ćwiczeń
+    - ilości serii, powtórzeń i waga
+    - czas treningu
+    - ew. zdjęcie z treningu
+
+- ćwiczenia
+    - lista ćwiczenia
+    - krotkie opisy (po kliknięciu)
+
+- kalendarz
+    - zaznaczone dni treningowe
+    - ilość tygodni treningowych pod rząd
+    - ilość dni odpoczynku
+
+- profil ze statystykami
+    - wykres podsumowujący czas treningów
+    - wykres pokazujący rozkład ćwiczeń na partie mięśniowe
+    - łączna ilość treningów
+    - łączny czas treninów
+
+- ustawienia
+    - zmiana loginu
+    - zmiana hasła
+    - zmiana motywu aplikacji
+    - wylogowanie
+
+
+Sensory:
+
+- aparat - dodawanie swoich zdjęć do 
+śledzenia progresu
+
+- wibracje - telefon wibruje kiedy czas 
+odpoczynku podczas treningu dobiegnie końca
+
+
+Skład zespołu:
+
+Filip Stępień
+Rafał Grot
+Damian Karwat
