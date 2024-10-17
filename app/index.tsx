@@ -23,9 +23,7 @@ export default function Index() {
 
     // Funkcja zmieniająca kolor tła na losowy
     const changeBackgroundColor = () => {
-        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
-            16
-        )}`;
+        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
         setBgColor(randomColor);
     };
 
@@ -35,27 +33,18 @@ export default function Index() {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: bgColor,
+                backgroundColor: bgColor
             }}
         >
-<<<<<<< HEAD
             {/* 1. Zmiana koloru tła */}
-            <Button
-                title="Change Background Color"
-                onPress={changeBackgroundColor}
-            />
+            <Button title='Change Background Color' onPress={changeBackgroundColor} />
 
             {/* 2. Licznik kliknięć */}
             <Text style={{ fontSize: 24, marginTop: 20 }}>Count: {count}</Text>
-            <Button
-                title="Increase Count"
-                onPress={() => setCount(count + 1)}
-            />
+            <Button title='Increase Count' onPress={() => setCount(count + 1)} />
 
             {/* 3. Zegar */}
-            <Text style={{ fontSize: 24, marginTop: 20 }}>
-                Current Time: {time}
-            </Text>
+            <Text style={{ fontSize: 24, marginTop: 20 }}>Current Time: {time}</Text>
 
             {/* 4. Pole tekstowe */}
             <TextInput
@@ -65,9 +54,9 @@ export default function Index() {
                     borderWidth: 1,
                     marginTop: 20,
                     padding: 10,
-                    width: 200,
+                    width: 200
                 }}
-                placeholder="Enter text"
+                placeholder='Enter text'
                 onChangeText={setInputText}
             />
             <Text style={{ marginTop: 10 }}>{inputText}</Text>
@@ -77,22 +66,15 @@ export default function Index() {
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    marginTop: 20,
+                    marginTop: 20
                 }}
             >
                 <Switch
                     value={isEnabled}
-                    onValueChange={() =>
-                        setIsEnabled(previousState => !previousState)
-                    }
+                    onValueChange={() => setIsEnabled(previousState => !previousState)}
                 />
-                <Text style={{ marginLeft: 10 }}>
-                    {isEnabled ? 'Enabled' : 'Disabled'}
-                </Text>
+                <Text style={{ marginLeft: 10 }}>{isEnabled ? 'Enabled' : 'Disabled'}</Text>
             </View>
-=======
-            <Text>REACT JEST SUPER</Text>
->>>>>>> 73192df19b6f51bad0f173a0484239524269d853
         </View>
     );
 }
