@@ -18,7 +18,7 @@ Po wciśnięciu `W` aplikacja otworzy się z wykorzystaniem przeglądarki pod ad
 
 ## To - do
 
--   [ ] Konfiguracja projektu (`prettier`, `eslint`)
+-   [x] Konfiguracja projektu (`prettier`, `eslint`)
 
 ## O projekcie
 
