@@ -1,8 +1,14 @@
 # Projekt aplikacje mobilne
 
-### Uruchamianie
+## Uruchamianie
 
-Uruchomienie projektu:
+Aby uruchomić projekt, zainstaluj zależności:
+
+```bash
+npm i
+```
+
+Następnie, aby uruchomić aplikację:
 
 ```bash
 npm run start
@@ -10,11 +16,11 @@ npm run start
 
 Po wciśnięciu `W` aplikacja otworzy się z wykorzystaniem przeglądarki pod adresem [http://localhost:8081](http://localhost:8081).
 
-### To - do
+## To - do
 
 -   [ ] Konfiguracja projektu (`prettier`, `eslint`)
 
-### O projekcie
+## O projekcie
 
 **Temat projektu:** Aplikacja do treningu
 
