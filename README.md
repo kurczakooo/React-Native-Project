@@ -20,6 +20,10 @@ Po wciśnięciu `W` aplikacja otworzy się z wykorzystaniem przeglądarki pod ad
 
 -   [x] Konfiguracja projektu (`prettier`, `eslint`)
 
+## Uwagi i linki
+
+-   [JSON i obrazki z ćwiczeniami](https://github.com/yuhonas/free-exercise-db)
+
 ## O projekcie
 
 **Temat projektu:** Aplikacja do treningu
