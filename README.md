@@ -11,7 +11,7 @@ npm i
 Następnie, aby uruchomić aplikację:
 
 ```bash
-npm run start
+npm start
 ```
 
 Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod adresem [http://localhost:8081](http://localhost:8081).
@@ -19,10 +19,13 @@ Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod ad
 ## To - do
 
 -   [x] Konfiguracja projektu (`prettier`, `eslint`)
+-   [x] Dodanie biblioteki UI (`React Native Paper`)
 
 ## Uwagi i linki
 
 -   [JSON i obrazki z ćwiczeniami](https://github.com/yuhonas/free-exercise-db)
+-   [Dokumentacja komponentów](https://callstack.github.io/react-native-paper/docs/components/ActivityIndicator)
+-   [Komponenty dla Figmy](https://www.figma.com/community/file/1035203688168086460)
 
 ## O projekcie
 
