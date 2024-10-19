@@ -14,7 +14,7 @@ Następnie, aby uruchomić aplikację:
 npm run start
 ```
 
-Po wciśnięciu `W` aplikacja otworzy się z wykorzystaniem przeglądarki pod adresem [http://localhost:8081](http://localhost:8081).
+Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod adresem [http://localhost:8081](http://localhost:8081).
 
 ## To - do
 
