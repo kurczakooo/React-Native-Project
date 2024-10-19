@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
-  <rect width="14" height="6" x="18" y="22" fill="#000" rx="1.5"/>
-  <path fill="#000" d="M8 6a6 6 0 0 1 6-6h2v50h-2a6 6 0 0 1-6-6V6Zm-8 8a5 5 0 0 1 5-5h1v32H5a5 5 0 0 1-5-5V14Zm42-8a6 6 0 0 0-6-6h-2v50h2a6 6 0 0 0 6-6V6Zm8 8a5 5 0 0 0-5-5h-1v32h1a5 5 0 0 0 5-5V14Z"/>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="23.04" y="28.16" width="17.92" height="7.68" rx="1.5" fill="black"/>
+<path d="M10.24 6C10.24 2.68629 12.9263 0 16.24 0H20.48V64H16.24C12.9263 64 10.24 61.3137 10.24 58V6Z" fill="black"/>
+<path d="M0 16.52C0 13.7586 2.23858 11.52 5 11.52H7.68V52.48H5C2.23858 52.48 0 50.2414 0 47.48V16.52Z" fill="black"/>
+<path d="M53.76 6C53.76 2.68629 51.0737 0 47.76 0H43.52V64H47.76C51.0737 64 53.76 61.3137 53.76 58V6Z" fill="black"/>
+<path d="M64 16.52C64 13.7586 61.7614 11.52 59 11.52H56.32V52.48H59C61.7614 52.48 64 50.2414 64 47.48V16.52Z" fill="black"/>
 </svg>
