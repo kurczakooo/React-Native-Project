@@ -21,6 +21,11 @@ export default function Index() {
                 style={{ width: 200, height: 'auto', aspectRatio: 16 / 9 }}
             />
             <Text style={{ color: 'black' }}>Kocham PŚK</Text>
+            <Text style={{ color: 'black' }}>Kocham PŚK</Text>
+            <Text style={{ color: 'black' }}>Kocham PŚK</Text>
+            <Text style={{ color: 'black' }}>Kocham PŚK</Text>
+            <Text style={{ color: 'black' }}>Kocham PŚK</Text>
+            <Text style={{ color: 'black' }}>Kocham PŚK</Text>
         </Surface>
     );
 }
