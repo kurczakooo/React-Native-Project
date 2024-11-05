@@ -20,6 +20,15 @@ Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod ad
 
 -   [x] Konfiguracja projektu (`prettier`, `eslint`)
 -   [x] Dodanie biblioteki UI (`React Native Paper`)
+-   [ ] Demo aplikacji (`Figma`)
+    -   [x] Logowanie / rejestracja
+    -   [x] Ekran główny
+    -   [ ] Aktualny trening
+    -   [ ] Wykonany trening
+    -   [ ] Ćwiczenia
+    -   [ ] Profil
+    -   [ ] Kalendarz
+    -   [ ] Ustawienia
 
 ## Uwagi i linki
 
