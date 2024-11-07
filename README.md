@@ -27,7 +27,7 @@ Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod ad
     -   [ ] Wykonany trening
     -   [x] Ćwiczenia
     -   [x] Profil
-    -   [ ] Kalendarz
+    -   [x] Kalendarz
     -   [x] Ustawienia
 
 ## Uwagi i linki
