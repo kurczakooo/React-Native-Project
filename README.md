@@ -23,7 +23,7 @@ Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod ad
 -   [ ] Demo aplikacji (`Figma`)
     -   [x] Logowanie / rejestracja
     -   [x] Ekran główny
-    -   [ ] Aktualny trening
+    -   [x] Aktualny trening
     -   [ ] Wykonany trening
     -   [x] Ćwiczenia
     -   [x] Profil
