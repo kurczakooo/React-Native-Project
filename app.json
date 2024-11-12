@@ -4,11 +4,11 @@
         "slug": "React-Native-Project",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/png/icon.png",
+        "icon": "./assets/logo/icon.png",
         "scheme": "myapp",
         "userInterfaceStyle": "automatic",
         "splash": {
-            "image": "./assets/png/splash.png",
+            "image": "./assets/logo/splash.png",
             "backgroundColor": "#ffffff"
         },
         "ios": {
@@ -16,14 +16,14 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/png/icon.png",
+                "foregroundImage": "./assets/logo/icon.png",
                 "backgroundColor": "#ffffff"
             }
         },
         "web": {
             "bundler": "metro",
             "output": "static",
-            "favicon": "./assets/png/icon.png"
+            "favicon": "./assets/logo/icon.png"
         },
         "plugins": ["expo-router"],
         "experiments": {
