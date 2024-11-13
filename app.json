@@ -1,14 +1,15 @@
 {
     "expo": {
-        "name": "React-Native-Project",
-        "slug": "React-Native-Project",
+        "name": "big-gain",
+        "slug": "big-gain",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/logo/icon.png",
-        "scheme": "myapp",
-        "userInterfaceStyle": "automatic",
+        "userInterfaceStyle": "light",
+        "newArchEnabled": true,
         "splash": {
             "image": "./assets/logo/splash.png",
+            "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
         "ios": {
@@ -21,13 +22,7 @@
             }
         },
         "web": {
-            "bundler": "metro",
-            "output": "static",
             "favicon": "./assets/logo/icon.png"
-        },
-        "plugins": ["expo-router"],
-        "experiments": {
-            "typedRoutes": true
         }
     }
 }
