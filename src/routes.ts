@@ -27,7 +27,7 @@ const tabRoutes: TabRoute[] = [
         options: { headerShown: false },
         screens: [
             {
-                name: 'Home',
+                name: 'HomeScreen',
                 component: HomeScreen
                 // options: {
                 //     tabBarIcon: ({ color, size }: { color: string; size: number }) => (
