@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "eslint .",
-    "api": "npx concurrently \"npx tsx src/api/generate.ts\" \"npx json-server database.json\""
+    "api": "npx concurrently \"npx tsx src/api/generate.ts\" \"npx json-server -s ./src/api/static database.json\""
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.0",

@@ -31,6 +31,20 @@ Dostępne metody HTTP opisane są na stronie pakietu [json-server](https://www.n
 > [!NOTE]  
 > Definicje typów obiektów używanych przez API znajdują się w pliku [types.ts](https://github.com/kurczakooo/React-Native-Project/blob/main/src/types.ts).
 
+#### Tworzone endpointy
+
+| Endpoint      | Opis                         | Interfejs ([types.ts](https://github.com/kurczakooo/React-Native-Project/blob/main/src/types.ts)) |
+| ------------- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| `/users`      | Użytkownicy aplikacji.       | `User`                                                                                            |
+| `/muscles`    | Lista partii mięśniowych.    | `ExerciseMuscle`                                                                                  |
+| `/levels`     | Kategorie trudności ćwiczeń. | `ExerciseLevel`                                                                                   |
+| `/forces`     | Typy siły w ćwiczeniach.     | `ExerciseForce`                                                                                   |
+| `/mechanics`  | Rodzaje mechaniki ćwiczeń.   | `ExerciseMechanic`                                                                                |
+| `/exercsises` | Lista dostępnych ćwiczeń.    | `PredefinedExercise`                                                                              |
+
+> [!TIP]  
+> W pliku [**.env.development**](https://github.com/kurczakooo/React-Native-Project/blob/main/.env.development) znajduje się zmienna `EXPO_PUBLIC_DEV_API_URL`, zawierająca adres URL testowego serwera. Można ją odczytać w bezpośrednio w kodzie za pomocą `process.env.EXPO_PUBLIC_DEV_API_URL`, co pozwala uniknąć wielokrotnego wpisywania adresu URL jako tekstu podczas realizowania zapytań do API.
+
 ## Uwagi i linki
 
 -   [JSON i obrazki z ćwiczeniami](https://github.com/yuhonas/free-exercise-db)

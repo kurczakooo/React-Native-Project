@@ -161,17 +161,12 @@ export interface WorkoutExercise {
 }
 
 /**
- * Base64-encoded image.
- */
-type Base64<imageType extends string> = `data:image/${imageType};base64${string}`;
-
-/**
  * User's performed workout.
  */
 export interface Workout {
     id: string;
     title: string;
-    image: Base64<'png'> | null;
+    imageUrl: string | null;
     dateTimestamp: number;
     totalDuration: number;
     totalSets: number;

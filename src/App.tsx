@@ -11,6 +11,8 @@ import lightTheme from './themes/light';
 const tab = createBottomTabNavigator();
 const stack = createNativeStackNavigator();
 
+console.log(process.env.EXPO_PUBLIC_DEV_API_URL);
+
 export default function App() {
     return (
         <PaperProvider theme={lightTheme}>
