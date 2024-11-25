@@ -1,4 +1,4 @@
 module.exports = {
     extends: ['expo', 'prettier'],
-    plugins: ['prettier']
+    plugins: ['prettier', 'only-error']
 };
