@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { MD3Colors, MD3Theme } from 'react-native-paper/lib/typescript/types';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
@@ -40,6 +41,36 @@ export interface TabRoute {
      * Navigation options.
      */
     options?: BottomTabNavigationOptions;
+}
+
+/**
+ * Color theme which extends default React Native Paper pallete type.
+ * Contains custom colors.
+ */
+export interface Theme extends MD3Theme {
+    colors: MD3Colors & {
+        /**
+         * Use this color if you are unsure
+         * which color from theme should be
+         * used for primary font.
+         */
+        fontPrimary: string;
+
+        /**
+         * Use this color if you are unsure
+         * which color from theme should be
+         * used for secondary font.
+         */
+        fontSecondary: string;
+
+        // Colors for exercise levels
+        beginner: string;
+        onBeginner: string;
+        intermediate: string;
+        onIntermediate: string;
+        expert: string;
+        onExpert: string;
+    };
 }
 
 /**

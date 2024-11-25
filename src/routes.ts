@@ -1,5 +1,5 @@
 import { TabRoute, StackScreen } from './types';
-import { Messages, Profile, Options } from './debug';
+import Debug from './debug';
 import HomeScreen from './screens/Home';
 
 /**
@@ -7,12 +7,8 @@ import HomeScreen from './screens/Home';
  */
 const stackScreens: StackScreen[] = [
     {
-        name: 'Home',
-        component: HomeScreen
-    },
-    {
-        name: 'Messages',
-        component: Messages
+        name: 'Debug',
+        component: Debug
     }
 ];
 
@@ -36,24 +32,6 @@ const tabRoutes: TabRoute[] = [
                 //       />
                 //     ),
                 //   },
-            },
-            {
-                name: 'Messages',
-                component: Messages
-            }
-        ]
-    },
-    {
-        name: 'Second',
-        options: { headerShown: false },
-        screens: [
-            {
-                name: 'Profile',
-                component: Profile
-            },
-            {
-                name: 'Options',
-                component: Options
             }
         ]
     }
