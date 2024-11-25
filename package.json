@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "api": "npx concurrently \"npx tsx src/api/generate.ts\" \"npx json-server database.json\""
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.0",
@@ -29,11 +30,14 @@
     "@babel/core": "^7.25.2",
     "@types/react": "~18.3.12",
     "babel-plugin-module-resolver": "^5.0.2",
+    "concurrently": "^9.1.0",
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "json-server": "^1.0.0-beta.3",
     "prettier": "^3.3.3",
+    "tsx": "^4.19.2",
     "typescript": "^5.3.3"
   },
   "private": true

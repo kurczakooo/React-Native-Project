@@ -16,28 +16,20 @@ npm start
 
 Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod adresem [http://localhost:8081](http://localhost:8081).
 
-## To - do
+## Testowe API
 
--   [x] Konfiguracja projektu (`prettier`, `eslint`)
--   [x] Dodanie biblioteki UI (`React Native Paper`)
--   [x] Demo aplikacji (`Figma`)
-    -   [x] Logowanie / rejestracja
-    -   [x] Ekran główny
-    -   [x] Aktualny trening
-    -   [x] Wykonany trening
-    -   [x] Ćwiczenia
-    -   [x] Profil
-    -   [x] Kalendarz
-    -   [x] Ustawienia
--   [ ] Implementacja ekranów
-    -   [ ] Logowanie / rejestracja
-    -   [ ] Ekran główny
-    -   [ ] Aktualny trening
-    -   [ ] Wykonany trening
-    -   [ ] Ćwiczenia
-    -   [ ] Profil
-    -   [ ] Kalendarz
-    -   [ ] Ustawienia
+Aby uruchomić proces z testowym API:
+
+```bash
+npm run api
+```
+
+Endpointy będą wówczas dostępne pod adresem [http://localhost:3000](http://localhost:3000).
+
+Dostępne metody HTTP opisane są na stronie pakietu [json-server](https://www.npmjs.com/package/json-server).
+
+> [!NOTE]  
+> Definicje typów obiektów używanych przez API znajdują się w pliku [types.ts](https://github.com/kurczakooo/React-Native-Project/blob/main/src/types.ts).
 
 ## Uwagi i linki
 

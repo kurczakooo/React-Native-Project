@@ -1,5 +1,5 @@
 import { TypedNavigator } from '@react-navigation/native';
-import { AppScreen } from '../types';
+import { StackScreen } from '../types';
 
 /**
  * Navigator, which manages screens with a stack.
@@ -8,7 +8,7 @@ import { AppScreen } from '../types';
  * @param stack stack returned from `createNativeStackNavigator()` call
  */
 export default function StackNavigator(props: {
-    screens: AppScreen[];
+    screens: StackScreen[];
     stack: TypedNavigator<any>;
 }) {
     const Stack = props.stack;
