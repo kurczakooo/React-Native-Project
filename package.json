@@ -34,7 +34,6 @@
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-only-error": "^1.0.2",
     "eslint-plugin-prettier": "^5.2.1",
     "json-server": "^1.0.0-beta.3",
     "prettier": "^3.3.3",
