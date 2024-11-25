@@ -1,12 +1,11 @@
-import { TabRoute, AppScreen } from './types';
-import { Feed, Messages, Profile, Options } from './debug';
-//import TabBarIcon from './components/TabBarIcon';
+import { TabRoute, StackScreen } from './types';
+import { Messages, Profile, Options } from './debug';
 import HomeScreen from './screens/Home';
 
 /**
  * Example screens for stack navigator.
  */
-const stackScreens: AppScreen[] = [
+const stackScreens: StackScreen[] = [
     {
         name: 'Home',
         component: HomeScreen
