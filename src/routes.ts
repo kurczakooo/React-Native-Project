@@ -1,13 +1,15 @@
 import { TabRoute, AppScreen } from './types';
 import { Feed, Messages, Profile, Options } from './debug';
+//import TabBarIcon from './components/TabBarIcon';
+import HomeScreen from './screens/Home';
 
 /**
  * Example screens for stack navigator.
  */
 const stackScreens: AppScreen[] = [
     {
-        name: 'Feed',
-        component: Feed
+        name: 'Home',
+        component: HomeScreen
     },
     {
         name: 'Messages',
@@ -21,12 +23,20 @@ const stackScreens: AppScreen[] = [
  */
 const tabRoutes: TabRoute[] = [
     {
-        name: 'First',
+        name: 'Home',
         options: { headerShown: false },
         screens: [
             {
-                name: 'Feed',
-                component: Feed
+                name: 'Home',
+                component: HomeScreen
+                // options: {
+                //     tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+                //       <Image
+                //         source={require('@assets/icons/home.png')}
+                //         style={{ width: size, height: size, tintColor: color }}
+                //       />
+                //     ),
+                //   },
             },
             {
                 name: 'Messages',
