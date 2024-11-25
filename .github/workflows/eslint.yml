@@ -32,7 +32,8 @@ jobs:
 
       - name: Install Stuffs
         run: |
-          npm i
+          npm i;
+          npm i @microsoft/eslint-formatter-sarif
 
       - name: Run ESLint
         env:
@@ -40,6 +41,7 @@ jobs:
         run: npx eslint .
           --ext .js,.jsx,.ts,.tsx
           --output-file eslint-results.sarif
+          --format @microsoft/eslint-formatter-sarif              
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
