@@ -1,7 +1,7 @@
-import { View, Image, StyleSheet, Pressable } from 'react-native';
-import { Avatar, Button, Card, Icon, Text, useTheme } from 'react-native-paper';
-import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Button, Text, useTheme } from 'react-native-paper';
 import { WorkoutCard } from './workoutCard';
+import { exampleCards } from './exampleCards';
 
 export default function HomeScreen() {
     const theme = useTheme();
@@ -12,15 +12,30 @@ export default function HomeScreen() {
         <View style={{ flex: 1, padding: 15, gap: 15 }}>
             <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Hi, {nickname} 👋</Text>
             <Button
-                //mode='elevated'
-                style={[styles.button, styles.buttonShadow]}
+                mode='elevated'
+                style={styles.button}
                 labelStyle={styles.buttonText}
                 onPress={() => console.log('Pressed')}
             >
                 + Start new workout
             </Button>
             <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'grey' }}>Recent workouts</Text>
-            <WorkoutCard />
+            <ScrollView>
+                {exampleCards.map(card => (
+                    <WorkoutCard
+                        key={card.id}
+                        id=''
+                        imageUrl=''
+                        title={card.name}
+                        dateTimestamp={card.date}
+                        totalDuration={card.time}
+                        totalSets={card.sets}
+                        totalVolume={card.volume}
+                        targetMuscles={card.targetMuscles}
+                        exercises={[]}
+                    />
+                ))}
+            </ScrollView>
         </View>
     );
 }
@@ -30,13 +45,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1778f2',
         paddingVertical: 13,
         borderRadius: 5,
-        elevation: 24
-    },
-    buttonShadow: {
-        shadowColor: 'grey',
-        shadowOffset: { width: 2, height: 3 },
-        shadowOpacity: 0.5,
-        shadowRadius: 3
+        elevation: 5,
+        shadowColor: 'grey'
     },
     buttonText: {
         color: '#FFFFFF',

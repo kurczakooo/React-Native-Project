@@ -1,22 +1,24 @@
 import { View, Image, StyleSheet, Pressable } from 'react-native';
-import { Avatar, Button, Card, Icon, Text, useTheme } from 'react-native-paper';
-import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import { Card, Icon, Text } from 'react-native-paper';
+import { Workout } from 'src/types';
 
-export const WorkoutCard = () => {
-    const workoutDate = new Date();
-    const formattedDate = `${workoutDate.getDate()} ${workoutDate.toLocaleString('default', { month: 'long' })} ${workoutDate.getFullYear()}`;
-    const timeIcon = props => (
-        <Image source={require('@assets/icons/time.png')} style={{ width: 20, height: 20 }} />
-    );
-    const setsIcon = props1 => (
-        <Image source={require('@assets/icons/set.png')} style={{ width: 20, height: 24 }} />
-    );
-    const volumeIcon = props2 => (
-        <Image source={require('@assets/icons/volume.png')} style={{ width: 20, height: 20 }} />
-    );
+export const WorkoutCard: React.FC<Workout> = ({
+    title,
+    dateTimestamp,
+    totalDuration,
+    totalSets,
+    totalVolume,
+    targetMuscles
+}) => {
+    const convertedDate = new Date(dateTimestamp);
+    const formattedDate = `${convertedDate.getFullYear()}-${(convertedDate.getMonth() + 1).toString().padStart(2, '0')}-${convertedDate.getDate().toString().padStart(2, '0')}`;
+
+    const timeIcon = require('@assets/icons/time.png');
+    const setsIcon = require('@assets/icons/set.png');
+    const volumeIcon = require('@assets/icons/volume.png');
 
     return (
-        <Card style={{ padding: 15 }}>
+        <Card style={{ padding: 15, margin: 5 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Card.Content>
                     <Text
@@ -26,7 +28,7 @@ export const WorkoutCard = () => {
                             color: 'black'
                         }}
                     >
-                        Workout
+                        {title}
                     </Text>
                     <Text style={styles.date}>{formattedDate}</Text>
                 </Card.Content>
@@ -50,30 +52,32 @@ export const WorkoutCard = () => {
                     <Icon source={timeIcon} size={20} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Time</Text>
-                        <Text style={styles.date}>55 min</Text>
+                        <Text style={styles.date}>{totalDuration} min</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, gap: 10 }}>
-                    <Icon source={setsIcon} size={20} />
+                    <Icon source={setsIcon} size={22} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Sets</Text>
-                        <Text style={styles.date}>18</Text>
+                        <Text style={styles.date}>{totalSets}</Text>
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, gap: 10 }}>
                     <Icon source={volumeIcon} size={20} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Volume</Text>
-                        <Text style={styles.date}>1052 kg</Text>
+                        <Text style={styles.date}>{totalVolume} kg</Text>
                     </View>
                 </View>
             </View>
             <Card.Content style={{ gap: 15 }}>
                 <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Target Muscles</Text>
                 <View style={{ flexDirection: 'row', gap: 10 }}>
-                    <Text style={styles.targetMuscles}>Arms</Text>
-                    <Text style={styles.targetMuscles}>Chest</Text>
-                    <Text style={styles.targetMuscles}>Shoulders</Text>
+                    {targetMuscles.map((muscleObj, index) => (
+                        <Text key={index} style={styles.targetMuscles}>
+                            {muscleObj.muscle}
+                        </Text>
+                    ))}
                 </View>
             </Card.Content>
         </Card>
