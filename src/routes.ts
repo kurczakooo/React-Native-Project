@@ -1,6 +1,9 @@
 import { TabRoute, StackScreen } from './types';
 import Debug from './debug';
 import HomeScreen from './screens/Home';
+import { Icon } from 'react-native-paper';
+
+const homeIcon = require('@assets/icons/home.png');
 
 /**
  * Example screens for stack navigator.
@@ -19,19 +22,13 @@ const stackScreens: StackScreen[] = [
 const tabRoutes: TabRoute[] = [
     {
         name: 'Home',
-        options: { headerShown: false },
+        options: { headerShown: false }, //, tabBarIcon: ({ color, size }) => {
+        //     return <Image source={homeIcon} />;
+        //   }, },
         screens: [
             {
                 name: 'HomeScreen',
                 component: HomeScreen
-                // options: {
-                //     tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-                //       <Image
-                //         source={require('@assets/icons/home.png')}
-                //         style={{ width: size, height: size, tintColor: color }}
-                //       />
-                //     ),
-                //   },
             }
         ]
     }

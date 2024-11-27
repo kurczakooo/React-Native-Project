@@ -1,14 +1,18 @@
 import { View, Image, StyleSheet, Pressable } from 'react-native';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { Card, Icon, Text } from 'react-native-paper';
 import { Workout } from 'src/types';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
 export const WorkoutCard: React.FC<Workout> = ({
+    id,
     title,
     dateTimestamp,
     totalDuration,
     totalSets,
     totalVolume,
-    targetMuscles
+    targetMuscles,
+    onPressProps
 }) => {
     const convertedDate = new Date(dateTimestamp);
     const formattedDate = `${convertedDate.getFullYear()}-${(convertedDate.getMonth() + 1).toString().padStart(2, '0')}-${convertedDate.getDate().toString().padStart(2, '0')}`;
@@ -33,7 +37,19 @@ export const WorkoutCard: React.FC<Workout> = ({
                     <Text style={styles.date}>{formattedDate}</Text>
                 </Card.Content>
                 <Card.Actions>
-                    <Pressable>
+                    <Pressable
+                        onPress={() =>
+                            onPressProps({
+                                id,
+                                title,
+                                dateTimestamp,
+                                totalDuration,
+                                totalSets,
+                                totalVolume,
+                                targetMuscles
+                            })
+                        }
+                    >
                         <Image
                             source={require('@assets/icons/options.png')}
                             style={{ width: 24, height: 24 }}
@@ -44,7 +60,6 @@ export const WorkoutCard: React.FC<Workout> = ({
             <View
                 style={{
                     flexDirection: 'row',
-                    //backgroundColor: 'red',
                     gap: 20
                 }}
             >

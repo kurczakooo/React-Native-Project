@@ -5,6 +5,7 @@ import { stackScreens, tabRoutes } from './routes';
 import TabNavigator from './components/TabNavigator';
 import StackNavigator from './components/StackNavigator';
 import { PaperProvider } from 'react-native-paper';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import lightTheme from './themes/light';
 
@@ -17,8 +18,10 @@ export default function App() {
     return (
         <PaperProvider theme={lightTheme}>
             <NavigationContainer>
-                <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
-                {/* <StackNavigator screens={stackScreens} stack={stack} /> */}
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                    <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
+                    {/* <StackNavigator screens={stackScreens} stack={stack} /> */}
+                </GestureHandlerRootView>
             </NavigationContainer>
         </PaperProvider>
     );
