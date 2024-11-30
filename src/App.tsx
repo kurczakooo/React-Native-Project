@@ -19,8 +19,8 @@ export default function App() {
         <PaperProvider theme={lightTheme}>
             <NavigationContainer>
                 <GestureHandlerRootView style={{ flex: 1 }}>
-                    <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
-                    {/* <StackNavigator screens={stackScreens} stack={stack} /> */}
+                    <StackNavigator screens={stackScreens} stack={stack} />
+                    {/* <TabNavigator routes={tabRoutes} tab={tab} stack={stack} /> */}
                 </GestureHandlerRootView>
             </NavigationContainer>
         </PaperProvider>

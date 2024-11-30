@@ -2,6 +2,7 @@ import { TabRoute, StackScreen } from './types';
 import Debug from './debug';
 import HomeScreen from './screens/Home';
 import { Icon } from 'react-native-paper';
+import Login from './screens/Login';
 
 const homeIcon = require('@assets/icons/home.png');
 
@@ -10,8 +11,9 @@ const homeIcon = require('@assets/icons/home.png');
  */
 const stackScreens: StackScreen[] = [
     {
-        name: 'Debug',
-        component: Debug
+        name: 'Login',
+        component: Login,
+        options: {headerShown: false}
     }
 ];
 

@@ -1,10 +1,16 @@
+import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
 import { Button, TextInput, Text } from 'react-native-paper';
+import { ColorSpace } from 'react-native-reanimated';
+import { backendAPI } from 'src/api/config';
+import { User } from 'src/types';
 
 export default function Login() {
     const [username, setUsername] = useState('janaslover');
-    const [password, setPassword] = useState('kochamjanasa');
+    const [password, setPassword] = useState(
+        '$2a$12$VKJqtFYnasNzt51QgRH9M.kiw31LFwv7ZBsY5Rj8IbQzNQEprdG32'
+    );
 
     const handleUsername = (newUsername: string) => {
         setUsername(newUsername);
@@ -14,8 +20,31 @@ export default function Login() {
         setPassword(newPassword);
     };
 
-    const onLogin = () => {
+    const onLogin = async () => {
         console.log(`Login pressed\nusername: ${username}\npassword: ${password}`);
+        const data = await backendAPI.get('/users');
+        const users: User[] = data.data.filter((e: User) => {
+            return e.username === username;
+        });
+
+        // if not found user with given username
+        if (users.length === 0) {
+            console.error(`User ${username} does not exist`);
+            console.log(users);
+            return;
+        }
+
+        const user: User = users[0];
+        //console.log(user);
+
+        // if credentails are wrong
+        if (user.username !== username || user.password !== password) {
+            console.error(`invalid credentials`);
+            return;
+        }
+
+        // successful authentication
+        console.log('Login sucessfull');
     };
 
     const onRegister = () => {
@@ -24,7 +53,6 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
-            // FIXME
             <Image
                 style={{ alignContent: 'center', width: '100%' }}
                 resizeMode='center'
