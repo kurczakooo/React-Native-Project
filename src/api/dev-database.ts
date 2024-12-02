@@ -1,19 +1,11 @@
-import {
-    User,
-    ExerciseMuscle,
-    ExerciseLevel,
-    ExerciseForce,
-    ExerciseMechanic,
-    PredefinedExercise
-} from '../types';
+import { User, Workout, PredefinedExercise, WorkoutExercise, WorkoutSet } from '../types';
 
 interface DevApiEndpoints {
     users: User[];
-    muscles: ExerciseMuscle[];
-    levels: ExerciseLevel[];
-    forces: ExerciseForce[];
-    mechanics: ExerciseMechanic[];
-    exercises: PredefinedExercise[];
+    workouts: Workout[];
+    exercises: WorkoutExercise[];
+    sets: WorkoutSet[];
+    'predefined-exercises': PredefinedExercise[];
 }
 
 export const endpoints: DevApiEndpoints = {
@@ -21,399 +13,237 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'u0',
             username: 'admin',
-            password: '$2a$12$VKJqtFYnasNzt51QgRH9M.kiw31LFwv7ZBsY5Rj8IbQzNQEprdG32',
-            workouts: [
-                {
-                    id: 'w0',
-                    title: 'First workout',
-                    imageUrl: 'http://localhost:3000/image.png',
-                    dateTimestamp: 1732550444,
-                    totalDuration: 3000,
-                    totalSets: 9,
-                    totalVolume: 3200,
-                    targetMuscles: [
-                        { id: 'm3', muscle: 'shoulders' },
-                        { id: 'm7', muscle: 'biceps' },
-                        { id: 'm11', muscle: 'chest' }
-                    ],
-                    exercises: [
-                        {
-                            id: 'e43',
-                            exerciseNumber: 1,
-                            name: 'Barbell Bench Press - Medium Grip',
-                            level: { id: 'l1', level: 'intermediate' },
-                            restDuration: 300,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 80,
-                                    reps: 12,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 10
-                                    }
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 80,
-                                    reps: 11,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 9
-                                    }
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 80,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 8
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            id: 'e223',
-                            exerciseNumber: 2,
-                            name: 'Dumbbell Bicep Curl',
-                            level: { id: 'l0', level: 'beginner' },
-                            restDuration: 180,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 25,
-                                    reps: 10,
-                                    previous: null
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 20,
-                                    reps: 10,
-                                    previous: null
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 20,
-                                    reps: 9,
-                                    previous: null
-                                }
-                            ]
-                        },
-                        {
-                            id: 'e664',
-                            exerciseNumber: 3,
-                            name: 'Side Lateral Raise',
-                            level: { id: 'l0', level: 'beginner' },
-                            restDuration: 120,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 12.5,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 9
-                                    }
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 12.5,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 8
-                                    }
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 12.5,
-                                    reps: 9,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 7
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'w1',
-                    title: 'Second workout',
-                    imageUrl: null,
-                    dateTimestamp: 1732550444,
-                    totalDuration: 3000,
-                    totalSets: 9,
-                    totalVolume: 4200,
-                    targetMuscles: [
-                        { id: 'm3', muscle: 'shoulders' },
-                        { id: 'm7', muscle: 'biceps' },
-                        { id: 'm11', muscle: 'chest' }
-                    ],
-                    exercises: [
-                        {
-                            id: 'e43',
-                            exerciseNumber: 1,
-                            name: 'Barbell Bench Press - Medium Grip',
-                            level: { id: 'l1', level: 'intermediate' },
-                            restDuration: 300,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 80,
-                                    reps: 12,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 10
-                                    }
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 80,
-                                    reps: 11,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 9
-                                    }
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 80,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 8
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            id: 'e223',
-                            exerciseNumber: 2,
-                            name: 'Dumbbell Bicep Curl',
-                            level: { id: 'l0', level: 'beginner' },
-                            restDuration: 180,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 25,
-                                    reps: 10,
-                                    previous: null
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 20,
-                                    reps: 10,
-                                    previous: null
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 20,
-                                    reps: 9,
-                                    previous: null
-                                }
-                            ]
-                        },
-                        {
-                            id: 'e664',
-                            exerciseNumber: 3,
-                            name: 'Side Lateral Raise',
-                            level: { id: 'l0', level: 'beginner' },
-                            restDuration: 120,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 12.5,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 9
-                                    }
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 12.5,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 8
-                                    }
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 12.5,
-                                    reps: 9,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 7
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'w2',
-                    title: 'Third workout',
-                    imageUrl: null,
-                    dateTimestamp: 1732550444,
-                    totalDuration: 3000,
-                    totalSets: 9,
-                    totalVolume: 2350,
-                    targetMuscles: [
-                        { id: 'm3', muscle: 'shoulders' },
-                        { id: 'm7', muscle: 'biceps' },
-                        { id: 'm11', muscle: 'chest' }
-                    ],
-                    exercises: [
-                        {
-                            id: 'e43',
-                            exerciseNumber: 1,
-                            name: 'Barbell Bench Press - Medium Grip',
-                            level: { id: 'l1', level: 'intermediate' },
-                            restDuration: 300,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 80,
-                                    reps: 12,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 10
-                                    }
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 80,
-                                    reps: 11,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 9
-                                    }
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 80,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 80,
-                                        reps: 8
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            id: 'e223',
-                            exerciseNumber: 2,
-                            name: 'Dumbbell Bicep Curl',
-                            level: { id: 'l0', level: 'beginner' },
-                            restDuration: 180,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 25,
-                                    reps: 10,
-                                    previous: null
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 20,
-                                    reps: 10,
-                                    previous: null
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 20,
-                                    reps: 9,
-                                    previous: null
-                                }
-                            ]
-                        },
-                        {
-                            id: 'e664',
-                            exerciseNumber: 3,
-                            name: 'Side Lateral Raise',
-                            level: { id: 'l0', level: 'beginner' },
-                            restDuration: 120,
-                            sets: [
-                                {
-                                    setNumber: 1,
-                                    weight: 12.5,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 9
-                                    }
-                                },
-                                {
-                                    setNumber: 2,
-                                    weight: 12.5,
-                                    reps: 10,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 8
-                                    }
-                                },
-                                {
-                                    setNumber: 3,
-                                    weight: 12.5,
-                                    reps: 9,
-                                    previous: {
-                                        weight: 12.5,
-                                        reps: 7
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+            password: '$2a$12$VKJqtFYnasNzt51QgRH9M.kiw31LFwv7ZBsY5Rj8IbQzNQEprdG32'
         }
     ],
-    muscles: [
-        { id: 'm0', muscle: 'abdominals' },
-        { id: 'm1', muscle: 'hamstrings' },
-        { id: 'm2', muscle: 'calves' },
-        { id: 'm3', muscle: 'shoulders' },
-        { id: 'm4', muscle: 'adductors' },
-        { id: 'm5', muscle: 'glutes' },
-        { id: 'm6', muscle: 'quadriceps' },
-        { id: 'm7', muscle: 'biceps' },
-        { id: 'm8', muscle: 'forearms' },
-        { id: 'm9', muscle: 'abductors' },
-        { id: 'm10', muscle: 'triceps' },
-        { id: 'm11', muscle: 'chest' },
-        { id: 'm12', muscle: 'lower back' },
-        { id: 'm13', muscle: 'traps' },
-        { id: 'm14', muscle: 'middle back' },
-        { id: 'm15', muscle: 'lats' },
-        { id: 'm16', muscle: 'neck' }
-    ],
-    levels: [
-        { id: 'l0', level: 'beginner' },
-        { id: 'l1', level: 'intermediate' },
-        { id: 'l2', level: 'expert' }
-    ],
-    forces: [
-        { id: 'f0', force: 'push' },
-        { id: 'f1', force: 'pull' },
-        { id: 'f2', force: 'static' },
-        { id: 'f3', force: 'mixed' }
-    ],
-    mechanics: [
-        { id: 'm0', mechanic: 'compound' },
-        { id: 'm1', mechanic: 'isolation' },
-        { id: 'm2', mechanic: 'mixed' }
+    workouts: [
+        {
+            id: 'w0',
+            userId: 'u0',
+            title: 'First workout',
+            imageUrl: null,
+            dateTimestamp: 1732550444,
+            totalDuration: 3000,
+            totalSets: 9,
+            totalVolume: 4200,
+            targetMuscles: ['shoulders', 'biceps', 'chest']
+        },
+        {
+            id: 'w1',
+            userId: 'u0',
+            title: 'Second workout',
+            imageUrl: null,
+            dateTimestamp: 1732550444,
+            totalDuration: 3000,
+            totalSets: 9,
+            totalVolume: 4200,
+            targetMuscles: ['shoulders', 'biceps', 'chest']
+        }
     ],
     exercises: [
         {
             id: 'e0',
+            workoutId: 'w0',
+            exerciseNumber: 1,
+            name: 'Barbell Bench Press - Medium Grip',
+            level: 'intermediate',
+            restDuration: 300
+        },
+        {
+            id: 'e1',
+            workoutId: 'w0',
+            exerciseNumber: 2,
+            name: 'Dumbbell Bicep Curl',
+            level: 'beginner',
+            restDuration: 180
+        },
+        {
+            id: 'e2',
+            workoutId: 'w0',
+            exerciseNumber: 3,
+            name: 'Side Lateral Raise',
+            level: 'beginner',
+            restDuration: 120
+        },
+        {
+            id: 'e3',
+            workoutId: 'w1',
+            exerciseNumber: 1,
+            name: 'Barbell Bench Press - Medium Grip',
+            level: 'intermediate',
+            restDuration: 300
+        },
+        {
+            id: 'e4',
+            workoutId: 'w1',
+            exerciseNumber: 2,
+            name: 'Dumbbell Bicep Curl',
+            level: 'beginner',
+            restDuration: 180
+        },
+        {
+            id: 'e5',
+            workoutId: 'w1',
+            exerciseNumber: 3,
+            name: 'Side Lateral Raise',
+            level: 'beginner',
+            restDuration: 120
+        }
+    ],
+    sets: [
+        {
+            id: 's0',
+            exerciseId: 'e0',
+            previousSetId: null,
+            setNumber: 1,
+            weight: 80,
+            reps: 12
+        },
+        {
+            id: 's1',
+            exerciseId: 'e0',
+            previousSetId: null,
+            setNumber: 2,
+            weight: 80,
+            reps: 11
+        },
+        {
+            id: 's2',
+            exerciseId: 'e0',
+            previousSetId: null,
+            setNumber: 3,
+            weight: 80,
+            reps: 10
+        },
+        {
+            id: 's3',
+            exerciseId: 'e1',
+            previousSetId: null,
+            setNumber: 1,
+            weight: 25,
+            reps: 10
+        },
+        {
+            id: 's4',
+            exerciseId: 'e1',
+            previousSetId: null,
+            setNumber: 2,
+            weight: 20,
+            reps: 10
+        },
+        {
+            id: 's5',
+            exerciseId: 'e1',
+            previousSetId: null,
+            setNumber: 3,
+            weight: 20,
+            reps: 9
+        },
+        {
+            id: 's6',
+            exerciseId: 'e2',
+            previousSetId: null,
+            setNumber: 1,
+            weight: 12.5,
+            reps: 10
+        },
+        {
+            id: 's7',
+            exerciseId: 'e2',
+            previousSetId: null,
+            setNumber: 2,
+            weight: 12.5,
+            reps: 10
+        },
+        {
+            id: 's8',
+            exerciseId: 'e2',
+            previousSetId: null,
+            setNumber: 3,
+            weight: 12.5,
+            reps: 9
+        },
+        {
+            id: 's9',
+            exerciseId: 'e3',
+            previousSetId: 's0',
+            setNumber: 1,
+            weight: 80,
+            reps: 12
+        },
+        {
+            id: 's10',
+            exerciseId: 'e3',
+            previousSetId: 's1',
+            setNumber: 2,
+            weight: 80,
+            reps: 11
+        },
+        {
+            id: 's11',
+            exerciseId: 'e3',
+            previousSetId: 's2',
+            setNumber: 3,
+            weight: 80,
+            reps: 10
+        },
+        {
+            id: 's12',
+            exerciseId: 'e4',
+            previousSetId: 's3',
+            setNumber: 1,
+            weight: 25,
+            reps: 10
+        },
+        {
+            id: 's13',
+            exerciseId: 'e4',
+            previousSetId: 's4',
+            setNumber: 2,
+            weight: 20,
+            reps: 10
+        },
+        {
+            id: 's14',
+            exerciseId: 'e4',
+            previousSetId: 's5',
+            setNumber: 3,
+            weight: 20,
+            reps: 9
+        },
+        {
+            id: 's15',
+            exerciseId: 'e5',
+            previousSetId: 's6',
+            setNumber: 1,
+            weight: 12.5,
+            reps: 10
+        },
+        {
+            id: 's16',
+            exerciseId: 'e5',
+            previousSetId: 's7',
+            setNumber: 2,
+            weight: 12.5,
+            reps: 10
+        },
+        {
+            id: 's17',
+            exerciseId: 'e5',
+            previousSetId: 's8',
+            setNumber: 3,
+            weight: 12.5,
+            reps: 9
+        }
+    ],
+    'predefined-exercises': [
+        {
+            id: 'e0',
             name: '3/4 Sit-Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on the floor and secure your feet. Your legs should be bent at the knees.',
                 'Place your hands behind or to the side of your head. You will begin with your back on the ground. This will be your starting position.',
@@ -425,10 +255,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e1',
             name: '90/90 Hamstring',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back, with one leg extended straight out.',
                 'With the other leg, bend the hip and knee to 90 degrees. You may brace your leg with your hands if necessary. This will be your starting position.',
@@ -439,10 +269,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e2',
             name: 'Ab Crunch Machine',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Select a light resistance and sit down on the ab machine placing your feet under the pads provided and grabbing the top handles. Your arms should be bent at a 90 degree angle as you rest the triceps on the pads provided. This will be your starting position.',
                 'At the same time, begin to lift the legs up as you crunch your upper torso. Breathe out as you perform this movement. Tip: Be sure to use a slow and controlled motion. Concentrate on using your abs to move the weight while relaxing your legs and feet.',
@@ -453,10 +283,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e3',
             name: 'Ab Roller',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hold the Ab Roller with both hands and kneel on the floor.',
                 'Now place the ab roller on the floor in front of you so that you are on all your hands and knees (as in a kneeling push up position). This will be your starting position.',
@@ -467,10 +297,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e4',
             name: 'Adductor',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'adductors',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lie face down with one leg on a foam roll.',
                 'Rotate the leg so that the foam roll contacts against your inner thigh. Shift as much weight onto the foam roll as can be tolerated.',
@@ -480,10 +310,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e5',
             name: 'Adductor/Groin',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'adductors',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back with your feet raised towards the ceiling.',
                 'Have your partner hold your feet or ankles. Abduct your legs as far as you can. This will be your starting position.',
@@ -494,10 +324,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e6',
             name: 'Advanced Kettlebell Windmill',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Clean and press a kettlebell overhead with one arm.',
                 'Keeping the kettlebell locked out at all times, push your butt out in the direction of the locked out kettlebell. Keep the non-working arm behind your back and turn your feet out at a forty-five degree angle from the arm with the kettlebell.',
@@ -508,10 +338,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e7',
             name: 'Air Bike',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie flat on the floor with your lower back pressed to the ground. For this exercise, you will need to put your hands beside your head. Be careful however to not strain with the neck as you perform it. Now lift your shoulders into the crunch position.',
                 'Bring knees up to where they are perpendicular to the floor, with your lower legs parallel to the floor. This will be your starting position.',
@@ -524,10 +354,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e8',
             name: 'All Fours Quad Stretch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Start off on your hands and knees, then lift your leg off the floor and hold the foot with your hand.',
                 'Use your hand to hold the foot or ankle, keeping the knee fully flexed, stretching the quadriceps and hip flexors.',
@@ -537,10 +367,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e9',
             name: 'Alternate Hammer Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright and a dumbbell in each hand being held at arms length. The elbows should be close to the torso.',
                 'The palms of the hands should be facing your torso. This will be your starting position.',
@@ -553,10 +383,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e10',
             name: 'Alternate Heel Touchers',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on the floor with the knees bent and the feet on the floor around 18-24 inches apart. Your arms should be extended by your side. This will be your starting position.',
                 'Crunch over your torso forward and up about 3-4 inches to the right side and touch your right heel as you hold the contraction for a second. Exhale while performing this movement.',
@@ -568,10 +398,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e11',
             name: 'Alternate Incline Dumbbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down on an incline bench with a dumbbell in each hand being held at arms length. Tip: Keep the elbows close to the torso.This will be your starting position.',
                 'While holding the upper arm stationary, curl the right weight forward while contracting the biceps as you breathe out. As you do so, rotate the hand so that the palm is facing up. Continue the movement until your biceps is fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a second as you squeeze the biceps. Tip: Only the forearms should move.',
@@ -583,10 +413,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e12',
             name: 'Alternate Leg Diagonal Bound',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a comfortable stance with one foot slightly in front of the other.',
                 'Begin by pushing off with the front leg, driving the opposite knee forward and as high as possible before landing. Attempt to cover as much distance to each side with each bound.',
@@ -597,10 +427,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e13',
             name: 'Alternating Cable Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Move the cables to the bottom of the tower and select an appropriate weight.',
                 'Grasp the cables and hold them at shoulder height, palms facing forward. This will be your starting position.',
@@ -611,10 +441,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e14',
             name: 'Alternating Deltoid Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'In a standing position, hold a pair of dumbbells at your side.',
                 'Keeping your elbows slightly bent, raise the weights directly in front of you to shoulder height, avoiding any swinging or cheating.',
@@ -626,10 +456,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e15',
             name: 'Alternating Floor Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor with two kettlebells next to your shoulders.',
                 'Position one in place on your chest and then the other, gripping the kettlebells on the handle with the palms facing forward.',
@@ -640,10 +470,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e16',
             name: 'Alternating Hang Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place two kettlebells between your feet. To get in the starting position, push your butt back and look straight ahead.',
                 'Clean one kettlebell to your shoulder and hold on to the other kettlebell in a hanging position. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulders. Rotate your wrist as you do so.',
@@ -653,10 +483,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e17',
             name: 'Alternating Kettlebell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells to your shoulders. Clean the kettlebells to your shoulders by extending through the legs and hips as you pull the kettlebells towards your shoulders. Rotate your wrists as you do so.',
                 'Press one directly overhead by extending through the elbow, turning it so the palm faces forward while holding the other kettlebell stationary .',
@@ -666,10 +496,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e18',
             name: 'Alternating Kettlebell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place two kettlebells in front of your feet. Bend your knees slightly and push your butt out as much as possible. As you bend over to get into the starting position grab both kettlebells by the handles.',
                 'Pull one kettlebell off of the floor while holding on to the other kettlebell. Retract the shoulder blade of the working side, as you flex the elbow, drawing the kettlebell towards your stomach or rib cage.',
@@ -679,10 +509,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e19',
             name: 'Alternating Renegade Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place two kettlebells on the floor about shoulder width apart. Position yourself on your toes and your hands as though you were doing a pushup, with the body straight and extended. Use the handles of the kettlebells to support your upper body. You may need to position your feet wide for support.',
                 'Push one kettlebell into the floor and row the other kettlebell, retracting the shoulder blade of the working side as you flex the elbow, pulling it to your side.',
@@ -692,10 +522,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e20',
             name: 'Ankle Circles',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Use a sturdy object like a squat rack to hold yourself.',
                 'Lift the right leg in the air (just around 2 inches from the floor) and perform a circular motion with the big toe. Pretend that you are drawing a big circle with it. Tip: One circle equals 1 repetition. Breathe normally as you perform the movement.',
@@ -705,10 +535,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e21',
             name: 'Ankle On The Knee',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'From a lying position, bend your knees and keep your feet on the floor.',
                 'Place your ankle of one foot on your opposite knee.',
@@ -718,10 +548,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e22',
             name: 'Anterior Tibialis-SMR',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Begin seated on the ground with your legs bent and your feet on the floor.',
                 'Using a Muscle Roller or a rolling pin, apply pressure to the muscles on the outside of your shins. Work from just below the knee to above the ankle, pausing at points of tension for 10-30 seconds. Repeat on the other leg.'
@@ -730,10 +560,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e23',
             name: 'Anti-Gravity Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a bar on the ground behind the head of an incline bench.',
                 'Lay on the bench face down. With a pronated grip, pick the barbell up from the floor. Flex the elbows, performing a reverse curl to bring the bar near your chest. This will be your starting position.',
@@ -744,10 +574,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e24',
             name: 'Arm Circles',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up and extend your arms straight out by the sides. The arms should be parallel to the floor and perpendicular (90-degree angle) to your torso. This will be your starting position.',
                 'Slowly start to make circles of about 1 foot in diameter with each outstretched arm. Breathe normally as you perform the movement.',
@@ -757,10 +587,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e25',
             name: 'Arnold Dumbbell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit on an exercise bench with back support and hold two dumbbells in front of you at about upper chest level with your palms facing your body and your elbows bent. Tip: Your arms should be next to your torso. The starting position should look like the contracted portion of a dumbbell curl.',
                 'Now to perform the movement, raise the dumbbells as you rotate the palms of your hands until they are facing forward.',
@@ -772,10 +602,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e26',
             name: 'Around The Worlds',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lay down on a flat bench holding a dumbbell in each hand with the palms of the hands facing towards the ceiling. Tip: Your arms should be parallel to the floor and next to your thighs. To avoid injury, make sure that you keep your elbows slightly bent. This will be your starting position.',
                 'Now move the dumbbells by creating a semi-circle as you displace them from the initial position to over the head. All of the movement should happen with the arms parallel to the floor at all times. Breathe in as you perform this portion of the movement.',
@@ -785,10 +615,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e27',
             name: 'Atlas Stone Trainer',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "This trainer is effective for developing Atlas Stone strength for those who don't have access to stones, and are typically made from bar ends or heavy pipe.",
                 'Begin by loading the desired weight onto the bar. Straddle the weight, wrapping your arms around the implement, bending at the hips.',
@@ -799,10 +629,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e28',
             name: 'Atlas Stones',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with the atlas stone between your feet. Bend at the hips to wrap your arms vertically around the Atlas Stone, attempting to get your fingers underneath the stone. Many stones will have a small flat portion on the bottom, which will make the stone easier to hold.',
                 'Pulling the stone into your torso, drive through the back half of your feet to pull the stone from the ground.',
@@ -813,10 +643,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e29',
             name: 'Axle Deadlift',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Approach the bar so that it is centered over your feet. You feet should be about hip width apart. Bend at the hip to grip the bar at shoulder width, allowing your shoulder blades to protract. Typically, you would use an over/under grip.',
                 'With your feet and your grip set, take a big breath and then lower your hips and flex the knees until your shins contact the bar. Look forward with your head, keep your chest up and your back arched, and begin driving through the heels to move the weight upward.',
@@ -827,10 +657,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e30',
             name: 'Back Flyes - With Bands',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Run a band around a stationary post like that of a squat rack.',
                 'Grab the band by the handles and stand back so that the tension in the band rises.',
@@ -843,10 +673,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e31',
             name: 'Backward Drag',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Load a sled with the desired weight, attaching a rope or straps to the sled that you can hold onto.',
                 'Begin the exercise by moving backwards for a given distance. Leaning back, extend through the legs for short steps to move as quickly as possible.'
@@ -855,10 +685,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e32',
             name: 'Backward Medicine Ball Throw',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best done with a partner. If you lack a partner, the ball can be thrown and retrieved or thrown against a wall.',
                 'Begin standing a few meters in front of your partner, both facing the same direction. Begin holding the ball between your legs.',
@@ -869,10 +699,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e33',
             name: 'Balance Board',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'Place a balance board in front of you.',
                 'Stand up on it and try to balance yourself.',
@@ -882,10 +712,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e34',
             name: 'Ball Leg Curl',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Begin on the floor laying on your back with your feet on top of the ball.',
                 'Position the ball so that when your legs are extended your ankles are on top of the ball. This will be your starting position.',
@@ -897,10 +727,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e35',
             name: 'Band Assisted Pull-Up',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'Choke the band around the center of the pullup bar. You can use different bands to provide varying levels of assistance.',
                 "Pull the end of the band down, and place one bent knee into the loop, ensuring it won't slip out. Take a medium to wide grip on the bar. This will be your starting position.",
@@ -911,10 +741,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e36',
             name: 'Band Good Morning',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Using a 41 inch band, stand on one end, spreading your feet a small amount. Bend at the hips to loop the end of the band behind your neck. This will be your starting position.',
                 'Keeping your legs straight, extend through the hips to come to a near vertical position.',
@@ -924,10 +754,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e37',
             name: 'Band Good Morning (Pull Through)',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Loop the band around a post. Standing a little ways away, loop the opposite end around the neck. Your hands can help hold the band in position.',
                 'Begin by bending at the hips, getting your butt back as far as possible. Keep your back flat and bend forward to about 90 degrees. Your knees should be only slightly bent.',
@@ -937,10 +767,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e38',
             name: 'Band Hip Adductions',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Anchor a band around a solid post or other object.',
                 'Stand with your left side to the post, and put your right foot through the band, getting it around the ankle.',
@@ -953,10 +783,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e39',
             name: 'Band Pull Apart',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Begin with your arms extended straight out in front of you, holding the band with both hands.',
                 'Initiate the movement by performing a reverse fly motion, moving your hands out laterally to your sides.',
@@ -967,10 +797,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e40',
             name: 'Band Skull Crusher',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Secure a band to the base of a rack or the bench. Lay on the bench so that the band is lined up with your head.',
                 'Take hold of the band, raising your elbows so that the upper arm is perpendicular to the floor. With the elbow flexed, the band should be above your head. This will be your starting position.',
@@ -980,10 +810,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e41',
             name: 'Barbell Ab Rollout',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need to get into a pushup position, but instead of having your hands of the floor, you will be grabbing on to an Olympic barbell (loaded with 5-10 lbs on each side) instead. This will be your starting position.',
                 "While keeping a slight arch on your back, lift your hips and roll the barbell towards your feet as you exhale. Tip: As you perform the movement, your glutes should be coming up, you should be keeping the abs tight and should maintain your back posture at all times. Also your arms should be staying perpendicular to the floor throughout the movement. If you don't, you will work out your shoulders and back more than the abs.",
@@ -994,10 +824,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e42',
             name: 'Barbell Ab Rollout - On Knees',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hold an Olympic barbell loaded with 5-10lbs on each side and kneel on the floor.',
                 'Now place the barbell on the floor in front of you so that you are on all your hands and knees (as in a kneeling push up position). This will be your starting position.',
@@ -1008,10 +838,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e43',
             name: 'Barbell Bench Press - Medium Grip',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on a flat bench. Using a medium width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.',
                 'From the starting position, breathe in and begin coming down slowly until the bar touches your middle chest.',
@@ -1023,10 +853,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e44',
             name: 'Barbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright while holding a barbell at a shoulder-width grip. The palm of your hands should be facing forward and the elbows should be close to the torso. This will be your starting position.',
                 'While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out. Tip: Only the forearms should move.',
@@ -1038,10 +868,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e45',
             name: 'Barbell Curls Lying Against An Incline',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie against an incline bench, with your arms holding a barbell and hanging down in a horizontal line. This will be your starting position.',
                 'While keeping the upper arms stationary, curl the weight up as high as you can while squeezing the biceps. Breathe out as you perform this portion of the movement. Tip: Only the forearms should move. Do not swing the arms.',
@@ -1052,10 +882,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e46',
             name: 'Barbell Deadlift',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand in front of a loaded barbell.',
                 'While keeping the back as straight as possible, bend your knees, bend forward and grasp the bar using a medium (shoulder width) overhand grip. This will be the starting position of the exercise. Tip: If it is difficult to hold on to the bar with this grip, alternate your grip or use wrist straps.',
@@ -1067,10 +897,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e47',
             name: 'Barbell Full Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack just above shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -1083,10 +913,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e48',
             name: 'Barbell Glute Bridge',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin seated on the ground with a loaded barbell over your legs. Using a fat bar or having a pad on the bar can greatly reduce the discomfort caused by this exercise. Roll the bar so that it is directly above your hips, and lay down flat on the floor.',
                 'Begin the movement by driving through with your heels, extending your hips vertically through the bar. Your weight should be supported by your upper back and the heels of your feet.',
@@ -1096,10 +926,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e49',
             name: 'Barbell Guillotine Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Using a medium width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over your neck with your arms locked. This will be your starting position.',
                 'As you breathe in, bring the bar down slowly until it is about 1 inch from your neck.',
@@ -1111,10 +941,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e50',
             name: 'Barbell Hack Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight while holding a barbell behind you at arms length and your feet at shoulder width. Tip: A shoulder width grip is best with the palms of your hands facing back. You can use wrist wraps for this exercise for a better grip. This will be your starting position.',
                 'While keeping your head and eyes up and back straight, squat until your upper thighs are parallel to the floor. Breathe in as you slowly go down.',
@@ -1125,10 +955,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e51',
             name: 'Barbell Hip Thrust',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin seated on the ground with a bench directly behind you. Have a loaded barbell over your legs. Using a fat bar or having a pad on the bar can greatly reduce the discomfort caused by this exercise.',
                 'Roll the bar so that it is directly above your hips, and lean back against the bench so that your shoulder blades are near the top of it.',
@@ -1138,10 +968,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e52',
             name: 'Barbell Incline Bench Press - Medium Grip',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on an incline bench. Using a medium-width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on you upper chest.',
@@ -1153,10 +983,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e53',
             name: 'Barbell Incline Shoulder Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on an Incline Bench. Using a medium width grip (a grip that is slightly wider than shoulder width), lift the bar from the rack and hold it straight over you with your arms straight. This will be your starting position.',
                 'While keeping the arms straight, lift the bar by protracting your shoulder blades, raising the shoulders from the bench as you breathe out.',
@@ -1167,10 +997,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e54',
             name: 'Barbell Lunge',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack just below shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -1182,10 +1012,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e55',
             name: 'Barbell Rear Delt Row',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight while holding a barbell using a wide (higher than shoulder width) and overhand (palms facing your body) grip.',
                 'Bend knees slightly and bend over as you keep the natural arch of your back. Let the arms hang in front of you as they hold the bar. Once your torso is parallel to the floor, flare the elbows out and away from your body. Tip: Your torso and your arms should resemble the letter "T". Now you are ready to begin the exercise.',
@@ -1197,10 +1027,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e56',
             name: 'Barbell Rollout from Bench',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a loaded barbell on the ground, near the end of a bench. Kneel with both legs on the bench, and take a medium to narrow grip on the barbell. This will be your starting position.',
                 'To begin, extend through the hips to slowly roll the bar forward. As you roll out, flex the shoulder to roll the bar above your head. Ensure that your arms remain extended throughout the movement.',
@@ -1210,10 +1040,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e57',
             name: 'Barbell Seated Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Place a block about 12 inches in front of a flat bench.',
                 'Sit on the bench and place the ball of your feet on the block.',
@@ -1226,10 +1056,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e58',
             name: 'Barbell Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit on a bench with back support in a squat rack. Position a barbell at a height that is just above your head. Grab the barbell with a pronated grip (palms facing forward).',
                 'Once you pick up the barbell with the correct grip width, lift the bar up over your head by locking your arms. Hold at about shoulder level and slightly in front of your head. This is your starting position.',
@@ -1241,10 +1071,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e59',
             name: 'Barbell Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight with your feet at shoulder width as you hold a barbell with both hands in front of you using a pronated grip (palms facing the thighs). Tip: Your hands should be a little wider than shoulder width apart. You can use wrist wraps for this exercise for a better grip. This will be your starting position.',
                 'Raise your shoulders up as far as you can go as you breathe out and hold the contraction for a second. Tip: Refrain from trying to lift the barbell by using your biceps.',
@@ -1255,10 +1085,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e60',
             name: 'Barbell Shrug Behind The Back',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight with your feet at shoulder width as you hold a barbell with both hands behind your back using a pronated grip (palms facing back). Tip: Your hands should be a little wider than shoulder width apart. You can use wrist wraps for this exercise for better grip. This will be your starting position.',
                 'Raise your shoulders up as far as you can go as you breathe out and hold the contraction for a second. Tip: Refrain from trying to lift the barbell by using your biceps. The arms should remain stretched out at all times.',
@@ -1269,10 +1099,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e61',
             name: 'Barbell Side Bend',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight while holding a barbell placed on the back of your shoulders (slightly below the neck). Your feet should be shoulder width apart. This will be your starting position.',
                 'While keeping your back straight and your head up, bend only at the waist to the right as far as possible. Breathe in as you bend to the side. Then hold for a second and come back up to the starting position as you exhale. Tip: Keep the rest of the body stationary.',
@@ -1283,10 +1113,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e62',
             name: 'Barbell Side Split Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight while holding a barbell placed on the back of your shoulders (slightly below the neck). Your feet should be placed wide apart with the foot of the lead leg angled out to the side. This will be your starting position.',
                 'Lower your body towards the side of your angled foot by bending the knee and hip of your lead leg and while keeping the opposite leg only slightly bent. Breathe in as you lower your body.',
@@ -1297,10 +1127,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e63',
             name: 'Barbell Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack to just below shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -1313,10 +1143,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e64',
             name: 'Barbell Squat To A Bench',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first place a flat bench or a box behind you. The flat bench is used to teach you to set your hips back and to hit depth.',
                 '',
@@ -1331,10 +1161,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e65',
             name: 'Barbell Step Ups',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight while holding a barbell placed on the back of your shoulders (slightly below the neck) and stand upright behind an elevated platform (such as the one used for spotting behind a flat bench). This is your starting position.',
                 'Place the right foot on the elevated platform. Step on the platform by extending the hip and the knee of your right leg. Use the heel mainly to lift the rest of your body up and place the foot of the left leg on the platform as well. Breathe out as you execute the force required to come up.',
@@ -1345,10 +1175,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e66',
             name: 'Barbell Walking Lunge',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with your feet shoulder width apart and a barbell across your upper back.',
                 'Step forward with one leg, flexing the knees to drop your hips. Descend until your rear knee nearly touches the ground. Your posture should remain upright, and your front knee should stay above the front foot.',
@@ -1359,10 +1189,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e67',
             name: 'Battling Ropes',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need a heavy rope anchored at its center 15-20 feet away. Standing in front of the rope, take an end in each hand with your arms extended at your side. This will be your starting position.',
                 'Initiate the movement by rapidly raising one arm to shoulder level as quickly as you can.',
@@ -1373,10 +1203,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e68',
             name: 'Bear Crawl Sled Drags',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Wearing either a harness or a loose weight belt, attach the chain to the back so that you will be facing away from the sled. Bend down so that your hands are on the ground. Your back should be flat and knees bent. This is your starting position.',
                 'Begin by driving with legs, alternating left and right. Use your hands to maintain balance and to help pull. Try to keep your back flat as you move over a given distance.'
@@ -1385,10 +1215,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e69',
             name: 'Behind Head Chest Stretch',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit upright on the floor with your partner behind you.',
                 'Place your hands behind your hand, and push your elbows back as far as you can. Your partner should hold your elbows. This will be your starting position.',
@@ -1399,10 +1229,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e70',
             name: 'Bench Dips',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need to place a bench behind your back. With the bench perpendicular to your body, and while looking away from it, hold on to the bench on its edge with the hands fully extended, separated at shoulder width. The legs will be extended forward, bent at the waist and perpendicular to your torso. This will be your starting position.',
                 'Slowly lower your body as you inhale by bending at the elbows until you lower yourself far enough to where there is an angle slightly smaller than 90 degrees between the upper arm and the forearm. Tip: Keep the elbows as close as possible throughout the movement. Forearms should always be pointing down.',
@@ -1413,10 +1243,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e71',
             name: 'Bench Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a box or bench 1-2 feet in front of you. Stand with your feet shoulder width apart. This will be your starting position.',
                 'Perform a short squat in preparation for the jump; swing your arms behind you.',
@@ -1428,10 +1258,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e72',
             name: 'Bench Press - Powerlifting',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin by lying on the bench, getting your head beyond the bar if possible. Tuck your feet underneath you and arch your back. Using the bar to help support your weight, lift your shoulder off the bench and retract them, squeezing the shoulder blades together. Use your feet to drive your traps into the bench. Maintain this tight body position throughout the movement.',
                 'However wide your grip, it should cover the ring on the bar. Pull the bar out of the rack without protracting your shoulders. Focus on squeezing the bar and trying to pull it apart.',
@@ -1442,10 +1272,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e73',
             name: 'Bench Press - With Bands',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Using a flat bench secure a band under the leg of the bench that is nearest to your head.',
                 'Once the band is secure, grab it by both handles and lie down on the bench.',
@@ -1459,10 +1289,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e74',
             name: 'Bench Press with Chains',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the leader chain, shortening it to the desired length.Place the chains on the sleeves of the bar.',
                 'Lying on the bench, get your head beyond the bar if possible. Tuck your feet underneath you and arch your back. Using the bar to help support your weight, lift your shoulder off the bench and retract them, squeezing the shoulder blades together. Use your feet to drive your traps into the bench. Maintain this tight body position throughout the movement. However wide your grip, it should cover the ring on the bar.',
@@ -1473,10 +1303,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e75',
             name: 'Bench Sprint',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand on the ground with one foot resting on a bench or box with your heel close to the edge.',
                 'Push off with your foot on top of the bench, extending through the hip and knee.',
@@ -1487,10 +1317,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e76',
             name: 'Bent-Arm Barbell Pullover',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie on a flat bench with a barbell using a shoulder grip width.',
                 'Hold the bar straight over your chest with a bend in your arms. This will be your starting position.',
@@ -1502,10 +1332,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e77',
             name: 'Bent-Arm Dumbbell Pullover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a dumbbell standing up on a flat bench.',
                 'Ensuring that the dumbbell stays securely placed at the top of the bench, lie perpendicular to the bench (torso across it as in forming a cross) with only your shoulders lying on the surface. Hips should be below the bench and legs bent with feet firmly on the floor. The head will be off the bench as well.',
@@ -1518,10 +1348,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e78',
             name: 'Bent-Knee Hip Raise',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lay flat on the floor with your arms next to your sides.',
                 'Now bend your knees at around a 75 degree angle and lift your feet off the floor by around 2 inches.',
@@ -1533,10 +1363,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e79',
             name: 'Bent Over Barbell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Holding a barbell with a pronated grip (palms facing down), bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The barbell should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position.',
                 'Now, while keeping the torso stationary, breathe out and lift the barbell to you. Keep the elbows close to the body and only use the forearms to hold the weight. At the top contracted position, squeeze the back muscles and hold for a brief pause.',
@@ -1547,10 +1377,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e80',
             name: 'Bent Over Dumbbell Rear Delt Raise With Head On Bench',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight while holding a dumbbell in each hand and with an incline bench in front of you.',
                 'While keeping your back straight and maintaining the natural arch of your back, lean forward until your forehead touches the bench in front of you. Let the arms hang in front of you perpendicular to the ground. The palms of your hands should be facing each other and your torso should be parallel to the floor. This will be your starting position.',
@@ -1562,10 +1392,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e81',
             name: 'Bent Over Low-Pulley Side Lateral',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Select a weight and hold the handle of the low pulley with your right hand.',
                 'Bend at the waist until your torso is nearly parallel to the floor. Your legs should be slightly bent with your left hand placed on your lower left thigh. Your right arm should be hanging from your shoulder in front of you and with a slight bend at the elbow. This will be your starting position.',
@@ -1577,10 +1407,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e82',
             name: 'Bent Over One-Arm Long Bar Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Put weight on one of the ends of an Olympic barbell. Make sure that you either place the other end of the barbell in the corner of two walls; or put a heavy object on the ground so the barbell cannot slide backward.',
                 'Bend forward until your torso is as close to parallel with the floor as you can and keep your knees slightly bent.',
@@ -1593,10 +1423,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e83',
             name: 'Bent Over Two-Arm Long Bar Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Put weight on one of the ends of an Olympic barbell. Make sure that you either place the other end of the barbell in the corner of two walls; or put a heavy object on the ground so the barbell cannot slide backward.',
                 'Bend forward until your torso is as close to parallel with the floor as you can and keep your knees slightly bent.',
@@ -1609,10 +1439,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e84',
             name: 'Bent Over Two-Dumbbell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a dumbbell in each hand (palms facing your torso), bend your knees slightly and bring your torso forward by bending at the waist; as you bend make sure to keep your back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The weights should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position.',
                 'While keeping the torso stationary, lift the dumbbells to your side (as you breathe out), keeping the elbows close to the body (do not exert any force with the forearm other than holding the weights). On the top contracted position, squeeze the back muscles and hold for a second.',
@@ -1623,10 +1453,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e85',
             name: 'Bent Over Two-Dumbbell Row With Palms In',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a dumbbell in each hand (palms facing each other), bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The weights should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position.',
                 'While keeping the torso stationary, lift the dumbbells to your side as you breathe out, squeezing your shoulder blades together. On the top contracted position, squeeze the back muscles and hold for a second.',
@@ -1637,10 +1467,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e86',
             name: 'Bent Press',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Clean a kettlebell to your shoulder. Clean the kettlebell to your shoulders by extending through the legs and hips as you raise the kettlebell towards your shoulder. The wrist should rotate as you do so. This will be your starting position.',
                 'Begin my leaning to the side opposite the kettlebell, continuing until you are able to touch the ground with your free hand, keeping your eyes on the kettlebell. As you do so, press the weight vertically be extending through the elbow, keeping your arm perpendicular to the ground.',
@@ -1650,10 +1480,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e87',
             name: 'Bicycling',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, seat yourself on the bike and adjust the seat to your height.'
             ]
@@ -1661,10 +1491,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e88',
             name: 'Bicycling, Stationary',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, seat yourself on the bike and adjust the seat to your height.',
                 'Select the desired option from the menu. You may have to start pedaling to turn it on. You can use the manual setting, or you can select a program to use. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. The level of resistance can be changed throughout the workout. The handles can be used to monitor your heart rate to help you stay at an appropriate intensity.'
@@ -1673,10 +1503,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e89',
             name: 'Board Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "Begin by lying on the bench, getting your head beyond the bar if possible. One to five boards, made out of 2x6's, can be screwed together and held in place by a training partner, bands, or just tucked under your shirt.",
                 'Tuck your feet underneath you and arch your back. Using the bar to help support your weight, lift your shoulder off the bench and retract them, squeezing the shoulder blades together. Use your feet to drive your traps into the bench. Maintain this tight body position throughout the movement.',
@@ -1687,10 +1517,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e90',
             name: 'Body-Up',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Assume a plank position on the ground. You should be supporting your bodyweight on your toes and forearms, keeping your torso straight. Your forearms should be shoulder-width apart. This will be your starting position.',
                 'Pressing your palms firmly into the ground, extend through the elbows to raise your body from the ground. Keep your torso rigid as you perform the movement.',
@@ -1701,10 +1531,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e91',
             name: 'Body Tricep Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Position a bar in a rack at chest height.',
                 'Standing, take a shoulder width grip on the bar and step a yard or two back, feet together and arms extended so that you are leaning on the bar. This will be your starting position.',
@@ -1716,10 +1546,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e92',
             name: 'Bodyweight Flyes',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Position two equally loaded EZ bars on the ground next to each other. Ensure they are able to roll.',
                 'Assume a push-up position over the bars, supporting your weight on your toes and hands with your arms extended and body straight.',
@@ -1731,10 +1561,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e93',
             name: 'Bodyweight Mid Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin by taking a medium to wide grip on a pull-up apparatus with your palms facing away from you. From a hanging position, tuck your knees to your chest, leaning back and getting your legs over your side of the pull-up apparatus. This will be your starting position.',
                 'Beginning with your arms straight, flex the elbows and retract the shoulder blades to raise your body up until your legs contact the pull-up apparatus.',
@@ -1744,10 +1574,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e94',
             name: 'Bodyweight Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your feet shoulder width apart. You can place your hands behind your head. This will be your starting position.',
                 'Begin the movement by flexing your knees and hips, sitting back with your hips.',
@@ -1757,10 +1587,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e95',
             name: 'Bodyweight Walking Lunge',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with your feet shoulder width apart and your hands on your hips.',
                 'Step forward with one leg, flexing the knees to drop your hips. Descend until your rear knee nearly touches the ground. Your posture should remain upright, and your front knee should stay above the front foot.',
@@ -1771,10 +1601,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e96',
             name: 'Bosu Ball Cable Crunch With Side Bends',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Connect a standard handle to each arm of a cable machine, and position them in the most downward position.',
                 'Grab a Bosu Ball and position it in front and center of the cable machine.',
@@ -1791,10 +1621,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e97',
             name: 'Bottoms-Up Clean From The Hang Position',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Initiate the exercise by standing upright with a kettlebell in one hand.',
                 'Swing the kettlebell back forcefully and then reverse the motion forcefully. Crush the kettlebell handle as hard as possible and raise the kettlebell to your shoulder.'
@@ -1803,10 +1633,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e98',
             name: 'Bottoms Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin by lying on your back on the ground. Your legs should be straight and your arms at your side. This will be your starting position.',
                 'To perform the movement, tuck the knees toward your chest by flexing the hips and knees. Following this, extend your legs directly above you so that they are perpendicular to the ground. Rotate and elevate your pelvis to raise your glutes from the floor.',
@@ -1816,10 +1646,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e99',
             name: 'Box Jump (Multiple Response)',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "Assume a relaxed stance facing the box or platform approximately an arm's length away. Arms should be down at the sides and legs slightly bent.",
                 'Using the arms to aid in the initial burst, jump upward and forward, landing with feet simultaneously on top of the box or platform.',
@@ -1829,10 +1659,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e100',
             name: 'Box Skip',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'You will need several boxes lined up about 8 feet apart.',
                 'Begin facing the first box with one leg slightly behind the other.',
@@ -1844,10 +1674,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e101',
             name: 'Box Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'The box squat allows you to squat to desired depth and develop explosive strength in the squat movement. Begin in a power rack with a box at the appropriate height behind you. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.',
                 'Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wider for more emphasis on the back, glutes, adductors, and hamstrings, or closer together for more quad development. Keep your head facing forward.',
@@ -1858,10 +1688,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e102',
             name: 'Box Squat with Bands',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "Begin in a power rack with a box at the appropriate height behind you. Set up the bands on the sleeves, secured to either band pegs, the rack, or dumbbells so that there is appropriate tension. If dumbbells are used, secure them so that they don't move. Also, ensure that the dumbbells you are using are heavy enough for the bands that you are using. Additional plates can be used to hold the dumbbells down. If more tension is needed, you can either widen the base on the floor or choke the bands. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.",
                 'Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wider for more emphasis on the back, glutes, adductors, and hamstrings, or closer together for more quad development. Keep your head facing forward.',
@@ -1872,10 +1702,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e103',
             name: 'Box Squat with Chains',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a power rack with a box at the appropriate height behind you. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.',
                 'To set up the chains, begin by looping the leader chain over the sleeves of the bar. The heavy chain should be attached using a snap hook. Adjust the length of the lead chain so that a few links are still on the floor at the top of the movement.',
@@ -1887,10 +1717,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e104',
             name: 'Brachialis-SMR',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your side, with your upper arm against the foam roller. The upper arm should be more or less aligned with your body, with the outside of the bicep pressed against the foam roller.',
                 'Raise your hips off of the floor, supporting your weight on your arm and on your feet. Hold for 10-30 seconds, and then switch sides.'
@@ -1899,10 +1729,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e105',
             name: 'Bradford/Rocky Presses',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit on a Military Press Bench with a bar at shoulder level with a pronated grip (palms facing forward). Tip: Your grip should be wider than shoulder width and it should create a 90-degree angle between the forearm and the upper arm as the barbell goes down. This is your starting position.',
                 'Once you pick up the barbell with the correct grip, lift the bar up over your head by locking your arms.',
@@ -1915,10 +1745,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e106',
             name: 'Butt-Ups',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin a pushup position but with your elbows on the ground and resting on your forearms. Your arms should be bent at a 90 degree angle.',
                 'Arch your back slightly out rather than keeping your back completely straight.',
@@ -1930,10 +1760,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e107',
             name: 'Butt Lift (Bridge)',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on the floor on your back with the hands by your side and your knees bent. Your feet should be placed around shoulder width. This will be your starting position.',
                 'Pushing mainly with your heels, lift your hips off the floor while keeping your back straight. Breathe out as you perform this part of the motion and hold at the top for a second.',
@@ -1943,10 +1773,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e108',
             name: 'Butterfly',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on the machine with your back flat on the pad.',
                 'Take hold of the handles. Tip: Your upper arms should be positioned parallel to the floor; adjust the machine accordingly. This will be your starting position.',
@@ -1958,10 +1788,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e109',
             name: 'Cable Chest Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the weight to an appropriate amount and be seated, grasping the handles. Your upper arms should be about 45 degrees to the body, with your head and chest up. The elbows should be bent to about 90 degrees. This will be your starting position.',
                 'Begin by extending through the elbow, pressing the handles together straight in front of you. Keep your shoulder blades retracted as you execute the movement.',
@@ -1972,10 +1802,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e110',
             name: 'Cable Crossover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To get yourself into the starting position, place the pulleys on a high position (above your head), select the resistance to be used and hold the pulleys in each hand.',
                 'Step forward in front of an imaginary straight line between both pulleys while pulling your arms together in front of you. Your torso should have a small forward bend from the waist. This will be your starting position.',
@@ -1987,10 +1817,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e111',
             name: 'Cable Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Kneel below a high pulley that contains a rope attachment.',
                 'Grasp cable rope attachment and lower the rope until your hands are placed next to your face.',
@@ -2003,10 +1833,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e112',
             name: 'Cable Deadlifts',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Move the cables to the bottom of the towers and select an appropriate weight. Stand directly in between the uprights.',
                 'To begin, squat down be flexing your hips and knees until you can reach the handles.',
@@ -2017,10 +1847,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e113',
             name: 'Cable Hammer Curls - Rope Attachment',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a rope attachment to a low pulley and stand facing the machine about 12 inches away from it.',
                 'Grasp the rope with a neutral (palms-in) grip and stand straight up keeping the natural arch of the back and your torso stationary.',
@@ -2033,10 +1863,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e114',
             name: 'Cable Hip Adduction',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand in front of a low pulley facing forward with one leg next to the pulley and the other one away.',
                 'Attach the ankle cuff to the cable and also to the ankle of the leg that is next to the pulley.',
@@ -2050,10 +1880,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e115',
             name: 'Cable Incline Pushdown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on incline an bench facing away from a high pulley machine that has a straight bar attachment on it.',
                 'Grasp the straight bar attachment overhead with a pronated (overhand; palms down) shoulder width grip and extend your arms in front of you. The bar should be around 2 inches away from your upper thighs. This will be your starting position.',
@@ -2065,10 +1895,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e116',
             name: 'Cable Incline Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on incline an bench facing away from a high pulley machine that has a straight bar attachment on it.',
                 'Grasp the straight bar attachment overhead with a pronated (overhand; palms down) narrow grip (less than shoulder width) and keep your elbows tucked in to your sides. Your upper arms should create around a 25 degree angle when measured from the floor.',
@@ -2080,10 +1910,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e117',
             name: 'Cable Internal Rotation',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "Sit next to a low pulley sideways (with legs stretched in front of you or crossed) and grasp the single hand cable attachment with the arm nearest to the cable. Tip: If you can adjust the pulley's height, you can use a flat bench to sit on instead.",
                 'Position the elbow against your side with the elbow bent at 90° and the arm pointing towards the pulley. This will be your starting position.',
@@ -2095,10 +1925,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e118',
             name: 'Cable Iron Cross',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Begin by moving the pulleys to the high position, select the resistance to be used, and take a handle in each hand.',
                 'Stand directly between both pulleys with your arms extended out to your sides. Your head and chest should be up while your arms form a "T". This will be your starting position.',
@@ -2110,10 +1940,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e119',
             name: 'Cable Judo Flip',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Connect a rope attachment to a tower, and move the cable to the lowest pulley position. Stand with your side to the cable with a wide stance, and grab the rope with both hands.',
                 "Twist your body away from the pulley as you bring the rope over your shoulder like you're performing a judo flip.",
@@ -2125,10 +1955,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e120',
             name: 'Cable Lying Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on a flat bench and grasp the straight bar attachment of a low pulley with a narrow overhand grip. Tip: The easiest way to do this is to have someone hand you the bar as you lay down.',
                 'With your arms extended, position the bar over your torso. Your arms and your torso should create a 90-degree angle. This will be your starting position.',
@@ -2140,10 +1970,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e121',
             name: 'Cable One Arm Tricep Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'With your right hand, grasp a single handle attached to the high-cable pulley using a supinated (underhand; palms facing up) grip. You should be standing directly in front of the weight stack.',
                 'Now pull the handle down so that your upper arm and elbow are locked in to the side of your body. Your upper arm and forearm should form an acute angle (less than 90-degrees). You can keep the other arm by the waist and you can have one leg in front of you and the other one back for better balance. This will be your starting position.',
@@ -2156,10 +1986,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e122',
             name: 'Cable Preacher Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place a preacher bench about 2 feet in front of a pulley machine.',
                 'Attach a straight bar to the low pulley.',
@@ -2173,10 +2003,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e123',
             name: 'Cable Rear Delt Fly',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the pulleys to the appropriate height and adjust the weight. The pulleys should be above your head.',
                 'Grab the left pulley with your right hand and the right pulley with your left hand, crossing them in front of you. This will be your starting position.',
@@ -2187,10 +2017,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e124',
             name: 'Cable Reverse Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Connect an ankle strap attachment to a low pulley cable and position a mat on the floor in front of it.',
                 'Sit down with your feet toward the pulley and attach the cable to your ankles.',
@@ -2203,10 +2033,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e125',
             name: 'Cable Rope Overhead Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a rope to the bottom pulley of the pulley machine.',
                 'Grasping the rope with both hands, extend your arms with your hands directly above your head using a neutral grip (palms facing each other). Your elbows should be in close to your head and the arms should be perpendicular to the floor with the knuckles aimed at the ceiling. This will be your starting position.',
@@ -2218,10 +2048,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e126',
             name: 'Cable Rope Rear-Delt Rows',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit in the same position on a low pulley row station as you would if you were doing seated cable rows for the back.',
                 'Attach a rope to the pulley and grasp it with an overhand grip. Your arms should be extended and parallel to the floor with the elbows flared out.',
@@ -2234,10 +2064,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e127',
             name: 'Cable Russian Twists',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Connect a standard handle attachment, and position the cable to a middle pulley position.',
                 "Lie on a stability ball perpendicular to the cable and grab the handle with one hand. You should be approximately arm's length away from the pulley, with the tension of the weight on the cable.",
@@ -2251,10 +2081,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e128',
             name: 'Cable Seated Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Seat on a flat bench with your back facing a high pulley.',
                 'Grasp the cable rope attachment with both hands (with the palms of the hands facing each other) and place your hands securely over both shoulders. Tip: Allow the weight to hyperextend the lower back slightly. This will be your starting position.',
@@ -2266,10 +2096,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e129',
             name: 'Cable Seated Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand in the middle of two low pulleys that are opposite to each other and place a flat bench right behind you (in perpendicular fashion to you; the narrow edge of the bench should be the one behind you). Select the weight to be used on each pulley.',
                 'Now sit at the edge of the flat bench behind you with your feet placed in front of your knees.',
@@ -2283,10 +2113,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e130',
             name: 'Cable Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Move the cables to the bottom of the towers and select an appropriate weight.',
                 'Stand directly in between the uprights. Grasp the cables and hold them at shoulder height, palms facing forward. This will be your starting position.',
@@ -2297,10 +2127,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e131',
             name: 'Cable Shrugs',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grasp a cable bar attachment that is attached to a low pulley with a shoulder width or slightly wider overhand (palms facing down) grip.',
                 'Stand erect close to the pulley with your arms extended in front of you holding the bar. This will be your starting position.',
@@ -2312,10 +2142,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e132',
             name: 'Cable Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing a flat bench in front of a low pulley cable that has a straight bar attachment.',
                 'Use your arms to grab the cable bar with a narrow to shoulder width supinated grip (palms up) and bring them up so that your forearms are resting against the top of your thighs. Your wrists should be hanging just beyond your knees.',
@@ -2328,10 +2158,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e133',
             name: 'Calf-Machine Shoulder Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Position yourself on the calf machine so that the shoulder pads are above your shoulders. Your torso should be straight with the arms extended normally by your side. This will be your starting position.',
                 'Raise your shoulders up towards your ears as you exhale and hold the contraction for a full second.',
@@ -2342,10 +2172,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e134',
             name: 'Calf Press',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the seat so that your legs are only slightly bent in the start position. The balls of your feet should be firmly on the platform.',
                 'Select an appropriate weight, and grasp the handles. This will be your starting position.',
@@ -2356,10 +2186,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e135',
             name: 'Calf Press On The Leg Press Machine',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Using a leg press machine, sit down on the machine and place your legs on the platform directly in front of you at a medium (shoulder width) foot stance.',
                 'Lower the safety bars holding the weighted platform in place and press the platform all the way up until your legs are fully extended in front of you without locking your knees. (Note: In some leg press units you can leave the safety bars on for increased safety. If your leg press unit allows for this, then this is the preferred method of performing the exercise.) Your torso and the legs should make perfect 90-degree angle. Now carefully place your toes and balls of your feet on the lower portion of the platform with the heels extending off. Toes should be facing forward, outwards or inwards as described at the beginning of the chapter. This will be your starting position.',
@@ -2371,10 +2201,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e136',
             name: 'Calf Raise On A Dumbbell',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Hang on to a sturdy object for balance and stand on a dumbbell handle, preferably one with round plates so that it rolls as in this manner you have to work harder to stabilize yourself; thus increasing the effectiveness of the exercise.',
                 'Now roll your foot slightly forward so that you can get a nice stretch of the calf. This will be your starting position.',
@@ -2386,10 +2216,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e137',
             name: 'Calf Raises - With Bands',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Grab an exercise band and stand on it with your toes making sure that the length of the band between the foot and the arms is the same for both sides.',
                 'While holding the handles of the band, raise the arms to the side of your head as if you were getting ready to perform a shoulder press. The palms should be facing forward with the elbows bent and to the sides. This movement will create tension on the band. This will be your starting position.',
@@ -2401,10 +2231,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e138',
             name: 'Calf Stretch Elbows Against Wall',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Stand facing a wall from a couple feet away.',
                 'Lean against the wall, placing your weight on your forearms.',
@@ -2414,10 +2244,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e139',
             name: 'Calf Stretch Hands Against Wall',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Stand facing a wall from several feet away. Stagger your stance, placing one foot forward.',
                 'Lean forward and rest your hands on the wall, keeping your heel, hip and head in a straight line.',
@@ -2427,10 +2257,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e140',
             name: 'Calves-SMR',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Begin seated on the floor. Place a foam roller underneath your lower leg. Your other leg can either be crossed over the opposite or be placed on the floor, supporting some of your weight. This will be your starting position.',
                 'Place your hands to your side or just behind you, and press down to raise your hips off of the floor, placing much of your weight against your calf muscle. Roll from below the knee to above the ankle, pausing at points of tension for 10-30 seconds. Repeat for the other leg.'
@@ -2439,10 +2269,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e141',
             name: 'Car Deadlift',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'This event apparatus typically has neutral grip handles, however some have a straight bar that you can approach like a normal deadlift. The apparatus can be loaded with a vehicle or other heavy objects such as tractor tires or kegs.',
                 'Center yourself between the handles if you are a strong squatter, or back a couple inches if you are a strong deadlifter. You feet should be about hip width apart. Bend at the hip to grip the handles. With your feet and your grip set, take a big breath and then lower your hips and flex the knees.',
@@ -2453,10 +2283,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e142',
             name: 'Car Drivers',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 "While standing upright, hold a barbell plate in both hands at the 3 and 9 o'clock positions. Your palms should be facing each other and your arms should be extended straight out in front of you. This will be your starting position.",
                 'Initiate the movement by rotating the plate as far to one side as possible. Use the same type of movement you would use to turn a steering wheel to one side.',
@@ -2467,10 +2297,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e143',
             name: 'Carioca Quick Step',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'Begin with your feet a few inches apart and your left arm up in a relaxed, athletic position.',
                 'With your right foot, quick step behind and pull the knee up.',
@@ -2480,10 +2310,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e144',
             name: 'Cat Stretch',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Position yourself on the floor on your hands and knees.',
                 'Pull your belly in and round your spine, lower back, shoulders, and neck, letting your head drop.',
@@ -2493,10 +2323,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e145',
             name: 'Catch and Overhead Throw',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing while facing a wall or a partner.',
                 'Using both hands, position the ball behind your head, stretching as much as possible, and forcefully throw the ball forward.',
@@ -2506,10 +2336,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e146',
             name: 'Chain Handle Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'You will need two cable handle attachments and a flat bench, as well as chains, for this exercise. Clip the middle of the chains to the handles, and position yourself on the flat bench. Your elbows should be pointing straight up.',
                 'Begin by extending through the elbow, keeping your upper arm still, with your wrists pronated.',
@@ -2519,10 +2349,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e147',
             name: 'Chain Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin by connecting the chains to the cable handle attachments. Position yourself on the flat bench in the same position as for a dumbbell press. Your wrists should be pronated and arms perpendicular to the floor. This will be your starting position.',
                 'Lower the chains by flexing the elbows, unloading some of the chain onto the floor.',
@@ -2532,10 +2362,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e148',
             name: 'Chair Leg Extended Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit upright in a chair and grip the seat on the sides.',
                 'Raise one leg, extending the knee, flexing the ankle as you do so.',
@@ -2546,10 +2376,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e149',
             name: 'Chair Lower Back Stretch',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit upright on a chair.',
                 'Bend to one side with your arm over your head. You can hold onto the chair with your free hand.',
@@ -2559,10 +2389,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e150',
             name: 'Chair Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, first set the bar to a position that best matches your height. Once the bar is loaded, step under it and position it across the back of your shoulders.',
                 'Take the bar with your hands facing forward, unlock it and lift it off the rack by extending your legs.',
@@ -2575,10 +2405,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e151',
             name: 'Chair Upper Body Stretch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit on the edge of a chair, gripping the back of it.',
                 'Straighten your arms, keeping your back straight, and pull your upper body forward so you feel a stretch. Hold for 20-30 seconds.'
@@ -2587,10 +2417,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e152',
             name: 'Chest And Front Of Shoulder Stretch',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Start off by standing with your legs together, holding a bodybar or a broomstick.',
                 'Take a slightly wider than shoulder width grip on the pole and hold it in front of you with your palms facing down.',
@@ -2600,10 +2430,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e153',
             name: 'Chest Push from 3 point stance',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a three point stance, squatted down with your back flat and one hand on the ground. Place the medicine ball directly in front of you.',
                 'To begin, take your first step as you pull the ball to your chest, positioning both hands to prepare for the throw.',
@@ -2613,10 +2443,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e154',
             name: 'Chest Push (multiple response)',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a kneeling position facing a wall or utilize a partner. Hold the ball with both hands tight into the chest.',
                 'Execute the pass by exploding forward and outward with the hips while pushing the ball as hard as possible.',
@@ -2627,10 +2457,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e155',
             name: 'Chest Push (single response)',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a kneeling position holding the medicine ball with both hands tightly into the chest.',
                 'Execute the pass by exploding forward and outward with the hips while pushing the ball as far as possible.',
@@ -2640,10 +2470,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e156',
             name: 'Chest Push with Run Release',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in an athletic stance with the knees bent, hips back, and back flat. Hold the medicine ball near your legs. This will be your starting position.',
                 'While taking your first step draw the medicine ball into your chest.',
@@ -2653,10 +2483,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e157',
             name: 'Chest Stretch on Stability Ball',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Get on your hands and knees next to an exercise ball.',
                 'Place your elbows on top of the ball, keeping your arm out to your side. This will be your starting position.',
@@ -2666,10 +2496,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e158',
             name: "Child's Pose",
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Get on your hands and knees, walk your hands in front of you.',
                 'Lower your buttocks down to sit on your heels. Let your arms drag along the floor as you sit back to stretch your entire spine.',
@@ -2679,10 +2509,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e159',
             name: 'Chin-Up',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab the pull-up bar with the palms facing your torso and a grip closer than the shoulder width.',
                 'As you have both arms extended in front of you holding the bar at the chosen grip width, keep your torso as straight as possible while creating a curvature on your lower back and sticking your chest out. This is your starting position. Tip: Keeping the torso as straight as possible maximizes biceps stimulation while minimizing back involvement.',
@@ -2694,10 +2524,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e160',
             name: 'Chin To Chest Stretch',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'neck',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Get into a seated position on the floor.',
                 'Place both hands at the rear of your head, fingers interlocked, thumbs pointing down and elbows pointing straight ahead. Slowly pull your head down to your chest. Hold for 20-30 seconds.'
@@ -2706,10 +2536,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e161',
             name: 'Circus Bell',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'The circus bell is an oversized dumbbell with a thick handle. Begin with the dumbbell between your feet, and grip the handle with both hands.',
                 'Clean the dumbbell by extending through your hips and knees to deliver the implement to the desired shoulder, letting go with the extra hand.',
@@ -2720,10 +2550,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e162',
             name: 'Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on the floor close to the shins, take an overhand (or hook) grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 '',
@@ -2736,10 +2566,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e163',
             name: 'Clean Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with a barbell close to your shins. Your feet should be directly under your hips with your feet turned out slightly. Grip the bar with a double overhand grip or hook grip, about shoulder width apart. Squat down to the bar. Your spine should be in full extension, with a back angle that places your shoulders in front of the bar and your back as vertical as possible.',
                 "Begin by driving through the floor through the front of your heels. As the bar travels upward, maintain a constant back angle. Flare your knees out to the side to help keep them out of the bar's path.",
@@ -2749,10 +2579,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e164',
             name: 'Clean Pull',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on the floor close to the shins, take an overhand or hook grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 'Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight and elbows out. Move the weight with control as you continue to above the knees.',
@@ -2762,10 +2592,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e165',
             name: 'Clean Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a shoulder width, double overhand or hook grip, with the bar hanging at the mid thigh position. Your back should be straight and inclined slightly forward.',
                 'Shrug your shoulders towards your ears. While this exercise can usually by loaded with heavier weight than a clean, avoid overloading to the point that the execution slows down.'
@@ -2774,10 +2604,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e166',
             name: 'Clean and Jerk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on the floor close to the shins, take an overhand or hook grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 'Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight. Move the weight with control as you continue to above the knees.',
@@ -2792,10 +2622,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e167',
             name: 'Clean and Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a shoulder-width stance, with knees inside the arms. Now while keeping the back flat, bend at the knees and hips so that you can grab the bar with the arms fully extended and a pronated grip that is slightly wider than shoulder width. Point the elbows out to sides. The bar should be close to the shins. Position the shoulders over or slightly ahead of the bar. Establish a flat back posture. This will be your starting position.',
                 'Begin to pull the bar by extending the knees. Move your hips forward and raise the shoulders at the same rate while keeping the angle of the back constant; continue to lift the bar straight up while keeping it close to your body.',
@@ -2809,10 +2639,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e168',
             name: 'Clean from Blocks',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on boxes or stands of the desired height, take an overhand or hook grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 'Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight with the elbows pointed out.',
@@ -2823,10 +2653,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e169',
             name: 'Clock Push-Up',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Move into a prone position on the floor, supporting your weight on your hands and toes.',
                 'Your arms should be fully extended with the hands around shoulder width. Keep your body straight throughout the movement. This will be your starting position.',
@@ -2839,10 +2669,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e170',
             name: 'Close-Grip Barbell Bench Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on a flat bench. Using a close grip (around shoulder width), lift the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your middle chest. Tip: Make sure that - as opposed to a regular bench press - you keep the elbows close to the torso at all times in order to maximize triceps involvement.',
@@ -2854,10 +2684,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e171',
             name: 'Close-Grip Dumbbell Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a dumbbell standing up on a flat bench.',
                 'Ensuring that the dumbbell stays securely placed at the top of the bench, lie perpendicular to the bench with only your shoulders lying on the surface. Hips should be below the bench and your legs bent with your feet firmly on the floor.',
@@ -2869,10 +2699,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e172',
             name: 'Close-Grip EZ-Bar Curl with Band',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a band to each end of the bar. Take the bar, placing a foot on the middle of the band. Stand upright with a narrow, supinated grip on the EZ bar. The elbows should be close to the torso. This will be your starting position.',
                 'While keeping the upper arms in place, flex the elbows to execute the curl. Exhale as the weight is lifted.',
@@ -2884,10 +2714,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e173',
             name: 'Close-Grip EZ-Bar Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on a flat bench with an EZ bar loaded to an appropriate weight.',
                 'Using a narrow grip lift the bar and hold it straight over your torso with your elbows in. The arms should be perpendicular to the floor. This will be your starting position.',
@@ -2899,10 +2729,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e174',
             name: 'Close-Grip EZ Bar Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright while holding an E-Z Curl Bar at the closer inner handle. The palm of your hands should be facing forward and they should be slightly tilted inwards due to the shape of the bar. The elbows should be close to the torso. This will be your starting position.',
                 'While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out. Tip: Only the forearms should move.',
@@ -2914,10 +2744,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e175',
             name: 'Close-Grip Front Lat Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on a pull-down machine with a wide bar attached to the top pulley. Make sure that you adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.',
                 'Grab the bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than your shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.',
@@ -2930,10 +2760,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e176',
             name: 'Close-Grip Push-Up off of a Dumbbell',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor and place your hands on an upright dumbbell. Supporting your weight on your toes and hands, keep your torso rigid and your elbows in with your arms straight. This will be your starting position.',
                 'Lower your body, allowing the elbows to flex while you inhale. Keep your body straight, not allowing your hips to rise or sag.',
@@ -2944,10 +2774,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e177',
             name: 'Close-Grip Standing Barbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a barbell with both hands, palms up and a few inches apart.',
                 'Stand with your torso straight and your head up. Your feet should be about shoulder width and your elbows close to your torso. This will be your starting position. Tip: You will keep your upper arms and elbows stationary throughout the movement.',
@@ -2959,10 +2789,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e178',
             name: 'Cocoons',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin by lying on your back on the ground. Your legs should be straight and your arms extended behind your head. This will be your starting position.',
                 'To perform the movement, tuck the knees toward your chest, rotating your pelvis to lift your glutes from the floor. As you do so, flex the spine, bringing your arms back over your head to perform a simultaneous crunch motion.',
@@ -2972,10 +2802,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e179',
             name: "Conan's Wheel",
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'With the weight loaded, take a zurcher hold on the end of the implement. Place the bar in the crook of the elbow and hold onto your wrist. Try to keep the weight off of the forearms.',
                 'Begin by lifting the weight from the ground. Keep a tight, upright posture as you being to walk, taking short, fast steps. Look up and away as you turn in a circle. Do not hold your breath during the event. Continue walking until you complete one or more complete turns.'
@@ -2984,10 +2814,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e180',
             name: 'Concentration Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down on a flat bench with one dumbbell in front of you between your legs. Your legs should be spread with your knees bent and feet on the floor.',
                 'Use your right arm to pick the dumbbell up. Place the back of your right upper arm on the top of your inner right thigh. Rotate the palm of your hand until it is facing forward away from your thigh. Tip: Your arm should be extended and the dumbbell should be above the floor. This will be your starting position.',
@@ -2999,10 +2829,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e181',
             name: 'Cross-Body Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie flat on your back and bend your knees about 60 degrees.',
                 'Keep your feet flat on the floor and place your hands loosely behind your head. This will be your starting position.',
@@ -3014,10 +2844,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e182',
             name: 'Cross Body Hammer Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight with a dumbbell in each hand. Your hands should be down at your side with your palms facing in.',
                 'While keeping your palms facing in and without twisting your arm, curl the dumbbell of the right arm up towards your left shoulder as you exhale. Touch the top of the dumbbell to your shoulder and hold the contraction for a second.',
@@ -3028,10 +2858,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e183',
             name: 'Cross Over - With Bands',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Secure an exercise band around a stationary post.',
                 'While facing away from the post, grab the handles on both ends of the band and step forward enough to create tension on the band.',
@@ -3044,10 +2874,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e184',
             name: 'Crossover Reverse Lunge',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Stand with your feet shoulder width apart. This will be your starting position.',
                 'Perform a rear lunge by stepping back with one foot and flexing the hips and front knee. As you do so, rotate your torso across the front leg.',
@@ -3057,10 +2887,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e185',
             name: 'Crucifix',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'In the crucifix, you statically hold weights out to the side for time. While the event can be practiced using dumbbells, it is best to practice with one of the various implements used, such as axes and hammers, as it feels different.',
                 'Begin standing, and raise your arms out to the side holding the implements. Your arms should be parallel to the ground. In competition, judges or sensors are used to let you know when you break parallel. Hold for as long as you can. Typically, the weights should be heavy enough that you fail in 30-60 seconds.'
@@ -3069,10 +2899,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e186',
             name: 'Crunch - Hands Overhead',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on the floor with your back flat and knees bent with around a 60-degree angle between the hamstrings and the calves.',
                 'Keep your feet flat on the floor and stretch your arms overhead with your palms crossed. This will be your starting position.',
@@ -3084,10 +2914,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e187',
             name: 'Crunch - Legs On Exercise Ball',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on your back with your feet resting on an exercise ball and your knees bent at a 90 degree angle.',
                 'Place your feet three to four inches apart and point your toes inward so they touch.',
@@ -3101,10 +2931,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e188',
             name: 'Crunches',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on your back with your feet flat on the ground, or resting on a bench with your knees bent at a 90 degree angle. If you are resting your feet on a bench, place them three to four inches apart and point your toes inward so they touch.',
                 "Now place your hands lightly on either side of your head keeping your elbows in. Tip: Don't lock your fingers behind your head.",
@@ -3117,10 +2947,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e189',
             name: 'Cuban Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Take a dumbbell in each hand with a pronated grip in a standing position. Raise your upper arms so that they are parallel to the floor, allowing your lower arms to hang in the "scarecrow" position. This will be your starting position.',
                 'To initiate the movement, externally rotate the shoulders to move the upper arm 180 degrees. Keep the upper arms in place, rotating the upper arms until the wrists are directly above the elbows, the forearms perpendicular to the floor.',
@@ -3132,10 +2962,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e190',
             name: "Dancer's Stretch",
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit up on the floor.',
                 'Cross your right leg over your left, keeping the knee bent. Your left leg is straight and down on the floor.',
@@ -3146,10 +2976,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e191',
             name: 'Dead Bug',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin lying on your back with your hands extended above you toward the ceiling.',
                 'Bring your feet, knees, and hips up to 90 degrees.',
@@ -3163,10 +2993,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e192',
             name: 'Deadlift with Bands',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To deadlift with short bands, simply loop them over the bar before you start, and step into them to set up. For long bands, they will need to be anchored to a secure base, such as heavy dumbbells or a rack.',
                 'With your feet, and your grip set, take a big breath and then lower your hips and bend the knees until your shins contact the bar. Look forward with your head, keep your chest up and your back arched, and begin driving through the heels to move the weight upward. After the bar passes the knees, aggressively pull the bar back, pulling your shoulder blades together as you drive your hips forward into the bar.',
@@ -3176,10 +3006,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e193',
             name: 'Deadlift with Chains',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'You can attach the chains to the sleeves of the bar, or just drape the middle over the bar so there is a greater weight increase as you lift.',
                 'Approach the bar so that it is centered over your feet. You feet should be about hip width apart. Bend at the hip to grip the bar at shoulder width, allowing your shoulder blades to protract. Typically, you would use an overhand grip or an over/under grip on heavier sets. With your feet, and your grip set, take a big breath and then lower your hips and bend the knees until your shins contact the bar.',
@@ -3190,10 +3020,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e194',
             name: 'Decline Barbell Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Secure your legs at the end of the decline bench and slowly lay down on the bench.',
                 'Using a medium width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over you with your arms locked. The arms should be perpendicular to the floor. This will be your starting position. Tip: In order to protect your rotator cuff, it is best if you have a spotter help you lift the barbell off the rack.',
@@ -3206,10 +3036,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e195',
             name: 'Decline Close-Grip Bench To Skull Crusher',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Secure your legs at the end of the decline bench and slowly lay down on the bench.',
                 'Using a close grip (a grip that is slightly less than shoulder width), lift the bar from the rack and hold it straight over you with your arms locked and elbows in. The arms should be perpendicular to the floor. This will be your starting position. Tip: In order to protect your rotator cuff, it is best if you have a spotter help you lift the barbell off the rack.',
@@ -3223,10 +3053,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e196',
             name: 'Decline Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Secure your legs at the end of the decline bench and lie down.',
                 "Now place your hands lightly on either side of your head keeping your elbows in. Tip: Don't lock your fingers behind your head.",
@@ -3239,10 +3069,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e197',
             name: 'Decline Dumbbell Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Secure your legs at the end of the decline bench and lie down with a dumbbell on each hand on top of your thighs. The palms of your hand will be facing each other.',
                 'Once you are laying down, move the dumbbells in front of you at shoulder width.',
@@ -3255,10 +3085,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e198',
             name: 'Decline Dumbbell Flyes',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Secure your legs at the end of the decline bench and lie down with a dumbbell on each hand on top of your thighs. The palms of your hand will be facing each other.',
                 'Once you are laying down, move the dumbbells in front of you at shoulder width. The palms of the hands should be facing each other and the arms should be perpendicular to the floor and fully extended. This will be your starting position.',
@@ -3270,10 +3100,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e199',
             name: 'Decline Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Secure your legs at the end of the decline bench and lie down with a dumbbell on each hand on top of your thighs. The palms of your hand will be facing each other.',
                 'Once you are laying down, move the dumbbells in front of you at shoulder width. The palms of the hands should be facing each other and the arms should be perpendicular to the floor and fully extended. This will be your starting position.',
@@ -3285,10 +3115,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e200',
             name: 'Decline EZ Bar Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Secure your legs at the end of the decline bench and slowly lay down on the bench.',
                 'Using a close grip (a grip that is slightly less than shoulder width), lift the EZ bar from the rack and hold it straight over you with your arms locked and elbows in. The arms should be perpendicular to the floor. This will be your starting position. Tip: In order to protect your rotator cuff, it is best if you have a spotter help you lift the barbell off the rack.',
@@ -3300,10 +3130,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e201',
             name: 'Decline Oblique Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Secure your legs at the end of the decline bench and slowly lay down on the bench.',
                 'Raise your upper body off the bench until your torso is about 35-45 degrees if measured from the floor.',
@@ -3316,10 +3146,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e202',
             name: 'Decline Push-Up',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor face down and place your hands about 36 inches apart while holding your torso up at arms length. Move your feet up to a box or bench. This will be your starting position.',
                 'Next, lower yourself downward until your chest almost touches the floor as you inhale.',
@@ -3330,10 +3160,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e203',
             name: 'Decline Reverse Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "Lie on your back on a decline bench and hold on to the top of the bench with both hands. Don't let your body slip down from this position.",
                 'Hold your legs parallel to the floor using your abs to hold them there while keeping your knees and feet together. Tip: Your legs should be fully extended with a slight bend on the knee. This will be your starting position.',
@@ -3345,10 +3175,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e204',
             name: 'Decline Smith Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a decline bench underneath the Smith machine. Now place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Using a pronated grip that is wider than shoulder width, unlock the bar from the rack and hold it straight over you with your arms extended. This will be your starting position.',
                 'As you inhale, lower the bar under control by allowing the elbows to flex, lightly contacting the torso.',
@@ -3360,10 +3190,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e205',
             name: 'Deficit Deadlift',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin by having a platform or weight plates that you can stand on, usually 1-3 inches in height. Approach the bar so that it is centered over your feet. You feet should be about hip width apart. Bend at the hip to grip the bar at shoulder width, allowing your shoulder blades to protract. Typically, you would use an overhand grip or an over/under grip on heavier sets.',
                 'With your feet, and your grip set, take a big breath and then lower your hips and bend the knees until your shins contact the bar. Look forward with your head, keep your chest up and your back arched, and begin driving through the heels to move the weight upward. After the bar passes the knees, aggressively pull the bar back, pulling your shoulder blades together as you drive your hips forward into the bar.',
@@ -3373,10 +3203,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e206',
             name: 'Depth Jump Leap',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'For this drill you will need two boxes or benches, one 12 to 16 inches high and the other 22 to 26 inches high.',
                 'Stand on one of the two boxes with arms at the sides; feet should be together and slightly off the edge as in the depth jump. Place the other box approximately two or three feet in front of and facing the performer.',
@@ -3387,10 +3217,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e207',
             name: 'Dip Machine',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit securely in a dip machine, select the weight and firmly grasp the handles.',
                 'Now keep your elbows in at your sides in order to place emphasis on the triceps. The elbows should be bent at a 90 degree angle.',
@@ -3402,10 +3232,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e208',
             name: 'Dips - Chest Version',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need access to parallel bars. To get yourself into the starting position, hold your body at arms length (arms locked) above the bars.',
                 'While breathing in, lower yourself slowly with your torso leaning forward around 30 degrees or so and your elbows flared out slightly until you feel a slight stretch in the chest.',
@@ -3416,10 +3246,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e209',
             name: 'Dips - Triceps Version',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "To get into the starting position, hold your body at arm's length with your arms nearly locked above the bars.",
                 'Now, inhale and slowly lower yourself downward. Your torso should remain upright and your elbows should stay close to your body. This helps to better focus on tricep involvement. Lower yourself until there is a 90 degree angle formed between the upper arm and forearm.',
@@ -3430,10 +3260,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e210',
             name: 'Donkey Calf Raises',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'For this exercise you will need access to a donkey calf raise machine. Start by positioning your lower back and hips under the padded lever provided. The tailbone area should be the one making contact with the pad.',
                 'Place both of your arms on the side handles and place the balls of your feet on the calf block with the heels extending off. Align the toes forward, inward or outward, depending on the area you wish to target, and straighten the knees without locking them. This will be your starting position.',
@@ -3445,10 +3275,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e211',
             name: 'Double Kettlebell Alternating Hang Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place two kettlebells between your feet. To get in the starting position, push your butt back and look straight ahead.',
                 'Clean one kettlebell to your shoulder and hold on to the other kettlebell.',
@@ -3458,10 +3288,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e212',
             name: 'Double Kettlebell Jerk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell by the handle in each hand.',
                 'Clean the kettlebells to your shoulders by extending through the legs and hips as you pull the kettlebells towards your shoulders. Rotate your wrists as you do so, so that the palms face forward. This will be your starting position.',
@@ -3475,10 +3305,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e213',
             name: 'Double Kettlebell Push Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells to your shoulders.',
                 'Squat down a few inches and reverse the motion rapidly. Use the momentum from the legs to drive the kettlebells overhead.',
@@ -3488,10 +3318,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e214',
             name: 'Double Kettlebell Snatch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place two kettlebells behind your feet. Bend your knees and sit back to pick up the kettlebells.',
                 'Swing the kettlebells between your legs forcefully and reverse the direction.',
@@ -3501,10 +3331,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e215',
             name: 'Double Kettlebell Windmill',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Place a kettlebell in front of your front foot and clean and press a kettlebell overhead with your opposite arm. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulders. Rotate your wrist as you do so, so that the palm faces forward.',
                 'Keeping the kettlebell locked out at all times, push your butt out in the direction of the locked out kettlebell. Turn your feet out at a forty-five degree angle from the arm with the locked out kettlebell.',
@@ -3515,10 +3345,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e216',
             name: 'Double Leg Butt Kick',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with your knees slightly bent.',
                 'Quickly squat a short distance, flexing the hips and knees, and immediately extend to jump for maximum vertical height.',
@@ -3529,10 +3359,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e217',
             name: 'Downward Facing Balance',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'glutes',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lie facedown on top of an exercise ball.',
                 'While resting on your stomach on the ball, walk your hands forward along the floor and lift your legs, extending your elbows and knees.'
@@ -3541,10 +3371,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e218',
             name: 'Drag Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab a barbell with a supinated grip (palms facing forward) and get your elbows close to your torso and back. This will be your starting position.',
                 'As you exhale, curl the bar up while keeping the elbows to the back as you "Drag" the bar up by keeping it in contact with your torso. Tip: As you can see, you will not be keeping the elbows pinned to your sides, but instead you will be bringing them back. Also, do not lift your shoulders.',
@@ -3555,10 +3385,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e219',
             name: 'Drop Push',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position low boxes or other platforms 2-3 feet apart.',
                 'Move to a pushup position between them, supporting yourself by placing your hands on the boxes.',
@@ -3568,10 +3398,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e220',
             name: 'Dumbbell Alternate Bicep Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand (torso upright) with a dumbbell in each hand held at arms length. The elbows should be close to the torso and the palms of your hand should be facing your thighs.',
                 'While holding the upper arm stationary, curl the right weight as you rotate the palm of the hands until they are facing forward. At this point continue contracting the biceps as you breathe out until your biceps is fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a second as you squeeze the biceps. Tip: Only the forearms should move.',
@@ -3583,10 +3413,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e221',
             name: 'Dumbbell Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on a flat bench with a dumbbell in each hand resting on top of your thighs. The palms of your hands will be facing each other.',
                 'Then, using your thighs to help raise the dumbbells up, lift the dumbbells one at a time so that you can hold them in front of you at shoulder width.',
@@ -3598,10 +3428,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e222',
             name: 'Dumbbell Bench Press with Neutral Grip',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Take a dumbbell in each hand and lay back onto a flat bench. Your feet should be flat on the floor and your shoulder blades retracted.',
                 'Maintaining a neutral grip, palms facing each other, begin with your arms extended directly above you, perpendicular to the floor. This will be your starting position.',
@@ -3612,10 +3442,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e223',
             name: 'Dumbbell Bicep Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 "Stand up straight with a dumbbell in each hand at arm's length. Keep your elbows close to your torso and rotate the palms of your hands until they are facing forward. This will be your starting position.",
                 'Now, keeping the upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps.',
@@ -3626,10 +3456,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e224',
             name: 'Dumbbell Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with a dumbbell in each hand with your feet shoulder width apart.',
                 'Lower the weights to the floor by flexing at the hips and knees, pushing your hips back until the dumbbells reach the floor. This will be your starting position.',
@@ -3641,10 +3471,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e225',
             name: 'Dumbbell Floor Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lay on the floor holding dumbbells in your hands. Your knees can be bent. Begin with the weights fully extended above you.',
                 'Lower the weights until your upper arm comes in contact with the floor. You can tuck your elbows to emphasize triceps size and strength, or to focus on your chest angle your arms to the side.',
@@ -3654,10 +3484,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e226',
             name: 'Dumbbell Flyes',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on a flat bench with a dumbbell on each hand resting on top of your thighs. The palms of your hand will be facing each other.',
                 "Then using your thighs to help raise the dumbbells, lift the dumbbells one at a time so you can hold them in front of you at shoulder width with the palms of your hands facing each other. Raise the dumbbells up like you're pressing them, but stop and hold just before you lock out. This will be your starting position.",
@@ -3669,10 +3499,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e227',
             name: 'Dumbbell Incline Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Using a neutral grip, lean into an incline bench.',
                 'Take a dumbbell in each hand with a neutral grip, beginning with the arms straight. This will be your starting position.',
@@ -3683,10 +3513,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e228',
             name: 'Dumbbell Incline Shoulder Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on an Incline Bench while holding a dumbbell on each hand on top of your thighs.',
                 'Lift your legs up to kick the weights to your shoulders and lean back. Position the dumbbells above your shoulders with your arms extended. The arms should be perpendicular to the floor with your palms facing forward and knuckles pointing towards the ceiling. This will be your starting position.',
@@ -3698,10 +3528,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e229',
             name: 'Dumbbell Lunges',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your torso upright holding two dumbbells in your hands by your sides. This will be your starting position.',
                 'Step forward with your right leg around 2 feet or so from the foot being left stationary behind and lower your upper body down, while keeping the torso upright and maintaining balance. Inhale as you go down. Note: As in the other exercises, do not allow your knee to go forward beyond your toes as you come down, as this will put undue stress on the knee joint. Make sure that you keep your front shin perpendicular to the ground.',
@@ -3712,10 +3542,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e230',
             name: 'Dumbbell Lying One-Arm Rear Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'While holding a dumbbell in one hand, lay with your chest down on a slightly inclined (around 15 degrees when measured from the floor) adjustable bench. The other hand can be used to hold to the leg of the bench for stability.',
                 'Position the palm of the hand that is holding the dumbbell in a neutral manner (palms facing your torso) as you keep the arm extended with the elbow slightly bent. This will be your starting position.',
@@ -3727,10 +3557,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e231',
             name: 'Dumbbell Lying Pronation',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on a flat bench face down with one arm holding a dumbbell and the other hand on top of the bench folded so that you can rest your head on it.',
                 'Bend the elbows of the arm holding the dumbbell so that it creates a 90-degree angle between the upper arm and the forearm.',
@@ -3743,10 +3573,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e232',
             name: 'Dumbbell Lying Rear Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'While holding a dumbbell in each hand, lay with your chest down on a slightly inclined (around 15 degrees when measured from the floor) adjustable bench.',
                 'Position the palms of the hands in a neutral manner (palms facing your torso) as you keep the arms extended with the elbows slightly bent. This will be your starting position.',
@@ -3758,10 +3588,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e233',
             name: 'Dumbbell Lying Supination',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie sideways on a flat bench with one arm holding a dumbbell and the other hand on top of the bench folded so that you can rest your head on it.',
                 'Bend the elbows of the arm holding the dumbbell so that it creates a 90-degree angle between the upper arm and the forearm.',
@@ -3774,10 +3604,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e234',
             name: 'Dumbbell One-Arm Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Grab a dumbbell and either sit on a military press bench or a utility bench that has a back support on it as you place the dumbbells upright on top of your thighs or stand up straight.',
                 'Clean the dumbbell up to bring it to shoulder height. The other hand can be kept fully extended to the side, by the waist or grabbing a fixed surface.',
@@ -3790,10 +3620,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e235',
             name: 'Dumbbell One-Arm Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a dumbbell and either sit on a military press bench or a utility bench that has a back support on it as you place the dumbbells upright on top of your thighs or stand up straight.',
                 'Clean the dumbbell up to bring it to shoulder height and then extend the arm over your head so that the whole arm is perpendicular to the floor and next to your head. The dumbbell should be on top of you. The other hand can be kept fully extended to the side, by the waist, supporting the upper arm that has the dumbbell or grabbing a fixed surface.',
@@ -3806,10 +3636,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e236',
             name: 'Dumbbell One-Arm Upright Row',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab a dumbbell and stand up straight with your arm extended in front of you with a slight bend at the elbows and your back straight. This will be your starting position. Tip: The dumbbell should be resting on top of your thigh with the palm of your hands facing your thighs.',
                 'Keep the other hand can be kept fully extended to the side, by the waist or grabbing a fixed surface. This will be your starting position.',
@@ -3821,10 +3651,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e237',
             name: 'Dumbbell Prone Incline Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a dumbbell on each hand and lie face down on an incline bench with your shoulders near top of the incline. Your knees can rest on the seat or your legs can be straddled to the sides (my preferred way).',
                 'Let your arms extend and hang naturally in front of you so that they are perpendicular to the floor.',
@@ -3837,10 +3667,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e238',
             name: 'Dumbbell Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab a dumbbell in each arm and stand up straight with your arms extended by your sides with a slight bend at the elbows and your back straight. This will be your starting position. Tip: The dumbbell should be next to your thighs with the palm of your hands facing back.',
                 'Use your side shoulders to lift the dumbbells as you exhale. The dumbbells should be to the side of the body as you move them up. Continue to lift it until the dumbbells are nearly in line with your chin. Tip: Your elbows should drive the motion. As you lift the dumbbell, your elbow should always be higher than your forearm. Also, keep your torso stationary and pause for a second at the top of the movement.',
@@ -3851,10 +3681,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e239',
             name: 'Dumbbell Rear Lunge',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your torso upright holding two dumbbells in your hands by your sides. This will be your starting position.',
                 'Step backward with your right leg around two feet or so from the left foot and lower your upper body down, while keeping the torso upright and maintaining balance. Inhale as you go down. Tip: As in the other exercises, do not allow your knee to go forward beyond your toes as you come down, as this will put undue stress on the knee joint. Make sure that you keep your front shin perpendicular to the ground. Keep the torso upright during the lunge; flexible hip flexors are important. A long lunge emphasizes the Gluteus Maximus; a short lunge emphasizes Quadriceps.',
@@ -3865,10 +3695,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e240',
             name: 'Dumbbell Scaption',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'This corrective exercise strengthens the muscles that stabilize your shoulder blade. Hold a light weight in each hand, hanging at your sides. Your thumbs should pointing up.',
                 'Begin the movement raising your arms out in front of you, about 30 degrees off center. Your arms should be fully extended as you perform the movement.',
@@ -3878,10 +3708,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e241',
             name: 'Dumbbell Seated Box Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a box a couple feet to the side of a bench. Hold a dumbbell to your chest with both hands and seat yourself on the bench facing the box. This will be your starting position.',
                 'Plant your feet firmly on the ground as you lean forward, extending through the hips and knees to jump up and forward.',
@@ -3892,10 +3722,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e242',
             name: 'Dumbbell Seated One-Leg Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Place a block on the floor about 12 inches from a flat bench.',
                 'Sit on a flat bench and place a dumbbell on your upper left thigh about 3 inches above your knee.',
@@ -3908,10 +3738,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e243',
             name: 'Dumbbell Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'While holding a dumbbell in each hand, sit on a military press bench or utility bench that has back support. Place the dumbbells upright on top of your thighs.',
                 'Now raise the dumbbells to shoulder height one at a time using your thighs to help propel them up into position.',
@@ -3924,10 +3754,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e244',
             name: 'Dumbbell Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand erect with a dumbbell on each hand (palms facing your torso), arms extended on the sides.',
                 'Lift the dumbbells by elevating the shoulders as high as possible while you exhale. Hold the contraction at the top for a second. Tip: The arms should remain extended at all times. Refrain from using the biceps to help lift the dumbbells. Only the shoulders should be moving up and down.',
@@ -3938,10 +3768,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e245',
             name: 'Dumbbell Side Bend',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight while holding a dumbbell on the left hand (palms facing the torso) as you have the right hand holding your waist. Your feet should be placed at shoulder width. This will be your starting position.',
                 'While keeping your back straight and your head up, bend only at the waist to the right as far as possible. Breathe in as you bend to the side. Then hold for a second and come back up to the starting position as you exhale. Tip: Keep the rest of the body stationary.',
@@ -3952,10 +3782,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e246',
             name: 'Dumbbell Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight while holding a dumbbell on each hand (palms facing the side of your legs).',
                 'Position your legs using a shoulder width medium stance with the toes slightly pointed out. Keep your head up at all times as looking down will get you off balance and also maintain a straight back. This will be your starting position. Note: For the purposes of this discussion we will use the medium stance described above which targets overall development; however you can choose any of the three stances discussed in the foot stances section.',
@@ -3967,10 +3797,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e247',
             name: 'Dumbbell Squat To A Bench',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight with a flat bench behind you while holding a dumbbell on each hand (palms facing the side of your legs).',
                 'Position your legs using a shoulder width medium stance with the toes slightly pointed out. Keep your head up at all times as looking down will get you off balance and also maintain a straight back. This will be your starting position. Note: For the purposes of this discussion we will use the medium stance described above which targets overall development; however you can choose any of the three stances discussed in the foot stances section.',
@@ -3982,10 +3812,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e248',
             name: 'Dumbbell Step Ups',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand up straight while holding a dumbbell on each hand (palms facing the side of your legs).',
                 'Place the right foot on the elevated platform. Step on the platform by extending the hip and the knee of your right leg. Use the heel mainly to lift the rest of your body up and place the foot of the left leg on the platform as well. Breathe out as you execute the force required to come up.',
@@ -3996,10 +3826,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e249',
             name: 'Dumbbell Tricep Extension -Pronated Grip',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on a flat bench holding two dumbbells directly above your shoulders. Your arms should be fully extended and form a 90 degree angle from your torso and the floor.',
                 'The palms of your hands should be facing forward, and your elbows should be tucked in. This will be your starting position.',
@@ -4010,10 +3840,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e250',
             name: 'Dynamic Back Stretch',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Stand with your feet shoulder width apart. This will be your starting position.',
                 'Keeping your arms straight, swing them straight up in front of you 5-10 times, increasing the range of motion each time until your arms are above your head.'
@@ -4022,10 +3852,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e251',
             name: 'Dynamic Chest Stretch',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Stand with your hands together, arms extended directly in front of you. This will be your starting position.',
                 'Keeping your arms straight, quickly move your arms back as far as possible and back in again, similar to an exaggerated clapping motion. Repeat 5-10 times, increasing speed as you do so.'
@@ -4034,10 +3864,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e252',
             name: 'EZ-Bar Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight while holding an EZ curl bar at the wide outer handle. The palms of your hands should be facing forward and slightly tilted inward due to the shape of the bar. Keep your elbows close to your torso. This will be your starting position.',
                 'Now, while keeping your upper arms stationary, exhale and curl the weights forward while contracting the biceps. Focus on only moving your forearms.',
@@ -4049,10 +3879,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e253',
             name: 'EZ-Bar Skullcrusher',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Using a close grip, lift the EZ bar and hold it with your elbows in as you lie on the bench. Your arms should be perpendicular to the floor. This will be your starting position.',
                 'Keeping the upper arms stationary, lower the bar by allowing the elbows to flex. Inhale as you perform this portion of the movement. Pause once the bar is directly above the forehead.',
@@ -4063,10 +3893,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e254',
             name: 'Elbow Circles',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit or stand with your feet slightly apart.',
                 'Place your hands on your shoulders with your elbows at shoulder level and pointing out.',
@@ -4076,10 +3906,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e255',
             name: 'Elbow to Knee',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor, crossing your right leg across your bent left knee. Clasp your hands behind your head, beginning with your shoulder blades on the ground. This will be your starting position.',
                 'Perform the motion by flexing the spine and rotating your torso to bring the left elbow to the right knee.',
@@ -4089,10 +3919,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e256',
             name: 'Elbows Back',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight.',
                 'Place both hands on your lower back, fingers pointing downward and elbows out.',
@@ -4102,10 +3932,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e257',
             name: 'Elevated Back Lunge',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar onto a rack at shoulder height loaded to an appropriate weight. Place a short, raised platform behind you.',
                 'Rack the bar onto your upper back, keeping your back arched and tight. Step onto your raised platform with both feet. This will be your starting position.',
@@ -4116,10 +3946,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e258',
             name: 'Elevated Cable Rows',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Get a platform of some sort (it can be an aerobics or calf raise platform) that is around 4-6 inches in height.',
                 'Place it on the seat of the cable row machine.',
@@ -4133,10 +3963,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e259',
             name: 'Elliptical Trainer',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, step onto the elliptical and select the desired option from the menu. Most ellipticals have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.',
                 'The handles can be used to monitor your heart rate to help you stay at an appropriate intensity.'
@@ -4145,10 +3975,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e260',
             name: 'Exercise Ball Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on an exercise ball with your lower back curvature pressed against the spherical surface of the ball. Your feet should be bent at the knee and pressed firmly against the floor. The upper torso should be hanging off the top of the ball. The arms should either be kept alongside the body or crossed on top of your chest as these positions avoid neck strains (as opposed to the hands behind the back of the head position).',
                 'Lower your torso into a stretch position keeping the neck stationary at all times. This will be your starting position.',
@@ -4160,10 +3990,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e261',
             name: 'Exercise Ball Pull-In',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place an exercise ball nearby and lay on the floor in front of it with your hands on the floor shoulder width apart in a push-up position.',
                 'Now place your lower shins on top of an exercise ball. Tip: At this point your legs should be fully extended with the shins on top of the ball and the upper body should be in a push-up type of position being supported by your two extended arms in front of you. This will be your starting position.',
@@ -4175,10 +4005,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e262',
             name: 'Extended Range One-Arm Kettlebell Floor Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor and position a kettlebell for one arm to press. The kettlebell should be held by the handle. The leg on the same side that you are pressing should be bent, with the knee crossing over the midline of the body.',
                 'Press the kettlebell by extending the elbow and adducting the arm, pressing it above your body. Return to the starting position.'
@@ -4187,10 +4017,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e263',
             name: 'External Rotation',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie sideways on a flat bench with one arm holding a dumbbell and the other hand on top of the bench folded so that you can rest your head on it.',
                 'Bend the elbows of the arm holding the dumbbell so that it creates a 90-degree angle between the upper arm and the forearm. Tip: Keep the arm parallel to your torso.',
@@ -4203,10 +4033,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e264',
             name: 'External Rotation with Band',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Choke the band around a post. The band should be at the same height as your elbow. Stand with your left side to the band a couple of feet away.',
                 'Grasp the end of the band with your right hand, and keep your elbow pressed firmly to your side. We recommend you hold a pad or foam roll in place with your elbow to keep it firmly in position.',
@@ -4218,10 +4048,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e265',
             name: 'External Rotation with Cable',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the cable to the same height as your elbow. Stand with your left side to the band a couple of feet away.',
                 'Grasp the handle with your right hand, and keep your elbow pressed firmly to your side. We recommend you hold a pad or foam roll in place with your elbow to keep it firmly in position.',
@@ -4232,10 +4062,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e266',
             name: 'Face Pull',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Facing a high pulley with a rope or dual handles attached, pull the weight directly towards your face, separating your hands as you do so. Keep your upper arms parallel to the ground.'
             ]
@@ -4243,10 +4073,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e267',
             name: "Farmer's Walk",
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 "There are various implements that can be used for the farmers walk. These can also be performed with heavy dumbbells or short bars if these implements aren't available. Begin by standing between the implements.",
                 'After gripping the handles, lift them up by driving through your heels, keeping your back straight and your head up.',
@@ -4256,10 +4086,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e268',
             name: 'Fast Skipping',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start in a relaxed position with one leg slightly forward. This will be your starting position.',
                 'Skip by executing a step-hop pattern of right-right-step to left-left-step, and so on, alternating back and forth.',
@@ -4269,10 +4099,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e269',
             name: 'Finger Curls',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a barbell with both hands and your palms facing up; hands spaced about shoulder width.',
                 'Place your feet flat on the floor, at a distance that is slightly wider than shoulder width apart. This will be your starting position.',
@@ -4283,10 +4113,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e270',
             name: 'Flat Bench Cable Flyes',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Position a flat bench between two low pulleys so that when you are laying on it, your chest will be lined up with the cable pulleys.',
                 'Lay flat on the bench and keep your feet on the ground.',
@@ -4300,10 +4130,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e271',
             name: 'Flat Bench Leg Pull-In',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie on an exercise mat or a flat bench with your legs off the end.',
                 'Place your hands either under your glutes with your palms down or by the sides holding on to the bench (or with palms down by the side on an exercise mat). Also extend your legs straight out. This will be your starting position.',
@@ -4315,10 +4145,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e272',
             name: 'Flat Bench Lying Leg Raise',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie with your back flat on a bench and your legs extended in front of you off the end.',
                 'Place your hands either under your glutes with your palms down or by the sides holding on to the bench. This will be your starting position.',
@@ -4329,10 +4159,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e273',
             name: 'Flexor Incline Dumbbell Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hold the dumbbell towards the side farther from you so that you have more weight on the side closest to you. (This can be done for a good effect on all bicep dumbbell exercises). Now do a normal incline dumbbell curl, but keep your wrists as far back as possible so as to neutralize any stress that is placed on them.',
                 'Sit on an incline bench that is angled at 45-degrees while holding a dumbbell on each hand.',
@@ -4345,10 +4175,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e274',
             name: 'Floor Glute-Ham Raise',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'You can use a partner for this exercise or brace your feet under something stable.',
                 'Begin on your knees with your upper legs and torso upright. If using a partner, they will firmly hold your feet to keep you in position. This will be your starting position.',
@@ -4359,10 +4189,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e275',
             name: 'Floor Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the j-hooks so they are at the appropriate height to rack the bar. Begin lying on the floor with your head near the end of a power rack. Keeping your shoulder blades pulled together; pull the bar off of the hooks.',
                 'Lower the bar towards the bottom of your chest or upper stomach, squeezing the bar and attempting to pull it apart as you do so. Ensure that you tuck your elbows throughout the movement. Lower the bar until your upper arm contacts the ground and pause, preventing any slamming or bouncing of the weight.',
@@ -4372,10 +4202,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e276',
             name: 'Floor Press with Chains',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the j-hooks so they are at the appropriate height to rack the bar. For this exercise, drape the chains directly over the end of the bar, trying to keep the ends away from the plates.',
                 'Begin lying on the floor with your head near the end of a power rack. Keeping your shoulder blades pulled together, pull the bar off of the hooks.',
@@ -4386,10 +4216,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e277',
             name: 'Flutter Kicks',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'On a flat bench lie facedown with the hips on the edge of the bench, the legs straight with toes high off the floor and with the arms on top of the bench holding on to the front edge.',
                 'Squeeze your glutes and hamstrings and straighten the legs until they are level with the hips. This will be your starting position.',
@@ -4401,10 +4231,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e278',
             name: 'Foot-SMR',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'This exercise stretches the fascia of the muscles in the feet. Start off seated with your shoes removed. Using a foot roller or a similar object, such as a small section of pvc pipe, place your foot against the roller across the arch of your foot. This will be your starting position.',
                 'Press down firmly, rolling across the arch of your foot. Hold for 10-30 seconds, and then switch feet.'
@@ -4413,10 +4243,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e279',
             name: 'Forward Drag with Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Attach a dual handled chain or rope attachment to the sled. You should be facing away from the sled, holding a handle in each hand.',
                 'Begin the movement by moving forward for one step. Leaning forward, extend through the legs and hips to move, pausing with each step to extend through the elbows, pressing your hands forward. Step forward until you return to the start position prepared to press.'
@@ -4425,10 +4255,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e280',
             name: 'Frankenstein Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This drill teaches you the proper positioning of both the bar and your body during the clean and front squat.',
                 "Place the barbell on the front of the shoulders, releasing your grip and extending your arms out in front of you. The shoulders should be pushed forward to create a shelf, and the bar should be in contact with the throat. Ensure that you only move your shoulder blades forward; don't round the thoracic spine.",
@@ -4439,10 +4269,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e281',
             name: 'Freehand Jump Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Cross your arms over your chest.',
                 'With your head up and your back straight, position your feet at shoulder width.',
@@ -4455,10 +4285,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e282',
             name: 'Frog Hops',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your hands behind your head, and squat down keeping your torso upright and your head up. This will be your starting position.',
                 'Jump forward several feet, avoiding jumping unnecessarily high. As your feet contact the ground, absorb the impact through your legs, and jump again. Repeat this action 5-10 times.'
@@ -4467,10 +4297,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e283',
             name: 'Frog Sit-Ups',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie with your back flat on the floor (or exercise mat) and your legs extended in front of you.',
                 'Now bend at the knees and place your outer thighs by the floor (or mat) as you make the soles of your feet touch each other.',
@@ -4484,10 +4314,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e284',
             name: 'Front Barbell Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, bring your arms up under the bar while keeping the elbows high and the upper arm slightly above parallel to the floor. Rest the bar on top of the deltoids and cross your arms while grasping the bar for total control.',
                 'Lift the bar off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -4500,10 +4330,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e285',
             name: 'Front Barbell Squat To A Bench',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set a flat bench behind you and set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, bring your arms up under the bar while keeping the elbows high and the upper arm slightly above parallel to the floor. Rest the bar on top of the deltoids and cross your arms while grasping the bar for total control.',
                 'Lift the bar off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -4516,10 +4346,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e286',
             name: 'Front Box Jump',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a box of an appropriate height 1-2 feet in front of you. Stand with your feet should width apart. This will be your starting position.',
                 'Perform a short squat in preparation for jumping, swinging your arms behind you.',
@@ -4530,10 +4360,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e287',
             name: 'Front Cable Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Select the weight on a low pulley machine and grasp the single hand cable attachment that is attached to the low pulley with your left hand.',
                 "Face away from the pulley and put your arm straight down with the hand cable attachment in front of your thighs at arms' length with the palms of the hand facing your thighs. This will be your starting position.",
@@ -4545,10 +4375,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e288',
             name: 'Front Cone Hops (or hurdle hops)',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Set up a row of cones or other small barriers, placing them a few feet apart.',
                 'Stand in front of the first cone with your feet shoulder width apart. This will be your starting position.',
@@ -4560,10 +4390,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e289',
             name: 'Front Dumbbell Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Pick a couple of dumbbells and stand with a straight torso and the dumbbells on front of your thighs at arms length with the palms of the hand facing your thighs. This will be your starting position.',
                 'While maintaining the torso stationary (no swinging), lift the left dumbbell to the front with a slight bend on the elbow and the palms of the hands always facing down. Continue to go up until you arm is slightly above parallel to the floor. Exhale as you execute this portion of the movement and pause for a second at the top. Inhale after the second pause.',
@@ -4574,10 +4404,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e290',
             name: 'Front Incline Dumbbell Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down on an incline bench with the incline set anywhere between 30 to 60 degrees while holding a dumbbell on each hand. Tip: You can change the angle to hit the muscle a little differently each time.',
                 'Extend your arms straight in front of you and have your palms facing down with the dumbbells raised about 1 inch above your thighs. This will be your starting position.',
@@ -4589,10 +4419,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e291',
             name: 'Front Leg Raises',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Stand next to a chair or other support, holding on with one hand.',
                 'Swing your leg forward, keeping the leg straight. Continue with a downward swing, bringing the leg as far back as your flexibility allows. Repeat 5-10 times, and then switch legs.'
@@ -4601,10 +4431,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e292',
             name: 'Front Plate Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 "While standing straight, hold a barbell plate in both hands at the 3 and 9 o'clock positions. Your palms should be facing each other and your arms should be extended and locked with a slight bend at the elbows and the plate should be down near your waist in front of you as far as you can go. Tip: The arms will remain in this position throughout the exercise. This will be your starting position.",
                 'Slowly raise the plate as you exhale until it is a little above shoulder level. Hold the contraction for a second. Tip: make sure that you do not swing the weight or bend at the elbows. Your torso should remain stationary throughout the movement as well.',
@@ -4615,10 +4445,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e293',
             name: 'Front Raise And Pullover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie on a flat bench while holding a barbell using a palms down grip that is about 15 inches apart.',
                 'Place the bar on your upper thighs, extend your arms and lock them while keeping a slight bend on the elbows. This will be your starting position.',
@@ -4630,10 +4460,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e294',
             name: 'Front Squat (Clean Grip)',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, first set the bar in a rack slightly below shoulder level. Rest the bar on top of the deltoids, pushing into the clavicles, and lightly touching the throat. Your hands should be in a clean grip, touching the bar only with your fingers to help keep it in position.',
                 'Lift the bar off the rack by first pushing with your legs and at the same time straightening your torso. Step away from the rack and position your legs using a shoulder width medium stance with the toes slightly pointed out. Keep your head and elbows up at all times. This will be your starting position.',
@@ -4644,10 +4474,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e295',
             name: 'Front Squats With Two Kettlebells',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells to your shoulders. Clean the kettlebells to your shoulders by extending through the legs and hips as you pull the kettlebells towards your shoulders. Rotate your wrists as you do so.',
                 'Looking straight ahead at all times, squat as low as you can and pause at the bottom. As you squat down, push your knees out. You should squat between your legs, keeping an upright torso, with your head and chest up.',
@@ -4657,10 +4487,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e296',
             name: 'Front Two-Dumbbell Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Pick a couple of dumbbells and stand with a straight torso and the dumbbells on front of your thighs at arms length with the palms of the hand facing your thighs. This will be your starting position.',
                 'While maintaining the torso stationary (no swinging), lift the dumbbells to the front with a slight bend on the elbow and the palms of the hands always facing down. Continue to go up until you arms are slightly above parallel to the floor. Exhale as you execute this portion of the movement and pause for a second at the top.',
@@ -4671,10 +4501,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e297',
             name: 'Full Range-Of-Motion Lat Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Either standing or seated on a high bench, grasp two stirrup cables that are attached to the high pulleys. Grab with the opposing hand so your arms are crisscrossed about you and your palms are facing forward.',
                 'Keeping your chest up and maintaining a slight arch in your lower back, pull the handles down as if you were doing a regular pulldown. The range of motion will be more of an arc. During the movement, rotate your hands so that in the bottom position your palms face each other rather than forward. Return slowly to the starting position and repeat.'
@@ -4683,10 +4513,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e298',
             name: 'Gironda Sternum Chins',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grasp the pull-up bar with a shoulder width underhand grip.',
                 'Now hang with your arms fully extended and stick your chest out and lean back. Tip: You will be leaning back throughout the entire movement. This will be your starting position.',
@@ -4699,10 +4529,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e299',
             name: 'Glute Ham Raise',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin by adjusting the equipment to fit your body. Place your feet against the footplate in between the rollers as you lie facedown. Your knees should be just behind the pad.',
                 'Start from the bottom of the movement. Keep your back arched as you begin the movement by flexing the knees. Drive your toes into the foot plate as you do so. Keep your upper body straight, and continue until your body is upright.',
@@ -4712,10 +4542,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e300',
             name: 'Glute Kickback',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Kneel on the floor or an exercise mat and bend at the waist with your arms extended in front of you (perpendicular to the torso) in order to get into a kneeling push-up position but with the arms spaced at shoulder width. Your head should be looking forward and the bend of the knees should create a 90-degree angle between the hamstrings and the calves. This will be your starting position.',
                 'As you exhale, lift up your right leg until the hamstrings are in line with the back while maintaining the 90-degree angle bend. Contract the glutes throughout this movement and hold the contraction at the top for a second. Tip: At the end of the movement the upper leg should be parallel to the floor while the calf should be perpendicular to it.',
@@ -4726,10 +4556,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e301',
             name: 'Goblet Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand holding a light kettlebell by the horns close to your chest. This will be your starting position.',
                 'Squat down between your legs until your hamstrings are on your calves. Keep your chest and head up and your back straight.',
@@ -4739,10 +4569,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e302',
             name: 'Good Morning',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a bar on a rack at shoulder height. Rack the bar across the rear of your shoulders as you would a power squat, not on top of your shoulders. Keep your back tight, shoulder blades pinched together, and your knees slightly bent. Step back from the rack.',
                 'Begin by bending at the hips, moving them back as you bend over to near parallel. Keep your back arched and your cervical spine in proper alignment.',
@@ -4752,10 +4582,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e303',
             name: 'Good Morning off Pins',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a bar on a rack at about the same height as your stomach. Bend over underneath the bar and rack the bar across the rear of your shoulders as you would a power squat, not on top of your shoulders. At the proper height, you should be near parallel to the floor when bent over. Keep your back tight, shoulder blades pinched together, and your knees slightly bent. Keep your back arched and your cervical spine in proper alignment.',
                 'Begin the motion by extending through the hips with your glutes and hamstrings, and you are standing with the weight. Slowly lower the weight back to the pins returning to the starting position.'
@@ -4764,10 +4594,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e304',
             name: 'Gorilla Chin/Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hang from a chin-up bar using an underhand grip (palms facing you) that is slightly wider than shoulder width.',
                 'Now bend your knees at a 90 degree angle so that the calves are parallel to the floor while the thighs remain perpendicular to it. This will be your starting position.',
@@ -4779,10 +4609,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e305',
             name: 'Groin and Back Stretch',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'adductors',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'Sit on the floor with your knees bent and feet together.',
                 'Interlock your fingers behind your head. This will be your starting position.',
@@ -4792,10 +4622,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e306',
             name: 'Groiners',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'adductors',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a pushup position on the floor. This will be your starting position.',
                 'Using both legs, jump forward landing with your feet next to your hands. Keep your head up as you do so.',
@@ -4805,10 +4635,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e307',
             name: 'Hack Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place the back of your torso against the back pad of the machine and hook your shoulders under the shoulder pads provided.',
                 'Position your legs in the platform using a shoulder width medium stance with the toes slightly pointed out. Tip: Keep your head up at all times and also maintain the back on the pad at all times.',
@@ -4822,10 +4652,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e308',
             name: 'Hammer Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright and a dumbbell on each hand being held at arms length. The elbows should be close to the torso.',
                 'The palms of the hands should be facing your torso. This will be your starting position.',
@@ -4837,10 +4667,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e309',
             name: 'Hammer Grip Incline DB Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on an incline bench with a dumbbell on each hand on top of your thighs. The palms of your hand will be facing each other.',
                 'By using your thighs to help you get the dumbbells up, clean the dumbbells one arm at a time so that you can hold them at shoulder width.',
@@ -4854,10 +4684,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e310',
             name: 'Hamstring-SMR',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'In a seated position, extend your legs over a foam roll so that it is position on the back of the upper legs. Place your hands to the side or behind you to help support your weight. This will be your starting position.',
                 'Using your hands, lift your hips off of the floor and shift your weight on the foam roll to one leg. Relax the hamstrings of the leg you are stretching.',
@@ -4867,10 +4697,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e311',
             name: 'Hamstring Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on your back with one leg extended above you, with the hip at ninety degrees. Keep the other leg flat on the floor.',
                 'Loop a belt, band, or rope over the ball of your foot. This will be your starting position.',
@@ -4880,10 +4710,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e312',
             name: 'Handstand Push-Ups',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'With your back to the wall bend at the waist and place both hands on the floor at shoulder width.',
                 'Kick yourself up against the wall with your arms straight. Your body should be upside down with the arms and legs fully extended. Keep your whole body as straight as possible. Tip: If doing this for the first time, have a spotter help you. Also, make sure that you keep facing the wall with your head, rather than looking down.',
@@ -4895,10 +4725,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e313',
             name: 'Hang Clean',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a shoulder width, double overhand or hook grip, with the bar hanging at the mid thigh position. Your back should be straight and inclined slightly forward.',
                 'Begin by aggressively extending through the hips, knees and ankles, driving the weight upward. As you do so, shrug your shoulders towards your ears.',
@@ -4908,10 +4738,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e314',
             name: 'Hang Clean - Below the Knees',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a shoulder width, double overhand or hook grip, with the bar hanging just below the knees. Your back should be straight and inclined slightly forward.',
                 'Begin by aggressively extending through the hips, knees and ankles, driving the weight upward. As you do so, shrug your shoulders towards your ears. As full extension is achieved, transition into the third pull by aggressively shrugging and flexing the arms with the elbows up and out.',
@@ -4922,10 +4752,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e315',
             name: 'Hang Snatch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a wide grip on the bar, with an overhand or hook grip. The feet should be directly below the hips with the feet turned out. Your knees should be slightly bent, and the torso inclined forward. The spine should be fully extended and the head facing forward. The bar should be at the hips. This will be your starting position.',
                 'Aggressively extend through the legs and hips. At peak extension, shrug the shoulders and allow the elbows to flex to the side.',
@@ -4936,10 +4766,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e316',
             name: 'Hang Snatch - Below Knees',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a wide grip on the bar, with an overhand or hook grip. The feet should be directly below the hips with the feet turned out. Your knees should be slightly bent, and the torso inclined forward. The spine should be fully extended and the head facing forward. The bar should be just below the knees. This will be your starting position.',
                 'Aggressively extend through the legs and hips. At peak extension, shrug the shoulders and allow the elbows to flex to the side.',
@@ -4950,10 +4780,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e317',
             name: 'Hanging Bar Good Morning',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a bar on a rack at about the same height as your stomach. Suspend the bar using chains or suspension straps.',
                 'Bend over underneath the bar and rack the bar across the rear of your shoulders as you would a power squat, not on top of your traps. At the proper height, you should be near parallel to the floor when bent over. Keep your back tight, shoulder blades pinched together, and your knees slightly bent. Keep your back arched and your cervical spine in proper alignment.',
@@ -4964,10 +4794,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e318',
             name: 'Hanging Leg Raise',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hang from a chin-up bar with both arms extended at arms length in top of you using either a wide grip or a medium grip. The legs should be straight down with the pelvis rolled slightly backwards. This will be your starting position.',
                 'Raise your legs until the torso makes a 90-degree angle with the legs. Exhale as you perform this movement and hold the contraction for a second or so.',
@@ -4978,10 +4808,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e319',
             name: 'Hanging Pike',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hang from a chin-up bar with your legs and feet together using an overhand grip (palms facing away from you) that is slightly wider than shoulder width. Tip: You may use wrist wraps in order to facilitate holding on to the bar.',
                 'Now bend your knees at a 90 degree angle and bring the upper legs forward so that the calves are perpendicular to the floor while the thighs remain parallel to it. This will be your starting position.',
@@ -4993,10 +4823,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e320',
             name: 'Heaving Snatch Balance',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This drill helps you learn the snatch. Begin by holding a light weight across the back of the shoulders. Your feet should be slightly wider than hip width apart with the feet turned out, the same position that you would perform a squat with.',
                 'Begin by dipping with the knees slightly, and popping back up to briefly unload the bar. Drive yourself underneath the bar, elevating it overhead as you descend into a full squat.',
@@ -5006,10 +4836,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e321',
             name: 'Heavy Bag Thrust',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Utilize a heavy bag for this exercise. Assume an upright stance next to the bag, with your feet staggered, fairly wide apart. Place your hand on the bag at about chest height. This will be your starting position.',
                 'Begin by twisting at the waist, pushing the bag forward as hard as possible. Perform this move quickly, pushing the bag away from your body.',
@@ -5019,10 +4849,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e322',
             name: 'High Cable Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand between a couple of high pulleys and grab a handle in each arm. Position your upper arms in a way that they are parallel to the floor with the palms of your hands facing you. This will be your starting position.',
                 'Curl the handles towards you until they are next to your ears. Make sure that as you do so you flex your biceps and exhale. The upper arms should remain stationary and only the forearms should move. Hold for a second in the contracted position as you squeeze the biceps.',
@@ -5033,10 +4863,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e323',
             name: 'Hip Circles (prone)',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abductors',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Position yourself on your hands and knees on the ground. Maintaining good posture, raise one bent knee off of the ground. This will be your starting position.',
                 'Keeping the knee in a bent position, rotate the femur in an arc, attempting to make a big circle with your knee.',
@@ -5046,10 +4876,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e324',
             name: 'Hip Extension with Bands',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Secure one end of the band to the lower portion of a post and attach the other to one ankle.',
                 'Facing the attachment point of the band, hold on to the column to stabilize yourself.',
@@ -5060,10 +4890,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e325',
             name: 'Hip Flexion with Band',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Secure one end of the band to the lower portion of a post and attach the other to one ankle.',
                 'Face away from the attachment point of the band.',
@@ -5074,10 +4904,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e326',
             name: 'Hip Lift with Band',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "After choosing a suitable band, lay down in the middle of the rack, after securing the band on either side of you. If your rack doesn't have pegs, the band can be secured using heavy dumbbells or similar objects, just ensure they won't move.",
                 'Adjust your position so that the band is directly over your hips. Bend your knees and place your feet flat on the floor. Your hands can be on the floor or holding the band in position.',
@@ -5088,10 +4918,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e327',
             name: 'Hug A Ball',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Seat yourself on the floor.',
                 'Straddle an exercise ball between both legs and lower your hips down toward the floor.',
@@ -5101,10 +4931,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e328',
             name: 'Hug Knees To Chest',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie down on your back and pull both knees up to your chest.',
                 'Hold your arms under the knees, not over (that would put to much pressure on your knee joints).',
@@ -5114,10 +4944,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e329',
             name: 'Hurdle Hops',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Set up a row of hurdles or other small barriers, placing them a few feet apart.',
                 'Stand in front of the first hurdle with your feet shoulder width apart. This will be your starting position.',
@@ -5128,10 +4958,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e330',
             name: 'Hyperextensions (Back Extensions)',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie face down on a hyperextension bench, tucking your ankles securely under the footpads.',
                 'Adjust the upper pad if possible so your upper thighs lie flat across the wide pad, leaving enough room for you to bend at the waist without any restriction.',
@@ -5144,10 +4974,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e331',
             name: 'Hyperextensions With No Hyperextension Bench',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With someone holding down your legs, slide yourself down to the edge a flat bench until your hips hang off the end of the bench. Tip: Your entire upper body should be hanging down towards the floor. Also, you will be in the same position as if you were on a hyperextension bench but the range of motion will be shorter due to the height of the flat bench vs. that of the hyperextension bench.',
                 'With your body straight, cross your arms in front of you (my preference) or behind your head. This will be your starting position. Tip: You can also hold a weight plate for extra resistance in front of you under your crossed arms.',
@@ -5159,10 +4989,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e332',
             name: 'IT Band and Glute Stretch',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abductors',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Loop a belt, rope, or band around one of your feet, and swing that leg across your body to the opposite side, keeping the leg extended as you lay on the ground. This will be your starting position.',
                 'Keeping your foot off of the floor, pull on the belt, using the tension to pull the toes up. Hold for 10-20 seconds, and repeat on the other side.'
@@ -5171,10 +5001,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e333',
             name: 'Iliotibial Tract-SMR',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abductors',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lay on your side, with the bottom leg placed onto a foam roller between the hip and the knee. The other leg can be crossed in front of you.',
                 'Place as much of your weight as is tolerable onto your bottom leg; there is no need to keep your bottom leg in contact with the ground. Be sure to relax the muscles of the leg you are stretching.',
@@ -5184,10 +5014,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e334',
             name: 'Inchworm',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your feet close together. Keeping your legs straight, stretch down and put your hands on the floor directly in front of you. This will be your starting position.',
                 'Begin by walking your hands forward slowly, alternating your left and your right. As you do so, bend only at the hip, keeping your legs straight.',
@@ -5199,10 +5029,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e335',
             name: 'Incline Barbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a barbell with an overhand grip (palms down) that is a little closer together than shoulder width.',
                 'Lie back on an incline bench set at any angle between 45-75-degrees.',
@@ -5215,10 +5045,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e336',
             name: 'Incline Bench Pull',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a dumbbell in each hand and lie face down on an incline bench that is set to an incline that is approximately 30 degrees.',
                 'Let the arms hang to your sides fully extended as they point to the floor.',
@@ -5232,10 +5062,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e337',
             name: 'Incline Cable Chest Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the weight to an appropriate amount and be seated, grasping the handles. Your upper arms should be about 45 degrees to the body, with your head and chest up. The elbows should be bent to about 90 degrees. This will be your starting position.',
                 'Begin by extending through the elbow, pressing the handles together straight in front of you. Keep your shoulder blades retracted as you execute the movement.',
@@ -5245,10 +5075,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e338',
             name: 'Incline Cable Flye',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To get yourself into the starting position, set the pulleys at the floor level (lowest level possible on the machine that is below your torso).',
                 'Place an incline bench (set at 45 degrees) in between the pulleys, select a weight on each one and grab a pulley on each hand.',
@@ -5261,10 +5091,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e339',
             name: 'Incline Dumbbell Bench With Palms Facing In',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on an incline bench with a dumbbell on each hand on top of your thighs. The palms of your hand will be facing each other.',
                 'By using your thighs to help you get the dumbbells up, clean the dumbbells one arm at a time so that you can hold them at shoulder width.',
@@ -5278,10 +5108,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e340',
             name: 'Incline Dumbbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit back on an incline bench with a dumbbell in each hand held at arms length. Keep your elbows close to your torso and rotate the palms of your hands until they are facing forward. This will be your starting position.',
                 'While holding the upper arm stationary, curl the weights forward while contracting the biceps as you breathe out. Only the forearms should move. Continue the movement until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a second.',
@@ -5292,10 +5122,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e341',
             name: 'Incline Dumbbell Flyes',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a dumbbell on each hand and lie on an incline bench that is set to an incline angle of no more than 30 degrees.',
                 'Extend your arms above you with a slight bend at the elbows.',
@@ -5308,10 +5138,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e342',
             name: 'Incline Dumbbell Flyes - With A Twist',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a dumbbell in each hand and lie on an incline bench that is set to an incline angle of no more than 30 degrees.',
                 'Extend your arms above you with a slight bend at the elbows.',
@@ -5324,10 +5154,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e343',
             name: 'Incline Dumbbell Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on an incline bench with a dumbbell in each hand atop your thighs. The palms of your hands will be facing each other.',
                 'Then, using your thighs to help push the dumbbells up, lift the dumbbells one at a time so that you can hold them at shoulder width.',
@@ -5341,10 +5171,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e344',
             name: 'Incline Hammer Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Seat yourself on an incline bench with a dumbbell in each hand. You should pressed firmly against he back with your feet together. Allow the dumbbells to hang straight down at your side, holding them with a neutral grip. This will be your starting position.',
                 'Initiate the movement by flexing at the elbow, attempting to keep the upper arm stationary.',
@@ -5354,10 +5184,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e345',
             name: 'Incline Inner Biceps Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a dumbbell in each hand and lie back on an incline bench.',
                 "The dumbbells should be at arm's length hanging at your sides and your palms should be facing out. This will be your starting position.",
@@ -5369,10 +5199,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e346',
             name: 'Incline Push-Up',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand facing bench or sturdy elevated platform. Place hands on edge of bench or platform, slightly wider than shoulder width.',
                 'Position forefoot back from bench or platform with arms and body straight. Arms should be perpendicular to body. Keeping body straight, lower chest to edge of box or platform by bending arms.',
@@ -5382,10 +5212,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e347',
             name: 'Incline Push-Up Close-Grip',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand facing a Smith machine bar or sturdy elevated platform at an appropriate height.',
                 'Place your hands next to one another on the bar.',
@@ -5397,10 +5227,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e348',
             name: 'Incline Push-Up Depth Jump',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'For this drill you will need a box about 12 inches high, and two thick mats or aerobics steps.',
                 'Place the steps just outside of your shoulders, and place your feet on top of the box so that you are in an incline pushup position, your hands just inside the steps. This will be your starting position.',
@@ -5411,10 +5241,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e349',
             name: 'Incline Push-Up Medium',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand facing a Smith machine bar or sturdy elevated platform at an appropriate height.',
                 'Place your hands on the bar, with your hands about shoulder width apart.',
@@ -5426,10 +5256,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e350',
             name: 'Incline Push-Up Reverse Grip',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand facing a Smith machine bar or sturdy elevated platform at an appropriate height.',
                 'Place your hands on the bar palms up, with your hands about shoulder width apart.',
@@ -5441,10 +5271,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e351',
             name: 'Incline Push-Up Wide',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand facing a Smith machine bar or sturdy elevated platform at an appropriate height.',
                 'Place your hands on the bar, with your hands wider than shoulder width.',
@@ -5456,10 +5286,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e352',
             name: 'Intermediate Groin Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on your back with your legs extended. Loop a belt, rope, or band around one of your feet, and swing that leg as far to the side as you can. This will be your starting position.',
                 'Pull gently on the belt to create tension in your groin and hamstring muscles. Hold for 10-20 seconds, and repeat on the other side.'
@@ -5468,10 +5298,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e353',
             name: 'Intermediate Hip Flexor and Quad Stretch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'Lie face down on the floor, with a rope, belt, or band looped around one foot.',
                 'Flex the knee and extend the hip of the leg to be stretched, using both hands to pull on the belt. Your knee and your hip should come off of the floor, creating tension in the hip flexors and quadriceps. Hold the stretch for 10-20 seconds, and repeat on the other leg.'
@@ -5480,10 +5310,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e354',
             name: 'Internal Rotation with Band',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'isolation',
             instructions: [
                 'Choke the band around a post. The band should be at the same height as your elbow. Stand with your right side to the band a couple of feet away.',
                 'Grasp the end of the band with your right hand, and keep your elbow pressed firmly to your side. We recommend you hold a pad or foam roll in place with your elbow to keep it firmly in position.',
@@ -5495,10 +5325,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e355',
             name: 'Inverted Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar in a rack to about waist height. You can also use a smith machine.',
                 'Take a wider than shoulder width grip on the bar and position yourself hanging underneath the bar. Your body should be straight with your heels on the ground with your arms fully extended. This will be your starting position.',
@@ -5510,10 +5340,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e356',
             name: 'Inverted Row with Straps',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hang a rope or suspension straps from a rack or other stable object. Grasp the ends and position yourself in a supine position hanging from the ropes. Your body should be straight with your heels on the ground with your arms fully extended. This will be your starting position.',
                 'Begin by flexing the elbow, pulling your chest to your hands. Retract your shoulder blades as you perform the movement.',
@@ -5524,19 +5354,19 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e357',
             name: 'Iron Cross',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: []
         },
         {
             id: 'e358',
             name: 'Iron Crosses (stretch)',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie face down on the floor, with your arms extended out to your side, palms pressed to the floor. This will be your starting position.',
                 'To begin, flex one knee and bring that leg across the back of your body, attempting to touch it to the ground near the opposite hand.',
@@ -5546,10 +5376,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e359',
             name: 'Isometric Chest Squeezes',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'While either seating or standing, bend your arms at a 90-degree angle and place the palms of your hands together in front of your chest. Tip: Your hands should be open with the palms together and fingers facing forward (perpendicular to your torso).',
                 'Push both hands against each other as you contract your chest. Start with slow tension and increase slowly. Keep breathing normally as you execute this contraction.',
@@ -5561,10 +5391,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e360',
             name: 'Isometric Neck Exercise - Front And Back',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'neck',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'With your head and neck in a neutral position (normal position with head erect facing forward), place both of your hands on the front side of your head.',
                 'Now gently push forward as you contract the neck muscles but resisting any movement of your head. Start with slow tension and increase slowly. Keep breathing normally as you execute this contraction.',
@@ -5576,10 +5406,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e361',
             name: 'Isometric Neck Exercise - Sides',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'neck',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'With your head and neck in a neutral position (normal position with head erect facing forward), place your left hand on the left side of your head.',
                 'Now gently push towards the left as you contract the left neck muscles but resisting any movement of your head. Start with slow tension and increase slowly. Keep breathing normally as you execute this contraction.',
@@ -5591,10 +5421,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e362',
             name: 'Isometric Wipers',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a push-up position, supporting your weight on your hands and toes while keeping your body straight. Your hands should be just outside of shoulder width. This will be your starting position.',
                 'Begin by shifting your body weight as far to one side as possible, allowing the elbow on that side to flex as you lower your body.',
@@ -5605,10 +5435,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e363',
             name: 'JM Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start the exercise the same way you would a close grip bench press. You will lie on a flat bench while holding a barbell at arms length (fully extended) with the elbows in. However, instead of having the arms perpendicular to the torso, make sure the bar is set in a direct line above the upper chest. This will be your starting position.',
                 'Now beginning from a fully extended position lower the bar down as if performing a lying triceps extension. Inhale as you perform this movement. When you reach the half way point, let the bar roll back about one inch by moving the upper arms towards your legs until they are perpendicular to the torso. Tip: Keep the bend at the elbows constant as you bring the upper arms forward.',
@@ -5620,10 +5450,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e364',
             name: 'Jackknife Sit-Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie flat on the floor (or exercise mat) on your back with your arms extended straight back behind your head and your legs extended also. This will be your starting position.',
                 'As you exhale, bend at the waist while simultaneously raising your legs and arms to meet in a jackknife position. Tip: The legs should be extended and lifted at approximately a 35-45 degree angle from the floor and the arms should be extended and parallel to your legs. The upper torso should be off the floor.',
@@ -5634,10 +5464,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e365',
             name: 'Janda Sit-Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Position your body on the floor in the basic sit-up position; knees to a ninety degree angle with feet flat on the floor and arms either crossed over your chest or to the sides. This will be your starting position.',
                 'As you strongly tighten your glutes and hamstrings, fill your lungs with air and in a slow (three to six second count) ascent, slowly exhale. Tip: It is important to tighten the glutes and hamstrings as this will cause the hip flexors to be inactivated in a process called reciprocal inhibition, which basically means that opposite muscles to the contracted ones will relax.',
@@ -5648,10 +5478,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e366',
             name: 'Jefferson Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a barbell on the floor.',
                 'Stand in the middle of the bar length wise.',
@@ -5665,10 +5495,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e367',
             name: 'Jerk Balance',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This drill helps you learn to drive yourself low enough during the jerk and corrects those who move backward during the movement. Begin with the bar racked in the jerk position, with the shoulders forward, torso upright, and the feet split slightly apart.',
                 'Initiate the movement as you would a normal jerk, dipping at the knees while keeping your torso vertical, and driving back up forcefully, using momentum and not your arms to elevate the weight.',
@@ -5678,10 +5508,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e368',
             name: 'Jerk Dip Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This movement strengthens the dip portion of the jerk. Begin with the bar racked in the jerk position, with the shoulders forward to create a shelf and the bar lightly contacting the throat. The feet should be directly under the hips, with the feet turned out as is comfortable.',
                 'Keeping the torso vertical, dip by flexing the knees, allowing them to travel forward and without moving the hips to the rear. The dip should not be excessive. Return the weight to the starting position by driving forcefully though the feet.'
@@ -5690,10 +5520,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e369',
             name: 'Jogging, Treadmill',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.',
                 'Treadmills offer convenience, cardiovascular benefits, and usually have less impact than jogging outside. A 150 lb person will burn almost 250 calories jogging for 30 minutes, compared to more than 450 calories running. Maintain proper posture as you jog, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate.'
@@ -5702,10 +5532,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e370',
             name: 'Keg Load',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To load kegs, place the desired number a distance from the loading platform, typically 30-50 feet.',
                 'Begin by grabbing the close handle of the first keg, tilting it onto its side to grab the opposite edge of the bottom of the keg. Lift the keg up to your chest.',
@@ -5716,10 +5546,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e371',
             name: 'Kettlebell Arnold Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean a kettlebell to your shoulder. Clean the kettlebell to your shoulder by extending through the legs and hips as you raise the kettlebell towards your shoulder. The palm should be facing inward.',
                 'Looking straight ahead, press the kettlebell out and overhead, rotating your wrist so that your palm faces forward at the top of the motion.',
@@ -5729,10 +5559,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e372',
             name: 'Kettlebell Dead Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place kettlebell between your feet. To get in the starting position, push your butt back and look straight ahead.',
                 'Clean the kettlebell to your shoulder. Clean the kettlebell to your shoulders by extending through the legs and hips as you raise the kettlebell towards your shoulder. The wrist should rotate as you do so.',
@@ -5742,10 +5572,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e373',
             name: 'Kettlebell Figure 8',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Place one kettlebell between your legs and take a wider than shoulder width stance. Bend over by pushing your butt out and keeping your back flat.',
                 'Pick up a kettlebell and pass it to your other hand between your legs. The receiving hand should reach from behind the legs. Go back and forth for several repetitions.'
@@ -5754,10 +5584,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e374',
             name: 'Kettlebell Hang Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place kettlebell between your feet. To get in the starting position, push your butt back and look straight ahead.',
                 'Clean kettlebell to your shoulder. Clean the kettlebell to your shoulders by extending through the legs and hips as you raise the kettlebell towards your shoulder. The wrist should rotate as you do so.',
@@ -5767,10 +5597,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e375',
             name: 'Kettlebell One-Legged Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell by the handle in one hand. Stand on one leg, on the same side that you hold the kettlebell.',
                 'Keeping that knee slightly bent, perform a stiff legged deadlift by bending at the hip, extending your free leg behind you for balance.',
@@ -5780,10 +5610,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e376',
             name: 'Kettlebell Pass Between The Legs',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place one kettlebell between your legs and take a comfortable stance. Bend over by pushing your butt out and keeping your back flat.',
                 'Pick up a kettlebell and pass it to your other hand between your legs, in the fashion of a "W". Go back and forth for several repetitions.'
@@ -5792,10 +5622,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e377',
             name: 'Kettlebell Pirate Ships',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'With a wide stance, hold a kettlebell with both hands. Allow it to hang at waist level with your arms extended. This will be your starting position.',
                 'Initiate the movement by turning to one side, swinging the kettlebell to head height. Briefly pause at the top of the motion.',
@@ -5806,10 +5636,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e378',
             name: 'Kettlebell Pistol Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Pick up a kettlebell with two hands and hold it by the horns. Hold one leg off of the floor and squat down on the other.',
                 'Squat down by flexing the knee and sitting back with the hips, holding the kettlebell up in front of you.',
@@ -5820,10 +5650,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e379',
             name: 'Kettlebell Seated Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit on the floor and spread your legs out comfortably.',
                 'Clean one kettlebell to your shoulder.',
@@ -5833,10 +5663,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e380',
             name: 'Kettlebell Seesaw Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells two your shoulders.',
                 'Press one kettlebell.',
@@ -5846,10 +5676,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e381',
             name: 'Kettlebell Sumo High Pull',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a kettlebell on the ground between your feet. Position your feet in a wide stance, and grasp the kettlebell with two hands. Set your hips back as far as possible, with your knees bent. Keep your chest and head up. This will be your starting position.',
                 'Begin by extending the hips and knees, simultaneously pulling the kettlebell to your shoulders, raising your elbows as you do so. Reverse the motion to return to the starting position.'
@@ -5858,10 +5688,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e382',
             name: 'Kettlebell Thruster',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells to your shoulders. Clean the kettlebells to your shoulders by extending through the legs and hips as you pull the kettlebells towards your shoulders. Rotate your wrists as you do so. This will be your starting position.',
                 'Begin to squat by flexing your hips and knees, lowering your hips between your legs. Maintain an upright, straight back as you descend as low as you can.',
@@ -5872,10 +5702,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e383',
             name: 'Kettlebell Turkish Get-Up (Lunge style)',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on your back on the floor and press a kettlebell to the top position by extending the elbow. Bend the knee on the same side as the kettlebell.',
                 'Keeping the kettlebell locked out at all times, pivot to the opposite side and use your non- working arm to assist you in driving forward to the lunge position. Using your free hand, push yourself to a seated position, then progressing to one knee.',
@@ -5885,10 +5715,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e384',
             name: 'Kettlebell Turkish Get-Up (Squat style)',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on your back on the floor and press a kettlebell to the top position by extending the elbow. Bend the knee on the same side as the kettlebell.',
                 'Keeping the kettlebell locked out at all times, pivot to the opposite side and use your non- working arm to assist you in driving forward to the lunge position.',
@@ -5898,10 +5728,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e385',
             name: 'Kettlebell Windmill',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a kettlebell in front of your lead foot and clean and press it overhead with your opposite arm. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulders. Rotate your wrist as you do so, so that the palm faces forward. Press it overhead by extending the elbow.',
                 'Keeping the kettlebell locked out at all times, push your butt out in the direction of the locked out kettlebell. Turn your feet out at a forty-five degree angle from the arm with the locked out kettlebell. Bending at the hip to one side, sticking your butt out, slowly lean until you can touch the floor with your free hand. Keep your eyes on the kettlebell that you hold over your head at all times.',
@@ -5911,10 +5741,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e386',
             name: 'Kipping Muscle Up',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grip the rings using a false grip, with the base of your palms on top of the rings.',
                 'Begin with a movement swinging your legs backward slightly.',
@@ -5926,10 +5756,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e387',
             name: 'Knee Across The Body',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 "Lie down on the floor with your right leg straight. Bend your left leg and lower it across your body, holding the knee down toward the floor with your right hand. (The knee doesn't need to touch the floor if you're tight.)",
                 'Place your left arm comfortably beside you and turn your head to the left. Imagine you have a weight tied to your tailbone. let your tailbone fall back toward the floor as your chest reaches in the opposite direction to stretch your lower back. Switch sides.'
@@ -5938,10 +5768,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e388',
             name: 'Knee Circles',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your legs together and hands by your waist.',
                 'Now move your knees in a circular motion as you breathe normally.',
@@ -5951,10 +5781,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e389',
             name: 'Knee/Hip Raise On Parallel Bars',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Position your body on the vertical leg raise bench so that your forearms are resting on the pads next to the torso and holding on to the handles. Your arms will be bent at a 90 degree angle.',
                 'The torso should be straight with the lower back pressed against the pad of the machine and the legs extended pointing towards the floor. This will be your starting position.',
@@ -5966,10 +5796,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e390',
             name: 'Knee Tuck Jump',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a comfortable standing position with your knees slightly bent. Hold your hands in front of you, palms down with your fingertips together at chest height. This will be your starting position.',
                 'Rapidly dip down into a quarter squat and immediately explode upward. Drive the knees towards the chest, attempting to touch them to the palms of the hands.',
@@ -5979,10 +5809,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e391',
             name: 'Kneeling Arm Drill',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'This drill helps increase arm efficiency during the run. Begin kneeling, left foot in front, right knee down. Apply pressure through the front heel to keep your glutes and hamstrings activated.',
                 'Begin by blocking the arms in long, pendulum like swings. Close the arm angle, blocking with the arms as you would when jogging, progressing to a run and finally a sprint.',
@@ -5993,10 +5823,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e392',
             name: 'Kneeling Cable Crunch With Alternating Oblique Twists',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Connect a rope attachment to a high pulley cable and position a mat on the floor in front of it.',
                 'Grab the rope with both hands and kneel approximately two feet back from the tower.',
@@ -6012,10 +5842,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e393',
             name: 'Kneeling Cable Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Place a bench sideways in front of a high pulley machine.',
                 'Hold a straight bar attachment above your head with your hands about 6 inches apart with your palms facing down.',
@@ -6029,10 +5859,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e394',
             name: 'Kneeling Forearm Stretch',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Start by kneeling on a mat with your palms flat and your fingers pointing back toward your knees.',
                 'Slowly lean back keeping your palms flat on the floor until you feel a stretch in your wrists and forearms. Hold for 20-30 seconds.'
@@ -6041,10 +5871,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e395',
             name: 'Kneeling High Pulley Row',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Select the appropriate weight using a pulley that is above your head. Attach a rope to the cable and kneel a couple of feet away, holding the rope out in front of you with both arms extended. This will be your starting position.',
                 'Initiate the movement by flexing the elbows and fully retracting your shoulders, pulling the rope toward your upper chest with your elbows out.',
@@ -6054,10 +5884,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e396',
             name: 'Kneeling Hip Flexor',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Kneel on a mat and bring your right knee up so the bottom of your foot is on the floor and extend your left leg out behind you so the top of your foot is on the floor.',
                 'Shift your weight forward until you feel a stretch in your hip. Hold for 15 seconds, then repeat for your other side.'
@@ -6066,10 +5896,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e397',
             name: 'Kneeling Jump Squat',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin kneeling on the floor with a barbell racked across the back of your shoulders, or you can use your body weight for this exercise. This can be done inside of a power rack to make unracking easier.',
                 'Sit back with your hips until your glutes touch your feet, keeping your head and chest up.',
@@ -6080,10 +5910,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e398',
             name: 'Kneeling Single-Arm High Pulley Row',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Attach a single handle to a high pulley and make your weight selection.',
                 'Kneel in front of the cable tower, taking the cable with one hand with your arm extended. This will be your starting position.',
@@ -6094,10 +5924,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e399',
             name: 'Kneeling Squat',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Set the bar to the proper height in a power rack. Kneel behind the bar; it may be beneficial to put a mat down to pad your knees. Slide under the bar, racking it across the back of your shoulders. Your shoulder blades should be retracted and the bar tight across your back. Unrack the weight.',
                 'With your head looking forward, sit back with your butt until you touch your calves.',
@@ -6107,10 +5937,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e400',
             name: "Landmine 180's",
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar into a landmine or securely anchor it in a corner. Load the bar to an appropriate weight.',
                 'Raise the bar from the floor, taking it to shoulder height with both hands with your arms extended in front of you. Adopt a wide stance. This will be your starting position.',
@@ -6122,10 +5952,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e401',
             name: 'Landmine Linear Jammer',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar into landmine or, lacking one, securely anchor it in a corner. Load the bar to an appropriate weight and position the handle attachment on the bar.',
                 'Raise the bar from the floor, taking the handles to your shoulders. This will be your starting position.',
@@ -6137,10 +5967,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e402',
             name: 'Lateral Bound',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a half squat position facing 90 degrees from your direction of travel. This will be your starting position.',
                 'Allow your lead leg to do a countermovement inward as you shift your weight to the outside leg.',
@@ -6152,10 +5982,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e403',
             name: 'Lateral Box Jump',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a comfortable standing position, with a short box positioned next to you. This will be your starting position.',
                 'Quickly dip into a quarter squat to initiate the stretch reflex, and immediately reverse direction to jump up and to the side.',
@@ -6167,10 +5997,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e404',
             name: 'Lateral Cone Hops',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a number of cones in a row several feet apart.',
                 'Stand next to the end of the cones, facing 90 degrees to the direction of travel. This will be your starting position.',
@@ -6181,10 +6011,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e405',
             name: 'Lateral Raise - With Bands',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 "To begin, stand on an exercise band so that tension begins at arm's length. Grasp the handles using a pronated (palms facing your thighs) grip that is slightly less than shoulder width. The handles should be resting on the sides of your thighs. Your arms should be extended with a slight bend at the elbows and your back should be straight. This will be your starting position.",
                 'Use your side shoulders to lift the handles to the sides as you exhale. Continue to lift the handles until they are slightly above parallel. Tip: As you lift the handles, slightly tilt the hand as if you were pouring water and keep your arms extended. Also, keep your torso stationary and pause for a second at the top of the movement.',
@@ -6195,10 +6025,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e406',
             name: 'Latissimus Dorsi-SMR',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'While lying on the floor, place a foam roll under your back and to one side, just behind your arm pit. This will be your starting position.',
                 'Keep the arm of the side being stretched behind and to the side of you as you shift your weight onto your lats, keeping your upper body off of the ground. Hold for 10-30 seconds, and switch sides.'
@@ -6207,10 +6037,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e407',
             name: 'Leg-Over Floor Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor with one kettlebell in place on your chest, holding it by the handle. Extend leg on working side over leg on non-working side.Your free arm can be extended out to your side for support.',
                 'Press the kettlebll into a locked out position.',
@@ -6220,10 +6050,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e408',
             name: 'Leg-Up Hamstring Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on your back, bend one knee, and put that foot flat on the floor to stabilize your spine.',
                 "Extend the other leg in the air. If you're tight, you wont be able to straighten it. That's okay. Extend the knee so that the sole of the lifted foot faces the ceiling (or as close as you can get it).",
@@ -6233,10 +6063,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e409',
             name: 'Leg Extensions',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'For this exercise you will need to use a leg extension machine. First choose your weight and sit on the machine with your legs under the pad (feet pointed forward) and the hands holding the side bars. This will be your starting position. Tip: You will need to adjust the pad so that it falls on top of your lower leg (just above your feet). Also, make sure that your legs form a 90-degree angle between the lower and upper leg. If the angle is less than 90-degrees then that means the knee is over the toes which in turn creates undue stress at the knee joint. If the machine is designed that way, either look for another machine or just make sure that when you start executing the exercise you stop going down once you hit the 90-degree angle.',
                 'Using your quadriceps, extend your legs to the maximum as you exhale. Ensure that the rest of the body remains stationary on the seat. Pause a second on the contracted position.',
@@ -6247,10 +6077,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e410',
             name: 'Leg Lift',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'While standing up straight with both feet next to each other at around shoulder width, grab a sturdy surface such as the sides of a squat rack or the top of a chair to brace yourself and keep balance.',
                 'With or without an ankle weight, lift one leg behind you as if performing a leg curl but standing up while keeping the other leg straight. Breathe out as you perform this movement.',
@@ -6262,10 +6092,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e411',
             name: 'Leg Press',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Using a leg press machine, sit down on the machine and place your legs on the platform directly in front of you at a medium (shoulder width) foot stance. (Note: For the purposes of this discussion we will use the medium stance described above which targets overall development; however you can choose any of the three stances described in the foot positioning section).',
                 'Lower the safety bars holding the weighted platform in place and press the platform all the way up until your legs are fully extended in front of you. Tip: Make sure that you do not lock your knees. Your torso and the legs should make a perfect 90-degree angle. This will be your starting position.',
@@ -6277,10 +6107,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e412',
             name: 'Leg Pull-In',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie on an exercise mat with your legs extended and your hands either palms facing down next to you or under your glutes. Tip: My preference is with the hands next to me. This will be your starting position.',
                 'Bend your knees and pull your upper thighs into your midsection as you breathe out. Continue the motion until your knees are around chest level. Contract your abs as you execute this movement and hold for a second at the top. Tip: As you perform the motion, the lower legs (calves) should always remain parallel to the floor.',
@@ -6291,10 +6121,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e413',
             name: 'Leverage Chest Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the bottom or middle of the pectorals at the beginning of the motion.',
                 'Your chest and head should be up and your shoulder blades retracted. This will be your starting position.',
@@ -6305,10 +6135,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e414',
             name: 'Leverage Deadlift',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Load the pins to an appropriate weight. Position yourself directly between the handles. Grasp the bottom handles with a comfortable grip, and then lower your hips as you take a breath. Look forward with your head and keep your chest up. This will be your starting position.',
                 'Return the weight to the starting position.'
@@ -6317,10 +6147,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e415',
             name: 'Leverage Decline Chest Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the bottom of the pectorals at the beginning of the motion. Your chest and head should be up and your shoulder blades retracted. This will be your starting position.',
                 'Press the handles forward by extending through the elbow.',
@@ -6330,10 +6160,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e416',
             name: 'Leverage High Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Load an appropriate weight onto the pins and adjust the seat height so that you can just reach the handles above you. Adjust the knee pad to help keep you down. Grasp the handles with a pronated grip. This will be your starting position.',
                 'Pull the handles towards your torso, retracting your shoulder blades as you flex the elbow.',
@@ -6344,10 +6174,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e417',
             name: 'Leverage Incline Chest Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the top of the pectorals at the beginning of the motion. Your chest and head should be up and your shoulder blades retracted. This will be your starting position.',
                 'Press the handles forward by extending through the elbow.',
@@ -6357,10 +6187,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e418',
             name: 'Leverage Iso Row',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Load an appropriate weight onto the pins and adjust the seat height so that the handles are at chest level. Grasp the handles with either a neutral or pronated grip. This will be your starting position.',
                 'Pull the handles towards your torso, retracting your shoulder blades as you flex the elbow.',
@@ -6370,10 +6200,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e419',
             name: 'Leverage Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the top of the shoulders at the beginning of the motion. Your chest and head should be up and handles held with a pronated grip. This will be your starting position.',
                 'Press the handles upward by extending through the elbow.',
@@ -6383,10 +6213,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e420',
             name: 'Leverage Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Load the pins to an appropriate weight. Position yourself directly between the handles.',
                 'Grasp the top handles with a comfortable grip, and then lower your hips as you take a breath. Look forward with your head and keep your chest up.',
@@ -6398,10 +6228,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e421',
             name: 'Linear 3-Part Start Technique',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This drill helps you accelerate as quickly as possible into a sprint from a dead stop. It helps to use a line to start from. Begin with two feet on the line. Place your left foot with the toe next to your right ankle. Place your right foot 4-6 inches behind the left.',
                 'Place your right hand onto the line, and thing bring your nose close to your left knee.',
@@ -6412,10 +6242,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e422',
             name: 'Linear Acceleration Wall Drill',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'Lean at around 45 degrees against a wall. Your feet should be together, glutes contracted.',
                 'Begin by lifting your right knee quickly, pausing, and then driving it straight down into the ground.',
@@ -6426,10 +6256,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e423',
             name: 'Linear Depth Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'You will need two boxes or benches spaced a few feet away from each other. Begin by standing on one box facing towards the other platform.',
                 'To initiate the movement, gently drop down to the ground between your platforms, allowing the knees and hips to flex.',
@@ -6440,10 +6270,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e424',
             name: 'Log Lift',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with the log in front of you. Grasp the handles, and begin to clean the log. As you are bent over to start the clean, attempt to get the log as high as possible, pulling it into your chest. Extend through the hips and knees to bring it up to complete the clean.',
                 'Push your head back and look up, creating a shelf on your chest to rest the log. Begin the press by dipping, flexing slightly through the knees and reversing the motion. This push press will generate momentum to start the log moving vertically. Continue by extending through the elbows to press the log above your head. There are no strict rules on form, so use whatever techniques you are most efficient with. As the log is pressed, ensure that you push your head through on each repetition, looking forward.',
@@ -6453,10 +6283,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e425',
             name: 'London Bridges',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Attach a climbing rope to a high beam or cross member. Below it, ensure that the smith machine bar is locked in place with the safeties and cannot move. Alternatively, a secure box could also be utilized.',
                 'Stand on the bar, using the rope to balance yourself. This will be your starting position.',
@@ -6467,10 +6297,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e426',
             name: 'Looking At Ceiling',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Kneel on the floor, holding your heels with both hands.',
                 'Lift your buttocks up and forward while bringing your head back to look up at the ceiling, to give an arch in your back.'
@@ -6479,10 +6309,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e427',
             name: 'Low Cable Crossover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To move into the starting position, place the pulleys at the low position, select the resistance to be used and grasp a handle in each hand.',
                 'Step forward, gaining tension in the pulleys. Your palms should be facing forward, hands below the waist, and your arms straight. This will be your starting position.',
@@ -6493,10 +6323,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e428',
             name: 'Low Cable Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Select the desired weight and lay down face up on the bench of a seated row machine that has a rope attached to it. Your head should be pointing towards the attachment.',
                 'Grab the outside of the rope ends with your palms facing each other (neutral grip).',
@@ -6509,10 +6339,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e429',
             name: 'Low Pulley Row To Neck',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit on a low pulley row machine with a rope attachment.',
                 'Grab the ends of the rope using a palms-down grip and sit with your back straight and your knees slightly bent. Tip: Keep your back almost completely vertical and your arms fully extended in front of you. This will be your starting position.',
@@ -6524,10 +6354,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e430',
             name: 'Lower Back-SMR',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'In a seated position, place a foam roll under your lower back. Cross your arms in front of you and protract your shoulders. This will be your starting position.',
                 'Raise your hips off of the floor and lean back, keeping your weight on your lower back. Now shift your weight slightly to one side, keeping your weight off of the spine and on the muscles to the side of it. Roll over your lower back, holding points of tension for 10-30 seconds. Repeat on the other side.'
@@ -6536,10 +6366,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e431',
             name: 'Lower Back Curl',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your stomach with your arms out to your sides. This will be your starting position.',
                 'Using your lower back muscles, extend your spine lifting your chest off of the ground. Do not use your arms to push yourself up. Keep your head up during the movement. Repeat for 10-20 repetitions.'
@@ -6548,10 +6378,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e432',
             name: 'Lunge Pass Through',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your torso upright holding a kettlebell in your right hand. This will be your starting position.',
                 'Step forward with your left foot and lower your upper body down by flexing the hip and the knee, keeping the torso upright. Lower your back knee until it nearly touches the ground.',
@@ -6563,10 +6393,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e433',
             name: 'Lunge Sprint',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust a bar in a Smith machine to an appropriate height. Position yourself under the bar, racking it across the back of your shoulders. Unrack the bar, and then split your feet, moving one foot forward and one foot back. This will be your starting position.',
                 'Lower your back knee nearly to the ground, flexing the knees and lowering your hips as you do so.',
@@ -6577,10 +6407,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e434',
             name: 'Lying Bent Leg Groin',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'adductors',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back with your knees bent and the soles of the feet pressed together. Have your partner hold your knees. This will be your starting position.',
                 'Attempt to squeeze your knees together, while your partner prevents any movement from occurring.',
@@ -6590,10 +6420,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e435',
             name: 'Lying Cable Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a straight bar or E-Z bar attachment that is attached to the low pulley with both hands, using an underhand (palms facing up) shoulder-width grip.',
                 'Lie flat on your back on top of an exercise mat in front of the weight stack with your feet flat against the frame of the pulley machine and your legs straight.',
@@ -6606,10 +6436,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e436',
             name: 'Lying Cambered Barbell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place a cambered bar underneath an exercise bench.',
                 'Lie face down on the exercise bench and grab the bar using a palms down (pronated grip) that is wider than shoulder width. This will be your starting position.',
@@ -6620,10 +6450,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e437',
             name: 'Lying Close-Grip Bar Curl On High Pulley',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place a flat bench in front of a high pulley or lat pulldown machine.',
                 'Hold the straight bar attachment using an underhand grip (palms up) that is about shoulder width.',
@@ -6637,10 +6467,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e438',
             name: 'Lying Close-Grip Barbell Triceps Extension Behind The Head',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'While holding a barbell or EZ Curl bar with a pronated grip (palms facing forward), lie on your back on a flat bench with your head close to the end of the bench. Tip: If you are holding a barbell grab it using a shoulder-width grip and if you are using an E-Z Bar grab it on the inner handles.',
                 'Extend your arms in front of you and slowly bring the bar back in a semi circular motion (while keeping the arms extended) to a position over your head. At the end of this step your arms should be overhead and parallel to the floor. This will be your starting position. Tip: Keep your elbows in at all times.',
@@ -6652,10 +6482,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e439',
             name: 'Lying Close-Grip Barbell Triceps Press To Chin',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'While holding a barbell or EZ Curl bar with a pronated grip (palms facing forward), lie on your back on a flat bench with your head off the end of the bench. Tip: If you are holding a barbell grab it using a shoulder-width grip and if you are using an E-Z Bar grab it on the inner handles.',
                 'Extend your arms in front of you as you hold the barbell over your chest. The arms should be perpendicular to your torso (90-degree angle). This will be your starting position.',
@@ -6667,10 +6497,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e440',
             name: 'Lying Crossover',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abductors',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back with your legs extended.',
                 'Cross one leg over your body with the knee bent, attempting to touch the knee to the ground. Your partner should kneel beside you, holding your shoulder down with one hand and controlling the crossed leg with the other. this will be your starting position.',
@@ -6681,10 +6511,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e441',
             name: 'Lying Dumbbell Tricep Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on a flat bench while holding two dumbbells directly in front of you. Your arms should be fully extended at a 90-degree angle from your torso and the floor. The palms should be facing in and the elbows should be tucked in. This is the starting position.',
                 'As you breathe in and you keep the upper arms stationary with the elbows in, slowly lower the weight until the dumbbells are near your ears.',
@@ -6695,10 +6525,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e442',
             name: 'Lying Face Down Plate Neck Resistance',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'neck',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie face down with your whole body straight on a flat bench while holding a weight plate behind your head. Tip: You will need to position yourself so that your shoulders are slightly above the end of a flat bench in order for the upper chest, neck and face to be off the bench. This will be your starting position.',
                 'While keeping the plate secure on the back of your head slowly lower your head (as in saying "yes") as you breathe in.',
@@ -6709,10 +6539,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e443',
             name: 'Lying Face Up Plate Neck Resistance',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'neck',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie face up with your whole body straight on a flat bench while holding a weight plate on top of your forehead. Tip: You will need to position yourself so that your shoulders are slightly above the end of a flat bench in order for the traps, neck and head to be off the bench. This will be your starting position.',
                 'While keeping the plate secure on your forehead slowly lower your head back in a semi-circular motion as you breathe in.',
@@ -6723,10 +6553,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e444',
             name: 'Lying Glute',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'glutes',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back with your partner kneeling beside you.',
                 'Flex the hip of one leg, raising it off of the floor. Rotate the leg so the foot is over the opposite hip, the lower leg perpendicular to your body. Your partner should hold the knee and ankle in place. This will be your starting position.',
@@ -6737,10 +6567,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e445',
             name: 'Lying Hamstring',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back with your legs extended. Your partner should be kneeling beside you. Raise one leg up towards the ceiling and have your partner hold the ankle. Your partner can use their shoulder to brace your leg if necessary. This will be your starting position.',
                 'With your partner holding your leg in place, attempt to flex the knee, contracting the hamstrings for 10-20 seconds.',
@@ -6750,10 +6580,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e446',
             name: 'Lying High Bench Barbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie face forward on a tall flat bench while holding a barbell with a supinated grip (palms facing up). Tip: If you are holding a barbell grab it using a shoulder-width grip and if you are using an E-Z Bar grab it on the inner handles. Your upper body should be positioned in a way that the upper chest is over the end of the bench and the barbell is hanging in front of you with the arms extended and perpendicular to the floor. This will be your starting position.',
                 'While keeping the elbows in and the upper arms stationary, curl the weight up in a semi-circular motion as you contract the biceps and exhale. Hold at the top of the movement for a second.',
@@ -6764,10 +6594,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e447',
             name: 'Lying Leg Curls',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the machine lever to fit your height and lie face down on the leg curl machine with the pad of the lever on the back of your legs (just a few inches under the calves). Tip: Preferably use a leg curl machine that is angled as opposed to flat since an angled position is more favorable for hamstrings recruitment.',
                 'Keeping the torso flat on the bench, ensure your legs are fully stretched and grab the side handles of the machine. Position your toes straight (or you can also use any of the other two stances described on the foot positioning section). This will be your starting position.',
@@ -6778,10 +6608,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e448',
             name: 'Lying Machine Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the leg machine to a height that will allow you to get inside it with your knees bent and the thighs slightly below parallel.',
                 'Once you select the weight, position yourself inside the machine face up with the knees bent and thighs slightly below parallel to the platform. Make sure that the knees do not go past the toes. The angle created between the hamstrings and the calves should be one that is slightly less than 90 degrees (since your starting position requires you to start slightly below parallel). Your back and your head should be resting on the machine while your shoulders are pressed under the shoulder pads.',
@@ -6794,10 +6624,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e449',
             name: 'Lying One-Arm Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'While holding a dumbbell in one hand, lay with your chest down on a flat bench. The other hand can be used to hold to the leg of the bench for stability.',
                 'Position the palm of the hand that is holding the dumbbell in a neutral manner (palms facing your torso) as you keep the arm extended with the elbow slightly bent. This will be your starting position.',
@@ -6809,10 +6639,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e450',
             name: 'Lying Prone Quadriceps',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'Lay face down on the floor with your partner kneeling beside you. Flex one knee and raise that leg off the ground, attempting to touch your glutes with your foot. Your partner should hold the knee and ankle. This will be your starting position.',
                 'Attempt to extend your knee while your partner prevents any actual movement.',
@@ -6823,10 +6653,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e451',
             name: 'Lying Rear Delt Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'While holding a dumbbell in each hand, lay with your chest down on a flat bench.',
                 'Position the palms of the hands in a neutral manner (palms facing your torso) as you keep the arms extended with the elbows slightly bent. This will be your starting position.',
@@ -6838,10 +6668,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e452',
             name: 'Lying Supine Dumbbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on a flat bench face up while holding a dumbbell in each arm on top of your thighs.',
                 'Bring the dumbbells to the sides with the arms extended and the palms of the hands facing your thighs (neutral grip).',
@@ -6853,10 +6683,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e453',
             name: 'Lying T-Bar Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Load up the T-bar Row Machine with the desired weight and adjust the leg height so that your upper chest is at the top of the pad. Tip: In some machines all you can do is stand on the appropriate step that allows you to be at a height that has the upper chest at the top of the pad.',
                 'Lay face down on the pad and grab the handles. You can either use a palms down, palms up, or palms in position depending on what part of your back you want to emphasize.',
@@ -6869,10 +6699,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e454',
             name: 'Lying Triceps Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on a flat bench with either an e-z bar (my preference) or a straight bar placed on the floor behind your head and your feet on the floor.',
                 'Grab the bar behind you, using a medium overhand (pronated) grip, and raise the bar in front of you at arms length. Tip: The arms should be perpendicular to the torso and the floor. The elbows should be tucked in. This is the starting position.',
@@ -6884,10 +6714,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e455',
             name: 'Machine Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on the Chest Press Machine and select the weight.',
                 'Step on the lever provided by the machine since it will help you to bring the handles forward so that you can grab the handles and fully extend the arms.',
@@ -6901,10 +6731,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e456',
             name: 'Machine Bicep Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the seat to the appropriate height and make your weight selection. Place your upper arms against the pads and grasp the handles. This will be your starting position.',
                 'Perform the movement by flexing the elbow, pulling your lower arm towards your upper arm.',
@@ -6915,10 +6745,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e457',
             name: 'Machine Preacher Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down on the Preacher Curl Machine and select the weight.',
                 'Place the back of your upper arms (your triceps) on the preacher pad provided and grab the handles using an underhand grip (palms facing up). Tip: Make sure that when you place the arms on the pad you keep the elbows in. This will be your starting position.',
@@ -6930,10 +6760,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e458',
             name: 'Machine Shoulder (Military) Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on the Shoulder Press Machine and select the weight.',
                 'Grab the handles to your sides as you keep the elbows bent and in line with your torso. This will be your starting position.',
@@ -6945,10 +6775,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e459',
             name: 'Machine Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the seat to the appropriate height and make your weight selection. Place your upper arms against the pads and grasp the handles. This will be your starting position.',
                 'Perform the movement by extending the elbow, pulling your lower arm away from your upper arm.',
@@ -6959,10 +6789,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e460',
             name: 'Medicine Ball Chest Pass',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'You will need a partner for this exercise. Lacking one, this movement can be performed against a wall.',
                 'Begin facing your partner holding the medicine ball at your torso with both hands.',
@@ -6974,10 +6804,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e461',
             name: 'Medicine Ball Full Twist',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need a medicine ball and a partner. Stand back to back with your partner, spaced 2-3 feet apart. This will be your starting position.',
                 'Hold the ball in front of the trunk. Open the hips and turn the shoulders at the same time as your partner.',
@@ -6988,10 +6818,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e462',
             name: 'Medicine Ball Scoop Throw',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a semisquat stance with a medicine ball in your hands. Your arms should hang so the ball is near your feet.',
                 'Begin by thrusting the hips forward as you extend through the legs, jumping up.',
@@ -7001,10 +6831,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e463',
             name: 'Middle Back Shrug',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie facedown on an incline bench while holding a dumbbell in each hand. Your arms should be fully extended hanging down and pointing towards the floor. The palms of your hands should be facing each other. This will be your starting position.',
                 'As you exhale, squeeze your shoulder blades together and hold the contraction for a full second. Tip: This movement is just like the reverse action of a hug, or trying to perform rear laterals as if you had no arms.',
@@ -7015,10 +6845,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e464',
             name: 'Middle Back Stretch',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Stand so your feet are shoulder width apart and your hands are on your hips.',
                 'Twist at your waist until you feel a stretch. Hold for 10 to 15 seconds, then twist to the other side.'
@@ -7027,10 +6857,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e465',
             name: 'Mixed Grip Chin',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Using a spacing that is just about 1 inch wider than shoulder width, grab a pull-up bar with the palms of one hand facing forward and the palms of the other hand facing towards you. This will be your starting position.',
                 'Now start to pull yourself up as you exhale. Tip: With the arm that has the palms facing up concentrate on using the back muscles in order to perform the movement. The elbow of that arm should remain close to the torso. With the other arm that has the palms facing forward, the elbows will be away but in line with the torso. You will concentrate on using the lats to pull your body up.',
@@ -7042,10 +6872,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e466',
             name: 'Monster Walk',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abductors',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a band around both ankles and another around both knees. There should be enough tension that they are tight when your feet are shoulder width apart.',
                 'To begin, take short steps forward alternating your left and right foot.',
@@ -7055,10 +6885,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e467',
             name: 'Mountain Climbers',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a pushup position, with your weight supported by your hands and toes. Flexing the knee and hip, bring one leg until the knee is approximately under the hip. This will be your starting position.',
                 'Explosively reverse the positions of your legs, extending the bent leg until the leg is straight and supported by the toe, and bringing the other foot up with the hip and knee flexed. Repeat in an alternating fashion for 20-30 seconds.'
@@ -7067,10 +6897,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e468',
             name: 'Moving Claw Series',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'This move helps prepare your running form to help you excel at sprinting. As you run, be sure to flex the knee, aiming to kick your glutes as the hip extends.',
                 'Reload the quad as the leg moves back forward, attacking the ground on the next step.',
@@ -7080,10 +6910,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e469',
             name: 'Muscle Snatch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a loaded barbell held at the mid thigh position with a wide grip. The feet should be directly below the hips, with the feet turned out as needed. Lower the hips, with the chest up and the head looking forward. The shoulders should be just in front of the bar. This will be the starting position.',
                 'Begin the pull by driving through the front of the heels, raising the bar. Transition into the second pull by extending through the hips knees and ankles, driving the bar up as quickly as possible. The bar should be close to the body.',
@@ -7093,10 +6923,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e470',
             name: 'Muscle Up',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grip the rings using a false grip, with the base of your palms on top of the rings. Initiate a pull up by pulling the elbows down to your side, flexing the elbows.',
                 'As you reach the top position of the pull-up, pull the rings to your armpits as you roll your shoulders forward, allowing your elbows to move straight back behind you. This puts you into the proper position to continue into the dip portion of the movement.',
@@ -7107,10 +6937,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e471',
             name: 'Narrow Stance Hack Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place the back of your torso against the back pad of the machine and hook your shoulders under the shoulder pads provided.',
                 'Position your legs in the platform using a less than shoulder width narrow stance with the toes slightly pointed out. Your feet should be around 3 inches or less apart. Tip: Keep your head up at all times and also maintain the back on the pad at all times.',
@@ -7124,10 +6954,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e472',
             name: 'Narrow Stance Leg Press',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Using a leg press machine, sit down on the machine and place your legs on the platform directly in front of you at a less-than-shoulder-width narrow stance with the toes slightly pointed out. Your feet should be around 3 inches or less apart. Tip: Keep your head up at all times and also maintain the back on the pad at all times.',
                 'Lower the safety bars holding the weighted platform in place and press the platform all the way up until your legs are fully extended in front of you. Tip: Make sure that you do not lock your knees. Your torso and the legs should make a perfect 90-degree angle. This will be your starting position.',
@@ -7139,10 +6969,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e473',
             name: 'Narrow Stance Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -7155,10 +6985,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e474',
             name: 'Natural Glute Ham Raise',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Using the leg pad of a lat pulldown machine or a preacher bench, position yourself so that your ankles are under the pads, knees on the seat, and you are facing away from the machine. You should be upright and maintaining good posture.',
                 'This will be your starting position. Lower yourself under control until your knees are almost completely straight.',
@@ -7169,10 +6999,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e475',
             name: 'Neck-SMR',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'neck',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Using a muscle roller or a rolling pin, place the roller behind your head and against your neck. Make sure that you do not place the roller directly against the spine, but turned slightly so that the roller is pressed against the muscles to either side of the spine. This will be your starting position.',
                 'Starting at the top of your neck, slowly roll down the muscles of your neck, pausing at points of tension for 10-30 seconds.'
@@ -7181,10 +7011,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e476',
             name: 'Neck Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on a flat bench. Using a medium-width grip (a grip that creates a 90-degree angle in the middle of the movement between the forearms and the upper arms), lift the bar from the rack and hold it straight over your neck with your arms locked. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your neck.',
@@ -7196,10 +7026,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e477',
             name: 'Oblique Crunches',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on the floor with your lower back pressed to the ground. For this exercise, you will need to put one hand beside your head and the other to the side against the floor.',
                 'Make sure your feet are elevated and resting on a flat surface.',
@@ -7213,10 +7043,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e478',
             name: 'Oblique Crunches - On The Floor',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by lying on your right side with your legs lying on top of each other. Make sure your knees are bent a little bit.',
                 'Place your left hand behind your head.',
@@ -7228,10 +7058,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e479',
             name: 'Olympic Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a barbell supported on top of the traps. The chest should be up, and the head facing forward. Adopt a hip width stance with the feet turned out as needed.',
                 'Descend by flexing the knees, refraining from moving the hips back as much as possible. This requires that the knees travel forward; ensure that they stay aligned with the feet. The goal is to keep the torso as upright as possible. Continue all the way down, keeping the weight on the front of the heel.',
@@ -7241,10 +7071,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e480',
             name: 'On-Your-Back Quad Stretch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lie on a flat bench or step, and hang one leg and arm over the side.',
                 'Bend the knee and hold the top of the foot. As you do this, be careful not to arch your lower back.',
@@ -7255,10 +7085,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e481',
             name: 'On Your Side Quad Stretch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Start off by lying on your right side, with your right knee bent at a 90-degree angle resting on the floor in front of you (this stabilizes the torso).',
                 'Bend your left knee behind you and hold your left foot with your left hand. To stretch your hip flexor, press your left hip forward as you push your left foot back into your hand. Switch sides.'
@@ -7267,10 +7097,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e482',
             name: 'One-Arm Dumbbell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Choose a flat bench and place a dumbbell on each side of it.',
                 'Place the right leg on top of the end of the bench, bend your torso forward from the waist until your upper body is parallel to the floor, and place your right hand on the other end of the bench for support.',
@@ -7284,10 +7114,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e483',
             name: 'One-Arm Flat Bench Dumbbell Flye',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on a flat bench with a dumbbell in one hand resting on top of your thigh. The palm of your hand with the dumbbell in it should be at a neutral grip.',
                 'By using your thighs to help you get the dumbbell up, clean the dumbbell so that you can hold it in front of you with your lifting arm being fully extended. Remember to maintain a neutral grip with this exercise. Your non lifting hand should be to the side holding the flat bench for better support. This will be your starting position.',
@@ -7300,10 +7130,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e484',
             name: 'One-Arm High-Pulley Cable Side Bends',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Connect a standard handle to a tower. Move cable to highest pulley position.',
                 'Stand with side to cable. With one hand, reach up and grab handle with underhand grip.',
@@ -7318,10 +7148,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e485',
             name: 'One-Arm Incline Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down sideways on an incline bench press with a dumbbell in the hand. Make sure the shoulder is pressing against the incline bench and the arm is lying across your body with the palm around your navel.',
                 'Hold a dumbbell in your uppermost arm while keeping it extended in front of you parallel to the floor. This is your starting position.',
@@ -7334,10 +7164,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e486',
             name: 'One-Arm Kettlebell Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a kettlebell between your feet. As you bend down to grab the kettlebell, push your butt back and keep your eyes looking forward.',
                 'Clean the kettlebell to your shoulders by extending through the legs and hips as you raise the kettlebell towards your shoulder. The wrist should rotate as you do so.',
@@ -7347,10 +7177,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e487',
             name: 'One-Arm Kettlebell Clean and Jerk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell by the handle.',
                 'Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so, so that the palm faces forward.',
@@ -7363,10 +7193,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e488',
             name: 'One-Arm Kettlebell Floor Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor holding a kettlebell with one hand, with your upper arm supported by the floor. The palm should be facing in.',
                 'Press the kettlebell straight up toward the ceiling, rotating your wrist.',
@@ -7376,10 +7206,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e489',
             name: 'One-Arm Kettlebell Jerk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell by the handle. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so, so that the palm faces forward. This will be your starting position.',
                 'Dip your body by bending the knees, keeping your torso upright.',
@@ -7390,10 +7220,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e490',
             name: 'One-Arm Kettlebell Military Press To The Side',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean a kettlebell to your shoulder. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so, so that the palm faces inward. This will be your starting position.',
                 'Look at the kettlebell and press it up and out until it is locked out overhead.',
@@ -7403,10 +7233,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e491',
             name: 'One-Arm Kettlebell Para Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean a kettlebell to your shoulder. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so, so that the palm faces forward. This will be your starting position.',
                 'Hold the kettlebell with the elbow out to the side, and press it up and out until it is locked out overhead.',
@@ -7416,10 +7246,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e492',
             name: 'One-Arm Kettlebell Push Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell by the handle. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so, so that the palm faces forward. This will be your starting position.',
                 'Dip your body by bending the knees, keeping your torso upright.',
@@ -7429,10 +7259,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e493',
             name: 'One-Arm Kettlebell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a kettlebell in front of your feet. Bend your knees slightly and then push your butt out as much as possible as you bend over to get in the starting position. Grab the kettlebell and pull it to your stomach, retracting your shoulder blade and flexing the elbow. Keep your back straight. Lower and repeat.'
             ]
@@ -7440,10 +7270,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e494',
             name: 'One-Arm Kettlebell Snatch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a kettlebell between your feet. Bend your knees and push your butt back to get in the proper starting position.',
                 'Look straight ahead and swing the kettlebell back between your legs.',
@@ -7453,10 +7283,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e495',
             name: 'One-Arm Kettlebell Split Jerk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell by the handle. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so, so that the palm faces forward. This will be your starting position.',
                 'Dip your body by bending the knees, keeping your torso upright.',
@@ -7468,10 +7298,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e496',
             name: 'One-Arm Kettlebell Split Snatch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hold a kettlebell in one hand by the handle.',
                 'Squat towards the floor, and then reverse the motion, extending the hips, knees, and finally the ankles, to raise the kettlebell overhead.',
@@ -7482,19 +7312,19 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e497',
             name: 'One-Arm Kettlebell Swings',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: []
         },
         {
             id: 'e498',
             name: 'One-Arm Long Bar Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar into a landmine or in a corner to keep it from moving. Load an appropriate weight onto your end.',
                 'Stand next to the bar, and take a grip with one hand close to the collar. Using your hips and legs, rise to a standing position.',
@@ -7506,10 +7336,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e499',
             name: 'One-Arm Medicine Ball Slam',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Start in a standing position with a staggered, athletic stance. Hold a medicine ball in one hand, on the same side as your back leg. This will be your starting position.',
                 'Begin by winding the arm, raising the medicine ball above your head. As you do so, extend through the hips, knees, and ankles to load up for the slam.',
@@ -7520,10 +7350,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e500',
             name: 'One-Arm Open Palm Kettlebell Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place one kettlebell between your feet.',
                 'Grab the handle with one hand and raise the kettlebell rapidly, let it flip so that the ball of the kettlebell lands in the palm of your hand.',
@@ -7534,10 +7364,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e501',
             name: 'One-Arm Overhead Kettlebell Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean and press a kettlebell with one arm. Clean the kettlebell to your shoulder by extending through the legs and hips as you pull the kettlebell towards your shoulder. Rotate your wrist as you do so. Press the weight overhead by extending through the elbow.This will be your starting position.',
                 'Looking straight ahead and keeping a kettlebell locked out above you, flex the knees and hips and lower your torso between your legs, keeping your head and chest up.',
@@ -7547,10 +7377,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e502',
             name: 'One-Arm Side Deadlift',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand to the side of a barbell next to its center. Bend your knees and lower your body until you are able to reach the barbell.',
                 'Grasp the bar as if you were grabbing a briefcase (palms facing you since the bar is sideways). You may need a wrist wrap if you are using a significant amount of weight. This is your starting position.',
@@ -7563,10 +7393,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e503',
             name: 'One-Arm Side Laterals',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Pick a dumbbell and place it in one of your hands. Your non lifting hand should be used to grab something steady such as an incline bench press. Lean towards your lifting arm and away from the hand that is gripping the incline bench as this will allow you to keep your balance.',
                 "Stand with a straight torso and have the dumbbell by your side at arm's length with the palm of the hand facing you. This will be your starting position.",
@@ -7579,10 +7409,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e504',
             name: 'One-Legged Cable Kickback',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'glutes',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Hook a leather ankle cuff to a low cable pulley and then attach the cuff to your ankle.',
                 'Face the weight stack from a distance of about two feet, grasping the steel frame for support.',
@@ -7595,10 +7425,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e505',
             name: 'One Arm Against Wall',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'From a standing position, place a bent arm against a wall or doorway.',
                 'Slowly lean toward your arm until you feel a stretch in your lats.'
@@ -7607,10 +7437,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e506',
             name: 'One Arm Chin-Up',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise, start out by placing a towel around a chin up bar.',
                 'Grab the chin-up bar with your palm facing you. One hand will be grabbing the chin-up bar and the other will be grabbing the towel.',
@@ -7624,10 +7454,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e507',
             name: 'One Arm Dumbbell Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on a flat bench with a dumbbell in one hand on top of your thigh.',
                 'By using your thigh to help you get the dumbbell up, clean the dumbbell up so that you can hold it in front of you at shoulder width. Use the hand you are not lifting with to help position the dumbbell over you properly.',
@@ -7641,10 +7471,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e508',
             name: 'One Arm Dumbbell Preacher Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a dumbbell with the right arm and place the upper arm on top of the preacher bench or the incline bench. The dumbbell should be held at shoulder length. This will be your starting position.',
                 'As you breathe in, slowly lower the dumbbell until your upper arm is extended and the biceps is fully stretched.',
@@ -7656,10 +7486,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e509',
             name: 'One Arm Floor Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on a flat surface with your back pressing against the floor or an exercise mat. Make sure your knees are bent.',
                 'Have a partner hand you the bar on one hand. When starting, your arm should be just about fully extended, similar to the starting position of a barbell bench press. However, this time your grip will be neutral (palms facing your torso).',
@@ -7673,10 +7503,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e510',
             name: 'One Arm Lat Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Select an appropriate weight and adjust the knee pad to help keep you down. Grasp the handle with a pronated grip. This will be your starting position.',
                 'Pull the handle down, squeezing your elbow to your side as you flex the elbow.',
@@ -7687,10 +7517,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e511',
             name: 'One Arm Pronated Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on a bench while holding a dumbbell at arms length. Your arm should be perpendicular to your body. The palm of your hand should be facing towards your feet as a pronated grip is required to perform this exercise.',
                 'Place your non lifting hand on your bicep for support.',
@@ -7703,10 +7533,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e512',
             name: 'One Arm Supinated Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on a bench while holding a dumbbell at arms length. Your arm should be perpendicular to your body. The palm of your hand should be facing towards your face as a supinated grip is required to perform this exercise.',
                 'Place your non lifting hand on your bicep for support.',
@@ -7720,10 +7550,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e513',
             name: 'One Half Locust',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lie facedown on the floor.',
                 'Put your left hand under your left hipbone to pad your hip and pubic bone.',
@@ -7734,10 +7564,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e514',
             name: 'One Handed Hang',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Grab onto a chinup bar with one hand, using a pronated grip. Keep your feet on the floor or a step. Allow the majority of your weight to hang from that hand, while keeping your feet on the ground. Hold for 10-20 seconds and switch sides.'
             ]
@@ -7745,10 +7575,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e515',
             name: 'One Knee To Chest',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'Start off by lying on the floor.',
                 'Extend one leg straight and pull the other knee to your chest. Hold under the knee joint to protect the kneecap.',
@@ -7759,10 +7589,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e516',
             name: 'One Leg Barbell Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start by standing about 2 to 3 feet in front of a flat bench with your back facing the bench. Have a barbell in front of you on the floor. Tip: Your feet should be shoulder width apart from each other.',
                 'Bend the knees and use a pronated grip with your hands being wider than shoulder width apart from each other to lift the barbell up until you can rest it on your chest.',
@@ -7776,10 +7606,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e517',
             name: 'Open Palm Kettlebell Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place one kettlebell between your feet. Clean the kettlebell by extending through the legs and hips as you raise the kettlebell towards your shoulders.',
                 'Release the kettlebell as it comes up, and let it flip so that the ball of the kettlebell lands in the palms of your hands.',
@@ -7789,10 +7619,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e518',
             name: 'Otis-Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Secure your feet and lay back on the floor. Your knees should be bent. Hold a weight with both hands to your chest. This will be your starting position.',
                 'Initiate the movement by flexing the hips and spine to raise your torso up from the ground.',
@@ -7803,10 +7633,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e519',
             name: 'Overhead Cable Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, set a weight that is comfortable on each side of the pulley machine. Note: Make sure that the amount of weight selected is the same on each side.',
                 'Now adjust the height of the pulleys on each side and make sure that they are positioned at a height higher than that of your shoulders.',
@@ -7819,10 +7649,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e520',
             name: 'Overhead Lat',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lats',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit upright on the floor with your partner behind you. Raise one arm straight up, and flex the elbow, attempting to touch your hand to your back. Your parner should hold your tricep and wrist. This will be your starting position.',
                 'Attempt to pull your upper arm to your side as your partner prevents you from doing actually doing so.',
@@ -7832,10 +7662,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e521',
             name: 'Overhead Slam',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hold a medine ball with both hands and stand with your feet at shoulder width. This will be your starting position.',
                 'Initiate the countermovement by raising the ball above your head and fully extending your body.',
@@ -7846,10 +7676,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e522',
             name: 'Overhead Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start out by having a barbell in front of you on the floor. Your feet should be wider than shoulder width apart from each other.',
                 'Bend the knees and use a pronated grip (palms facing you) to grab the barbell. Your hands should be at a wider than shoulder width apart from each other before lifting. Once you are positioned, lift the barbell up until you can rest it on your chest.',
@@ -7862,10 +7692,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e523',
             name: 'Overhead Stretch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'Standing straight up, lace your fingers together and open your palms to the ceiling. Keep your shoulders down as you extend your arms up.',
                 'To create a full torso stretch, pull your tailbone down and stabilize your torso as you do this. Stretch the muscles on both the front and the back of the torso.'
@@ -7874,10 +7704,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e524',
             name: 'Overhead Triceps',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'triceps',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit upright on the floor with your partner behind you. Raise one arm straight up, and flex the elbow, attempting to touch your hand to your back. Your parner should hold your elbow and wrist. This will be your starting position.',
                 'Attempt to extend the arm straight into the air as your partner prevents you from doing actually doing so.',
@@ -7887,10 +7717,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e525',
             name: 'Pallof Press',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Connect a standard handle to a tower, and—if possible—position the cable to shoulder height. If not, a low pulley will suffice.',
                 "With your side to the cable, grab the handle with both hands and step away from the tower. You should be approximately arm's length away from the pulley, with the tension of the weight on the cable.",
@@ -7903,10 +7733,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e526',
             name: 'Pallof Press With Rotation',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Connect a standard handle to a tower, and position the cable to shoulder height.',
                 "With your side to the cable, grab the handle with one hand and step away from the tower. You should be approximately arm's length away from the pulley, with the tension of the weight on the cable. Align outstretched arm with cable.",
@@ -7922,10 +7752,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e527',
             name: 'Palms-Down Dumbbell Wrist Curl Over A Bench',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing two dumbbells on one side of a flat bench.',
                 'Kneel down on both of your knees so that your body is facing the flat bench.',
@@ -7939,10 +7769,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e528',
             name: 'Palms-Down Wrist Curl Over A Bench',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing a barbell on one side of a flat bench.',
                 'Kneel down on both of your knees so that your body is facing the flat bench.',
@@ -7956,10 +7786,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e529',
             name: 'Palms-Up Barbell Wrist Curl Over A Bench',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing a barbell on one side of a flat bench.',
                 'Kneel down on both of your knees so that your body is facing the flat bench.',
@@ -7973,10 +7803,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e530',
             name: 'Palms-Up Dumbbell Wrist Curl Over A Bench',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing two dumbbells on one side of a flat bench.',
                 'Kneel down on both of your knees so that your body is facing the flat bench.',
@@ -7990,10 +7820,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e531',
             name: 'Parallel Bar Dip',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand between a set of parallel bars. Place a hand on each bar, and then take a small jump to help you get into the starting position with your arms locked out.',
                 'Begin by flexing the elbow, lowering your body until your arms break 90 degrees. Avoid swinging, and maintain good posture throughout the descent.',
@@ -8004,10 +7834,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e532',
             name: 'Pelvic Tilt Into Bridge',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'Lie down with your feet on the floor, heels directly under your knees.',
                 "Lift only your tailbone to the ceiling to stretch your lower back. (Don't lift the entire spine yet.) Pull in your stomach.",
@@ -8017,10 +7847,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e533',
             name: 'Peroneals-SMR',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lay on your side, supporting your weight on your forearm and on a foam roller placed on the outside of your lower leg. Your upper leg can either be on top of your lower leg, or you can cross it in front of you. This will be your starting position.',
                 'Raise your hips off of the ground and begin to roll from below the knee to above the ankle on the side of your leg, pausing at points of tension for 10-30 seconds. Repeat on the other leg.'
@@ -8029,10 +7859,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e534',
             name: 'Peroneals Stretch',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'In a seated position, loop a belt, rope, or band around one foot. This will be your starting position.',
                 'With the leg extended and the heel off of the ground, pull on the belt so that the foot is inverted, with the inside of the foot being pulled towards you. Hold for 10-20 seconds, and then switch sides.'
@@ -8041,10 +7871,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e535',
             name: 'Physioball Hip Bridge',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lay on a ball so that your upper back is on the ball with your hips unsupported. Both feet should be flat on the floor, hip width apart or wider. This will be your starting position.',
                 'Begin by extending the hips using your glutes and hamstrings, raising your hips upward as you bridge.',
@@ -8054,10 +7884,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e536',
             name: 'Pin Presses',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Pin presses remove the eccentric phase of the bench press, developing starting strength. They also allow you to train a desired range of motion.',
                 'The bench should be set up in a power rack. Set the pins to the desired point in your range of motion, whether it just be lockout or an inch off of your chest. The bar should be moved to the pins and prepared for lifting.',
@@ -8070,10 +7900,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e537',
             name: 'Piriformis-SMR',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'glutes',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit with your buttocks on top of a foam roll. Bend your knees, and then cross one leg so that the ankle is over the knee. This will be your starting position.',
                 'Shift your weight to the side of the crossed leg, rolling over the buttocks until you feel tension in your upper glute. You may assist the stretch by using one hand to pull the bent knee towards your chest. Hold this position for 10-30 seconds, and then switch sides.'
@@ -8082,10 +7912,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e538',
             name: 'Plank',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Get into a prone position on the floor, supporting your weight on your toes and your forearms. Your arms are bent and directly below the shoulder.',
                 'Keep your body straight at all times, and hold this position as long as possible. To increase difficulty, an arm or leg can be raised.'
@@ -8094,10 +7924,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e539',
             name: 'Plate Pinch',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Grab two wide-rimmed plates and put them together with the smooth sides facing outward',
                 'Use your fingers to grip the outside part of the plate and your thumb for the other side thus holding both plates together. This is the starting position.',
@@ -8109,10 +7939,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e540',
             name: 'Plate Twist',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on the floor or an exercise mat with your legs fully extended and your upper body upright. Grab the plate by its sides with both hands out in front of your abdominals with your arms slightly bent.',
                 'Slowly cross your legs near your ankles and lift them up off the ground. Your knees should also be bent slightly. Note: Move your upper body back slightly to help keep you balanced turning this exercise. This is the starting position.',
@@ -8124,10 +7954,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e541',
             name: 'Platform Hamstring Slides',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'For this movement a wooden floor or similar is needed. Lay on your back with your legs extended. Place a gym towel or a light weight underneath your heel. This will be your starting position.',
                 'Begin the movement by flexing the knee, keeping your other leg straight.',
@@ -8138,10 +7968,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e542',
             name: 'Plie Dumbbell Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Hold a dumbbell at the base with both hands and stand straight up. Move your legs so that they are wider than shoulder width apart from each other with your knees slightly bent.',
                 'Your toes should be facing out. Note: Your arms should be stationary while performing the exercise. This is the starting position.',
@@ -8153,10 +7983,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e543',
             name: 'Plyo Kettlebell Pushups',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a kettlebell on the floor. Place yourself in a pushup position, on your toes with one hand on the ground and one hand holding the kettlebell, with your elbows extended. This will be your starting position.',
                 'Begin by lowering yourself as low as you can, keeping your back straight.',
@@ -8166,10 +7996,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e544',
             name: 'Plyo Push-up',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Move into a prone position on the floor, supporting your weight on your hands and toes.',
                 'Your arms should be fully extended with the hands around shoulder width. Keep your body straight throughout the movement. This will be your starting position.',
@@ -8182,10 +8012,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e545',
             name: 'Posterior Tibialis Stretch',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'In a seated position, loop a belt, rope, or band around one foot. This will be your starting position.',
                 'With the leg extended and the heel off of the ground, pull on the belt so that the foot is everted, with the outside of the foot being pulled towards you. Hold for 10-20 seconds, and then switch sides.'
@@ -8194,10 +8024,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e546',
             name: 'Power Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your feet slightly wider than shoulder width apart and toes pointing out slightly.',
                 'Squat down and grasp bar with a closed, pronated grip. Your hands should be slightly wider than shoulder width apart outside knees with elbows fully extended.',
@@ -8228,10 +8058,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e547',
             name: 'Power Clean from Blocks',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on boxes of the desired height, take a grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 'Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight. As the bar approaches the mid-thigh position, begin extending through the hips.',
@@ -8243,10 +8073,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e548',
             name: 'Power Jerk',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Standing with the weight racked on the front of the shoulders, begin with the dip. With your feet directly under your hips, flex the knees without moving the hips backward. Go down only slightly, and reverse direction as powerfully as possible.',
                 'Drive through the heels create as much speed and force as possible, and be sure to move your head out of the way as the bar leaves the shoulders.',
@@ -8258,10 +8088,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e549',
             name: 'Power Partials',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright and a dumbbell on each hand being held at arms length. The elbows should be close to the torso.',
                 'The palms of the hands should be facing your torso. Your feet should be about shoulder width apart. This will be your starting position.',
@@ -8273,10 +8103,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e550',
             name: 'Power Snatch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a loaded barbell on the floor. The bar should be close to or touching the shins, and a wide grip should be taken on the bar. The feet should be directly below the hips, with the feet turned out as needed. Lower the hips, with the chest up and the head looking forward. The shoulders should be just in front of the bar. This will be the starting position.',
                 'Begin the first pull by driving through the front of the heels, raising the bar from the ground. The back angle should stay the same until the bar passes the knees.',
@@ -8288,10 +8118,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e551',
             name: 'Power Snatch from Blocks',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a loaded barbell on boxes or stands of the desired height. A wide grip should be taken on the bar. The feet should be directly below the hips, with the feet turned out as needed. Lower the hips, with the chest up and the head looking forward. The shoulders should be just in front of the bar, with the elbows pointed out. This will be the starting position.',
                 'Begin the first pull by driving through the front of the heels, raising the bar from the boxes.',
@@ -8303,10 +8133,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e552',
             name: 'Power Stairs',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'In the power stairs, implements are moved up a staircase. For training purposes, these can be performed with a tire or box.',
                 'Begin by taking the implement with both hands. Set your feet wide, with your head and chest up. Drive through the ground with your heels, extending your knees and hips to raise the weight from the ground.',
@@ -8317,10 +8147,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e553',
             name: 'Preacher Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To perform this movement you will need a preacher bench and an E-Z bar. Grab the E-Z curl bar at the close inner handle (either have someone hand you the bar which is preferable or grab the bar from the front bar rest provided by most preacher benches). The palm of your hands should be facing forward and they should be slightly tilted inwards due to the shape of the bar.',
                 'With the upper arms positioned against the preacher bench pad and the chest against it, hold the E-Z Curl Bar at shoulder length. This will be your starting position.',
@@ -8332,10 +8162,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e554',
             name: 'Preacher Hammer Dumbbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place the upper part of both arms on top of the preacher bench as you hold a dumbbell in each hand with the palms facing each other (neutral grip).',
                 'As you breathe in, slowly lower the dumbbells until your upper arm is extended and the biceps is fully stretched.',
@@ -8346,10 +8176,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e555',
             name: 'Press Sit-Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, lie down on a bench with a barbell resting on your chest. Position your legs so they are secure on the extension of the abdominal bench. This is the starting position.',
                 'While inhaling, tighten your abdominals and glutes. Simultaneously curl your torso as you do when performing a sit-up and press the barbell to an overhead position while exhaling. Tip: Use your arms to push the barbell out as you perform this exercise while still focusing on the abdominal muscles.',
@@ -8360,10 +8190,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e556',
             name: 'Prone Manual Hamstring',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'You will need a partner for this exercise. Lay face down with your legs straight. Your assistant will place their hand on your heel.',
                 'To begin, flex the knee to curl your leg up. Your partner should provide resistance, starting light and increasing the pressure as the movement is completed. Communicate with your partner to monitor appropriate resistance levels.',
@@ -8373,10 +8203,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e557',
             name: 'Prowler Sprint',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place your sled on an appropriate surface, loaded to a suitable weight. The sled should provide enough resistance to require effort, but not so heavy that you are significantly slowed down.',
                 'You may use the upright or the low handles for this exercise. Place your hands on the handles with your arms extended, leaning into the implement.',
@@ -8386,10 +8216,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e558',
             name: 'Pull Through',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing a few feet in front of a low pulley with a rope or handle attached. Face away from the machine, straddling the cable, with your feet set wide apart.',
                 'Begin the movement by reaching through your legs as far as possible, bending at the hips. Keep your knees slightly bent. Keeping your arms straight, extend through the hip to stand straight up. Avoid pulling upward through the shoulders; all of the motion should originate through the hips.'
@@ -8398,10 +8228,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e559',
             name: 'Pullups',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab the pull-up bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than your shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.',
                 'As you have both arms extended in front of you holding the bar at the chosen grip width, bring your torso back around 30 degrees or so while creating a curvature on your lower back and sticking your chest out. This is your starting position.',
@@ -8413,10 +8243,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e560',
             name: 'Push-Up Wide',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'With your hands wide apart, support your body on your toes and hands in a plank position. Your elbows should be extended and your body straight. Do not allow your hips to sag. This will be your starting position.',
                 'To begin, allow the elbows to flex, lowering your chest to the floor as you inhale.',
@@ -8427,10 +8257,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e561',
             name: 'Push-Ups - Close Triceps Position',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "Lie on the floor face down and place your hands closer than shoulder width for a close hand position. Make sure that you are holding your torso up at arms' length.",
                 'Lower yourself until your chest almost touches the floor as you inhale.',
@@ -8441,10 +8271,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e562',
             name: 'Push-Ups With Feet Elevated',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor face down and place your hands about 36 inches apart from each other holding your torso up at arms length.',
                 'Place your toes on top of a flat bench. This will allow your body to be elevated. Note: The higher the elevation of the flat bench, the higher the resistance of the exercise is.',
@@ -8456,10 +8286,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e563',
             name: 'Push-Ups With Feet On An Exercise Ball',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor face down and place your hands about 36 inches apart from each other holding your torso up at arms length.',
                 'Place your toes on top of an exercise ball. This will allow your body to be elevated.',
@@ -8471,19 +8301,19 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e564',
             name: 'Push Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: []
         },
         {
             id: 'e565',
             name: 'Push Press - Behind the Neck',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Standing with the weight racked on the back of the shoulders, begin with the dip. With your feet directly under your hips, flex the knees without moving the hips backward. Go down only slightly, and reverse direction as powerfully as possible. Drive through the heels create as much speed and force as possible, moving the bar in a vertical path.',
                 'Using the momentum generated, finish pressing the weight overhead be extending through the arms.',
@@ -8493,10 +8323,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e566',
             name: 'Push Up to Side Plank',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Get into pushup position on the toes with your hands just outside of shoulder width.',
                 'Perform a pushup by allowing the elbows to flex. As you descend, keep your body straight.',
@@ -8508,10 +8338,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e567',
             name: 'Pushups',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor face down and place your hands about 36 inches apart while holding your torso up at arms length.',
                 'Next, lower yourself downward until your chest almost touches the floor as you inhale.',
@@ -8522,10 +8352,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e568',
             name: 'Pushups (Close and Wide Hand Positions)',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie on the floor face down and body straight with your toes on the floor and the hands wider than shoulder width for a wide hand position and closer than shoulder width for a close hand position. Make sure you are holding your torso up at arms length.',
                 'Lower yourself until your chest almost touches the floor as you inhale.',
@@ -8536,10 +8366,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e569',
             name: 'Pyramid',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Start off by rolling your torso forward onto the ball so your hips rest on top of the ball and become the highest point of your body.',
                 'Rest your hands and feet on the floor. Your arms and legs can be slightly bent or straight, depending on the size of the ball, your flexibility, and the length of your limbs. This also helps develop stabilizing strength in your torso and shoulders.'
@@ -8548,10 +8378,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e570',
             name: 'Quad Stretch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lay on your side. Loop a belt, rope, or band around your top foot. Flex the knee and extend your hip, attempting to touch your glutes with your foot, and holding the belt with your hands. This will be your starting position.',
                 'With the belt being held over the shoulder or overhead, gently pull to increase the stretch in the quadriceps. Hold for 10-20 seconds, and then switch sides.'
@@ -8560,10 +8390,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e571',
             name: 'Quadriceps-SMR',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Lay facedown on the floor with your weight supported by your hands or forearms. Place a foam roll underneath one leg on the quadriceps, and keep the foot off of the ground. Make sure to relax the leg as much as possible. This will be your starting position.',
                 'Shifting as much weight onto the leg to be stretched as is tolerable, roll over the foam from above the knee to below the hip, holding points of tension for 10-30 seconds. Switch sides.'
@@ -8572,10 +8402,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e572',
             name: 'Quick Leap',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'You will need a box for this exerise.',
                 'Begin facing the box standing 1-2 feet from its edge.',
@@ -8586,10 +8416,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e573',
             name: 'Rack Delivery',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'This drill teaches the delivery of the barbell to the rack position on the shoulders. Begin holding a bar in the scarecrow position, with the upper arms parallel to the floor, and the forearms hanging down. Use a hook grip, with your fingers wrapped over your thumbs.',
                 'Begin by rotating the elbows around the bar, delivering the bar to the shoulders. As your elbows come forward, relax your grip. The shoulders should be protracted, providing a shelf for the bar, which should lightly contact the throat.',
@@ -8599,10 +8429,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e574',
             name: 'Rack Pull with Bands',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Set up in a power rack with the bar on the pins. The pins should be set to the desired point; just below the knees, just above, or in the mid thigh position. Attach bands to the base of the rack, or secure them with dumbbells. Attach the other end to the bar. You may need to choke the bands to provide tension.',
                 'Position yourself against the bar in proper deadlifting position. Your feet should be under your hips, your grip shoulder width, back arched, and hips back to engage the hamstrings. Since the weight is typically heavy, you may use a mixed grip, a hook grip, or use straps to aid in holding the weight.',
@@ -8612,10 +8442,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e575',
             name: 'Rack Pulls',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Set up in a power rack with the bar on the pins. The pins should be set to the desired point; just below the knees, just above, or in the mid thigh position. Position yourself against the bar in proper deadlifting position. Your feet should be under your hips, your grip shoulder width, back arched, and hips back to engage the hamstrings. Since the weight is typically heavy, you may use a mixed grip, a hook grip, or use straps to aid in holding the weight.',
                 'With your head looking forward, extend through the hips and knees, pulling the weight up and back until lockout. Be sure to pull your shoulders back as you complete the movement.',
@@ -8625,10 +8455,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e576',
             name: 'Rear Leg Raises',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'mixed',
             instructions: [
                 'Place yourself on your hands knees on an exercise mat. Your head should be looking forward and the bend of the knees should create a 90-degree angle between the hamstrings and the calves. This will be your starting position.',
                 'Extend one leg up and behind you. The knee and hip should both extend. Repeat for 5-10 repetitions, and then switch sides.'
@@ -8637,10 +8467,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e577',
             name: 'Recumbent Bike',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, seat yourself on the bike and adjust the seat to your height.',
                 'Select the desired option from the menu. You may have to start pedaling to turn it on. You can use the manual setting, or you can select a program to use. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. The level of resistance can be changed throughout the workout. The handles can be used to monitor your heart rate to help you stay at an appropriate intensity.',
@@ -8650,10 +8480,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e578',
             name: 'Return Push from Stance',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'You will need a partner for this drill.',
                 'Begin in an athletic 2 or 3 point stance.',
@@ -8665,10 +8495,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e579',
             name: 'Reverse Band Bench Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a bench inside a power rack, with the bar set to the correct height. Begin by anchoring bands either to band pegs or to the top of the rack. Ensure that you will be position properly under the bands. Attach the other end to the barbell.',
                 'Lie on the bench, tuck your feet underneath you and arch your back. Using the bar to help support your weight, lift your shoulder off the bench and retract them, squeezing the shoulder blades together. Use your feet to drive your traps into the bench. Maintain this tight body position throughout the movement. However wide your grip, it should cover the ring on the bar.',
@@ -8679,10 +8509,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e580',
             name: 'Reverse Band Box Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a power rack with a box at the appropriate height behind you. Set up the bands either on band pegs or attached to the top of the rack, ensuring they will be directly above the bar during the squat. Attach the other end to the bar.',
                 'Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wider for more emphasis on the back, glutes, adductors, and hamstrings, or closer together for more quad development. Keep your head facing forward.',
@@ -8693,10 +8523,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e581',
             name: 'Reverse Band Deadlift',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Set the bar up in a power rack. Attach bands to the top of the rack, using either bands pegs or the frame itself. Attach the other end of the bands to the bar.',
                 'Approach the bar so that it is centered over your feet. You feet should be about hip width apart. Bend at the hip to grip the bar at shoulder width, allowing your shoulder blades to protract. Typically, you would use an overhand grip or an over/under grip on heavier sets.',
@@ -8708,10 +8538,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e582',
             name: 'Reverse Band Power Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a power rack with the pins and bar set at the appropriate height. After loading the bar, attach bands to the top of the rack, using either pegs or the frame itself. Attach the other end of the bands to the bar.',
                 'Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wide for more emphasis on the back, glutes, adductors, and hamstrings.',
@@ -8722,10 +8552,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e583',
             name: 'Reverse Band Sumo Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a bar loaded on the floor inside of a power rack. Attach bands to the top of the rack, using either pegs or the frame itself. Attach the other end to the barbell.',
                 'Approach the bar so that the bar intersects the middle of the feet. The feet should be set very wide, near the collars. Bend at the hips to grip the bar. The arms should be directly below the shoulders, inside the legs, and you can use a pronated grip, a mixed grip, or hook grip. Relax the shoulders, which in effect lengthens your arms.',
@@ -8737,10 +8567,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e584',
             name: 'Reverse Barbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright while holding a barbell at shoulder width with the elbows close to the torso. The palm of your hands should be facing down (pronated grip). This will be your starting position.',
                 'While holding the upper arms stationary, curl the weights while contracting the biceps as you breathe out. Only the forearms should move. Continue the movement until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a second as you squeeze the muscle.',
@@ -8751,10 +8581,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e585',
             name: 'Reverse Barbell Preacher Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab an EZ-bar using a shoulder width and palms down (pronated) grip.',
                 'Now place the upper part of both arms on top of the preacher bench and have your arms extended. This will be your starting position.',
@@ -8766,10 +8596,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e586',
             name: 'Reverse Cable Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright while holding a bar attachment that is attached to a low pulley using a pronated (palms down) and shoulder width grip. Make sure also that you keep the elbows close to the torso. This will be your starting position.',
                 'While holding the upper arms stationary, curl the weights while contracting the biceps as you breathe out. Only the forearms should move. Continue the movement until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a second as you squeeze the muscle.',
@@ -8780,10 +8610,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e587',
             name: 'Reverse Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on the floor with your legs fully extended and arms to the side of your torso with the palms on the floor. Your arms should be stationary for the entire exercise.',
                 'Move your legs up so that your thighs are perpendicular to the floor and feet are together and parallel to the floor. This is the starting position.',
@@ -8795,10 +8625,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e588',
             name: 'Reverse Flyes',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, lie down on an incline bench with the chest and stomach pressing against the incline. Have the dumbbells in each hand with the palms facing each other (neutral grip).',
                 'Extend the arms in front of you so that they are perpendicular to the angle of the bench. The legs should be stationary while applying pressure with the ball of your toes. This is the starting position.',
@@ -8811,10 +8641,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e589',
             name: 'Reverse Flyes With External Rotation',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, lie down on an incline bench set at a 30-degree angle with the chest and stomach pressing against the incline.',
                 'Have the dumbbells in each hand with the palms facing down to the floor. Your arms should be in front of you so that they are perpendicular to the angle of the bench. Tip: Your elbows should have a slight bend. The legs should be stationary while applying pressure with the ball of your toes (your heels should not be touching the floor). This is the starting position.',
@@ -8828,10 +8658,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e590',
             name: 'Reverse Grip Bent-Over Rows',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand erect while holding a barbell with a supinated grip (palms facing up).',
                 'Bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The barbell should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position.',
@@ -8843,10 +8673,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e591',
             name: 'Reverse Grip Triceps Pushdown',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Start by setting a bar attachment (straight or e-z) on a high pulley machine.',
                 'Facing the bar attachment, grab it with the palms facing up (supinated grip) at shoulder width. Lower the bar by using your lats until your arms are fully extended by your sides. Tip: Elbows should be in by your sides and your feet should be shoulder width apart from each other. This is the starting position.',
@@ -8858,10 +8688,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e592',
             name: 'Reverse Hyperextension',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Place your feet between the pads after loading an appropriate weight. Lay on the top pad, allowing your hips to hang off the back, while grasping the handles to hold your position.',
                 'To begin the movement, flex the hips, pulling the legs forward.',
@@ -8873,10 +8703,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e593',
             name: 'Reverse Machine Flyes',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the handles so that they are fully to the rear. Make an appropriate weight selection and adjust the seat height so the handles are at shoulder level. Grasp the handles with your hands facing inwards. This will be your starting position.',
                 'In a semicircular motion, pull your hands out to your side and back, contracting your rear delts.',
@@ -8887,10 +8717,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e594',
             name: 'Reverse Plate Curls',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 "Start by standing straight with a weighted plate held by both hands and arms fully extended. Use a pronated grip (palms facing down) and make sure your fingers grab the rough side of the plate while your thumb grabs the smooth side. Note: For the best results, grab the weighted plate at an 11:00 and 1:00 o'clock position.",
                 'Your feet should be shoulder width apart from each other and the weighted plate should be near the groin area. This is the starting position.',
@@ -8902,10 +8732,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e595',
             name: 'Reverse Triceps Bench Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on a flat bench. Using a close, supinated grip (around shoulder width), lift the bar from the rack and hold it straight over you with your arms locked extended in front of you and perpendicular to the floor. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your middle chest. Tip: Make sure that as opposed to a regular bench press, you keep the elbows close to the torso at all times in order to maximize triceps involvement.',
@@ -8917,10 +8747,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e596',
             name: 'Rhomboids-SMR',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Lay down with your back on the floor. Place a foam roll underneath your upper back, and cross your arms in front of you, protracting your shoulders. This will be your starting position.',
                 'Raise your hips off of the ground, placing your weight onto the foam roll. Shift your weight to one side at a time, rolling over your middle and upper back. Pause at points of tension for 10-30 seconds.'
@@ -8929,10 +8759,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e597',
             name: 'Rickshaw Carry',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'Position the frame at the starting point, and load with the appropriate weight. Standing in the center of the frame, begin by gripping the handles and driving through your heels to lift the frame. Ensure your chest and head are up and your back is straight.',
                 'Immediately begin walking briskly with quick, controlled steps. Keep your chest up and head forward, and make sure you continue breathing. Bring the frame to the ground after you have reached the end point.'
@@ -8941,10 +8771,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e598',
             name: 'Rickshaw Deadlift',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Load the frame with the desired weight. Center yourself between the handles. You feet should be about hip width apart. Bend at the hips to grip the handles, allowing your shoulder blades to protract.',
                 'With your feet and your grip set, take a big breath and then lower your hips and flex the knees. Look forward with your head, keep your chest up and your back arched, and begin driving through the heels to move the weight upward. As the weight comes up, pull your shoulder blades together as you drive your hips forward.',
@@ -8954,10 +8784,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e599',
             name: 'Ring Dips',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Grip a ring in each hand, and then take a small jump to help you get into the starting position with your arms locked out.',
                 'Begin by flexing the elbow, lowering your body until your arms break 90 degrees. Avoid swinging, and maintain good posture throughout the descent.',
@@ -8968,10 +8798,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e600',
             name: 'Rocket Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a relaxed stance with your feet shoulder width apart and hold your arms close to the body.',
                 'To initiate the move, squat down halfway and explode back up as high as possible.',
@@ -8981,10 +8811,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e601',
             name: 'Rocking Standing Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place it on the back of your shoulders (slightly below the neck).',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -8999,10 +8829,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e602',
             name: 'Rocky Pull-Ups/Pulldowns',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab the pull-up bar with the palms facing forward using a wide grip.',
                 'As you have both arms extended in front of you holding the bar at the chosen grip width, bring your torso back around 30 degrees or so while creating a curvature on your lower back and sticking your chest out. This is your starting position.',
@@ -9015,10 +8845,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e603',
             name: 'Romanian Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Put a barbell in front of you on the ground and grab it using a pronated (palms facing down) grip that a little wider than shoulder width. Tip: Depending on the weight used, you may need wrist wraps to perform the exercise and also a raised platform in order to allow for better range of motion.',
                 'Bend the knees slightly and keep the shins vertical, hips back and back straight. This will be your starting position.',
@@ -9030,10 +8860,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e604',
             name: 'Romanian Deadlift from Deficit',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "Begin standing while holding a bar at arm's length in front of you. You can stand on a raised platform to increase the range of motion.",
                 'Begin by flexing the knees slightly, and then flex at the hip, moving your butt back as far as possible, lowering the torso as far as flexibility allows. The back should remain in absolute extension at all times, and the bar should remain in contact with the legs. If done properly, there should be heavy tension felt in the hamstrings.',
@@ -9043,10 +8873,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e605',
             name: 'Rope Climb',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab the rope with both hands above your head. Pull down on the rope as you take a small jump.',
                 'Wrap the rope around one leg, using your feet to pinch the rope. Reach up as high as possible with your arms, gripping the rope tightly.',
@@ -9058,10 +8888,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e606',
             name: 'Rope Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Kneel 1-2 feet in front of a cable system with a rope attached.',
                 'After selecting an appropriate weight, grasp the rope with both hands reaching overhead. Your torso should be upright in the starting position.',
@@ -9073,10 +8903,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e607',
             name: 'Rope Jumping',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'Hold an end of the rope in each hand. Position the rope behind you on the ground. Raise your arms up and turn the rope over your head bringing it down in front of you. When it reaches the ground, jump over it. Find a good turning pace that can be maintained. Different speeds and techniques can be used to introduce variation.',
                 'Rope jumping is exciting, challenges your coordination, and requires a lot of energy. A 150 lb person will burn about 350 calories jumping rope for 30 minutes, compared to over 450 calories running.'
@@ -9085,10 +8915,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e608',
             name: 'Rope Straight-Arm Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a rope to a high pulley and make your weight selection. Stand a couple feet back from the pulley with your feet staggered and take the rope with both hands. Lean forward from the hip, keeping your back straight, with your arms extended up in front of you. This will be your starting position.',
                 'Keeping your arms straight, extend the shoulder to pull the rope down to your thighs.',
@@ -9099,10 +8929,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e609',
             name: 'Round The World Shoulder Stretch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Stand up straight with your legs together, holding a bodybar or broomstick.',
                 'Hold the pole behind your hips with a wider than shoulder width grip. Your palms should be down and your thumbs facing out.',
@@ -9112,10 +8942,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e610',
             name: 'Rowing, Stationary',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, seat yourself on the rower. Make sure that your heels are resting comfortably against the base of the foot pedals and that the straps are secured. Select the program that you wish to use, if applicable. Sit up straight and bend forward at the hips.',
                 'There are three phases of movement when using a rower. The first phase is when you come forward on the rower. Your knees are bent and against your chest. Your upper body is leaning slightly forward while still maintaining good posture. Next, push against the foot pedals and extend your legs while bringing your hands to your upper abdominal area, squeezing your shoulders back as you do so. To avoid straining your back, use primarily your leg and hip muscles.',
@@ -9125,10 +8955,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e611',
             name: "Runner's Stretch",
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 "It's easiest to get into this stretch if you start standing up, put one leg behind you, and slowly lower your torso down to the floor.",
                 'Keep the front heel on the floor (if it lifts up, scoot your other leg further back).',
@@ -9138,10 +8968,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e612',
             name: 'Running, Treadmill',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.',
                 'Treadmills offer convenience, cardiovascular benefits, and usually have less impact than running outside. A 150 lb person will burn over 450 calories running 8 miles per hour for 30 minutes. Maintain proper posture as you run, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate.'
@@ -9150,10 +8980,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e613',
             name: 'Russian Twist',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on the floor placing your feet either under something that will not move or by having a partner hold them. Your legs should be bent at the knees.',
                 'Elevate your upper body so that it creates an imaginary V-shape with your thighs. Your arms should be fully extended in front of you perpendicular to your torso and with the hands clasped. This is the starting position.',
@@ -9165,10 +8995,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e614',
             name: 'Sandbag Load',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To load sandbags or other objects, begin with the implements placed a distance from the loading platform, typically 50 feet.',
                 'Begin by lifting the sandbag. Sandbags are extremely awkward, and the manner of lifting them can vary depending on the particular sandbag used. Reach as far around it as possible, extending through the hips and knees to pull it up high. Shouldering is usually not allowed.',
@@ -9179,10 +9009,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e615',
             name: 'Scapular Pull-Up',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Take a pronated grip on a pull-up bar.',
                 'From a hanging position, raise yourself a few inches without using your arms. Do this by depressing your shoulder girdle in a reverse shrugging motion.',
@@ -9192,10 +9022,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e616',
             name: 'Scissor Kick',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, lie down with your back pressed against the floor or on an exercise mat (optional). Your arms should be fully extended to the sides with your palms facing down. Note: The arms should be stationary the entire time.',
                 'With a slight bend at the knees, lift your legs up so that your heels are about 6 inches off the ground. This is the starting position.',
@@ -9207,10 +9037,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e617',
             name: 'Scissors Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a lunge stance position with one foot forward with the knee bent, and the rear knee nearly touching the ground.',
                 'Ensure that the front knee is over the midline of the foot. Extending through both legs, jump as high as possible, swinging your arms to gain lift.',
@@ -9221,10 +9051,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e618',
             name: 'Seated Band Hamstring Curl',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Secure a band close to the ground and place a bench a couple feet away from it.',
                 'Seat yourself on the bench and secure the band behind your ankles, beginning with your legs straight. This will be your starting position.',
@@ -9235,10 +9065,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e619',
             name: 'Seated Barbell Military Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Sit on a Military Press Bench with a bar behind your head and either have a spotter give you the bar (better on the rotator cuff this way) or pick it up yourself carefully with a pronated grip (palms facing forward). Tip: Your grip should be wider than shoulder width and it should create a 90-degree angle between the forearm and the upper arm as the barbell goes down.',
                 'Once you pick up the barbell with the correct grip length, lift the bar up over your head by locking your arms. Hold at about shoulder level and slightly in front of your head. This is your starting position.',
@@ -9250,10 +9080,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e620',
             name: 'Seated Barbell Twist',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by sitting at the end of a flat bench with a barbell placed on top of your thighs. Your feet should be shoulder width apart from each other.',
                 'Grip the bar with your palms facing down and make sure your hands are wider than shoulder width apart from each other. Begin to lift the barbell up over your head until your arms are fully extended.',
@@ -9266,10 +9096,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e621',
             name: 'Seated Bent-Over One-Arm Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down at the end of a flat bench with a dumbbell in one arm using a neutral grip (palms of the hand facing you).',
                 'Bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Make sure that you keep the head up.',
@@ -9283,10 +9113,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e622',
             name: 'Seated Bent-Over Rear Delt Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place a couple of dumbbells looking forward in front of a flat bench.',
                 'Sit on the end of the bench with your legs together and the dumbbells behind your calves.',
@@ -9299,10 +9129,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e623',
             name: 'Seated Bent-Over Two-Arm Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down at the end of a flat bench with a dumbbell in both arms using a neutral grip (palms of the hand facing you).',
                 'Bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Make sure that you keep the head up.',
@@ -9315,10 +9145,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e624',
             name: 'Seated Biceps',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on the floor with your knees bent and your partner standing behind you. Extend your arms straight behind you with your palms facing each other. Your partner will hold your wrists for you. This will be the starting position.',
                 'Attempt to flex your elbows, while your partner prevents any actual movement.',
@@ -9328,10 +9158,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e625',
             name: 'Seated Cable Rows',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need access to a low pulley row machine with a V-bar. Note: The V-bar will enable you to have a neutral grip where the palms of your hands face each other. To get into the starting position, first sit down on the machine and place your feet on the front platform or crossbar provided making sure that your knees are slightly bent and not locked.',
                 'Lean over as you keep the natural alignment of your back and grab the V-bar handles.',
@@ -9343,10 +9173,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e626',
             name: 'Seated Cable Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Adjust the weight to an appropriate amount and be seated, grasping the handles. Your upper arms should be about 90 degrees to the body, with your head and chest up. The elbows should also be bent to about 90 degrees. This will be your starting position.',
                 'Begin by extending through the elbow, pressing the handles together above your head.',
@@ -9357,10 +9187,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e627',
             name: 'Seated Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on the machine and place your toes on the lower portion of the platform provided with the heels extending off. Choose the toe positioning of your choice (forward, in, or out) as per the beginning of this chapter.',
                 'Place your lower thighs under the lever pad, which will need to be adjusted according to the height of your thighs. Now place your hands on top of the lever pad in order to prevent it from slipping forward.',
@@ -9373,10 +9203,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e628',
             name: 'Seated Calf Stretch',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit up straight on an exercise mat.',
                 'Bend one knee and put that foot on the floor to stabilize the torso.',
@@ -9387,10 +9217,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e629',
             name: 'Seated Close-Grip Concentration Barbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit down on a flat bench with a barbell or E-Z Bar in front of you in between your legs. Your legs should be spread with the knees bent and the feet on the floor.',
                 'Use your arms to pick the barbell up and place the back of your upper arms on top of your inner thighs (around three and a half inches away from the front of the knee). A supinated grip closer than shoulder width is needed to perform this exercise. Tip: Your arm should be extended at arms length and the barbell should be above the floor. This will be your starting position.',
@@ -9402,10 +9232,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e630',
             name: 'Seated Dumbbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on a flat bench with a dumbbell on each hand being held at arms length. The elbows should be close to the torso.',
                 'Rotate the palms of the hands so that they are facing your torso. This will be your starting position.',
@@ -9417,10 +9247,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e631',
             name: 'Seated Dumbbell Inner Biceps Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on the end of a flat bench with a dumbbell in each hand being held at arms length. The elbows should be close to the torso.',
                 'Rotate the palms of the hands so that they are facing inward in a neutral position. This will be your starting position.',
@@ -9433,10 +9263,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e632',
             name: 'Seated Dumbbell Palms-Down Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing two dumbbells on the floor in front of a flat bench.',
                 'Sit down on the edge of the flat bench with your legs at about shoulder width apart. Make sure to keep your feet on the floor.',
@@ -9450,10 +9280,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e633',
             name: 'Seated Dumbbell Palms-Up Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by placing two dumbbells on the floor in front of a flat bench.',
                 'Sit down on the edge of the flat bench with your legs at about shoulder width apart. Make sure to keep your feet on the floor.',
@@ -9467,10 +9297,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e634',
             name: 'Seated Dumbbell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Grab a couple of dumbbells and sit on a military press bench or a utility bench that has a back support on it as you place the dumbbells upright on top of your thighs.',
                 'Clean the dumbbells up one at a time by using your thighs to bring the dumbbells up to shoulder height at each side.',
@@ -9483,10 +9313,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e635',
             name: 'Seated Flat Bench Leg Pull-In',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit on a bench with the legs stretched out in front of you slightly below parallel and your arms holding on to the sides of the bench. Your torso should be leaning backwards around a 45-degree angle from the bench. This will be your starting position.',
                 'Bring the knees in toward you as you move your torso closer to them at the same time. Breathe out as you perform this movement.',
@@ -9497,10 +9327,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e636',
             name: 'Seated Floor Hamstring Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit on a mat with your right leg extended in front of you and your left leg bent with your foot against your right inner thigh.',
                 'Lean forward from your hips and reach for your ankle until you feel a stretch in your hamstring. Hold for 15 seconds, then repeat for your other side.'
@@ -9509,10 +9339,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e637',
             name: 'Seated Front Deltoid',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Sit upright on the floor with your legs bent, your partner standing behind you. Stick your arms straight out to your sides, with your palms facing the ground. Attempt to move them as far behind you as possible, as your assistant holds your wrists. This will be your starting position.',
                 'Keeping your elbows straight, attempt to move your arms to the front, with your partner gently restraining you to prevent any actual movement for 10-20 seconds.',
@@ -9522,10 +9352,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e638',
             name: 'Seated Glute',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'glutes',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'In a seated position with your knees bent, cross one ankle over the opposite knee. Your partner will stand behind you. Now, lean forward as your partner braces your shoulders with their hands. This will be your starting position.',
                 'Attempt to push your torso back for 10-20 seconds, as your partner prevents any actual movement of your torso.',
@@ -9535,10 +9365,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e639',
             name: 'Seated Good Mornings',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Set up a box in a power rack. The pins should be set at an appropriate height. Begin by stepping under the bar and placing it across the back of the shoulders, not on top of your traps. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders.',
                 'Remove the bar from the rack, creating a tight arch in your lower back. Keep your head facing forward. With your back, shoulders, and core tight, push your knees and butt out and you begin your descent. Sit back with your hips until you are seated on the box. This will be your starting position.',
@@ -9549,10 +9379,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e640',
             name: 'Seated Hamstring',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'In a seated position with your legs extended, have your partner stand behind you. Now, lean forward as your partner braces your shoulders with their hands. This will be your starting position.',
                 'Attempt to push your torso back for 10-20 seconds, as your partner prevents any actual movement of your torso.',
@@ -9562,10 +9392,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e641',
             name: 'Seated Hamstring and Calf Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Loop a belt, rope, or band around one foot. Sit down with both legs extended . This will be your starting position.',
                 'Leaning forward slightly, pull on the belt to draw the toes of your foot back. Hold this position for 10-20 seconds and then repeat with the other leg.'
@@ -9574,10 +9404,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e642',
             name: 'Seated Head Harness Neck Resistance',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'neck',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Place a neck strap on the floor at the end of a flat bench. Once you have selected the weights, sit at the end of the flat bench with your feet wider than shoulder width apart from each other. Your toes should be pointed out.',
                 'Slowly move your torso forward until it is almost parallel with the floor. Using both hands, securely position the neck strap around your head. Tip: Make sure the weights are still lying on the floor to prevent any strain on the neck. Now grab the weight with both hands while elevating your torso back until it is almost perpendicular to the floor. Note: Your head and torso needs to be slightly tilted forward to perform this exercise.',
@@ -9590,10 +9420,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e643',
             name: 'Seated Leg Curl',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the machine lever to fit your height and sit on the machine with your back against the back support pad.',
                 'Place the back of lower leg on top of padded lever (just a few inches under the calves) and secure the lap pad against your thighs, just above the knees. Then grasp the side handles on the machine as you point your toes straight (or you can also use any of the other two stances) and ensure that the legs are fully straight right in front of you. This will be your starting position.',
@@ -9605,10 +9435,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e644',
             name: 'Seated Leg Tucks',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on a bench with the legs stretched out in front of you slightly below parallel and your arms holding on to the sides of the bench. Your torso should be leaning backwards around a 45-degree angle from the bench. This will be your starting position.',
                 'Bring the knees in toward you as you move your torso closer to them at the same time. Breathe out as you perform this movement.',
@@ -9619,10 +9449,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e645',
             name: 'Seated One-Arm Dumbbell Palms-Down Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on a flat bench with a dumbbell in your right hand.',
                 'Place your feet flat on the floor, at a distance that is slightly wider than shoulder width apart.',
@@ -9635,10 +9465,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e646',
             name: 'Seated One-Arm Dumbbell Palms-Up Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Sit on a flat bench with a dumbbell in your right hand.',
                 'Place your feet flat on the floor, at a distance that is slightly wider than shoulder width apart.',
@@ -9651,10 +9481,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e647',
             name: 'Seated One-arm Cable Pulley Rows',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To get into the starting position, first sit down on the machine and place your feet on the front platform or crossbar provided making sure that your knees are slightly bent and not locked.',
                 'Lean over as you keep the natural alignment of your back and grab the single handle attachment with your left arm using a palms-down grip.',
@@ -9667,10 +9497,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e648',
             name: 'Seated Overhead Stretch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit up straight on an exercise mat.',
                 'Touch the soles of your feet together with your feet six to eight inches in front of your hips.',
@@ -9681,10 +9511,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e649',
             name: 'Seated Palm-Up Barbell Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a barbell with both hands and your palms facing up; hands spaced about shoulder width.',
                 'Place your feet flat on the floor, at a distance that is slightly wider than shoulder width apart.',
@@ -9696,10 +9526,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e650',
             name: 'Seated Palms-Down Barbell Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a barbell with both hands and your palms facing down; hands spaced about shoulder width.',
                 'Place your feet flat on the floor, at a distance that is slightly wider than shoulder width apart.',
@@ -9711,10 +9541,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e651',
             name: 'Seated Side Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 "Pick a couple of dumbbells and sit at the end of a flat bench with your feet firmly on the floor. Hold the dumbbells with your palms facing in and your arms straight down at your sides at arms' length. This will be your starting position.",
                 'While maintaining the torso stationary (no swinging), lift the dumbbells to your side with a slight bend on the elbow and the hands slightly tilted forward as if pouring water in a glass. Continue to go up until you arms are parallel to the floor. Exhale as you execute this movement and pause for a second at the top.',
@@ -9725,10 +9555,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e652',
             name: 'Seated Triceps Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 "Sit down on a bench with back support and grasp a dumbbell with both hands and hold it overhead at arm's length. Tip: a better way is to have somebody hand it to you especially if it is very heavy. The resistance should be resting in the palms of your hands with your thumbs around it. The palm of the hand should be facing inward. This will be your starting position.",
                 'Keeping your upper arms close to your head (elbows in) and perpendicular to the floor, lower the resistance in a semi-circular motion behind your head until your forearms touch your biceps. Tip: The upper arms should remain stationary and only the forearms should move. Breathe in as you perform this step.',
@@ -9739,10 +9569,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e653',
             name: 'Seated Two-Arm Palms-Up Low-Pulley Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Put a bench in front of a low pulley machine that has a barbell or EZ Curl attachment on it.',
                 'Move the bench far enough away so that when you bring the handle to the top of your thighs tension is created on the cable due to the weight stack being moved up.',
@@ -9758,10 +9588,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e654',
             name: 'See-Saw Press (Alternating Side Press)',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Grab a dumbbell with each hand and stand up erect.',
                 'Clean (lift) the dumbbells to the chest/shoulder level and then rotate your wrists so that your palms are facing towards you as if you were getting ready to perform an Arnold Press. This will be your starting position.',
@@ -9773,10 +9603,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e655',
             name: 'Shotgun Row',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Attach a single handle to a low cable.',
                 'After selecting the correct weight, stand a couple feet back with a wide-split stance. Your arm should be extended and your shoulder forward. This will be your starting position.',
@@ -9787,10 +9617,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e656',
             name: 'Shoulder Circles',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 "With shoulders relaxed and arms resting loosely at your sides (or in your lap if you're seated), gently roll your shoulders forward, up, back, and down.",
                 'Reverse direction. You can do this exercise alternating shoulders or both at the same time.'
@@ -9799,10 +9629,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e657',
             name: 'Shoulder Press - With Bands',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 "To begin, stand on an exercise band so that tension begins at arm's length. Grasp the handles and lift them so that the hands are at shoulder height at each side.",
                 'Rotate the wrists so that the palms of your hands are facing forward. Your elbows should be bent, with the upper arms and forearms in line to the torso. This is your starting position.',
@@ -9812,10 +9642,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e658',
             name: 'Shoulder Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Relax your arms to your sides and raise your shoulders up toward your ears, then back down.'
             ]
@@ -9823,19 +9653,19 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e659',
             name: 'Shoulder Stretch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: ['Reach your left arm across your body and hold it straight.']
         },
         {
             id: 'e660',
             name: 'Side-Lying Floor Stretch',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'First lie on your left side, bending your left knee in front of you to stabilize your torso (use your abdominal muscles as well to hold you upright).',
                 'Straighten your right leg and rest the right foot on the floor behind your left. Straighten your right arm over your head and gently pull on your right wrist to stretch the entire right side of the body. Switch sides.'
@@ -9844,19 +9674,19 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e661',
             name: 'Side Bridge',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: []
         },
         {
             id: 'e662',
             name: 'Side Hop-Sprint',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand to the side of a cone or hurdle.',
                 'Begin this drill by hopping sideways over the obstacle, rebounding out of your landing to hop back to where you started.',
@@ -9866,19 +9696,19 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e663',
             name: 'Side Jackknife',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: []
         },
         {
             id: 'e664',
             name: 'Side Lateral Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Pick a couple of dumbbells and stand with a straight torso and the dumbbells by your side at arms length with the palms of the hand facing you. This will be your starting position.',
                 'While maintaining the torso in a stationary position (no swinging), lift the dumbbells to your side with a slight bend on the elbow and the hands slightly tilted forward as if pouring water in a glass. Continue to go up until you arms are parallel to the floor. Exhale as you execute this movement and pause for a second at the top.',
@@ -9889,10 +9719,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e665',
             name: 'Side Laterals to Front Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'In a standing position, hold a pair of dumbbells at your side. This will be your starting position.',
                 'Keeping your elbows slightly bent, raise the weights directly in front of you to shoulder height, avoiding any swinging or cheating.',
@@ -9905,10 +9735,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e666',
             name: 'Side Leg Raises',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Stand next to a chair, which you may hold onto as a support. Stand on one leg. This will be your starting position.',
                 'Keeping your leg straight, raise it as far out to the side as possible, and swing it back down, allowing it to cross the opposite leg.',
@@ -9918,10 +9748,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e667',
             name: 'Side Lying Groin Stretch',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Start off by lying on your right side and bend your right knee in front of you to stabilize the torso.',
                 'Rest your head on your right hand or shoulder. Lift your left leg upward and hold it by the back of the knee (easier) or the foot (harder).',
@@ -9931,10 +9761,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e668',
             name: 'Side Neck Stretch',
-            primaryMuscle: { id: 'm16', muscle: 'neck' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'neck',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Start with your shoulders relaxed, gently tilt your head towards your shoulder.',
                 'Assist stretch with a gentle pull on the side of the head.'
@@ -9943,10 +9773,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e669',
             name: 'Side Standing Long Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin standing with your feet hip width apart in an athletic stance. Your head and chest should be up, knees and hips slightly bent. This will be your starting position.',
                 'Leaning to your right, extend through your hips, knees, and ankles to jump into the air. Block with the arms to lead the movement, jumping as far to your right as you can.',
@@ -9956,10 +9786,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e670',
             name: 'Side To Side Chins',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab the pull-up bar with the palms facing forward using a wide grip.',
                 'As you have both arms extended in front of you holding the bar at a wide grip, bring your torso back around 30 degrees or so while creating a curvature on your lower back and sticking your chest out. This is your starting position.',
@@ -9973,10 +9803,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e671',
             name: 'Side Wrist Pull',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'This stretch works best standing. Cross your left arm over the midline of your body and hold the left wrist in your right hand down at the level of your hips. Start the stretch with a bent left arm.',
                 "Slowly straighten, pull, and lift it up to shoulder height, as pictured. Feel this stretch originate in your back, not your shoulders, and don't pull too hard on the shoulders joint. Switch sides."
@@ -9985,10 +9815,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e672',
             name: 'Side to Side Box Shuffle',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand to one side of the box with your left foot resting on the middle of it.',
                 'To begin, jump up and over to the other side of the box, landing with your right foot on top of the box and your left foot on the floor. Swing your arms to aid your movement.',
@@ -9998,10 +9828,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e673',
             name: 'Single-Arm Cable Crossover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Begin by moving the pulleys to the high position, select the resistance to be used, and take a handle in each hand.',
                 'Step forward in front of both pulleys with your arms extended in front of you, bringing your hands together. Your head and chest should be up as you lean forward, while your feet should be staggered. This will be your starting position.',
@@ -10013,10 +9843,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e674',
             name: 'Single-Arm Linear Jammer',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar into a landmine or securely anchor it in a corner. Load the bar to an appropriate weight.',
                 'Raise the bar from the floor, taking it to your shoulders with one or both hands. Adopt a wide stance. This will be your starting position.',
@@ -10027,10 +9857,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e675',
             name: 'Single-Arm Push-Up',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin laying prone on the ground. Move yourself into a position supporting your weight on your toes and one arm. Your working arm should be placed directly under the shoulder, fully extended. Your legs should be extended, and for this movement you may need a wider base, placing your feet further apart than in a normal push-up.',
                 'Maintain good posture, and place your free hand behind your back. This will be your starting position.',
@@ -10041,10 +9871,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e676',
             name: 'Single-Cone Sprint Drill',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'mixed',
             instructions: [
                 'This drill teaches quick foot action. You need a single cone. Begin standing next to the cone with one arm back and one arm forward.',
                 'Chop the feet as quickly as possible, blocking with the arms. Circle the cone, keep your knees up, with violent foot action.',
@@ -10054,10 +9884,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e677',
             name: 'Single-Leg High Box Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a box in a rack. Secure a band or rope in place above the box.',
                 'Standing in front of it, step onto the box to a full standing position, letting your other leg remain unsupported. Hold onto the band for balance',
@@ -10067,10 +9897,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e678',
             name: 'Single-Leg Hop Progression',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Arrange a line of cones in front of you. Assume a relaxed standing position, balanced on one leg. Raise the knee of your opposite leg. This will be your starting position.',
                 'Hop forward, jumping and landing with the same leg over the cone.',
@@ -10081,10 +9911,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e679',
             name: 'Single-Leg Lateral Hop',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand to the side of a cone or hurdle. To get into the start position, stand on one leg with your knee slightly bent.',
                 'To begin, execute a counterjump to hop sideways over the cone.',
@@ -10095,10 +9925,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e680',
             name: 'Single-Leg Leg Extension',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Seat yourself in the machine and adjust it so that you are positioned properly. The pad should be against the lower part of the shin but not in contact with the ankle. Adjust the seat so that the pivot point is in line with your knee. Select a weight appropriate for your abilities.',
                 'Maintaining good posture, fully extend one leg, pausing at the top of the motion.',
@@ -10109,10 +9939,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e681',
             name: 'Single-Leg Stride Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand to the side of a box with your inside foot on top of it, close to the edge.',
                 'Begin by swinging the arms upward as you push through the top leg, jumping upward as high as possible. Attempt to drive the opposite knee upward.',
@@ -10122,10 +9952,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e682',
             name: 'Single Dumbbell Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'isolation',
             instructions: [
                 'With a wide stance, hold a dumbell with both hands, grasping the head of the dumbbell instead of the handle. Your arms should be extended and hanging at the waist. This will be your starting position.',
                 'Raise the weight until it is above shoulder level, keeping your arms extended. Your torso and hips should remain stationary throughout the movement.',
@@ -10135,10 +9965,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e683',
             name: 'Single Leg Butt Kick',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin by standing on one leg, with the bent knee raised. This will be your start position.',
                 'Using a countermovement jump, take off upward by extending the hip, knee, and ankle of the grounded leg.',
@@ -10149,10 +9979,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e684',
             name: 'Single Leg Glute Bridge',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lay on the floor with your feet flat and knees bent.',
                 'Raise one leg off of the ground, pulling the knee to your chest. This will be your starting position.',
@@ -10163,10 +9993,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e685',
             name: 'Single Leg Push-off',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand on the ground with one foot resting on the box, heel close to the edge.',
                 'Push off with your foot on top of the box, trying to gain as much height as possible by extending through the hip and knee.',
@@ -10176,10 +10006,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e686',
             name: 'Sit-Up',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on the floor placing your feet either under something that will not move or by having a partner hold them. Your legs should be bent at the knees.',
                 'Place your hands behind your head and lock them together by clasping your fingers. This is the starting position.',
@@ -10191,10 +10021,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e687',
             name: 'Sit Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'mixed',
             instructions: [
                 'Stand with your feet shoulder width apart. This will be your starting position.',
                 'Begin the movement by flexing your knees and hips, sitting back with your hips.',
@@ -10204,10 +10034,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e688',
             name: 'Skating',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'Roller skating is a fun activity which can be effective in improving cardiorespiratory fitness and muscular endurance. It requires relatively good balance and coordination. It is necessary to learn the basics of skating including turning and stopping and to wear protective gear to avoid possible injury.',
                 'You can skate at a comfortable pace for 30 minutes straight. If you want a cardio challenge, do interval skating — speed skate two minutes of every five minutes, using the remaining three minutes to recover. A 150 lb person will typically burn about 175 calories in 30 minutes skating at a comfortable pace, similar to brisk walking.'
@@ -10216,10 +10046,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e689',
             name: 'Sled Drag - Harness',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, load the sled with the desired weight and attach the pulling strap. You can pull with handles, use a harness, or attach the pulling strap to a weight belt.',
                 'Whether pulling forwards or backwards, lean in the direction of travel and progress by extending through the hips and knees.'
@@ -10228,10 +10058,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e690',
             name: 'Sled Overhead Backward Walk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Attach dual handles to a sled connected by a rope or chain. Load the sled to a light weight.',
                 'Face the sled, backing up until there is some tension in the line. Hold your hands directly above your head with your elbows extended. This will be your starting position.',
@@ -10241,10 +10071,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e691',
             name: 'Sled Overhead Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Attach dual handles to a sled using a chain or rope. Load the sled to an appropriate load.',
                 'Facing away from the sled, step away until there is tension in the line. Raise your hands above your head, keeping them together, palms facing each other. Your elbows should be pointed upward with the elbows flexed. This will be your starting position.',
@@ -10255,10 +10085,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e692',
             name: 'Sled Push',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Load your pushing sled with the desired weight.',
                 'Take an athletic posture, leaning into the sled with your arms fully extended, grasping the handles. Push the sled as fast as possible, focusing on extending your hips and knees to strengthen your posterior chain.'
@@ -10267,10 +10097,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e693',
             name: 'Sled Reverse Flye',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Attach dual handles to a sled connected by a rope or chain. Load the sled to a light weight.',
                 'Face the sled, backing up until there is some tension in the line. Take both handles at arms length at about waist level. Bend the knees slightly and keep your chest and head up. This will be your starting position.',
@@ -10281,10 +10111,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e694',
             name: 'Sled Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Attach dual handles to a sled connected by a rope or chain. Load the sled to an appropriate weight. Face the sled, backing up until there is some tension in the line.',
                 'With a handle in each hand, bend the knees slightly, keep your head and chest up, and begin with your arms extended.',
@@ -10295,10 +10125,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e695',
             name: 'Sledgehammer Swings',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'You will need a tire and a sledgehammer for this exercise. Stand in front of the tire about two feet away from it with a staggered stance. Grip the sledgehammer.',
                 'If you are right handed, your left hand should be at the bottom of the handle, and your right hand should be choking up closer to the head.',
@@ -10309,10 +10139,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e696',
             name: 'Smith Incline Shoulder Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Place an incline bench underneath the smith machine. Place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the incline bench and make sure your shoulders are aligned right under the barbell.',
                 'Using a shoulder width pronated (palms forward) grip, lift the bar from the rack and hold it straight over you with a slight bend at the elbows. This will be your starting position.',
@@ -10325,10 +10155,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e697',
             name: 'Smith Machine Behind the Back Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'With the bar at thigh level, load an appropriate weight.',
                 'Stand with the bar behind you, taking a shoulder-width, pronated grip on the bar and unhook the weight. You should be standing up straight with your head and chest up and your arms extended. This will be your starting position.',
@@ -10340,10 +10170,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e698',
             name: 'Smith Machine Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a flat bench underneath the smith machine. Now place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the flat bench. Using a pronated grip that is wider than shoulder width, unlock the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your middle chest.',
@@ -10355,10 +10185,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e699',
             name: 'Smith Machine Bent Over Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Set the barbell attached to the smith machine to a height that is about 2 inches below your knees.',
                 'Bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up.',
@@ -10371,10 +10201,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e700',
             name: 'Smith Machine Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Place a block or weight plate below the bar on the Smith machine. Set the bar to a position that best matches your height. Once the correct height is chosen and the bar is loaded, step onto the plates with the balls of your feet and place the bar on the back of your shoulders.',
                 'Take the bar with both hands facing forward. Rotate the bar to unrack it. This will be your starting position.',
@@ -10386,10 +10216,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e701',
             name: 'Smith Machine Close-Grip Bench Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a flat bench underneath the smith machine. Place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the flat bench. Using a close and pronated grip (palms facing forward) that is around shoulder width, unlock the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your middle chest. Tip: Make sure that as opposed to a regular bench press, you keep the elbows close to the torso at all times in order to maximize triceps involvement.',
@@ -10401,10 +10231,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e702',
             name: 'Smith Machine Decline Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'Position a decline bench in the rack so that the bar will be above your chest. Load an appropriate weight and take your place on the bench.',
                 'Rotate the bar to unhook it from the rack and fully extend your arms. Your back should be slightly arched and your shoulder blades retracted. This will be your starting position.',
@@ -10416,10 +10246,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e703',
             name: 'Smith Machine Hang Power Clean',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Position the bar at knee height and load it to an appropriate weight.',
                 'Take a pronated grip on the bar outside of shoulder width and unhook the bar from the machine. Your arms should be fully extended with your head and chest up. Your elbows should be pointed out with your shoulders back and down. Your hips should be back, loading the tension into the hamstrings. This will be your starting position.',
@@ -10432,10 +10262,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e704',
             name: 'Smith Machine Hip Raise',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Position a bench in the rack and load the bar to an appropriate weight. Lie down on the bench, placing the bottom of your feet against the bar. Unlock the bar and extend your legs. You may need to use your hands to assist you. For added stability grasp the sides of the Smith Machine. This will be your starting position.',
                 'Initiate the movement by rotating your pelvis, flexing your spine to raise your hips off of the bench. Maintain a slight bend in the knees throughout the motion.',
@@ -10446,10 +10276,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e705',
             name: 'Smith Machine Incline Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place an incline bench underneath the smith machine. Place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the incline bench and make sure your upper chest is aligned with the barbell. Using a pronated grip (palms facing forward) that is wider than shoulder width, unlock the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your upper chest.',
@@ -10461,10 +10291,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e706',
             name: 'Smith Machine Leg Press',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a Smith machine bar a couple feet off of the ground. Ensure that it is resting on the safeties. After loading the bar to an appropriate weight, lie underneath the bar. Place the middle of your feet on the bar, tucking your knees to your chest. This will be your starting position.',
                 'Begin the movement by driving through your feet to move the bar upward, extending the hips and knees. Do not lock out your knees.',
@@ -10474,10 +10304,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e707',
             name: 'Smith Machine One-Arm Upright Row',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With the bar at thigh level, load an appropriate weight.',
                 'Take a wide grip on the bar and unhook the weight, removing your off hand from the bar. Your arm should be extended as you stand up straight with your head and chest up. This will be your starting position.',
@@ -10489,10 +10319,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e708',
             name: 'Smith Machine Overhead Shoulder Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, place a flat bench (or preferably one with back support) underneath a smith machine. Position the barbell at a height so that when seated on the flat bench, the arms must be almost fully extended to reach the barbell.',
                 'Once you have the correct height, sit slightly in behind the barbell so that there is an imaginary straight line from the tip of your nose to the barbell. Your feet should be stationary. Grab the barbell with the palms facing forward, unlock it and lift it up so that your arms are fully extended. This is the starting position.',
@@ -10504,10 +10334,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e709',
             name: 'Smith Machine Pistol Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, first set the bar to a position that best matches your height. Step under it and position the bar across the back of your shoulders.',
                 'Take the bar with your hands facing forward, unlock it and lift it off the rack by extending your legs. 3',
@@ -10519,10 +10349,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e710',
             name: 'Smith Machine Reverse Calf Raises',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the barbell on the smith machine to fit your height and align a raised platform right under the bar.',
                 'Stand on the platform with the heels of your feet secured on top of it with the balls of your feet extending off it. Position your toes facing forward with a shoulder width stance.',
@@ -10535,10 +10365,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e711',
             name: 'Smith Machine Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, first set the bar on the height that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side (palms facing forward), unlock it and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -10551,10 +10381,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e712',
             name: 'Smith Machine Stiff-Legged Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To begin, set the bar on the smith machine to a height that is around the middle of your thighs. Once the correct height is chosen and the bar is loaded, grasp the bar using a pronated (palms forward) grip that is shoulder width apart. You may need some wrist wraps if using a significant amount of weight.',
                 'Lift the bar up by fully extending your arms while keeping your back straight. Stand with your torso straight and your legs spaced using a shoulder width or narrower stance. The knees should be slightly bent. This is your starting position.',
@@ -10566,10 +10396,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e713',
             name: 'Smith Machine Upright Row',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To begin, set the bar on the smith machine to a height that is around the middle of your thighs. Once the correct height is chosen and the bar is loaded, grasp the bar using a pronated (palms forward) grip that is shoulder width apart. You may need some wrist wraps if using a significant amount of weight.',
                 'Lift the barbell up and fully extend your arms with your back straight. There should be a slight bend at the elbows. This is the starting position.',
@@ -10581,10 +10411,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e714',
             name: 'Smith Single-Leg Split Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, place a flat bench 2-3 feet behind the smith machine. Then, set the bar on the height that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side (palms facing forward), unlock it and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -10598,10 +10428,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e715',
             name: 'Snatch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place your feet at a shoulder width stance with the barbell resting right above the connection between the toes and the rest of the foot.',
                 'With a palms facing down grip, bend at the knees and keeping the back flat grab the bar using a wider than shoulder width grip. Bring the hips down and make sure that your body drops as if you were going to sit on a chair. This will be your starting position.',
@@ -10615,10 +10445,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e716',
             name: 'Snatch Balance',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin with the feet in the pulling position, the bar racked across the back of the shoulders, and the hands placed in a wide snatch grip.',
                 'Pop the bar with an abrupt dip and drive of the knees, and aggressively drive under the bar, transitioning the feet into the receiving position.',
@@ -10629,10 +10459,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e717',
             name: 'Snatch Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'The snatch deadlift strengthens the first pull of the snatch. Begin with a wide snatch grip with the barbell placed on the platform. The feet should be directly under the hips, with the feet turned out. Squat down to the bar, keeping the back in absolute extension with the head facing forward.',
                 'Initiate the movement by driving through the heels, raising the hips. The back angle should remain the same until the bar passes the knees.',
@@ -10642,10 +10472,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e718',
             name: 'Snatch Pull',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on the floor close to the shins, take a wide snatch grip. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 'Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight. Move the weight with control as you continue to above the knees.',
@@ -10656,10 +10486,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e719',
             name: 'Snatch Shrug',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a wide grip, with the bar hanging at the mid thigh position. You can use a hook or overhand grip. Your back should be straight and inclined slightly forward.',
                 'Shrug your shoulders towards your ears. While this exercise can usually by loaded with heavier weight than a snatch, avoid overloading to the point that the execution slows down.'
@@ -10668,10 +10498,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e720',
             name: 'Snatch from Blocks',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a loaded barbell on boxes or stands of the desired height. A wide grip should be taken on the bar. The feet should be directly below the hips, with the feet turned out as needed. Lower the hips, with the chest up and the head looking forward. The shoulders should be just in front of the bar, with the elbows pointed out. This will be the starting position.',
                 'Begin the first pull by driving through the front of the heels, raising the bar from the boxes.',
@@ -10683,10 +10513,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e721',
             name: 'Speed Band Overhead Triceps',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'For this exercise anchor a band to the ground. We used an incline bench and anchored the band to the base, standing over the bench. Alternatively, this could be performed standing on the band.',
                 'To begin, pull the band behind your head, holding it with a pronated grip and your elbows up. This will be your starting position.',
@@ -10697,10 +10527,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e722',
             name: 'Speed Box Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Attach bands to the bar that are securely anchored near the ground. You may need to choke the bands to get adequate tension.',
                 "Use a box of an appropriate height for this exercise. Load the bar to a weight that still requires effort, but isn't so heavy that speed is compromised. Typically, that will be between 50-70% of your one rep max.",
@@ -10712,10 +10542,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e723',
             name: 'Speed Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -10728,10 +10558,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e724',
             name: 'Spell Caster',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hold a dumbbell in each hand with a pronated grip. Your feet should be wide with your hips and knees extended. This will be your starting position.',
                 'Begin the movement by pulling both of the dumbbells to one side next to your hip, rotating your torso.',
@@ -10742,10 +10572,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e725',
             name: 'Spider Crawl',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a prone position on the floor. Support your weight on your hands and toes, with your feet together and your body straight. Your arms should be bent to 90 degrees. This will be your starting position.',
                 'Initiate the movement by raising one foot off of the ground. Externally rotate the leg and bring the knee toward your elbow, as far forward as possible.',
@@ -10755,10 +10585,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e726',
             name: 'Spider Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by setting the bar on the part of the preacher bench that you would normally sit on. Make sure to align the barbell properly so that it is balanced and will not fall off.',
                 'Move to the front side of the preacher bench (the part where the arms usually lay) and position yourself to lay at a 45 degree slant with your torso and stomach pressed against the front side of the preacher bench.',
@@ -10772,10 +10602,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e727',
             name: 'Spinal Stretch',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Sit in a chair so your back is straight and your feet planted on the floor.',
                 'Interlace your fingers behind your head, elbows out and your chin down.',
@@ -10786,10 +10616,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e728',
             name: 'Split Clean',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'With a barbell on the floor close to the shins, take an overhand grip just outside the legs. Lower your hips with the weight focused on the heels, back straight, head facing forward, chest up, with your shoulders just in front of the bar. This will be your starting position.',
                 'Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight. Move the weight with control as you continue to above the knees.',
@@ -10802,10 +10632,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e729',
             name: 'Split Jerk',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Standing with the weight racked on the front of the shoulders, begin with the dip. With your feet directly under your hips, flex the knees without moving the hips backward.',
                 'Go down only slightly, and reverse direction as powerfully as possible. Drive through the heels create as much speed and force as possible, and be sure to move your head out of the way as the bar leaves the shoulders. At this moment as the feet leave the floor, the feet must be placed into the receiving position as quickly as possible.',
@@ -10816,10 +10646,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e730',
             name: 'Split Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Assume a lunge stance position with one foot forward with the knee bent, and the rear knee nearly touching the ground.',
                 'Ensure that the front knee is over the midline of the foot.',
@@ -10831,10 +10661,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e731',
             name: 'Split Snatch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'expert',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a loaded barbell on the floor. The bar should be close to or touching the shins, and a wide grip should be taken on the bar. The feet should be directly below the hips, with the feet turned out as needed. Lower the hips, with the chest up and the head looking forward. The shoulders should be just in front of the bar. This will be the starting position.',
                 'Begin the first pull by driving through the front of the heels, raising the bar from the ground. The back angle should stay the same until the bar passes the knees.',
@@ -10847,10 +10677,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e732',
             name: 'Split Squat with Dumbbells',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position yourself into a staggered stance with the rear foot elevated and front foot forward.',
                 'Hold a dumbbell in each hand, letting them hang at the sides. This will be your starting position.',
@@ -10861,10 +10691,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e733',
             name: 'Split Squats',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'mixed',
             instructions: [
                 'Being in a standing position. Jump into a split leg position, with one leg forward and one leg back, flexing the knees and lowering your hips slightly as you do so.',
                 'As you descend, immediately reverse direction, standing back up and jumping, reversing the position of your legs. Repeat 5-10 times on each leg.'
@@ -10873,10 +10703,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e734',
             name: 'Squat Jerk',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Standing with the weight racked on the front of the shoulders, begin with the dip. With your feet directly under your hips, flex the knees without moving the hips backward. Go down only slightly, and reverse direction as powerfully as possible. Drive through the heels create as much speed and force as possible, and be sure to move your head out of the way as the bar leaves the shoulders.',
                 "At this moment as the feet leave the floor, the feet must be placed into the receiving position as quickly as possible. In the brief moment the feet are not actively driving against the platform, the athlete's effort to push the bar up will drive them down. The feet should move forcefully to just outside the hips, turned out as necessary. Receive the bar with your body in a full squat and the arms fully extended overhead.",
@@ -10886,10 +10716,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e735',
             name: 'Squat with Bands',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Set up the bands on the sleeves, secured to either band pegs, the rack, or dumbbells so that there is appropriate tension.',
                 'Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wide for more emphasis on the back, glutes, adductors, and hamstrings. Keep your head facing forward.',
@@ -10900,10 +10730,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e736',
             name: 'Squat with Chains',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To set up the chains, begin by looping the leader chain over the sleeves of the bar. The heavy chain should be attached using a snap hook. Adjust the length of the lead chain so that a few links are still on the floor at the top of the movement.',
                 'Begin by stepping under the bar and placing it across the back of the shoulders. Squeeze your shoulder blades together and rotate your elbows forward, attempting to bend the bar across your shoulders. Remove the bar from the rack, creating a tight arch in your lower back, and step back into position. Place your feet wide for more emphasis on the back, glutes, adductors, and hamstrings. Keep your head facing forward.',
@@ -10914,10 +10744,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e737',
             name: 'Squat with Plate Movers',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To begin, first set the bar on a rack to just below shoulder level. Position a weight plate on the ground a couple feet back from the rack. Once the bar is loaded, step under it and place the back of your shoulders across it.',
                 'Hold on to the bar with both hands and lift it off the rack by first pushing with your legs and at the same time straighten your torso.',
@@ -10932,10 +10762,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e738',
             name: 'Squats - With Bands',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'To start out, make sure that the exercise band is at an even split between both the left and right side of the body. To do this, use your hands to grab both sides of the band and place both feet in the middle of the band. Your feet should be shoulder width apart from each other.',
                 'When holding the bands, they should be the same height on each side. You should be using a pronated grip (palms facing forward) and have the handles of the bands next to your face for this exercise. This is the starting position.',
@@ -10947,10 +10777,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e739',
             name: 'Stairmaster',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, step onto the stairmaster and select the desired option from the menu. You can choose a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise.',
                 "Pump your legs up and down in an established rhythm, driving the pedals down but not all the way to the floor. It is recommended that you maintain your grip on the handles so that you don't fall. The handles can be used to monitor your heart rate to help you stay at an appropriate intensity.",
@@ -10960,10 +10790,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e740',
             name: 'Standing Alternating Dumbbell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand with a dumbbell in each hand. Raise the dumbbells to your shoulders with your palms facing forward and your elbows pointed out. This will be your starting position.',
                 'Extend one arm to press the dumbbell straight up, keeping your off hand in place. Do not lean or jerk the weight during the movement.',
@@ -10974,10 +10804,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e741',
             name: 'Standing Barbell Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the bar on the back of your shoulders (slightly below the neck).',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -10990,10 +10820,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e742',
             name: 'Standing Barbell Press Behind Neck',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for easier pick up of the bar. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -11006,10 +10836,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e743',
             name: 'Standing Bent-Over One-Arm Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'With a dumbbell in one hand and the palm facing your torso, bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Make sure that you keep the head up.',
                 'The upper arm should be close to the torso and parallel to the floor while the forearm is pointing towards the floor as the hand holds the weight. Tip: There should be a 90-degree angle between the forearm and the upper arm. This is your starting position.',
@@ -11022,10 +10852,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e744',
             name: 'Standing Bent-Over Two-Arm Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'With a dumbbell in each hand and the palms facing your torso, bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Make sure that you keep the head up. The upper arms should be close to the torso and parallel to the floor while the forearms are pointing towards the floor as the hands hold the weights. Tip: There should be a 90-degree angle between the forearms and the upper arm. This is your starting position.',
                 'Keeping the upper arms stationary, use the triceps to lift the weights as you exhale until the forearms are parallel to the floor and the whole arms are extended. Like many other arm exercises, only the forearm moves.',
@@ -11036,10 +10866,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e745',
             name: 'Standing Biceps Cable Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright while holding a cable curl bar that is attached to a low pulley. Grab the cable bar at shoulder width and keep the elbows close to the torso. The palm of your hands should be facing up (supinated grip). This will be your starting position.',
                 'While holding the upper arms stationary, curl the weights while contracting the biceps as you breathe out. Only the forearms should move. Continue the movement until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a second as you squeeze the muscle.',
@@ -11050,10 +10880,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e746',
             name: 'Standing Biceps Stretch',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Clasp your hands behind your back with your palms together, straighten arms and then rotate them so your palms face downward.',
                 'Raise your arms up and hold until you feel a stretch in your biceps.'
@@ -11062,10 +10892,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e747',
             name: 'Standing Bradford Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Place a loaded bar at shoulder level in a rack. With a pronated grip at shoulder width, begin with the bar racked across the front of your shoulders. This is your starting position.',
                 'Initiate the lift by extending the elbows to press the bar overhead. Avoid locking out the elbow as you move the weight behind your head.',
@@ -11078,10 +10908,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e748',
             name: 'Standing Cable Chest Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position dual pulleys to chest height and select an appropriate weight. Stand a foot or two in front of the cables, holding one in each hand. You can stagger your stance for better stability.',
                 'Position the upper arm at a 90 degree angle with the shoulder blades together. This will be your starting position.',
@@ -11092,10 +10922,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e749',
             name: 'Standing Cable Lift',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Connect a standard handle on a tower, and move the cable to the lowest pulley position.',
                 "With your side to the cable, grab the handle with one hand and step away from the tower. You should be approximately arm's length away from the pulley, with the tension of the weight on the cable. Your outstretched arm should be aligned with the cable.",
@@ -11110,10 +10940,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e750',
             name: 'Standing Cable Wood Chop',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Connect a standard handle to a tower, and move the cable to the highest pulley position.',
                 "With your side to the cable, grab the handle with one hand and step away from the tower. You should be approximately arm's length away from the pulley, with the tension of the weight on the cable. Your outstretched arm should be aligned with the cable.",
@@ -11128,10 +10958,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e751',
             name: 'Standing Calf Raises',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the padded lever of the calf raise machine to fit your height.',
                 'Place your shoulders under the pads provided and position your toes facing forward (or using any of the two other positions described at the beginning of the chapter). The balls of your feet should be secured on top of the calf block with the heels extending off it. Push the lever up by extending your hips and knees until your torso is standing erect. The knees should be kept with a slight bend; never locked. Toes should be facing forward, outwards or inwards as described at the beginning of the chapter. This will be your starting position.',
@@ -11143,10 +10973,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e752',
             name: 'Standing Concentration Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Taking a dumbbell in your working hand, lean forward. Allow your working arm to hang perpendicular to the ground with the elbow pointing out. This will be your starting position.',
                 'Flex the elbow to curl the weight, keeping the upper arm stationary. At the top of the repetition, flex the biceps and pause.',
@@ -11157,10 +10987,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e753',
             name: 'Standing Dumbbell Calf Raise',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Stand with your torso upright holding two dumbbells in your hands by your sides. Place the ball of the foot on a sturdy and stable wooden board (that is around 2-3 inches tall) while your heels extend off and touch the floor. This will be your starting position.',
                 'With the toes pointing either straight (to hit all parts equally), inwards (for emphasis on the outer head) or outwards (for emphasis on the inner head), raise the heels off the floor as you exhale by contracting the calves. Hold the top contraction for a second.',
@@ -11171,10 +11001,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e754',
             name: 'Standing Dumbbell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Standing with your feet shoulder width apart, take a dumbbell in each hand. Raise the dumbbells to head height, the elbows out and about 90 degrees. This will be your starting position.',
                 'Maintaining strict technique with no leg drive or leaning back, extend through the elbow to raise the weights together directly above your head.',
@@ -11184,10 +11014,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e755',
             name: 'Standing Dumbbell Reverse Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand straight with a dumbbell in each hand using a pronated grip (palms facing down). Your arms should be fully extended while your feet are shoulder width apart from each other. This is the starting position.',
                 'While holding the upper arms stationary, curl the weights while contracting the biceps as you breathe out. Only the forearms should move. Continue the movement until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a second as you squeeze the muscle.',
@@ -11198,10 +11028,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e756',
             name: 'Standing Dumbbell Straight-Arm Front Delt Raise Above Head',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Hold the dumbbells in front of your thighs, palms facing your thighs.',
                 'Keep your arms straight with a slight bend at the elbows but keep them locked. This will be your starting position.',
@@ -11213,10 +11043,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e757',
             name: 'Standing Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand up with a dumbbell held by both hands. Your feet should be about shoulder width apart from each other. Slowly use both hands to grab the dumbbell and lift it over your head until both arms are fully extended.',
                 'The resistance should be resting in the palms of your hands with your thumbs around it. The palm of the hands should be facing up towards the ceiling. This will be your starting position.',
@@ -11228,10 +11058,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e758',
             name: 'Standing Dumbbell Upright Row',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grasp a dumbbell in each hand with a pronated (palms forward) grip that is slightly less than shoulder width. The dumbbells should be resting on top of your thighs. Your arms should be extended with a slight bend at the elbows and your back should be straight. This will be your starting position.',
                 'Use your side shoulders to lift the dumbbells as you exhale. The dumbbells should be close to the body as you move it up and the elbows should drive the motion. Continue to lift them until they nearly touch your chin. Tip: Your elbows should drive the motion. As you lift the dumbbells, your elbows should always be higher than your forearms. Also, keep your torso stationary and pause for a second at the top of the movement.',
@@ -11242,10 +11072,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e759',
             name: 'Standing Elevated Quad Stretch',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Start by standing with your back about two to three feet away from a bench or step.',
                 'Lift one leg behind you and rest your foot on the step,either on your instep or the ball of your foot, whichever you find most comfortable.',
@@ -11255,10 +11085,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e760',
             name: 'Standing Front Barbell Raise Over Head',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand straight with a barbell in your hands. You should grip the bar with palms facing down and a closer than shoulder width grip apart from each other.',
                 'Your feet should be shoulder width apart from each other. Your elbows should be slightly bent. This is the starting position.',
@@ -11270,10 +11100,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e761',
             name: 'Standing Gastrocnemius Calf Stretch',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Place your right heel on a step with your knee extended and lean forward to grab your right toe with your right hand. Your left knee should be slightly bent and your back should be straight.',
                 'Support your weight on your left leg and place your left hand on your left thigh.',
@@ -11283,10 +11113,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e762',
             name: 'Standing Hamstring and Calf Stretch',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Being by looping a belt, band, or rope around one foot. While standing, place that foot forward.',
                 'Bend your back leg, while keeping the front one straight. Now raise the toes of your front foot off of the ground and lean forward.',
@@ -11296,10 +11126,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e763',
             name: 'Standing Hip Circles',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abductors',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Begin standing on one leg, holding to a vertical support.',
                 'Raise the unsupported knee to 90 degrees. This will be your starting position.',
@@ -11310,10 +11140,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e764',
             name: 'Standing Hip Flexors',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up straight with the spine vertical, the left foot slightly in front of the right.',
                 "Bend both knees and lift the back heel off the floor as you press the right hip forward. You can't get a thorough, deep stretch in this position, however, because it's hard to relax the hip flexor and stand on it at the same time. Switch sides."
@@ -11322,10 +11152,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e765',
             name: 'Standing Inner-Biceps Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 "Stand up with a dumbbell in each hand being held at arms length. The elbows should be close to the torso. Your legs should be at about shoulder's width apart from each other.",
                 'Rotate the palms of the hands so that they are facing inward in a neutral position. This will be your starting position.',
@@ -11339,10 +11169,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e766',
             name: 'Standing Lateral Stretch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Take a slightly wider than hip distance stance with your knees slightly bent.',
                 'Place your right hand on your right hip to support the spine.',
@@ -11353,10 +11183,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e767',
             name: 'Standing Leg Curl',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the machine lever to fit your height and lie with your torso bent at the waist facing forward around 30-45 degrees (since an angled position is more favorable for hamstrings recruitment) with the pad of the lever on the back of your right leg (just a few inches under the calves) and the front of the right leg on top of the machine pad.',
                 'Keeping the torso bent forward, ensure your leg is fully stretched and grab the side handles of the machine. Position your toes straight. This will be your starting position.',
@@ -11368,10 +11198,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e768',
             name: 'Standing Long Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This drill is best done in sand or other soft landing surface. Ensure that you are able to measure distance. Stand in a partial squat stance with feet shoulder width apart.',
                 'Utilizing a big arm swing and a countermovement of the legs, jump forward as far as you can.',
@@ -11382,10 +11212,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e769',
             name: 'Standing Low-Pulley Deltoid Raise',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Start by standing to the right side of a low pulley row. Use your left hand to come across the body and grab a single handle attached to the low pulley with a pronated grip (palms facing down). Rest your arm in front of you. Your right hand should grab the machine for better support and balance.',
                 'Make sure that your back is erect and your feet are shoulder width apart from each other. This is the starting position.',
@@ -11398,10 +11228,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e770',
             name: 'Standing Low-Pulley One-Arm Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a single handle with your left arm next to the low pulley machine. Turn away from the machine keeping the handle to the side of your body with your arm fully extended. Now use both hands to elevate the single handle directly above the head with the palm facing forward. Keep your upper arm completely vertical (perpendicular to the floor) and put your right hand on your left elbow to help keep it steady. This is the starting position.',
                 'Keeping your upper arms close to your head (elbows in) and perpendicular to the floor, lower the resistance in a semicircular motion behind your head until your forearms touch your biceps. Tip: The upper arms should remain stationary and only the forearms should move. Breathe in as you perform this step.',
@@ -11413,10 +11243,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e771',
             name: 'Standing Military Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start by placing a barbell that is about chest high on a squat rack. Once you have selected the weights, grab the barbell using a pronated (palms facing forward) grip. Make sure to grip the bar wider than shoulder width apart from each other.',
                 'Slightly bend the knees and place the barbell on your collar bone. Lift the barbell up keeping it lying on your chest. Take a step back and position your feet shoulder width apart from each other.',
@@ -11429,10 +11259,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e772',
             name: 'Standing Olympic Plate Hand Squeeze',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 "To begin, stand straight while holding a weight plate by the ridge at arm's length in each hand using a neutral grip (palms facing in). You feet should be shoulder width apart from each other. This will be your starting position.",
                 'Lower the plates until the fingers are nearly extended but can still hold weights. Inhale as you lower the plates.',
@@ -11443,10 +11273,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e773',
             name: 'Standing One-Arm Cable Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by grabbing single handle next to the low pulley machine. Make sure you are far enough from the machine so that your arm is supporting the weight.',
                 'Make sure that your upper arm is stationary, perpendicular to the floor with elbows in and palms facing forward. Your non lifting arm should be grabbing your waist. This will allow you to keep your balance.',
@@ -11459,10 +11289,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e774',
             name: 'Standing One-Arm Dumbbell Curl Over Incline Bench',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand on the back side of an incline bench as if you were going to be a spotter for someone. Have a dumbbell in one hand and rest it across the incline bench with a supinated (palms up) grip.',
                 'Position your non lifting hand at the corner or side of the incline bench. The chest should be pressed against the top part of the incline and your feet should be pressed against the floor at a wide stance. This is the starting position.',
@@ -11475,10 +11305,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e775',
             name: 'Standing One-Arm Dumbbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand up with a dumbbell held in one hand. Your feet should be about shoulder width apart from each other. Now fully extend the arm with the dumbbell over your head. Tip: The small finger of your hand should be facing the ceiling and the palm of your hand should be facing forward. The dumbbell should be above your head.',
                 'This will be your starting position.',
@@ -11491,10 +11321,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e776',
             name: 'Standing Overhead Barbell Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand up holding a barbell or e-z bar using a pronated grip (palms facing forward) with your hands closer than shoulder width apart from each other. Your feet should be about shoulder width apart.',
                 'Now elevate the barbell above your head until your arms are fully extended. Keep your elbows in. This will be your starting position.',
@@ -11506,10 +11336,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e777',
             name: 'Standing Palm-In One-Arm Dumbbell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start by having a dumbbell in one hand with your arm fully extended to the side using a neutral grip. Use your other arm to hold on to an incline bench to keep your balance.',
                 'Your feet should be shoulder width apart from each other. Now slowly lift the dumbbell up until you create a 90 degree angle with your arm. Note: Your forearm should be perpendicular to the floor. Continue to maintain a neutral grip throughout the entire exercise.',
@@ -11523,10 +11353,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e778',
             name: 'Standing Palms-In Dumbbell Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start by having a dumbbell in each hand with your arm fully extended to the side using a neutral grip. Your feet should be shoulder width apart from each other. Now slowly lift the dumbbells up until you create a 90 degree angle with your arms. Note: Your forearms should be perpendicular to the floor. This the starting position.',
                 'Continue to maintain a neutral grip throughout the entire exercise. Slowly lift the dumbbells up until your arms are fully extended.',
@@ -11537,10 +11367,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e779',
             name: 'Standing Palms-Up Barbell Behind The Back Wrist Curl',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 "Start by standing straight and holding a barbell behind your glutes at arm's length while using a pronated grip (palms will be facing back away from the glutes) and having your hands shoulder width apart from each other.",
                 'You should be looking straight forward while your feet are shoulder width apart from each other. This is the starting position.',
@@ -11553,10 +11383,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e780',
             name: 'Standing Pelvic Tilt',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Start off with your feet hip-distance apart.',
                 'Bend your knees slightly to keep them soft and springy.',
@@ -11566,10 +11396,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e781',
             name: 'Standing Rope Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a rope to a high pulley and select an appropriate weight.',
                 'Stand with your back to the cable tower. Take the rope with both hands over your shoulders, holding it to your upper chest. This will be your starting position.',
@@ -11580,10 +11410,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e782',
             name: 'Standing Soleus And Achilles Stretch',
-            primaryMuscle: { id: 'm2', muscle: 'calves' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'calves',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Stand with your feet hip-distance apart, one foot slightly in front of the other.',
                 'Bend both knees, keeping your back heel on the floor. Switch sides.'
@@ -11592,10 +11422,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e783',
             name: 'Standing Toe Touches',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Stand with some space in front and behind you.',
                 'Bend at the waist, keeping your legs straight, until you can relax and let your upper body hang down in front of you. Let your arms and hands hang down naturally. Hold for 10 to 20 seconds.'
@@ -11604,10 +11434,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e784',
             name: 'Standing Towel Triceps Extension',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand up with both arms fully extended above the head holding one end of a towel with both hands. Your elbows should be in and the arms perpendicular to the floor with the palms facing each other while your feet should be shoulder width apart from each other. This is the starting position.',
                 'Now communicate with your partner so that he/she can grip the other side of the towel to apply resistance. Keeping your upper arms close to your head (elbows in) and perpendicular to the floor, lower the resistance in a semicircular motion behind your head until your forearms touch your biceps. Tip: The upper arms should remain stationary and only the forearms should move. Breathe in as you perform this step.',
@@ -11618,10 +11448,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e785',
             name: 'Standing Two-Arm Overhead Throw',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Stand with your feet shoulder width apart holding a medicine ball in both hands. To begin, reach the medicine ball deep behind your head as you bend the knees slightly and lean back.',
                 'Violently throw the ball forward, flexing at the hip and using your whole body to complete the movement.',
@@ -11631,10 +11461,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e786',
             name: 'Star Jump',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a relaxed stance with your feet shoulder width apart and hold your arms close to the body.',
                 'To initiate the move, squat down halfway and explode back up as high as possible. Fully extend your entire body, spreading your legs and arms away from the body.',
@@ -11644,10 +11474,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e787',
             name: 'Step-up with Knee Raise',
-            primaryMuscle: { id: 'm5', muscle: 'glutes' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'glutes',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand facing a box or bench of an appropriate height with your feet together. This will be your starting position.',
                 'Begin the movement by stepping up, putting your left foot on the top of the bench. Extend through the hip and knee of your front leg to stand up on the box. As you stand on the box with your left leg, flex your right knee and hip, bringing your knee as high as you can.',
@@ -11657,10 +11487,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e788',
             name: 'Step Mill',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 "To begin, step onto the stepmill and select the desired option from the menu. You can choose a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Use caution so that you don't trip as you climb the stairs. It is recommended that you maintain your grip on the handles so that you don't fall.",
                 'Stepmills offer convenience, cardiovascular benefits, and usually have less impact than running outside while offering a similar rate of calories burned. They are typically much harder than other cardio equipment. A 150 lb person will typically burn over 300 calories in 30 minutes, compared to about 175 calories walking.'
@@ -11669,10 +11499,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e789',
             name: 'Stiff-Legged Barbell Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grasp a bar using an overhand grip (palms facing down). You may need some wrist wraps if using a significant amount of weight.',
                 'Stand with your torso straight and your legs spaced using a shoulder width or narrower stance. The knees should be slightly bent. This is your starting position.',
@@ -11684,10 +11514,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e790',
             name: 'Stiff-Legged Dumbbell Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "Grasp a couple of dumbbells holding them by your side at arm's length.",
                 'Stand with your torso straight and your legs spaced using a shoulder width or narrower stance. The knees should be slightly bent. This is your starting position.',
@@ -11699,10 +11529,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e791',
             name: 'Stiff Leg Barbell Good Morning',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -11715,10 +11545,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e792',
             name: 'Stomach Vacuum',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand straight with your feet shoulder width apart from each other. Place your hands on your hips. This is the starting position.',
                 'Now slowly inhale as much air as possible and then start to exhale as much as possible while bringing your stomach in as much as possible and hold this position. Try to visualize your navel touching your backbone.',
@@ -11730,10 +11560,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e793',
             name: 'Straight-Arm Dumbbell Pullover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a dumbbell standing up on a flat bench.',
                 'Ensuring that the dumbbell stays securely placed at the top of the bench, lie perpendicular to the bench (torso across it as in forming a cross) with only your shoulders lying on the surface. Hips should be below the bench and legs bent with feet firmly on the floor. The head will be off the bench as well.',
@@ -11746,10 +11576,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e794',
             name: 'Straight-Arm Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'You will start by grabbing the wide bar from the top pulley of a pulldown machine and using a wider than shoulder-width pronated (palms down) grip. Step backwards two feet or so.',
                 'Bend your torso forward at the waist by around 30-degrees with your arms fully extended in front of you and a slight bend at the elbows. If your arms are not fully extended then you need to step a bit more backwards until they are. Once your arms are fully extended and your torso is slightly bent at the waist, tighten the lats and then you are ready to begin.',
@@ -11761,10 +11591,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e795',
             name: 'Straight Bar Bench Mid Rows',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place a loaded barbell on the end of a bench. Standing on the bench behind the bar, take a medium, pronated grip. Stand with your hips back and chest up, maintaining a neutral spine. This will be your starting position.',
                 'Row the bar to your torso by retracting the shoulder blades and flexing the elbows. Use a controlled movement with no jerking.',
@@ -11774,10 +11604,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e796',
             name: 'Straight Raises on Incline Bench',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Place a bar on the ground behind the head of an incline bench.',
                 'Lay on the bench face down. With a pronated grip, pick the barbell up from the floor, keeping your arms straight. Allow the bar to hang straight down. This will be your starting position.',
@@ -11788,10 +11618,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e797',
             name: 'Stride Jump Crossover',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Stand to the side of a box with your inside foot on top of it, close to the edge.',
                 'Begin by swinging the arms upward as you push through the top leg, jumping upward as high as possible. Attempt to drive the opposite knee upward.',
@@ -11802,10 +11632,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e798',
             name: 'Sumo Deadlift',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a bar loaded on the ground. Approach the bar so that the bar intersects the middle of the feet. The feet should be set very wide, near the collars. Bend at the hips to grip the bar. The arms should be directly below the shoulders, inside the legs, and you can use a pronated grip, a mixed grip, or hook grip. Relax the shoulders, which in effect lengthens your arms.',
                 'Take a breath, and then lower your hips, looking forward with your head with your chest up. Drive through the floor, spreading your feet apart, with your weight on the back half of your feet. Extend through the hips and knees.',
@@ -11816,10 +11646,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e799',
             name: 'Sumo Deadlift with Bands',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To deadlift with short bands, simply loop them over the bar before you start, and step into them to set up. Ensure that they under the back half of your foot, directly where you are driving into the floor.',
                 'Begin with a bar loaded on the ground. Approach the bar so that the bar intersects the middle of the feet. The feet should be set very wide, near the collars. Bend at the hips to grip the bar. The arms should be directly below the shoulders, inside the legs, and you can use a pronated grip, a mixed grip, or hook grip.',
@@ -11831,10 +11661,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e800',
             name: 'Sumo Deadlift with Chains',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "You can attach the chains to the sleeves of the bar, or just drape the middle over the bar so there is a greater weight increase as you lift. Attempt to keep the ends of the chains away from the plates so you don't hit them when you lower the weight.",
                 'Begin with a bar loaded on the ground. Approach the bar so that the bar intersects the middle of the feet. The feet should be set very wide, near the collars. Bend at the hips to grip the bar. The arms should be directly below the shoulders, inside the legs, and you can use a pronated grip, a mixed grip, or hook grip. Relax the shoulders, which in effect lengthens your arms.',
@@ -11846,10 +11676,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e801',
             name: 'Superman',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'compound',
             instructions: [
                 'To begin, lie straight and face down on the floor or exercise mat. Your arms should be fully extended in front of you. This is the starting position.',
                 'Simultaneously raise your arms, legs, and chest off of the floor and hold this contraction for 2 seconds. Tip: Squeeze your lower back to get the best results from this exercise. Remember to exhale during this movement. Note: When holding the contracted position, you should look like superman when he is flying.',
@@ -11860,10 +11690,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e802',
             name: 'Supine Chest Throw',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This drill is great for chest passes when you lack a partner or a wall of sufficient strength. Lay on the ground on your back with your knees bent.',
                 'Begin with the ball on your chest, held with both hands on the bottom.',
@@ -11874,10 +11704,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e803',
             name: 'Supine One-Arm Overhead Throw',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lay on the ground on your back with your knees bent. Hold the ball with one hand, extending the arm fully behind your head. This will be your starting position.',
                 'Initiate the movement at the shoulder, throwing the ball directly forward of you as you sit up, attempting to go for maximum distance.',
@@ -11887,10 +11717,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e804',
             name: 'Supine Two-Arm Overhead Throw',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lay on the ground on your back with your knees bent.',
                 'Hold the ball with both hands, extending the arms fully behind your head. This will be your starting position.',
@@ -11901,10 +11731,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e805',
             name: 'Suspended Fallout',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Adjust the straps so the handles are at an appropriate height, below waist level.',
                 'Begin standing and grasping the handles. Lean into the straps, moving to an incline push-up position. This will be your starting position.',
@@ -11916,10 +11746,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e806',
             name: 'Suspended Push-Up',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Anchor your suspension straps securely to the top of a rack or other object.',
                 'Leaning into the straps, take a handle in each hand and move into a push-up plank position. You should be as close to parallel to the ground as you can manage with your arms fully extended, maintaining good posture.',
@@ -11930,10 +11760,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e807',
             name: 'Suspended Reverse Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Secure a set of suspension straps with the handles hanging about a foot off of the ground. Move yourself into a pushup plank position facing away from the rack.',
                 'Place your feet into the handles. You should maintain a straight posture, not allowing the hips to sag. This will be your starting position.',
@@ -11944,10 +11774,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e808',
             name: 'Suspended Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Suspend your straps at around chest height. Take a handle in each hand and lean back. Keep your body erect and your head and chest up. Your arms should be fully extended. This will be your starting position.',
                 'Begin by flexing the elbow to initiate the movement. Protract your shoulder blades as you do so.',
@@ -11957,10 +11787,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e809',
             name: 'Suspended Split Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Suspend your straps so the handles are 18-30 inches from the floor.',
                 'Facing away from the setup, place your rear foot into the handle behind you. Keep your head looking forward and your chest up, with your knee slightly bent. This will be your starting position.',
@@ -11971,10 +11801,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e810',
             name: 'Svend Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Begin in a standing position.',
                 'Press two lightweight plates together with your hands. Hold the plates together close to your chest to create an isometric contraction in your chest muscles. Your fingers should be pointed forward. This is your starting position.',
@@ -11985,10 +11815,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e811',
             name: 'T-Bar Row with Handle',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Position a bar into a landmine or in a corner to keep it from moving. Load an appropriate weight onto your end.',
                 'Stand over the bar, and position a Double D row handle around the bar next to the collar. Using your hips and legs, rise to a standing position.',
@@ -12000,10 +11830,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e812',
             name: 'Tate Press',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Lie down on a flat bench with a dumbbell in each hand on top of your thighs. The palms of your hand will be facing each other.',
                 'By using your thighs to help you get the dumbbells up, clean the dumbbells one arm at a time so that you can hold them in front of you at shoulder width. Note: when holding the dumbbells in front of you, make sure your arms are wider than shoulder width apart from each other using a pronated (palms forward) grip. Allow your elbows to point out. This is your starting position.',
@@ -12015,10 +11845,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e813',
             name: 'The Straddle',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Begin in a seated, upright position. Start by extending your legs in front of you in a V.',
                 'With your hands on the floor, lean forward as far as possible. Hold for 10 to 20 seconds.'
@@ -12027,10 +11857,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e814',
             name: 'Thigh Abductor',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abductors',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, sit down on the abductor machine and select a weight you are comfortable with. When your legs are positioned properly, grip the handles on each side. Your entire upper body (from the waist up) should be stationary. This is the starting position.',
                 'Slowly press against the machine with your legs to move them away from each other while exhaling.',
@@ -12041,10 +11871,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e815',
             name: 'Thigh Adductor',
-            primaryMuscle: { id: 'm4', muscle: 'adductors' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'adductors',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, sit down on the adductor machine and select a weight you are comfortable with. When your legs are positioned properly on the leg pads of the machine, grip the handles on each side. Your entire upper body (from the waist up) should be stationary. This is the starting position.',
                 'Slowly press against the machine with your legs to move them towards each other while exhaling.',
@@ -12055,10 +11885,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e816',
             name: 'Tire Flip',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin by gripping the bottom of the tire on the tread, and position your feet back a bit. Your chest should be driving into the tire.',
                 'To lift the tire, extend through the hips, knees, and ankles, driving into the tire and up.',
@@ -12068,10 +11898,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e817',
             name: 'Toe Touchers',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, lie down on the floor or an exercise mat with your back pressed against the floor. Your arms should be lying across your sides with the palms facing down.',
                 'Your legs should be touching each other. Slowly elevate your legs up in the air until they are almost perpendicular to the floor with a slight bend at the knees. Your feet should be parallel to the floor.',
@@ -12084,10 +11914,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e818',
             name: 'Torso Rotation',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Stand upright holding an exercise ball with both hands. Extend your arms so the ball is straight out in front of you. This will be your starting position.',
                 'Rotate your torso to one side, keeping your eyes on the ball as you move. Now, rotate back to the opposite direction. Repeat for 10-20 repetitions.'
@@ -12096,10 +11926,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e819',
             name: 'Trail Running/Walking',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'Running or hiking on trails will get the blood pumping and heart beating almost immediately. Make sure you have good shoes. While you use the muscles in your calves and buttocks to pull yourself up a hill, the knees, joints and ankles absorb the bulk of the pounding coming back down. Take smaller steps as you walk downhill, keep your knees bent to reduce the impact and slow down to avoid falling.',
                 'A 150 lb person can burn over 200 calories for 30 minutes walking uphill, compared to 175 on a flat surface. If running the trail, a 150 lb person can burn well over 500 calories in 30 minutes.'
@@ -12108,10 +11938,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e820',
             name: 'Trap Bar Deadlift',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise load a trap bar, also known as a hex bar, to an appropriate weight resting on the ground. Stand in the center of the apparatus and grasp both handles.',
                 'Lower your hips, look forward with your head and keep your chest up.',
@@ -12122,10 +11952,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e821',
             name: 'Tricep Dumbbell Kickback',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Start with a dumbbell in each hand and your palms facing your torso. Keep your back straight with a slight bend in the knees and bend forward at the waist. Your torso should be almost parallel to the floor. Make sure to keep your head up. Your upper arms should be close to your torso and parallel to the floor. Your forearms should be pointed towards the floor as you hold the weights. There should be a 90-degree angle formed between your forearm and upper arm. This is your starting position.',
                 'Now, while keeping your upper arms stationary, exhale and use your triceps to lift the weights until the arm is fully extended. Focus on moving the forearm.',
@@ -12136,10 +11966,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e822',
             name: 'Tricep Side Stretch',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Bring right arm across your body and over your left shoulder, holding your elbow with your left hand, until you feel a stretch in your tricep. Then repeat for your other arm.'
             ]
@@ -12147,10 +11977,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e823',
             name: 'Triceps Overhead Extension with Rope',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a rope to a low pulley. After selecting an appropriate weight, grasp the rope with both hands and face away from the cable.',
                 'Position your hands behind your head with your elbows point straight up. Your elbows should start out flexed, and you can stagger your stance and lean gently away from the machine to create greater stability. This will be your starting position.',
@@ -12161,10 +11991,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e824',
             name: 'Triceps Pushdown',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a straight or angled bar to a high pulley and grab with an overhand grip (palms facing down) at shoulder width.',
                 'Standing upright with the torso straight and a very small inclination forward, bring the upper arms close to your body and perpendicular to the floor. The forearms should be pointing up towards the pulley as they hold the bar. This is your starting position.',
@@ -12176,10 +12006,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e825',
             name: 'Triceps Pushdown - Rope Attachment',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a rope attachment to a high pulley and grab with a neutral grip (palms facing each other).',
                 'Standing upright with the torso straight and a very small inclination forward, bring the upper arms close to your body and perpendicular to the floor. The forearms should be pointing up towards the pulley as they hold the rope with the palms facing each other. This is your starting position.',
@@ -12191,10 +12021,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e826',
             name: 'Triceps Pushdown - V-Bar Attachment',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'push',
+            mechanic: 'isolation',
             instructions: [
                 'Attach a V-Bar to a high pulley and grab with an overhand grip (palms facing down) at shoulder width.',
                 'Standing upright with the torso straight and a very small inclination forward, bring the upper arms close to your body and perpendicular to the floor. The forearms should be pointing up towards the pulley as they hold the bar. The thumbs should be higher than the small finger. This is your starting position.',
@@ -12206,10 +12036,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e827',
             name: 'Triceps Stretch',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'triceps',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'isolation',
             instructions: [
                 'Reach your hand behind your head, grasp your elbow and gently pull. Hold for 10 to 20 seconds, then switch sides.'
             ]
@@ -12217,10 +12047,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e828',
             name: 'Tuck Crunch',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, lie down on the floor or an exercise mat with your back pressed against the floor. Your arms should be lying across your sides with the palms facing down.',
                 'Your legs should be crossed by wrapping one ankle around the other. Slowly elevate your legs up in the air until your thighs are perpendicular to the floor with a slight bend at the knees. Note: Your knees and toes should be parallel to the floor as opposed to the thighs.',
@@ -12233,10 +12063,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e829',
             name: 'Two-Arm Dumbbell Preacher Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a dumbbell with each arm and place the upper arms on top of the preacher bench or the incline bench. The dumbbell should be held at shoulder length. This will be your starting position.',
                 'As you breathe in, slowly lower the dumbbells until your upper arm is extended and the biceps is fully stretched.',
@@ -12247,10 +12077,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e830',
             name: 'Two-Arm Kettlebell Clean',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place two kettlebells between your feet. To get in the starting position, push your butt back and look straight ahead.',
                 'Clean the kettlebells to your shoulders by extending through the legs and hips as you raise the kettlebells towards your shoulders. Rotate your wrists as you do so.',
@@ -12260,10 +12090,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e831',
             name: 'Two-Arm Kettlebell Jerk',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells to your shoulders. Clean the kettlebells to your shoulders by extending through the legs and hips as you swing the kettlebells towards your shoulders. Rotate your wrists as you do so, so that the palms face forward. Squat down a few inches and reverse the motion rapidly driving both kettlebells overhead. Immediately after the initial push, squat down again and get under the kettlebells. Once the kettlebells are locked out, stand upright to complete the exercise.'
             ]
@@ -12271,10 +12101,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e832',
             name: 'Two-Arm Kettlebell Military Press',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Clean two kettlebells to your shoulders. Clean the kettlebells to your shoulders by extending through the legs and hips as you swing the kettlebells towards your shoulders. Rotate your wrists as you do so, so that the palms face forward.',
                 'Press the kettlebells up and out. As the kettlebells pass your head, lean into the weights so that the kettlebells are racked behind your head. Make sure to contract your lats, butt, and stomach for added stability.'
@@ -12283,10 +12113,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e833',
             name: 'Two-Arm Kettlebell Row',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'middle back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Place two kettlebells in front of your feet. Bend your knees slightly and then push your butt out as much as possible as you bend over to get in the starting position.',
                 'Grab both kettlebells and pull them to your stomach, retracting your shoulder blades and flexing the elbows. Keep your back straight. Lower and repeat.'
@@ -12295,10 +12125,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e834',
             name: 'Underhand Cable Pulldowns',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on a pull-down machine with a wide bar attached to the top pulley. Adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.',
                 'Grab the pull-down bar with the palms facing your torso (a supinated grip). Make sure that the hands are placed closer than the shoulder width.',
@@ -12311,10 +12141,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e835',
             name: 'Upper Back-Leg Grab',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'While seated, bend forward to hug your thighs from underneath with both arms.',
                 'Keep your knees together and your legs extended out as you bring your chest down to your knees. You can also stretch your middle back by pulling your back away from your knees as your hugging them.'
@@ -12323,10 +12153,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e836',
             name: 'Upper Back Stretch',
-            primaryMuscle: { id: 'm14', muscle: 'middle back' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'middle back',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Clasp fingers together with your thumbs pointing down, round your shoulders as you reach your hands forward.'
             ]
@@ -12334,10 +12164,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e837',
             name: 'Upright Barbell Row',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grasp a barbell with an overhand grip that is slightly less than shoulder width. The bar should be resting on the top of your thighs with your arms extended and a slight bend in your elbows. Your back should also be straight. This will be your starting position.',
                 'Now exhale and use the sides of your shoulders to lift the bar, raising your elbows up and to the side. Keep the bar close to your body as you raise it. Continue to lift the bar until it nearly touches your chin. Tip: Your elbows should drive the motion, and should always be higher than your forearms. Remember to keep your torso stationary and pause for a second at the top of the movement.',
@@ -12348,10 +12178,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e838',
             name: 'Upright Cable Row',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grasp a straight bar cable attachment that is attached to a low pulley with a pronated (palms facing your thighs) grip that is slightly less than shoulder width. The bar should be resting on top of your thighs. Your arms should be extended with a slight bend at the elbows and your back should be straight. This will be your starting position.',
                 'Use your side shoulders to lift the cable bar as you exhale. The bar should be close to the body as you move it up. Continue to lift it until it nearly touches your chin. Tip: Your elbows should drive the motion. As you lift the bar, your elbows should always be higher than your forearms. Also, keep your torso stationary and pause for a second at the top of the movement.',
@@ -12362,10 +12192,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e839',
             name: 'Upright Row - With Bands',
-            primaryMuscle: { id: 'm13', muscle: 'traps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'traps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 "To begin, stand on an exercise band so that tension begins at arm's length. Grasp the handles using a pronated (palms facing your thighs) grip that is slightly less than shoulder width. The handles should be resting on top of your thighs. Your arms should be extended with a slight bend at the elbows and your back should be straight. This will be your starting position.",
                 'Use your side shoulders to lift the handles as you exhale. The handles should be close to the body as you move them up. Continue to lift the handles until they nearly touches your chin. Tip: Your elbows should drive the motion. As you lift the handles, your elbows should always be higher than your forearms. Also, keep your torso stationary and pause for a second at the top of the movement.',
@@ -12376,10 +12206,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e840',
             name: 'Upward Stretch',
-            primaryMuscle: { id: 'm3', muscle: 'shoulders' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'shoulders',
+            level: 'beginner',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'Extend both hands straight above your head, palms touching.',
                 'Slowly push your hands up and back, keeping your back straight.'
@@ -12388,10 +12218,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e841',
             name: 'V-Bar Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on a pull-down machine with a V-Bar attached to the top pulley.',
                 'Adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.',
@@ -12404,10 +12234,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e842',
             name: 'V-Bar Pullup',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Start by placing the middle of the V-bar in the middle of the pull-up bar (assuming that the pull-up station you are using does not have neutral grip handles). The V-Bar handles will be facing down so that you can hang from the pull-up bar through the use of the handles.',
                 'Once you securely place the V-bar, take a hold of the bar from each side and hang from it. Stick your chest out and lean yourself back slightly in order to better engage the lats. This will be your starting position.',
@@ -12419,10 +12249,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e843',
             name: 'Vertical Swing',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Allow the dumbbell to hang at arms length between your legs, holding it with both hands. Keep your back straight and your head up.',
                 'Swing the dumbbell between your legs, flexing at the hips and bending the knees slightly.',
@@ -12433,10 +12263,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e844',
             name: 'Walking, Treadmill',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'quadriceps',
+            level: 'beginner',
+            force: 'mixed',
+            mechanic: 'mixed',
             instructions: [
                 'To begin, step onto the treadmill and select the desired option from the menu. Most treadmills have a manual setting, or you can select a program to run. Typically, you can enter your age and weight to estimate the amount of calories burned during exercise. Elevation can be adjusted to change the intensity of the workout.',
                 "Treadmills offer convenience, cardiovascular benefits, and usually have less impact than walking outside. When walking, you should move at a moderate to fast pace, not a leisurely one. Being an activity of lower intensity, walking doesn't burn as many calories as some other activities, but still provides great benefit. A 150 lb person will burn about 175 calories walking 4 miles per hour for 30 minutes, compared to 450 calories running twice as fast. Maintain proper posture as you walk, and only hold onto the handles when necessary, such as when dismounting or checking your heart rate."
@@ -12445,10 +12275,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e845',
             name: 'Weighted Ball Hyperextension',
-            primaryMuscle: { id: 'm12', muscle: 'lower back' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lower back',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'To begin, lie down on an exercise ball with your torso pressing against the ball and parallel to the floor. The ball of your feet should be pressed against the floor to help keep you balanced. Place a weighted plate under your chin or behind your neck. This is the starting position.',
                 'Slowly raise your torso up by bending at the waist and lower back. Remember to exhale during this movement.',
@@ -12459,10 +12289,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e846',
             name: 'Weighted Ball Side Bend',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, lie down on an exercise ball with your left side of the torso (waist, hips and shoulder) pressed against the ball.',
                 'Your feet should be on the floor while your legs are crossed and hanging from the ball. Hold a weighted plate with your right hand directly to the right side of your head. Tip: Make sure the smooth side of the plate is resting against your head.',
@@ -12476,10 +12306,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e847',
             name: 'Weighted Bench Dip',
-            primaryMuscle: { id: 'm10', muscle: 'triceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'triceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'For this exercise you will need to place a bench behind your back and another one in front of you. With the benches perpendicular to your body, hold on to one bench on its edge with the hands close to your body, separated at shoulder width. Your arms should be fully extended.',
                 'The legs will be extended forward on top of the other bench. Your legs should be parallel to the floor while your torso is to be perpendicular to the floor. Have your partner place the dumbbell on your lap. Note: This exercise is best performed with a partner as placing the weight on your lap can be challenging and cause injury without assistance. This will be your starting position.',
@@ -12491,10 +12321,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e848',
             name: 'Weighted Crunches',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Lie flat on your back with your feet flat on the ground or resting on a bench with your knees bent at a 90 degree angle.',
                 'Hold a weight to your chest, or you may hold it extended above your torso. This will be your starting position.',
@@ -12506,10 +12336,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e849',
             name: 'Weighted Jump Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Position a lightly loaded barbell across the back of your shoulders. You could also use a weighted vest, sandbag, or other type of resistance for this exercise.',
                 "The weight should be light enough that it doesn't slow you down significantly. Your feet should be just outside of shoulder width with your head and chest up. This will be your starting position.",
@@ -12520,10 +12350,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e850',
             name: 'Weighted Pull Ups',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Attach a weight to a dip belt and secure it around your waist. Grab the pull-up bar with the palms of your hands facing forward. For a medium grip, your hands should be spaced at shoulder width. Both arms should be extended in front of you holding the bar at the chosen grip.',
                 "You'll want to bring your torso back about 30 degrees while creating a curvature in your lower back and sticking your chest out. This will be your starting position.",
@@ -12534,10 +12364,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e851',
             name: 'Weighted Sissy Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Standing upright, with feet at shoulder width and toes raised, use one hand to hold onto the beams of a squat rack and the opposite arm to hold a plate on top of your chest. This is your starting position.',
                 'As you use one arm to hold yourself, bend at the knees and slowly lower your torso toward the ground by bringing your pelvis and knees forward. Inhale as you go down and stop when your upper and lower legs almost create a 90-degree angle. Hold the stretch position for a second.',
@@ -12548,10 +12378,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e852',
             name: 'Weighted Sit-Ups - With Bands',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'abdominals',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start out by strapping the bands around the base of the decline bench. Place the handles towards the inside of the decline bench so that when lying down, you can reach for both of them.',
                 'Position your legs through the decline machine until they are secured. Now reach for the exercise bands with both hands. Use a pronated (palms forward) grip to grasp the handles. Position them near your collar bone and rotate your wrist to a neutral grip (palms facing the torso). Note: Your arms should remain stationary throughout the exercise. This is the starting position.',
@@ -12562,10 +12392,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e853',
             name: 'Weighted Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Start by positioning two flat benches shoulder width apart from each other. Stand on top of them and wrap the weighted belt around your waist with the amount of weight you feel comfortable with. Make sure your toes are facing out.',
                 'Once you are standing straight up with the weight hanging in between your legs, position your arms so that they are fully extended to the side of your body. This is the starting position.',
@@ -12577,10 +12407,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e854',
             name: 'Wide-Grip Barbell Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on a flat bench with feet firm on the floor. Using a wide, pronated (palms forward) grip that is around 3 inches away from shoulder width (for each hand), lift the bar from the rack and hold it straight over you with your arms locked. The bar will be perpendicular to the torso and the floor. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your middle chest.',
@@ -12591,10 +12421,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e855',
             name: 'Wide-Grip Decline Barbell Bench Press',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'Lie back on a decline bench with the feet securely locked at the front of the bench. Using a wide, pronated (palms forward) grip that is around 3 inches away from shoulder width (for each hand), lift the bar from the rack and hold it straight over you with your arms locked. The bar will be perpendicular to the torso and the floor. This will be your starting position.',
                 'As you breathe in, come down slowly until you feel the bar on your lower chest.',
@@ -12605,10 +12435,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e856',
             name: 'Wide-Grip Decline Barbell Pullover',
-            primaryMuscle: { id: 'm11', muscle: 'chest' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'chest',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Lie down on a decline bench with both legs securely locked in position. Reach for the barbell behind the head using a pronated grip (palms facing out). Make sure to grab the barbell wider than shoulder width apart for this exercise. Slowly lift the barbell up from the floor by using your arms.',
                 'When positioned properly, your arms should be fully extended and perpendicular to the floor. This is the starting position.',
@@ -12621,10 +12451,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e857',
             name: 'Wide-Grip Lat Pulldown',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on a pull-down machine with a wide bar attached to the top pulley. Make sure that you adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.',
                 'Grab the bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.',
@@ -12637,10 +12467,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e858',
             name: 'Wide-Grip Pulldown Behind The Neck',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Sit down on a pull-down machine with a wide bar attached to the top pulley. Make sure that you adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.',
                 'Grab the bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than your shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.',
@@ -12653,10 +12483,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e859',
             name: 'Wide-Grip Rear Pull-Up',
-            primaryMuscle: { id: 'm15', muscle: 'lats' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'lats',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Grab the pull-up bar with the palms facing forward using a wide grip.',
                 'As you have both arms extended in front of you holding the bar, bring your torso forward and head so that there is an imaginary line from the pull-up bar to the back of your neck. This is your starting position.',
@@ -12668,10 +12498,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e860',
             name: 'Wide-Grip Standing Barbell Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright while holding a barbell at the wide outer handle. The palm of your hands should be facing forward. The elbows should be close to the torso. This will be your starting position.',
                 'While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out. Tip: Only the forearms should move.',
@@ -12683,10 +12513,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e861',
             name: 'Wide Stance Barbell Squat',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.',
                 'Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso.',
@@ -12699,10 +12529,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e862',
             name: 'Wide Stance Stiff Legs',
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Begin with a barbell loaded on the floor. Adopt a wide stance, and then bend at the hips to grab the bar. Your hips should be as far back as possible, and your legs nearly straight. Keep your back straight, and your head and chest up. This will be your starting position.',
                 'Begin the movement be engaging the hips, driving them forward as you allow the arms to hang straight. Continue until you are standing straight up, and then slowly return the weight to the starting position. For successive reps, the weight need not touch the floor.'
@@ -12711,10 +12541,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e863',
             name: 'Wind Sprints',
-            primaryMuscle: { id: 'm0', muscle: 'abdominals' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'abdominals',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'compound',
             instructions: [
                 'Hang from a pull-up bar using a pronated grip. Your arms and legs should be extended. This will be your starting position.',
                 'Begin by quickly raising one knee as high as you can. Do not swing your body or your legs. 3',
@@ -12725,10 +12555,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e864',
             name: 'Windmills',
-            primaryMuscle: { id: 'm9', muscle: 'abductors' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'abductors',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'mixed',
             instructions: [
                 'Lie on your back with your arms extended out to the sides and your legs straight. This will be your starting position.',
                 'Lift one leg and quickly cross it over your body, attempting to touch the ground near the opposite hand.',
@@ -12738,10 +12568,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e865',
             name: "World's Greatest Stretch",
-            primaryMuscle: { id: 'm1', muscle: 'hamstrings' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f2', force: 'static' },
-            mechanic: { id: 'm2', mechanic: 'mixed' },
+            primaryMuscle: 'hamstrings',
+            level: 'intermediate',
+            force: 'static',
+            mechanic: 'mixed',
             instructions: [
                 'This is a three-part stretch. Begin by lunging forward, with your front foot flat on the ground and on the toes of your back foot. With your knees bent, squat down until your knee is almost touching the ground. Keep your torso erect, and hold this position for 10-20 seconds.',
                 'Now, place the arm on the same side as your front leg on the ground, with the elbow next to the foot. Your other hand should be placed on the ground, parallel to your lead leg, to help support you during this portion of the stretch.',
@@ -12751,10 +12581,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e866',
             name: 'Wrist Circles',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Start by standing straight with your feet being shoulder width apart from each other. Elevate your arms to the side of you until they are fully extended and parallel to the floor at a height that is evenly aligned with your shoulders. Tip: Your torso and arms should form the letter "T: Your palms should be facing down. This is the starting position.',
                 'Keeping your entire body stationary except for the wrists, begin to rotate both wrists forward in a circular motion. Tip: Pretend that you are trying to draw circles by using your hands as the brush. Breathe normally as you perform this exercise.',
@@ -12764,10 +12594,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e867',
             name: 'Wrist Roller',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'To begin, stand straight up grabbing a wrist roller using a pronated grip (palms facing down). Your feet should be shoulder width apart.',
                 'Slowly lift both arms until they are fully extended and parallel to the floor in front of you. Note: Make sure the rope is not wrapped around the roller. Your entire body should be stationary except for the forearms. This is the starting position.',
@@ -12779,10 +12609,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e868',
             name: 'Wrist Rotations with Straight Bar',
-            primaryMuscle: { id: 'm8', muscle: 'forearms' },
-            level: { id: 'l0', level: 'beginner' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'forearms',
+            level: 'beginner',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Hold a barbell with both hands and your palms facing down; hands spaced about shoulder width. This will be your starting position.',
                 'Alternating between each of your hands, perform the movement by extending the wrist as though you were rolling up a newspaper. Continue alternating back and forth until failure.',
@@ -12792,10 +12622,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e869',
             name: 'Yoke Walk',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f3', force: 'mixed' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'intermediate',
+            force: 'mixed',
+            mechanic: 'compound',
             instructions: [
                 'The yoke is usually done with a yoke apparatus, but is sometimes seen with refrigerators or other heavy objects.',
                 'Begin by racking the apparatus across the back of the shoulders. With your head looking forward and back arched, lift the yoke by driving through the heels.',
@@ -12805,10 +12635,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e870',
             name: 'Zercher Squats',
-            primaryMuscle: { id: 'm6', muscle: 'quadriceps' },
-            level: { id: 'l2', level: 'expert' },
-            force: { id: 'f0', force: 'push' },
-            mechanic: { id: 'm0', mechanic: 'compound' },
+            primaryMuscle: 'quadriceps',
+            level: 'expert',
+            force: 'push',
+            mechanic: 'compound',
             instructions: [
                 'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. The correct height should be anywhere above the waist but below the chest. Once the correct height is chosen and the bar is loaded, lock your hands together and place the bar on top of your arms in between the forearm and upper arm.',
                 'Lift the bar up so that it is resting on top of your forearms. If you are holding the bar properly, it should look as if you have your arms crossed but with a bar running across them.',
@@ -12821,10 +12651,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e871',
             name: 'Zottman Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Stand up with your torso upright and a dumbbell in each hand being held at arms length. The elbows should be close to the torso.',
                 'Make sure the palms of the hands are facing each other. This will be your starting position.',
@@ -12839,10 +12669,10 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'e872',
             name: 'Zottman Preacher Curl',
-            primaryMuscle: { id: 'm7', muscle: 'biceps' },
-            level: { id: 'l1', level: 'intermediate' },
-            force: { id: 'f1', force: 'pull' },
-            mechanic: { id: 'm1', mechanic: 'isolation' },
+            primaryMuscle: 'biceps',
+            level: 'intermediate',
+            force: 'pull',
+            mechanic: 'isolation',
             instructions: [
                 'Grab a dumbbell in each hand and place your upper arms on top of the preacher bench or the incline bench. The dumbbells should be held at shoulder height and the elbows should be flexed. Hold the dumbbells with the palms of your hands facing down. This will be your starting position.',
                 'As you breathe in, slowly lower the dumbbells keeping the palms down until your upper arm is extended and your biceps are fully stretched.',

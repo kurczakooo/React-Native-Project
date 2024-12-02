@@ -76,51 +76,39 @@ export interface Theme extends MD3Theme {
 /**
  * Possible muscles targeted by an Exercise.
  */
-export interface ExerciseMuscle {
-    id: string;
-    muscle:
-        | 'abdominals'
-        | 'hamstrings'
-        | 'calves'
-        | 'shoulders'
-        | 'adductors'
-        | 'glutes'
-        | 'quadriceps'
-        | 'biceps'
-        | 'forearms'
-        | 'abductors'
-        | 'triceps'
-        | 'chest'
-        | 'lower back'
-        | 'traps'
-        | 'middle back'
-        | 'lats'
-        | 'neck';
-}
+export type ExerciseMuscle =
+    | 'abdominals'
+    | 'hamstrings'
+    | 'calves'
+    | 'shoulders'
+    | 'adductors'
+    | 'glutes'
+    | 'quadriceps'
+    | 'biceps'
+    | 'forearms'
+    | 'abductors'
+    | 'triceps'
+    | 'chest'
+    | 'lower back'
+    | 'traps'
+    | 'middle back'
+    | 'lats'
+    | 'neck';
 
 /**
  * Difficulty of an exercise.
  */
-export interface ExerciseLevel {
-    id: string;
-    level: 'beginner' | 'intermediate' | 'expert';
-}
+export type ExerciseLevel = 'beginner' | 'intermediate' | 'expert';
 
 /**
  * Main force used while performing an Exercise.
  */
-export interface ExerciseForce {
-    id: string;
-    force: 'push' | 'pull' | 'static' | 'mixed';
-}
+export type ExerciseForce = 'push' | 'pull' | 'static' | 'mixed';
 
 /**
  * Main mechanic used while performing an Exercise.
  */
-export interface ExerciseMechanic {
-    id: string;
-    mechanic: 'compound' | 'isolation' | 'mixed';
-}
+export type ExerciseMechanic = 'compound' | 'isolation' | 'mixed';
 
 /**
  * Exercise from exercises database file.
@@ -139,13 +127,12 @@ export interface PredefinedExercise {
  * Set of an exercise, containing results from previous workout.
  */
 export interface WorkoutSet {
+    id: string;
+    exerciseId: string;
+    previousSetId: string | null;
     setNumber: number;
     weight: number;
     reps: number;
-    previous: {
-        weight: number;
-        reps: number;
-    } | null;
 }
 
 /**
@@ -153,11 +140,11 @@ export interface WorkoutSet {
  */
 export interface WorkoutExercise {
     id: string;
+    workoutId: string;
     exerciseNumber: number;
     name: string;
     level: ExerciseLevel;
     restDuration: number | null;
-    sets: WorkoutSet[];
 }
 
 /**
@@ -165,6 +152,7 @@ export interface WorkoutExercise {
  */
 export interface Workout {
     id: string;
+    userId: string;
     title: string;
     imageUrl: string | null;
     dateTimestamp: number;
@@ -172,7 +160,6 @@ export interface Workout {
     totalSets: number;
     totalVolume: number;
     targetMuscles: ExerciseMuscle[];
-    exercises: WorkoutExercise[];
 }
 
 /**
@@ -182,5 +169,4 @@ export interface User {
     id: string;
     username: string;
     password: string;
-    workouts: Workout[];
 }
