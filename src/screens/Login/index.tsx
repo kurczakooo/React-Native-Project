@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
 import { Button, TextInput, Text } from 'react-native-paper';
 import { ColorSpace } from 'react-native-reanimated';
 import { backendAPI } from 'src/api/config';
+import { loginContext } from 'src/App';
 import { User } from 'src/types';
 
 export default function Login() {
@@ -20,31 +21,47 @@ export default function Login() {
         setPassword(newPassword);
     };
 
-    const onLogin = async () => {
-        console.log(`Login pressed\nusername: ${username}\npassword: ${password}`);
-        const data = await backendAPI.get('/users');
-        const users: User[] = data.data.filter((e: User) => {
-            return e.username === username;
-        });
-
-        // if not found user with given username
-        if (users.length === 0) {
-            console.error(`User ${username} does not exist`);
-            console.log(users);
-            return;
-        }
-
-        const user: User = users[0];
-        //console.log(user);
-
-        // if credentails are wrong
-        if (user.username !== username || user.password !== password) {
-            console.error(`invalid credentials`);
-            return;
-        }
-
+    const { isLoggedIn, setIsLoggedIn } = useContext(loginContext);
+    const onSuccessfullAuth = () => {
         // successful authentication
         console.log('Login sucessfull');
+        setIsLoggedIn(true);
+    };
+
+    const onLogin = async () => {
+        try {
+            console.log(`Login pressed\nusername: ${username}\npassword: ${password}`);
+            // SMH doesn't throw even when it should
+            let data = await backendAPI.get('/users', {
+                validateStatus(status) {
+                    return status === 200;
+                }
+            });
+
+            const users: User[] = data.data.filter((e: User) => {
+                return e.username === username;
+            });
+
+            // if not found user with given username
+            if (users.length === 0) {
+                console.error(`User ${username} does not exist`);
+                console.log(users);
+                return;
+            }
+
+            const user: User = users[0];
+            //console.log(user);
+
+            // if credentails are wrong
+            if (user.username !== username || user.password !== password) {
+                console.error(`invalid credentials`);
+                return;
+            }
+
+            onSuccessfullAuth();
+        } catch (e) {
+            console.error('LOGIN FAILED!: ', e);
+        }
     };
 
     const onRegister = () => {
