@@ -30,7 +30,7 @@ export default function App() {
 
     return (
         <PaperProvider theme={lightTheme}>
-            <loginContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+            {/* <loginContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
                 {isLoggedIn === false ? (
                     <NavigationContainer>
                         <StackNavigator screens={stackScreens} stack={stack} /> :
@@ -42,7 +42,12 @@ export default function App() {
                         </GestureHandlerRootView>
                     </NavigationContainer>
                 )}
-            </loginContext.Provider>
+            </loginContext.Provider> */}
+            <NavigationContainer>
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                    <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
+                </GestureHandlerRootView>
+            </NavigationContainer>
         </PaperProvider>
     );
 }

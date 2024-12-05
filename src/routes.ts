@@ -1,9 +1,10 @@
 import { TabRoute, StackScreen } from './types';
-import Debug from './debug';
 import HomeScreen from './screens/Home';
-import { Icon } from 'react-native-paper';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import ExercisesScreen from './screens/Exercises';
+import ProfileScreen from './screens/Profile';
+import { Icon } from 'react-native-paper';
 
 const homeIcon = require('@assets/icons/home.png');
 
@@ -19,7 +20,7 @@ const stackScreens: StackScreen[] = [
     {
         name: 'Register',
         component: Register,
-        options: {headerShown: false}
+        options: { headerShown: false }
     }
 ];
 
@@ -30,13 +31,36 @@ const stackScreens: StackScreen[] = [
 const tabRoutes: TabRoute[] = [
     {
         name: 'Home',
-        options: { headerShown: false }, //, tabBarIcon: ({ color, size }) => {
-        //     return <Image source={homeIcon} />;
-        //   }, },
+        options: {
+            headerShown: false
+            // tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+
+            // ),
+        },
         screens: [
             {
                 name: 'HomeScreen',
                 component: HomeScreen
+            }
+        ]
+    },
+    {
+        name: 'Exercises',
+        options: { headerShown: false },
+        screens: [
+            {
+                name: 'ExercisesScreen',
+                component: ExercisesScreen
+            }
+        ]
+    },
+    {
+        name: 'Profile',
+        options: { headerShown: false },
+        screens: [
+            {
+                name: 'ProfileScreen',
+                component: ProfileScreen
             }
         ]
     }

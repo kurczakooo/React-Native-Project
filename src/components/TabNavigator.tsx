@@ -1,6 +1,7 @@
 import { TypedNavigator } from '@react-navigation/native';
 import { TabRoute } from '../types';
 import StackNavigator from './StackNavigator';
+import { Text, View } from 'react-native';
 
 /**
  * Navigator, which manages routes with a bottom tab,
@@ -21,7 +22,18 @@ export default function TabNavigator(props: {
 }) {
     const Tab = props.tab;
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={{
+                tabBarStyle: { backgroundColor: 'black' },
+                tabBarLabelStyle: {
+                    fontSize: 14,
+                    color: 'white'
+                },
+                tabBarIconStyle: { width: 24, height: 24 },
+                tabBarActiveTintColor: '#1778f2',
+                tabBarInactiveTintColor: '#fff'
+            }}
+        >
             {props.routes.map((route, i) => (
                 <Tab.Screen key={i} name={route.name} options={route.options}>
                     {() => <StackNavigator stack={props.stack} screens={route.screens} />}

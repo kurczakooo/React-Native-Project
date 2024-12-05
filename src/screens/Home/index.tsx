@@ -1,17 +1,44 @@
-import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, StyleSheet, ScrollView, Pressable, Image } from 'react-native';
 import { Button, Text, useTheme, Icon } from 'react-native-paper';
 import { WorkoutCard } from './workoutCard';
 import { exampleCards } from './exampleCards';
-import React, { useState, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useLayoutEffect } from 'react';
 import BottomSheet, {
     BottomSheetView,
     BottomSheetBackdrop,
     BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+    /////////////////////////////////////////////////////////////////////////////////////////////////TEMPORARY
+    const navigation = useNavigation();
+    const appIcon = require('@assets/logo/icon.png');
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: 'Home',
+            headerStyle: { backgroundColor: 'black' },
+            headerTintColor: '#FFFFFF',
+            headerLeft: () => (
+                <Image
+                    source={require('@assets/logo/icon.png')}
+                    style={{ marginRight: 15, width: 26, height: 26, tintColor: '#FFF' }}
+                />
+            ),
+            headerRight: () => (
+                <Pressable style={{ paddingTop: 20, paddingBottom: 20 }}>
+                    <Image
+                        source={require('@assets/icons/settings.png')}
+                        style={{ width: 26, height: 26, tintColor: '#FFF' }}
+                    />
+                </Pressable>
+            )
+        });
+    }, [navigation]);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const theme = useTheme();
-    const nickname = 'Janas';
+    const nickname = 'User';
     //converting exampleWorkouts to array to test how deleting works
     const workoutsArray = exampleCards;
 
@@ -61,7 +88,7 @@ export default function HomeScreen() {
     return (
         <>
             <View style={{ flex: 1, padding: 15, gap: 15 }}>
-                <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Hi, {nickname} 👋</Text>
+                <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Hi, {nickname}! 👋</Text>
                 <Button
                     mode='elevated'
                     style={styles.button}
@@ -93,9 +120,10 @@ export default function HomeScreen() {
             <BottomSheet
                 ref={bottomSheetRef}
                 snapPoints={snapPoints}
-                enablePanDownToClose={true}
+                enablePanDownToClose
                 onClose={handleCloseBottomSheet}
                 backdropComponent={renderBackdrop}
+                index={-1}
             >
                 <BottomSheetView style={{ padding: 20, gap: 10 }}>
                     <Pressable
