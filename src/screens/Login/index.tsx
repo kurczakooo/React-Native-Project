@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import axios, { AxiosResponse } from 'axios';
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
@@ -7,7 +8,7 @@ import { backendAPI } from 'src/api/config';
 import { loginContext } from 'src/App';
 import { User } from 'src/types';
 
-export default function Login() {
+export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('janaslover');
     const [password, setPassword] = useState(
         '$2a$12$VKJqtFYnasNzt51QgRH9M.kiw31LFwv7ZBsY5Rj8IbQzNQEprdG32'
@@ -40,8 +41,8 @@ export default function Login() {
                 }
             });
         } catch (err) {
-            console.error("Authentication requrest failed")
-            return ;
+            console.error('Authentication requrest failed');
+            return;
         }
 
         if (!data || !data?.data) {
@@ -74,6 +75,7 @@ export default function Login() {
 
     const onRegister = () => {
         console.log('Register');
+        navigation.navigate('Register');
     };
 
     return (
@@ -97,8 +99,8 @@ export default function Login() {
             <Button onPress={onLogin} mode='contained'>
                 Login
             </Button>
-            <View style={styles.containerRegister}>
-                <Text style={styles.registerTextMessage}>You still do not have account?</Text>
+            <View style={styles.bottomTextContainer}>
+                <Text style={styles.bottomText}>You still do not have account?</Text>
                 <Text onPress={onRegister} style={styles.signUpText}>
                     Sign up NOW!!!
                 </Text>
@@ -108,7 +110,7 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-    containerRegister: {},
+    bottomTextContainer: {},
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
         height: '100%',
         marginBottom: 30
     },
-    registerTextMessage: {
+    bottomText: {
         fontWeight: 'bold',
         textAlign: 'center'
     },

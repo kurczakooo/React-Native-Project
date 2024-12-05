@@ -3,6 +3,7 @@ import Debug from './debug';
 import HomeScreen from './screens/Home';
 import { Icon } from 'react-native-paper';
 import Login from './screens/Login';
+import Register from './screens/Register';
 
 const homeIcon = require('@assets/icons/home.png');
 
@@ -13,6 +14,11 @@ const stackScreens: StackScreen[] = [
     {
         name: 'Login',
         component: Login,
+        options: { headerShown: false }
+    },
+    {
+        name: 'Register',
+        component: Register,
         options: {headerShown: false}
     }
 ];

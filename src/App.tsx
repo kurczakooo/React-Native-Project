@@ -23,6 +23,8 @@ export const loginContext = createContext<{
     setIsLoggedIn: () => {} // default function (empty)
 });
 
+const Stack = createNativeStackNavigator();
+
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
