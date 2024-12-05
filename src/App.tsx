@@ -30,8 +30,9 @@ export default function App() {
 
     return (
         <PaperProvider theme={lightTheme}>
-            {/* <loginContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
-                {isLoggedIn === false ? (
+            <loginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+                {/* Na Sztywno false żeby skipować login */}
+                {false && isLoggedIn === false ? (
                     <NavigationContainer>
                         <StackNavigator screens={stackScreens} stack={stack} /> :
                     </NavigationContainer>
@@ -42,12 +43,7 @@ export default function App() {
                         </GestureHandlerRootView>
                     </NavigationContainer>
                 )}
-            </loginContext.Provider> */}
-            <NavigationContainer>
-                <GestureHandlerRootView style={{ flex: 1 }}>
-                    <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
-                </GestureHandlerRootView>
-            </NavigationContainer>
+            </loginContext.Provider>
         </PaperProvider>
     );
 }

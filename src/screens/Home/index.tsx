@@ -10,10 +10,12 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: any) {
     /////////////////////////////////////////////////////////////////////////////////////////////////TEMPORARY
-    const navigation = useNavigation();
     const appIcon = require('@assets/logo/icon.png');
+    const onSettings = () => {
+        navigation.navigate('Settings');
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -27,7 +29,7 @@ export default function HomeScreen() {
                 />
             ),
             headerRight: () => (
-                <Pressable style={{ paddingTop: 20, paddingBottom: 20 }}>
+                <Pressable style={{ paddingTop: 20, paddingBottom: 20 }} onPress={onSettings}>
                     <Image
                         source={require('@assets/icons/settings.png')}
                         style={{ width: 26, height: 26, tintColor: '#FFF' }}
