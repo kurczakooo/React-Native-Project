@@ -1,6 +1,7 @@
 import { TabRoute, StackScreen } from './types';
 import Debug from './debug';
 import HomeScreen from './screens/Home';
+import ExercisesScreen from './screens/Exercises';
 
 /**
  * Example screens for stack navigator.
@@ -13,13 +14,11 @@ const stackScreens: StackScreen[] = [
 ];
 
 /**
- * Example routes for tab navigator,
- * with screens for stack navigator.
+ * Routes used by the app, while user is authenticated.
  */
-const tabRoutes: TabRoute[] = [
+const appRoutes: TabRoute[] = [
     {
         name: 'Home',
-        options: { headerShown: false },
         screens: [
             {
                 name: 'HomeScreen',
@@ -34,7 +33,16 @@ const tabRoutes: TabRoute[] = [
                 //   },
             }
         ]
+    },
+    {
+        name: 'Exercises',
+        screens: [
+            {
+                name: 'ExercisesScreen',
+                component: ExercisesScreen
+            }
+        ]
     }
 ];
 
-export { tabRoutes, stackScreens };
+export { appRoutes, stackScreens };

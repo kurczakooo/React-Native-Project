@@ -1,7 +1,8 @@
-import { FunctionComponent } from 'react';
+import { ComponentType } from 'react';
 import { MD3Colors, MD3Theme } from 'react-native-paper/lib/typescript/types';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { StyleSheet } from 'react-native';
 
 /**
  * Represents a screen in the application.
@@ -15,7 +16,7 @@ export interface StackScreen {
     /**
      * React component which renders the screen.
      */
-    component: FunctionComponent<any>;
+    component: ComponentType<any>;
 
     /**
      * Navigation options.
@@ -45,9 +46,19 @@ export interface TabRoute {
 
 /**
  * Color theme which extends default React Native Paper pallete type.
- * Contains custom colors.
+ * Contains custom colors and properties.
  */
 export interface Theme extends MD3Theme {
+    /**
+     * Padding for screen contents.
+     */
+    screenPadding: number;
+
+    /**
+     * Shadow used by all elements.
+     */
+    shadowPrimary: string;
+
     colors: MD3Colors & {
         /**
          * Use this color if you are unsure
@@ -72,6 +83,17 @@ export interface Theme extends MD3Theme {
         onExpert: string;
     };
 }
+
+/**
+ * Style object used by react native StyleSheet namespace.
+ */
+export type StyleObject<T> = StyleSheet.NamedStyles<any> | StyleSheet.NamedStyles<T>;
+
+/**
+ * Function which grants access to theme,
+ * used to return style object with theme variables applied.
+ */
+export type ThemedStyleFunction<T extends StyleObject<T>> = (theme: Theme) => T;
 
 /**
  * Possible muscles targeted by an Exercise.

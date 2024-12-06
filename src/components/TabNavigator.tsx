@@ -5,7 +5,11 @@ import StackNavigator from './StackNavigator';
 /**
  * Navigator, which manages routes with a bottom tab,
  * and subroutes (screens) with a stack.
- * Note: this component needs to be a children of `NavigationContainer`.
+ *
+ * Tab navigator header is hidden by default.
+ *
+ * **Note:** this component needs to be a children of `NavigationContainer`.
+ *
  * @param routes list of routes to be used in tab navigator.
  *               Each element will be displayed in a bottom tab,
  *               with corresponding label (`name` property).
@@ -23,7 +27,11 @@ export default function TabNavigator(props: {
     return (
         <Tab.Navigator>
             {props.routes.map((route, i) => (
-                <Tab.Screen key={i} name={route.name} options={route.options}>
+                <Tab.Screen
+                    key={i}
+                    name={route.name}
+                    options={{ headerShown: false, ...route.options }}
+                >
                     {() => <StackNavigator stack={props.stack} screens={route.screens} />}
                 </Tab.Screen>
             ))}
