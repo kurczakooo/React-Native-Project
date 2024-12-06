@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { MD3Colors, MD3Theme } from 'react-native-paper/lib/typescript/types';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { StyleSheet } from 'react-native';
 
 /**
  * Represents a screen in the application.
@@ -82,6 +83,17 @@ export interface Theme extends MD3Theme {
         onExpert: string;
     };
 }
+
+/**
+ * Style object used by react native StyleSheet namespace.
+ */
+export type StyleObject<T> = StyleSheet.NamedStyles<any> | StyleSheet.NamedStyles<T>;
+
+/**
+ * Function which grants access to theme,
+ * used to return style object with theme variables applied.
+ */
+export type ThemedStyleFactory<T extends StyleObject<T>> = (theme: Theme) => T;
 
 /**
  * Possible muscles targeted by an Exercise.
