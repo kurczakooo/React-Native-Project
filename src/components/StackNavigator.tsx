@@ -1,5 +1,7 @@
 import { TypedNavigator } from '@react-navigation/native';
 import { StackScreen } from '../types';
+import { Pressable, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 /**
  * Navigator, which manages screens with a stack.
@@ -11,9 +13,43 @@ export default function StackNavigator(props: {
     screens: StackScreen[];
     stack: TypedNavigator<any>;
 }) {
+    const navigation = useNavigation();
+    // TO DO fix this
+    const onSettings = () => {
+        // navigation.navigate();
+    };
+
     const Stack = props.stack;
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={({ route }: { route: any }) => ({
+                headerStyle: { backgroundColor: 'black' },
+                headerTintColor: '#FFFFFF',
+                headerLeft: () => {
+                    if (route.name !== 'Workout') {
+                        return (
+                            <Image
+                                source={require('@assets/logo/icon.png')}
+                                style={{
+                                    marginRight: 15,
+                                    width: 26,
+                                    height: 26,
+                                    tintColor: '#FFF'
+                                }}
+                            />
+                        );
+                    }
+                },
+                headerRight: () => (
+                    <Pressable style={{ paddingTop: 20, paddingBottom: 20 }} onPress={onSettings}>
+                        <Image
+                            source={require('@assets/icons/settings.png')}
+                            style={{ width: 26, height: 26, tintColor: '#FFF' }}
+                        />
+                    </Pressable>
+                )
+            })}
+        >
             {props.screens.map((screen, i) => (
                 <Stack.Screen
                     key={i}

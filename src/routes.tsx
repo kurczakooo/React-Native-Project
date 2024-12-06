@@ -5,6 +5,8 @@ import Register from './screens/Register';
 import ExercisesScreen from './screens/Exercises';
 import ProfileScreen from './screens/Profile';
 import { Image } from 'react-native';
+import Settings from './screens/Settings';
+import WorkoutScreen from './screens/Workout';
 
 const homeIcon = require('@assets/icons/home.png');
 const profileIcon = require('@assets/icons/profile.png');
@@ -46,7 +48,11 @@ const tabRoutes: TabRoute[] = [
             }) => {
                 return (
                     <Image
-                        style={{ width: size, height: size, tintColor: '#fff' }}
+                        style={{
+                            width: size,
+                            height: size,
+                            tintColor: focused ? '#1778f2' : '#fff'
+                        }}
                         source={homeIcon}
                     />
                 );
@@ -54,8 +60,16 @@ const tabRoutes: TabRoute[] = [
         },
         screens: [
             {
-                name: 'HomeScreen',
+                name: 'Home',
                 component: HomeScreen
+            },
+            {
+                name: 'Settings',
+                component: Settings
+            },
+            {
+                name: 'Workout',
+                component: WorkoutScreen
             }
         ]
     },
@@ -74,7 +88,11 @@ const tabRoutes: TabRoute[] = [
             }) => {
                 return (
                     <Image
-                        style={{ width: size, height: size, tintColor: '#fff' }}
+                        style={{
+                            width: size,
+                            height: size,
+                            tintColor: focused ? '#1778f2' : '#fff'
+                        }}
                         source={exercisesIcon}
                     />
                 );
@@ -82,7 +100,7 @@ const tabRoutes: TabRoute[] = [
         },
         screens: [
             {
-                name: 'ExercisesScreen',
+                name: 'Exercises',
                 component: ExercisesScreen
             }
         ]
@@ -102,7 +120,11 @@ const tabRoutes: TabRoute[] = [
             }) => {
                 return (
                     <Image
-                        style={{ width: size, height: size, tintColor: '#fff' }}
+                        style={{
+                            width: size,
+                            height: size,
+                            tintColor: focused ? '#1778f2' : '#fff'
+                        }}
                         source={profileIcon}
                     />
                 );
@@ -110,7 +132,7 @@ const tabRoutes: TabRoute[] = [
         },
         screens: [
             {
-                name: 'ProfileScreen',
+                name: 'Profile',
                 component: ProfileScreen
             }
         ]

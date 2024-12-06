@@ -1,44 +1,15 @@
-import { View, StyleSheet, ScrollView, Pressable, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Button, Text, useTheme, Icon } from 'react-native-paper';
 import { WorkoutCard } from './workoutCard';
 import { exampleCards } from './exampleCards';
-import React, { useState, useCallback, useMemo, useRef, useLayoutEffect } from 'react';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import BottomSheet, {
     BottomSheetView,
     BottomSheetBackdrop,
     BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
-import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen({ navigation }: any) {
-    /////////////////////////////////////////////////////////////////////////////////////////////////TEMPORARY
-    const appIcon = require('@assets/logo/icon.png');
-    const onSettings = () => {
-        navigation.navigate('Settings');
-    };
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: 'Home',
-            headerStyle: { backgroundColor: 'black' },
-            headerTintColor: '#FFFFFF',
-            headerLeft: () => (
-                <Image
-                    source={require('@assets/logo/icon.png')}
-                    style={{ marginRight: 15, width: 26, height: 26, tintColor: '#FFF' }}
-                />
-            ),
-            headerRight: () => (
-                <Pressable style={{ paddingTop: 20, paddingBottom: 20 }} onPress={onSettings}>
-                    <Image
-                        source={require('@assets/icons/settings.png')}
-                        style={{ width: 26, height: 26, tintColor: '#FFF' }}
-                    />
-                </Pressable>
-            )
-        });
-    }, [navigation]);
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const theme = useTheme();
     const nickname = 'User';
     //converting exampleWorkouts to array to test how deleting works
@@ -87,6 +58,10 @@ export default function HomeScreen({ navigation }: any) {
         []
     );
 
+    const onStartWorkout = () => {
+        navigation.navigate('Workout');
+    };
+
     return (
         <>
             <View style={{ flex: 1, padding: 15, gap: 15 }}>
@@ -95,7 +70,7 @@ export default function HomeScreen({ navigation }: any) {
                     mode='elevated'
                     style={styles.button}
                     labelStyle={styles.buttonText}
-                    //onPress={console.log('WORKOUT CREATION')}
+                    onPress={onStartWorkout}
                 >
                     + Start new workout
                 </Button>

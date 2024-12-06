@@ -24,10 +24,9 @@ export default function TabNavigator(props: {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarStyle: { backgroundColor: 'black' },
+                tabBarStyle: { backgroundColor: 'black', height: 60 },
                 tabBarLabelStyle: {
-                    fontSize: 14,
-                    color: 'white'
+                    fontSize: 14
                 },
                 tabBarIconStyle: { width: 24, height: 24 },
                 tabBarActiveTintColor: '#1778f2',
