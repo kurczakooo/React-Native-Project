@@ -1,21 +1,11 @@
 import { Theme } from 'src/types';
-import { MD3LightTheme } from 'react-native-paper';
+import defaultTheme from './default';
 
 const lightTheme: Theme = {
-    ...MD3LightTheme,
-    roundness: 1,
+    ...defaultTheme,
     colors: {
-        ...MD3LightTheme.colors,
-
-        // Custom colors
-        fontPrimary: '#000000',
-        fontSecondary: '#6b6b6b',
-        beginner: '#69ff9b',
-        onBeginner: '#ffffff',
-        intermediate: '#f3e97a',
-        onIntermediate: '#ffffff',
-        expert: '#fe554b',
-        onExpert: '#ffffff',
+        // custom colors taken from default theme
+        ...defaultTheme.colors,
 
         // Colors used by Paper components
         surface: '#ffffff',

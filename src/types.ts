@@ -48,6 +48,16 @@ export interface TabRoute {
  * Contains custom colors.
  */
 export interface Theme extends MD3Theme {
+    /**
+     * Padding for screen contents.
+     */
+    screenPadding: number;
+
+    /**
+     * Shadow used by all elements.
+     */
+    shadowPrimary: string;
+
     colors: MD3Colors & {
         /**
          * Use this color if you are unsure
