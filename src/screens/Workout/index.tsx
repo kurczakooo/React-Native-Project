@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pressable, View, Image, StyleSheet } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
-import WorkoutCard from './workoutCard';
+import WorkoutCard from './components/workoutCard';
 
 export default function WorkoutScreen() {
     const iconSize = 24;

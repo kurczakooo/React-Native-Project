@@ -24,7 +24,7 @@ export default function App() {
 
     return (
         <PaperProvider theme={lightTheme}>
-            <userIdContext.Provider value={{ userId, setUserId }}>
+            {/* <userIdContext.Provider value={{ userId, setUserId }}>
                 {userId === null ? (
                     <NavigationContainer>
                         <StackNavigator screens={stackScreens} stack={stack} /> :
@@ -36,7 +36,12 @@ export default function App() {
                         </GestureHandlerRootView>
                     </NavigationContainer>
                 )}
-            </userIdContext.Provider>
+            </userIdContext.Provider> */}
+            <NavigationContainer>
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                    <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
+                </GestureHandlerRootView>
+            </NavigationContainer>
         </PaperProvider>
     );
 }
