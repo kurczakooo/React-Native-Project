@@ -1,6 +1,6 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Button, Text, useTheme, Icon } from 'react-native-paper';
-import { WorkoutCard } from './workoutCard';
+import { RecentWorkoutCard } from './recentWorkoutCard';
 import { exampleCards } from './exampleCards';
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import BottomSheet, {
@@ -79,7 +79,7 @@ export default function HomeScreen({ navigation }: any) {
                 </Text>
                 <ScrollView>
                     {workoutsArray.map(card => (
-                        <WorkoutCard
+                        <RecentWorkoutCard
                             key={card.id}
                             imageUrl=''
                             title={card.name}

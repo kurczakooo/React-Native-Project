@@ -4,7 +4,7 @@ import { Card, Icon, Text } from 'react-native-paper';
 import { Workout } from 'src/types';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
-export const WorkoutCard: React.FC<Workout> = ({
+export const RecentWorkoutCard: React.FC<Workout> = ({
     id,
     title,
     dateTimestamp,
