@@ -1,6 +1,7 @@
 import { View, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Theme } from 'src/types';
+import { ReactNode } from 'react';
 
 /**
  * Wrapper for screen contents.
@@ -19,19 +20,11 @@ import { Theme } from 'src/types';
  *   );
  * }
  */
-export default function ScreenContainer({
-    children,
-    ...props
-}: {
-    children: JSX.Element | JSX.Element[];
-}) {
+export default function ScreenContainer({ children }: { children: ReactNode | ReactNode[] }) {
     const { screenPadding } = useTheme<Theme>();
     return (
-        <ScrollView
-            {...props}
-            style={{ display: 'flex', flexDirection: 'column', padding: screenPadding }}
-        >
-            {children}
+        <ScrollView style={{ padding: screenPadding }}>
+            <View style={{ gap: 10, paddingBottom: screenPadding * 2 }}>{children}</View>
         </ScrollView>
     );
 }
