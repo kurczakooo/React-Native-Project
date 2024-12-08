@@ -6,9 +6,10 @@ import TabNavigator from './components/TabNavigator';
 import StackNavigator from './components/StackNavigator';
 import { PaperProvider } from 'react-native-paper';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { userIdContext } from './contexts/userIdContext';
 
 import lightTheme from './themes/light';
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const tab = createBottomTabNavigator();
 const stack = createNativeStackNavigator();
@@ -27,12 +28,12 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userId, setUserId] = useState<string | null>(null);
 
     return (
         <PaperProvider theme={lightTheme}>
-            <loginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-                {/* Na Sztywno false żeby skipować login */}
-                {false && isLoggedIn === false ? (
+            <userIdContext.Provider value={{ userId, setUserId }}>
+                {userId === null ? (
                     <NavigationContainer>
                         <StackNavigator screens={stackScreens} stack={stack} /> :
                     </NavigationContainer>
@@ -43,7 +44,7 @@ export default function App() {
                         </GestureHandlerRootView>
                     </NavigationContainer>
                 )}
-            </loginContext.Provider>
+            </userIdContext.Provider>
         </PaperProvider>
     );
 }

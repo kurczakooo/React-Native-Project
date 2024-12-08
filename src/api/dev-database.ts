@@ -13,7 +13,7 @@ export const endpoints: DevApiEndpoints = {
         {
             id: 'u0',
             username: 'admin',
-            password: '$2a$12$VKJqtFYnasNzt51QgRH9M.kiw31LFwv7ZBsY5Rj8IbQzNQEprdG32'
+            password: 'admin'
         }
     ],
     workouts: [

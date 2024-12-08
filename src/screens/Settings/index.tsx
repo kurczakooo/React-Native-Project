@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Switch, Button, TextInput } from 'react-native-paper';
+import { useStyleSheetMemo } from 'src/hooks/useStyleSheetMemo';
 
 function Settings() {
     const [isDarkmodeOn, setIsDarkmodeOn] = React.useState(false);
@@ -30,6 +31,11 @@ function Settings() {
                 <TextInput label='New password'></TextInput>
                 <TextInput label='Repeat new password'></TextInput>
                 <Button>Change password</Button>
+            </View>
+
+            <View style={styles.container}>
+                <Text variant='headlineMedium'>Actions</Text>
+                <Button>Log out</Button>
             </View>
         </View>
     );
