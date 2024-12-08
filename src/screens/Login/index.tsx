@@ -2,16 +2,18 @@ import { useNavigation } from '@react-navigation/native';
 import axios, { AxiosResponse } from 'axios';
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
-import { Button, TextInput, Text } from 'react-native-paper';
-import { ColorSpace } from 'react-native-reanimated';
-import { backendAPI } from 'src/api/config';
+import { HelperText, Button, TextInput, Text } from 'react-native-paper';
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import { onLogin } from 'src/api/login';
+import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
-import { User } from 'src/types';
+import stylesGlobal from 'src/styles/style';
 
 export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('admin');
+
+    const [loginFailed, setLoginFailed] = useState(false);
 
     const handleUsername = (newUsername: string) => {
         setUsername(newUsername);
@@ -24,7 +26,11 @@ export default function Login({ navigation }: any) {
     const { userId, setUserId } = useContext(userIdContext);
 
     const onLoginnn = async () => {
+        setLoginFailed(false);
         setUserId(await onLogin(username, password));
+        if (userId === null) {
+            setLoginFailed(true);
+        }
     };
 
     const onRegister = () => {
@@ -34,24 +40,27 @@ export default function Login({ navigation }: any) {
 
     return (
         <View style={styles.container}>
-            <Image
-                style={{ alignContent: 'center', width: '100%' }}
-                resizeMode='center'
-                source={require('@assets/logo/logo.png')}
-            ></Image>
+            <Logo></Logo>
             <TextInput
+                style={styles.textInput}
                 label='username'
                 value={username}
+                error={loginFailed}
                 onChangeText={text => handleUsername(text)}
             />
             <TextInput
+                style={styles.textInput}
                 label='password'
                 secureTextEntry
                 value={password}
+                error={loginFailed}
                 onChangeText={text => handlePassword(text)}
             />
-            <Button onPress={onLoginnn} mode='contained'>
-                Login
+            <HelperText type='error' visible={loginFailed}>
+                Incorrect username or password
+            </HelperText>
+            <Button onPress={onLoginnn} mode='contained' style={styles.button}>
+                <Text>Login</Text>
             </Button>
             <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>You still do not have account?</Text>
@@ -64,13 +73,11 @@ export default function Login({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-    bottomTextContainer: {},
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 50,
-        gap: 20
+    ...stylesGlobal,
+    button: {
+        ...stylesGlobal.button
     },
+    bottomTextContainer: {},
     imageContainer: {
         width: '100%',
         height: '100%',

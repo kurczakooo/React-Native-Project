@@ -1,53 +1,118 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Switch, Button, TextInput } from 'react-native-paper';
-import { useStyleSheetMemo } from 'src/hooks/useStyleSheetMemo';
+import React, { useContext, useState } from 'react';
+import { View, StyleSheet, ToastAndroid } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Text, Switch, Button, TextInput, HelperText } from 'react-native-paper';
+import { onLogin } from 'src/api/login';
+import { changePassword } from 'src/api/settings';
+import { userIdContext } from 'src/contexts/userIdContext';
+import { styles } from 'src/styles/style';
 
 function Settings() {
-    const [isDarkmodeOn, setIsDarkmodeOn] = React.useState(false);
+    const { userId, setUserId } = useContext(userIdContext);
 
-    const onToggleSwitch = () => setIsDarkmodeOn(isDarkmodeOn => !isDarkmodeOn);
+    const [isDarkmodeOn, setIsDarkmodeOn] = React.useState(false);
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
+    const [newPassword, setNewPassword] = useState('');
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+
+    const onToggleDarkmodeSwitch = () => setIsDarkmodeOn(isDarkmodeOn => !isDarkmodeOn);
+
+    const onChangeUserName = () => {
+        console.log(`FIXME username change ${username}`);
+    };
+
+    const onChangePassword = async () => {
+        if (password === '') {
+            setPasswordError(true);
+        }
+
+        if (newPasswordConfirm !== newPassword) {
+            console.log('Passwords do not match');
+            return;
+        }
+
+        if (!userId) {
+            console.log('user is not set');
+            return;
+        }
+        const didChangeSucced = await changePassword(userId, password, newPassword);
+
+        console.log(didChangeSucced);
+        if (didChangeSucced) {
+            console.log('Password changed');
+            setPassword('');
+            setNewPassword('');
+            setNewPasswordConfirm('');
+        }
+    };
+
+    const onLogout = () => {
+        setUserId(null);
+    };
 
     return (
-        <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <Text variant='headlineMedium'>App</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text>Dark mode</Text>
-                    <Switch value={isDarkmodeOn} onValueChange={onToggleSwitch} />
+                    <Switch value={isDarkmodeOn} onValueChange={onToggleDarkmodeSwitch} />
                 </View>
             </View>
-            <View style={styles.container}></View>
-            <Text variant='headlineMedium'>Username</Text>
-            <Button mode='elevated'>Change username</Button>
-            <TextInput label='Username'></TextInput>
+            <View style={styles.container}>
+                <Text variant='headlineMedium'>Username</Text>
 
+                <TextInput
+                    style={styles.textInput}
+                    label='New username'
+                    onChangeText={text => {
+                        setUsername(text);
+                    }}
+                ></TextInput>
+                <Button mode='contained' onPress={onChangeUserName} style={styles.button}>
+                    Change username
+                </Button>
+            </View>
             <View style={styles.container}>
                 <Text variant='headlineMedium'>Password</Text>
-
                 <Text>Password</Text>
-                <TextInput label='Old password'></TextInput>
-                <TextInput label='New password'></TextInput>
-                <TextInput label='Repeat new password'></TextInput>
-                <Button>Change password</Button>
+                <TextInput
+                    style={styles.textInput}
+                    label='Old password'
+                    onChangeText={text => setPassword(text)}
+                    error={passwordError}
+                ></TextInput>
+                {passwordError && (
+                    <HelperText style={{ margin: 0 }} type='error' visible={passwordError}>
+                        Password is required
+                    </HelperText>
+                )}
+                <TextInput
+                    style={styles.textInput}
+                    label='New password'
+                    onChangeText={text => setNewPassword(text)}
+                ></TextInput>
+                <TextInput
+                    style={styles.textInput}
+                    label='Repeat new password'
+                    onChangeText={text => setNewPasswordConfirm(text)}
+                ></TextInput>
+                <Button onPress={onChangePassword} mode='contained' style={styles.button}>
+                    Change password
+                </Button>
             </View>
 
             <View style={styles.container}>
                 <Text variant='headlineMedium'>Actions</Text>
-                <Button>Log out</Button>
+                <Button onPress={onLogout} mode='contained'>
+                    Log out
+                </Button>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
 export default Settings;
-
-const styles = StyleSheet.create({
-    container: {
-        padding: 10,
-        borderColor: 'black',
-        justifyContent: 'center',
-        gap: 10
-    }
-});

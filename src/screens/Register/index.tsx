@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
+import Logo from 'src/components/Logo';
+import stylesGlobal from 'src/styles/style';
 
 function Register({ navigation }: any) {
     const [username, setUsername] = useState('');
@@ -25,29 +27,28 @@ function Register({ navigation }: any) {
 
     return (
         <View style={styles.container}>
-            <Image
-                style={{ alignContent: 'center', width: '100%' }}
-                resizeMode='center'
-                source={require('@assets/logo/logo.png')}
-            ></Image>
+            <Logo></Logo>
             <TextInput
                 label='username'
                 value={username}
                 onChangeText={text => handleUsername(text)}
+                style={styles.textInput}
             />
             <TextInput
                 label='password'
                 secureTextEntry
                 value={password}
                 onChangeText={text => handlePassword(text)}
+                style={styles.textInput}
             />
             <TextInput
                 label='coonfirm password'
                 secureTextEntry
                 value={password}
                 onChangeText={text => handlePassword(text)}
+                style={styles.textInput}
             />
-            <Button onPress={onRegister} mode='contained'>
+            <Button onPress={onRegister} mode='contained' style={styles.button}>
                 Register
             </Button>
             <View style={styles.bottomTextContainer}>
@@ -66,13 +67,8 @@ function Register({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+    ...stylesGlobal,
     bottomTextContainer: {},
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 50,
-        gap: 20
-    },
     imageContainer: {
         width: '100%',
         height: '100%',
