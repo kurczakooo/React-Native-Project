@@ -6,7 +6,6 @@ import { Button, TextInput, Text } from 'react-native-paper';
 import { ColorSpace } from 'react-native-reanimated';
 import { backendAPI } from 'src/api/config';
 import { onLogin } from 'src/api/login';
-import { loginContext } from 'src/App';
 import { userIdContext } from 'src/contexts/userIdContext';
 import { User } from 'src/types';
 
@@ -22,8 +21,6 @@ export default function Login({ navigation }: any) {
         setPassword(newPassword);
     };
 
-    const { isLoggedIn, setIsLoggedIn } = useContext(loginContext);
-
     const { userId, setUserId } = useContext(userIdContext);
 
     const onLoginnn = async () => {
@@ -34,8 +31,6 @@ export default function Login({ navigation }: any) {
         console.log('Register');
         navigation.navigate('Register');
     };
-
-    
 
     return (
         <View style={styles.container}>

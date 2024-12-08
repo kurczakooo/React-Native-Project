@@ -9,20 +9,12 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { userIdContext } from './contexts/userIdContext';
 
 import lightTheme from './themes/light';
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 const tab = createBottomTabNavigator();
 const stack = createNativeStackNavigator();
 
 console.log(process.env.EXPO_PUBLIC_DEV_API_URL);
-
-export const loginContext = createContext<{
-    isLoggedIn: boolean;
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}>({
-    isLoggedIn: false, // default value
-    setIsLoggedIn: () => {} // default function (empty)
-});
 
 const Stack = createNativeStackNavigator();
 
