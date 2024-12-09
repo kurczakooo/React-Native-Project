@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { backendAPI } from './config';
+import { api } from './config';
 
 /**
  *
@@ -15,14 +15,14 @@ export const changePassword = async (userId: string, password: string, newPasswo
     }
 
     // console.log('----');
-    const user = await backendAPI.get(`/users/?id=${userId}&password=${password}`);
+    const user = await api.get(`/users/?id=${userId}&password=${password}`);
 
     if (user.data.length === 0) {
         console.warn('No such account found');
         return false;
     } else {
         // console.log(user.data);
-        const resp = await backendAPI.patch(`/users/${userId}`, {
+        const resp = await api.patch(`/users/${userId}`, {
             // ...user,
             password: newPassword
         });

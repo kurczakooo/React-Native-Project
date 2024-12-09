@@ -61,7 +61,7 @@ const tabRoutes: TabRoute[] = [
         screens: [
             {
                 name: 'Home',
-                component: Settings
+                component: HomeScreen
             },
             {
                 name: 'Settings',
@@ -133,7 +133,8 @@ const tabRoutes: TabRoute[] = [
         screens: [
             {
                 name: 'Profile',
-                component: ProfileScreen
+                // component: ProfileScreen
+                component: Settings
             }
         ]
     }

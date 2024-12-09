@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios, { AxiosResponse } from 'axios';
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
-import { HelperText, Button, TextInput, Text } from 'react-native-paper';
+import { HelperText, Button, TextInput, Text, useTheme } from 'react-native-paper';
 import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
@@ -59,8 +59,8 @@ export default function Login({ navigation }: any) {
             <HelperText type='error' visible={loginFailed}>
                 Incorrect username or password
             </HelperText>
-            <Button onPress={onLoginnn} mode='contained' style={styles.button}>
-                <Text>Login</Text>
+            <Button onPress={onLoginnn} mode='contained' style={{ ...styles.button, backgroundColor: 'black' }}>
+                <Text style={{color: 'white'}}>Login</Text>
             </Button>
             <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>You still do not have account?</Text>
