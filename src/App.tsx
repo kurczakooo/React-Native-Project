@@ -7,16 +7,13 @@ import StackNavigator from './components/StackNavigator';
 import { PaperProvider } from 'react-native-paper';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { userIdContext } from './contexts/userIdContext';
-
 import lightTheme from './themes/light';
 import React, { useState } from 'react';
 
 const tab = createBottomTabNavigator();
 const stack = createNativeStackNavigator();
 
-console.log(process.env.EXPO_PUBLIC_DEV_API_URL);
-
-const Stack = createNativeStackNavigator();
+const debug = true;
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,18 +22,15 @@ export default function App() {
     return (
         <PaperProvider theme={lightTheme}>
             <userIdContext.Provider value={{ userId, setUserId }}>
-                {/* VVV  Jak chcesz omijac logowanie to zrób żeby to ewaluwoało się do false */}
-                {userId === null ? (
-                    <NavigationContainer>
-                        <StackNavigator screens={stackScreens} stack={stack} /> :
-                    </NavigationContainer>
-                ) : (
-                    <NavigationContainer>
-                        <GestureHandlerRootView style={{ flex: 1 }}>
+                <NavigationContainer>
+                    <GestureHandlerRootView style={{ flex: 1 }}>
+                        {!debug && userId === null ? (
+                            <StackNavigator screens={stackScreens} stack={stack} />
+                        ) : (
                             <TabNavigator routes={tabRoutes} tab={tab} stack={stack} />
-                        </GestureHandlerRootView>
-                    </NavigationContainer>
-                )}
+                        )}
+                    </GestureHandlerRootView>
+                </NavigationContainer>
             </userIdContext.Provider>
         </PaperProvider>
     );
