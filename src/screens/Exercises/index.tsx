@@ -6,11 +6,21 @@ import ScreenContainer from 'src/components/ScreenContainer';
 import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
 import { StyleSheet } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-interface ExercisesScreenProps {
-    mode: 'view' | 'select';
-    onSelect?: (modalExercises: PredefinedExerciseType[]) => void;
-}
+type ExercisesScreenRouteParams = {
+    Exercises:
+        | {
+              mode: 'view' | 'select';
+              onSelect: (modalExercises: PredefinedExerciseType[]) => void;
+          }
+        | undefined;
+};
+
+export type ExercisesScreenNavProps = NativeStackNavigationProp<
+    ExercisesScreenRouteParams,
+    'Exercises'
+>;
 
 enum ActionType {
     FETCH,
@@ -142,7 +152,9 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
         dispatch({ type: ActionType.SELECT_EXERCISE, payload: { selectedExercise: exercise } });
     };
 
-    const handleSelectConfirm = () => {};
+    const handleSelectConfirm = () => {
+        props.route.params?.onSelect(state.selectedExercises);
+    };
 
     const isExerciseSelected = (id: string) => {
         return state.selectedExercises.some(e => e.id === id);
@@ -176,8 +188,10 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
                     <PredefinedExercise
                         key={e.id}
                         exercise={e}
-                        // onPress={props.mode === 'select' ? selectExercise : showDialog}
-                        onPress={selectExercise}
+                        onPress={
+                            selectExercise
+                            //props.route.params?.mode === 'select' ? selectExercise : showDialog
+                        }
                         selected={isExerciseSelected(e.id)}
                     />
                 ))}

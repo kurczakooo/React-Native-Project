@@ -7,6 +7,7 @@ import ProfileScreen from './screens/Profile';
 import { Image } from 'react-native';
 import Settings from './screens/Settings';
 import WorkoutScreen from './screens/Workout';
+import DebugComponent from './debug';
 
 const homeIcon = require('@assets/icons/home.png');
 const profileIcon = require('@assets/icons/profile.png');
@@ -99,6 +100,10 @@ const tabRoutes: TabRoute[] = [
             }
         },
         screens: [
+            {
+                name: 'Debug',
+                component: DebugComponent
+            },
             {
                 name: 'Exercises',
                 component: ExercisesScreen
