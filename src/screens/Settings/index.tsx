@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, StyleSheet, ToastAndroid } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Switch, Button, TextInput, HelperText, Card } from 'react-native-paper';
@@ -14,9 +14,14 @@ function Settings() {
     const [isDarkmodeOn, setIsDarkmodeOn] = React.useState(false);
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = useState('');
-    const [passwordError, setPasswordError] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
+    const [newPasswordDoNotMatchError, setNewPasswordError] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+
+    useEffect(() => {
+        setNewPasswordError('');
+    }, [newPassword, newPasswordConfirm]);
 
     const onToggleDarkmodeSwitch = () => setIsDarkmodeOn(isDarkmodeOn => !isDarkmodeOn);
 
@@ -24,20 +29,33 @@ function Settings() {
         console.log(`FIXME username change ${username}`);
     };
 
+    const onChangePasswordText = (text: string) => {
+        setPassword(text);
+        setPasswordError('');
+    };
+
     const onChangePassword = async () => {
+        let errored = false;
         if (password === '') {
-            setPasswordError(true);
+            setPasswordError('Password can not be empty');
+            errored = true;
         }
 
-        if (newPasswordConfirm !== newPassword) {
-            console.log('Passwords do not match');
-            return;
-        }
+        if (newPassword === '') {
+            setNewPasswordError('New password has to be set');
+            errored = true;
+        } else if (newPasswordConfirm !== newPassword) {
+            setNewPasswordError('Passwords do not match');
+            errored = true;
+        } 
 
         if (!userId) {
             console.log('user is not set');
             return;
         }
+
+        if (errored) return;
+
         const didChangeSucced = await changePassword(userId, password, newPassword);
 
         console.log(didChangeSucced);
@@ -88,16 +106,14 @@ function Settings() {
                 <TextInput
                     style={styles.textInput}
                     label='Old password'
-                    onChangeText={text => setPassword(text)}
-                    error={passwordError}
+                    onChangeText={onChangePasswordText}
+                    error={passwordError !== ''}
                 ></TextInput>
-                {passwordError && (
-                    <HelperText style={{ margin: 0 }} type='error' visible={passwordError}>
-                        Password is required
-                    </HelperText>
-                )}
+                <HelperText style={{ margin: 0 }} type='error' visible={passwordError !== ''}>
+                    Password is required
+                </HelperText>
                 <TextInput
-                    style={styles.textInput}
+                    style={{ ...styles.textInput }}
                     label='New password'
                     onChangeText={text => setNewPassword(text)}
                 ></TextInput>
@@ -106,6 +122,13 @@ function Settings() {
                     label='Repeat new password'
                     onChangeText={text => setNewPasswordConfirm(text)}
                 ></TextInput>
+                <HelperText
+                    style={{ margin: 0 }}
+                    type='error'
+                    visible={newPasswordDoNotMatchError !== ''}
+                >
+                    {newPasswordDoNotMatchError}
+                </HelperText>
                 <Button onPress={onChangePassword} mode='contained' style={styles.button}>
                     Change password
                 </Button>
