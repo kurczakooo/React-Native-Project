@@ -15,7 +15,12 @@ export default function ImageDialog({
     pickImage: Function;
 }) {
     return (
-        <Dialog visible={visible} onDismiss={hideDialog} style={{ marginTop: -150 }}>
+        <Dialog
+            visible={visible}
+            onDismiss={hideDialog}
+            style={{ marginTop: -150 }}
+            dismissable={false}
+        >
             <Dialog.Title>Choose image</Dialog.Title>
             <Dialog.Content style={{ gap: 25, paddingTop: 20 }}>
                 <Pressable style={{ flexDirection: 'row', gap: 10 }}>

@@ -19,7 +19,7 @@ export default function PredefinedExercise({
     onPress
 }: {
     exercise: PredefinedExerciseType;
-    onPress?: SetStateAction<any>;
+    onPress: (exercise: PredefinedExerciseType) => void;
 }) {
     const theme = useTheme<Theme>();
     const { name, level, force, mechanic } = exercise;
@@ -31,7 +31,7 @@ export default function PredefinedExercise({
 
     return (
         <Pressable
-            onPress={onPress}
+            onPress={() => onPress(exercise)}
             style={{
                 ...styles.container,
                 backgroundColor: theme.colors.elevation.level5,
