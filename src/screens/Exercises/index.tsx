@@ -6,18 +6,25 @@ import ScreenContainer from 'src/components/ScreenContainer';
 import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
 
+interface ExercisesScreenProps {
+    mode: 'view' | 'select';
+    onSelect?: (modalExercises: PredefinedExerciseType[]) => void;
+}
+
 enum ActionType {
     FETCH,
     SEARCH,
     SELECT_EXERCISE,
     SHOW_DIALOG,
-    HIDE_DIALOG
+    HIDE_DIALOG,
+    UPDATE_BUTTON
 }
 
 interface Action {
     type: ActionType;
     payload?: {
         exercises?: PredefinedExerciseType[];
+        modalExercise?: PredefinedExerciseType;
         selectedExercise?: PredefinedExerciseType;
         searchQuery?: string;
     };
@@ -26,7 +33,8 @@ interface Action {
 interface State {
     initialExercises: PredefinedExerciseType[];
     shownExercises: PredefinedExerciseType[];
-    selectedExercise: PredefinedExerciseType | null;
+    selectedExercises: PredefinedExerciseType[];
+    modalExercise: PredefinedExerciseType | null;
     searchQuery: string;
     dialogVisible: boolean;
 }
@@ -56,11 +64,22 @@ function reducer(state: State, action: Action): State {
             const result = query ? fuse.search(query).map(e => e.item) : state.initialExercises;
             return { ...state, searchQuery: query, shownExercises: result };
 
+        case ActionType.SELECT_EXERCISE:
+            const selected = action.payload?.selectedExercise;
+            if (!selected) return state;
+
+            const found = state.selectedExercises.find(e => e.id === selected.id);
+            const newState = found
+                ? state.selectedExercises.filter(e => e.id !== found?.id)
+                : [...state.selectedExercises, selected];
+
+            return { ...state, selectedExercises: newState };
+
         case ActionType.SHOW_DIALOG:
             return {
                 ...state,
                 dialogVisible: true,
-                selectedExercise: action.payload?.selectedExercise ?? null
+                modalExercise: action.payload?.modalExercise ?? null
             };
 
         case ActionType.HIDE_DIALOG:
@@ -74,21 +93,22 @@ function reducer(state: State, action: Action): State {
 const initialState: State = {
     initialExercises: [],
     shownExercises: [],
+    selectedExercises: [],
     searchQuery: '',
-    selectedExercise: null,
+    modalExercise: null,
     dialogVisible: false
 };
 
 const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     if (!exercise) return null;
     return exercise.instructions.map((instruction, i) => (
-        <Text style={{ lineHeight: 20, padding: 5 }}>
+        <Text style={{ lineHeight: 20, padding: 5 }} key={instruction}>
             {i + 1}. {instruction}
         </Text>
     ));
 };
 
-export default function ExercisesScreen() {
+export default function ExercisesScreen(props: ExercisesScreenProps) {
     const [state, dispatch] = useReducer(reducer, initialState);
     const { shadowPrimary } = useTheme<Theme>();
 
@@ -110,17 +130,19 @@ export default function ExercisesScreen() {
     };
 
     const showDialog = (exercise: PredefinedExerciseType) => {
-        dispatch({ type: ActionType.SHOW_DIALOG, payload: { selectedExercise: exercise } });
+        dispatch({ type: ActionType.SHOW_DIALOG, payload: { modalExercise: exercise } });
+    };
+
+    const selectExercise = (exercise: PredefinedExerciseType) => {
+        dispatch({ type: ActionType.SELECT_EXERCISE, payload: { selectedExercise: exercise } });
     };
 
     return (
         <ScreenContainer>
             <Portal>
                 <Dialog visible={state.dialogVisible} onDismiss={hideDialog} dismissable={false}>
-                    <Dialog.Title>{state.selectedExercise?.name}</Dialog.Title>
-                    <Dialog.Content>
-                        {getExerciseInstructions(state.selectedExercise)}
-                    </Dialog.Content>
+                    <Dialog.Title>{state.modalExercise?.name}</Dialog.Title>
+                    <Dialog.Content>{getExerciseInstructions(state.modalExercise)}</Dialog.Content>
                     <Dialog.Actions>
                         <Button onPress={hideDialog}>OK</Button>
                     </Dialog.Actions>
@@ -133,7 +155,12 @@ export default function ExercisesScreen() {
                 style={{ boxShadow: shadowPrimary }}
             />
             {state.shownExercises.map(e => (
-                <PredefinedExercise key={e.id} exercise={e} onPress={showDialog} />
+                <PredefinedExercise
+                    key={e.id}
+                    exercise={e}
+                    // onPress={props.mode === 'select' ? selectExercise : showDialog}
+                    onPress={selectExercise}
+                />
             ))}
         </ScreenContainer>
     );
