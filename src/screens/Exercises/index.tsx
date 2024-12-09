@@ -34,17 +34,27 @@ interface State {
 function reducer(state: State, action: Action): State {
     switch (action.type) {
         case ActionType.FETCH:
+            const priorites = {
+                beginner: 1,
+                intermediate: 2,
+                expert: 3
+            };
+
+            const sorted = action.payload?.exercises?.sort(
+                (a, b) => priorites[a.level] - priorites[b.level]
+            );
+
             return {
                 ...state,
-                initialExercises: action.payload?.exercises ?? [],
-                shownExercises: action.payload?.exercises ?? []
+                initialExercises: sorted ?? [],
+                shownExercises: sorted ?? []
             };
 
         case ActionType.SEARCH:
             const fuse = new Fuse(state.initialExercises, { keys: ['name'] });
             const query = action.payload?.searchQuery ?? '';
-            const sorted = query ? fuse.search(query).map(e => e.item) : state.initialExercises;
-            return { ...state, searchQuery: query, shownExercises: sorted };
+            const result = query ? fuse.search(query).map(e => e.item) : state.initialExercises;
+            return { ...state, searchQuery: query, shownExercises: result };
 
         case ActionType.SHOW_DIALOG:
             return {
@@ -72,7 +82,7 @@ const initialState: State = {
 const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     if (!exercise) return null;
     return exercise.instructions.map((instruction, i) => (
-        <Text style={{ textAlign: 'justify', lineHeight: 20 }}>
+        <Text style={{ lineHeight: 20, padding: 5 }}>
             {i + 1}. {instruction}
         </Text>
     ));
