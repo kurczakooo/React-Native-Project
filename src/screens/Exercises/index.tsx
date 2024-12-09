@@ -4,6 +4,7 @@ import { Theme, PredefinedExercise as PredefinedExerciseType } from 'src/types';
 import { exercises as devExercises } from './exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
 import PredefinedExercise from './components/PredefinedExercise';
+import Fuse from 'fuse.js';
 
 export default function ExercisesScreen() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -20,10 +21,10 @@ export default function ExercisesScreen() {
     }, []);
 
     const handleSearch = (query: string) => {
+        const fuse = new Fuse(devExercises, { keys: ['name'] });
+        const sorted = fuse.search(query).map(e => e.item);
         setSearchQuery(query);
-        setShownExercises(
-            fetchedExercises.filter(e => e.name.toLowerCase().startsWith(query.toLowerCase()))
-        );
+        setShownExercises(sorted);
     };
 
     return (
