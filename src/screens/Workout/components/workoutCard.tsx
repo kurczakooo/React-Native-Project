@@ -4,53 +4,19 @@ import { Card, useTheme } from 'react-native-paper';
 import ImageDialog from './imageDialog';
 import * as ImagePicker from 'expo-image-picker';
 import ButtonWithIcon from './buttonWithIcon';
-import CurrentExercise from './currentExercise';
-import { exercises } from 'src/screens/Exercises/exercises';
 
-export default function WorkoutCard() {
+export default function WorkoutCard({
+    showDialog,
+    image
+}: {
+    showDialog: () => void;
+    image: string;
+}) {
     const iconSize = 24;
     const theme = useTheme();
 
     const [title, setTitle] = useState('Workout Title');
     const [isEditing, setIsEditing] = useState(false);
-    const [visible, setVisible] = React.useState(false);
-    const [image, setImage] = useState<string | null>(null);
-
-    const showDialog = () => setVisible(true);
-
-    const hideDialog = () => setVisible(false);
-
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
-            //allowsEditing: true,
-            //aspect: [1, 1],
-            quality: 1
-        });
-
-        setVisible(false);
-        //console.log(result);
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
-    };
-
-    const takePhoto = async () => {
-        let result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ['images'],
-            //allowsEditing: true,
-            //aspect: [1, 1],
-            quality: 1
-        });
-
-        setVisible(false);
-        // console.log(result);
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
-    };
 
     const testPress = () => {
         console.log('Pressed');
@@ -60,7 +26,7 @@ export default function WorkoutCard() {
         <>
             <Card style={{ padding: 15, borderRadius: 10 }}>
                 <View style={{ flexDirection: 'row', gap: 20 }}>
-                    {image !== null ? (
+                    {image !== '' ? (
                         <Pressable onPress={() => showDialog()}>
                             <Image
                                 source={{ uri: image }}
@@ -152,15 +118,6 @@ export default function WorkoutCard() {
                     />
                 </View>
             </Card>
-            <CurrentExercise exercise={exercises[0]} />
-
-            <ImageDialog
-                visible={visible}
-                hideDialog={hideDialog}
-                iconSize={iconSize}
-                pickImageCallback={pickImage}
-                takePhotoCallback={takePhoto}
-            />
         </>
     );
 }

@@ -8,9 +8,10 @@ import BottomSheet, {
     BottomSheetBackdrop,
     BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
+import { Theme } from 'src/types';
 
 export default function HomeScreen({ navigation }: any) {
-    const theme = useTheme();
+    const { shadowPrimary } = useTheme<Theme>();
     const nickname = 'User';
     //converting exampleWorkouts to array to test how deleting works
     const workoutsArray = exampleCards;
@@ -67,10 +68,14 @@ export default function HomeScreen({ navigation }: any) {
             <View style={{ flex: 1, padding: 15, gap: 15 }}>
                 <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Hi, {nickname}! 👋</Text>
                 <Button
-                    mode='elevated'
-                    style={styles.button}
-                    labelStyle={styles.buttonText}
-                    onPress={onStartWorkout}
+                    onPress={() => {
+                        onStartWorkout();
+                    }}
+                    mode='contained'
+                    style={{
+                        padding: 3,
+                        boxShadow: shadowPrimary
+                    }}
                 >
                     + Start new workout
                 </Button>
