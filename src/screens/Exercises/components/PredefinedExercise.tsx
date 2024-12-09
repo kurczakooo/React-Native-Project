@@ -16,13 +16,17 @@ function capitalize(val: string): string {
 
 export default function PredefinedExercise({
     exercise,
-    onPress
+    onPress,
+    selected
 }: {
     exercise: PredefinedExerciseType;
     onPress: (exercise: PredefinedExerciseType) => void;
+    selected?: boolean;
 }) {
     const theme = useTheme<Theme>();
     const { name, level, force, mechanic } = exercise;
+
+    const borderColor = selected ? theme.colors.primary : 'transparent';
     const indicatorColors = {
         beginner: theme.colors.beginner,
         intermediate: theme.colors.intermediate,
@@ -34,12 +38,17 @@ export default function PredefinedExercise({
             onPress={() => onPress(exercise)}
             style={{
                 ...styles.container,
+                borderColor: borderColor,
                 backgroundColor: theme.colors.elevation.level5,
                 boxShadow: theme.shadowPrimary
             }}
         >
             <View
-                style={{ ...styles.levelIndicator, backgroundColor: indicatorColors[level] }}
+                style={{
+                    ...styles.levelIndicator,
+                    borderColor: borderColor,
+                    backgroundColor: indicatorColors[level]
+                }}
             ></View>
             <View style={styles.nameContainer}>
                 <Text variant='titleSmall'>{name}</Text>
@@ -70,7 +79,8 @@ export default function PredefinedExercise({
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 5,
+        borderRadius: 7,
+        borderWidth: 2,
         padding: 20,
         paddingVertical: 15,
         position: 'relative'
@@ -85,12 +95,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     levelIndicator: {
-        borderTopLeftRadius: 5,
-        borderBottomLeftRadius: 5,
+        borderTopLeftRadius: 7,
+        borderBottomLeftRadius: 7,
+        borderWidth: 2,
+        borderRightWidth: 0,
         width: 10,
         position: 'absolute',
-        inset: 0,
-        left: 0,
-        top: 0
-    }
+        inset: -2,
+        left: -2,
+        top: -2
+    },
+    selected: {}
 });

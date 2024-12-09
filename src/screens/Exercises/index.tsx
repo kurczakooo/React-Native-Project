@@ -5,6 +5,7 @@ import { exercises as devExercises } from './exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
 import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
+import { StyleSheet } from 'react-native';
 
 interface ExercisesScreenProps {
     mode: 'view' | 'select';
@@ -102,7 +103,7 @@ const initialState: State = {
 const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     if (!exercise) return null;
     return exercise.instructions.map((instruction, i) => (
-        <Text style={{ lineHeight: 20, padding: 5 }} key={instruction}>
+        <Text style={styles.instruction} key={instruction}>
             {i + 1}. {instruction}
         </Text>
     ));
@@ -110,7 +111,11 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
 
 export default function ExercisesScreen(props: ExercisesScreenProps) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const { shadowPrimary } = useTheme<Theme>();
+    const { shadowPrimary, screenPadding } = useTheme<Theme>();
+
+    const exercisesCount = state.selectedExercises.length;
+    const selectButtonVisible = exercisesCount > 0;
+    const selectButtonText = `+ Add ${exercisesCount} exercise${exercisesCount > 1 ? 's' : ''}`;
 
     useEffect(() => {
         // Fetch exercises...
@@ -137,31 +142,72 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
         dispatch({ type: ActionType.SELECT_EXERCISE, payload: { selectedExercise: exercise } });
     };
 
+    const handleSelectConfirm = () => {};
+
+    const isExerciseSelected = (id: string) => {
+        return state.selectedExercises.some(e => e.id === id);
+    };
+
     return (
-        <ScreenContainer>
-            <Portal>
-                <Dialog visible={state.dialogVisible} onDismiss={hideDialog} dismissable={false}>
-                    <Dialog.Title>{state.modalExercise?.name}</Dialog.Title>
-                    <Dialog.Content>{getExerciseInstructions(state.modalExercise)}</Dialog.Content>
-                    <Dialog.Actions>
-                        <Button onPress={hideDialog}>OK</Button>
-                    </Dialog.Actions>
-                </Dialog>
-            </Portal>
-            <Searchbar
-                placeholder='Search...'
-                onChangeText={handleSearch}
-                value={state.searchQuery}
-                style={{ boxShadow: shadowPrimary }}
-            />
-            {state.shownExercises.map(e => (
-                <PredefinedExercise
-                    key={e.id}
-                    exercise={e}
-                    // onPress={props.mode === 'select' ? selectExercise : showDialog}
-                    onPress={selectExercise}
+        <>
+            <ScreenContainer>
+                <Portal>
+                    <Dialog
+                        visible={state.dialogVisible}
+                        onDismiss={hideDialog}
+                        dismissable={false}
+                    >
+                        <Dialog.Title>{state.modalExercise?.name}</Dialog.Title>
+                        <Dialog.Content>
+                            {getExerciseInstructions(state.modalExercise)}
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button onPress={hideDialog}>OK</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
+                <Searchbar
+                    placeholder='Search...'
+                    onChangeText={handleSearch}
+                    value={state.searchQuery}
+                    style={{ boxShadow: shadowPrimary }}
                 />
-            ))}
-        </ScreenContainer>
+                {state.shownExercises.map(e => (
+                    <PredefinedExercise
+                        key={e.id}
+                        exercise={e}
+                        // onPress={props.mode === 'select' ? selectExercise : showDialog}
+                        onPress={selectExercise}
+                        selected={isExerciseSelected(e.id)}
+                    />
+                ))}
+            </ScreenContainer>
+            {selectButtonVisible && (
+                <Button
+                    onPress={handleSelectConfirm}
+                    mode='contained'
+                    style={{
+                        ...styles.button,
+                        bottom: screenPadding / 2,
+                        boxShadow: shadowPrimary
+                    }}
+                >
+                    {selectButtonText}
+                </Button>
+            )}
+        </>
     );
 }
+
+const styles = StyleSheet.create({
+    button: {
+        position: 'absolute',
+        alignSelf: 'center',
+        width: '95%',
+        padding: 3
+    },
+    instruction: {
+        lineHeight: 20,
+        padding: 5
+    }
+});
