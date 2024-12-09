@@ -1,48 +1,44 @@
-import { FunctionComponent } from 'react';
 import { MD3Colors, MD3Theme } from 'react-native-paper/lib/typescript/types';
-import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
+import { NavigationProp, NavigatorScreenParams } from '@react-navigation/native';
 
-/**
- * Represents a screen in the application.
- */
-export interface StackScreen {
-    /**
-     * Name used in navigation.
-     */
-    name: string;
+export type HomeStackParamList = {
+    Home: undefined;
+    Workout: undefined;
+    Settings: undefined;
+};
 
-    /**
-     * React component which renders the screen.
-     */
-    component: FunctionComponent<any>;
+export type HomeStackNavigation = NavigationProp<HomeStackParamList>;
 
-    /**
-     * Navigation options.
-     */
-    options?: NativeStackNavigationOptions;
-}
+export type ExecisesStackParamList = {
+    Debug: undefined;
+    Exercises: undefined;
+    Settings: undefined;
+};
 
-/**
- * Application route managed by a tab navigator.
- */
-export interface TabRoute {
-    /**
-     * Name used in navigation.
-     */
-    name: string;
+export type ExercisesStackNavigation = NavigationProp<ExecisesStackParamList>;
 
-    /**
-     * Subroutes managed by a stack navigator.
-     */
-    screens: StackScreen[];
+export type ProfileStackParamList = {
+    Profile: undefined;
+    Settings: undefined;
+};
 
-    /**
-     * Navigation options.
-     */
-    options?: BottomTabNavigationOptions;
-}
+export type ProfileStackNavigation = NavigationProp<ProfileStackParamList>;
+
+export type AuthStackParamList = {
+    Login: undefined;
+    Register: undefined;
+};
+
+export type AuthStackNavigation = NavigationProp<AuthStackParamList>;
+
+export type AppTabParamList = {
+    HomeTab: NavigatorScreenParams<HomeStackParamList>;
+    ExercisesTab: NavigatorScreenParams<ExecisesStackParamList>;
+    ProfileTab: NavigatorScreenParams<ProfileStackParamList>;
+};
+
+export type AppTabNavigation = NavigationProp<AppTabParamList>;
 
 /**
  * Color theme which extends default React Native Paper pallete type.

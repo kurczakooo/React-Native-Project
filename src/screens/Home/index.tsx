@@ -60,7 +60,7 @@ export default function HomeScreen({ navigation }: any) {
     );
 
     const onStartWorkout = () => {
-        navigation.navigate('Workout');
+        navigation.navigate('WorkoutScreen');
     };
 
     return (
