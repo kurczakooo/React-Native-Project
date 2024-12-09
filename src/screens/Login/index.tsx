@@ -4,10 +4,10 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
 import { HelperText, Button, TextInput, Text } from 'react-native-paper';
 import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
-import { onLogin } from 'src/api/login';
 import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
 import stylesGlobal from 'src/styles/style';
+import { onLogin } from 'src/api/login';
 
 export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('admin');

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, ToastAndroid } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Text, Switch, Button, TextInput, HelperText } from 'react-native-paper';
+import { Text, Switch, Button, TextInput, HelperText, Card } from 'react-native-paper';
 import { onLogin } from 'src/api/login';
 import { changePassword } from 'src/api/settings';
 import { userIdContext } from 'src/contexts/userIdContext';
@@ -55,14 +55,20 @@ function Settings() {
 
     return (
         <ScrollView style={{ flex: 1 }}>
-            <View style={styles.container}>
+            <Card style={styles.container}>
                 <Text variant='headlineMedium'>App</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View
+                    style={{
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between'
+                    }}
+                >
                     <Text>Dark mode</Text>
                     <Switch value={isDarkmodeOn} onValueChange={onToggleDarkmodeSwitch} />
                 </View>
-            </View>
-            <View style={styles.container}>
+            </Card>
+            <Card style={styles.container}>
                 <Text variant='headlineMedium'>Username</Text>
 
                 <TextInput
@@ -75,8 +81,8 @@ function Settings() {
                 <Button mode='contained' onPress={onChangeUserName} style={styles.button}>
                     Change username
                 </Button>
-            </View>
-            <View style={styles.container}>
+            </Card>
+            <Card style={styles.container}>
                 <Text variant='headlineMedium'>Password</Text>
                 <Text>Password</Text>
                 <TextInput
@@ -103,14 +109,14 @@ function Settings() {
                 <Button onPress={onChangePassword} mode='contained' style={styles.button}>
                     Change password
                 </Button>
-            </View>
+            </Card>
 
-            <View style={styles.container}>
+            <Card style={styles.container}>
                 <Text variant='headlineMedium'>Actions</Text>
                 <Button onPress={onLogout} mode='contained'>
                     Log out
                 </Button>
-            </View>
+            </Card>
         </ScrollView>
     );
 }

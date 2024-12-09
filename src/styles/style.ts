@@ -5,6 +5,7 @@ import { red } from 'react-native-reanimated/lib/typescript/Colors';
 
 export const styles = StyleSheet.create({
     container: {
+        borderRadius: 5,
         paddingHorizontal: 10,
         justifyContent: 'center',
         paddingVertical: 15,
