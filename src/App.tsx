@@ -26,7 +26,7 @@ export default function App() {
         <PaperProvider theme={lightTheme}>
             <userIdContext.Provider value={{ userId, setUserId }}>
                 {/* VVV  Jak chcesz omijac logowanie to zrób żeby to ewaluwoało się do false */}
-                {userId === null ? (
+                {userId !== null ? (
                     <NavigationContainer>
                         <StackNavigator screens={stackScreens} stack={stack} /> :
                     </NavigationContainer>

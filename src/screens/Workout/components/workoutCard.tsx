@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, Pressable, StyleSheet } from 'react-native';
-import { Button, Card } from 'react-native-paper';
+import { Card, useTheme } from 'react-native-paper';
 import ImageDialog from './imageDialog';
 import * as ImagePicker from 'expo-image-picker';
+import ButtonWithIcon from './buttonWithIcon';
 
-export default function WorkoutCard({}) {
+export default function WorkoutCard() {
     const iconSize = 24;
+    const theme = useTheme();
 
     const [title, setTitle] = useState('Workout Title');
     const [isEditing, setIsEditing] = useState(false);
@@ -19,17 +21,37 @@ export default function WorkoutCard({}) {
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'],
-            allowsEditing: true,
-            aspect: [1, 1],
+            //allowsEditing: true,
+            //aspect: [1, 1],
             quality: 1
         });
 
         setVisible(false);
-        console.log(result);
+        //console.log(result);
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
         }
+    };
+
+    const takePhoto = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ['images'],
+            //allowsEditing: true,
+            //aspect: [1, 1],
+            quality: 1
+        });
+
+        setVisible(false);
+        // console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
+
+    const testPress = () => {
+        console.log('Pressed');
     };
 
     return (
@@ -107,16 +129,31 @@ export default function WorkoutCard({}) {
                         </View>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Button style={{ borderWidth: 2 }}>Discard</Button>
-                    <Button>Save</Button>
+                <View style={{ flexDirection: 'row', paddingTop: 20, gap: 10 }}>
+                    <ButtonWithIcon
+                        iconSource={require('@assets/icons/cross.png')}
+                        label='Discard'
+                        outlineColor='red'
+                        color='red'
+                        backgroundColor='white'
+                        onPress={testPress}
+                    />
+                    <ButtonWithIcon
+                        iconSource={require('@assets/icons/check.png')}
+                        label='Save'
+                        outlineColor='#1778f2'
+                        color='white'
+                        backgroundColor='#1778f2'
+                        onPress={testPress}
+                    />
                 </View>
             </Card>
             <ImageDialog
                 visible={visible}
                 hideDialog={hideDialog}
                 iconSize={iconSize}
-                pickImage={pickImage}
+                pickImageCallback={pickImage}
+                takePhotoCallback={takePhoto}
             />
         </>
     );
@@ -147,7 +184,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'grey'
     },
-
     buttonText: {
         color: '#FFFFFF',
         fontSize: 18

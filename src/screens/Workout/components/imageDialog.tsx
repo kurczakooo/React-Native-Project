@@ -7,18 +7,23 @@ export default function ImageDialog({
     visible,
     hideDialog,
     iconSize,
-    pickImage
+    pickImageCallback,
+    takePhotoCallback
 }: {
     visible: boolean;
     hideDialog: any;
     iconSize: number;
-    pickImage: Function;
+    pickImageCallback: Function;
+    takePhotoCallback: Function;
 }) {
     return (
         <Dialog visible={visible} onDismiss={hideDialog} style={{ marginTop: -150 }}>
             <Dialog.Title>Choose image</Dialog.Title>
             <Dialog.Content style={{ gap: 25, paddingTop: 20 }}>
-                <Pressable style={{ flexDirection: 'row', gap: 10 }}>
+                <Pressable
+                    style={{ flexDirection: 'row', gap: 10 }}
+                    onPress={() => takePhotoCallback()}
+                >
                     <Image
                         source={require('@assets/icons/add_photo.png')}
                         style={{
@@ -29,7 +34,10 @@ export default function ImageDialog({
                     />
                     <Text>Take a photo</Text>
                 </Pressable>
-                <Pressable style={{ flexDirection: 'row', gap: 10 }} onPress={() => pickImage()}>
+                <Pressable
+                    style={{ flexDirection: 'row', gap: 10 }}
+                    onPress={() => pickImageCallback()}
+                >
                     <Image
                         source={require('@assets/icons/add_image.png')}
                         style={{
