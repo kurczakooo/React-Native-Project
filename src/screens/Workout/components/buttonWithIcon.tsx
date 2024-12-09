@@ -1,4 +1,4 @@
-import { Text, Image, Pressable, ImageSourcePropType } from 'react-native';
+import { Text, Image, Pressable, ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 
 export default function ButtonWithIcon({
     iconSource,
@@ -6,7 +6,8 @@ export default function ButtonWithIcon({
     color,
     backgroundColor,
     outlineColor,
-    onPress
+    onPress,
+    style
 }: {
     iconSource: ImageSourcePropType;
     label: string;
@@ -14,14 +15,14 @@ export default function ButtonWithIcon({
     backgroundColor: string;
     outlineColor: string;
     onPress: Function;
+    style?: StyleProp<ViewStyle>;
 }) {
     return (
         <Pressable
             style={{
-                flex: 1,
+                ...style,
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'center',
                 borderWidth: 2,
                 borderColor: outlineColor,
                 borderRadius: 10,
@@ -37,8 +38,8 @@ export default function ButtonWithIcon({
             <Image
                 source={iconSource}
                 style={{
-                    width: 18,
-                    height: 18,
+                    width: 14,
+                    height: 14,
                     tintColor: color
                 }}
             />

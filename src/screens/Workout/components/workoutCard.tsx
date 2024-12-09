@@ -4,6 +4,8 @@ import { Card, useTheme } from 'react-native-paper';
 import ImageDialog from './imageDialog';
 import * as ImagePicker from 'expo-image-picker';
 import ButtonWithIcon from './buttonWithIcon';
+import CurrentExercise from './currentExercise';
+import { exercises } from 'src/screens/Exercises/exercises';
 
 export default function WorkoutCard() {
     const iconSize = 24;
@@ -56,7 +58,7 @@ export default function WorkoutCard() {
 
     return (
         <>
-            <Card style={{ padding: 15, margin: 5, borderRadius: 10 }}>
+            <Card style={{ padding: 15, borderRadius: 10 }}>
                 <View style={{ flexDirection: 'row', gap: 20 }}>
                     {image !== null ? (
                         <Pressable onPress={() => showDialog()}>
@@ -137,6 +139,7 @@ export default function WorkoutCard() {
                         color='red'
                         backgroundColor='white'
                         onPress={testPress}
+                        style={{ flex: 1, justifyContent: 'center' }}
                     />
                     <ButtonWithIcon
                         iconSource={require('@assets/icons/check.png')}
@@ -145,9 +148,12 @@ export default function WorkoutCard() {
                         color='white'
                         backgroundColor='#1778f2'
                         onPress={testPress}
+                        style={{ flex: 1, justifyContent: 'center' }}
                     />
                 </View>
             </Card>
+            <CurrentExercise exercise={exercises[0]} />
+
             <ImageDialog
                 visible={visible}
                 hideDialog={hideDialog}
