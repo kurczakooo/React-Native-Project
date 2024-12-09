@@ -23,16 +23,16 @@ function Settings() {
         setNewPasswordError('');
     }, [newPassword, newPasswordConfirm]);
 
+    useEffect(() => {
+        setPasswordError('');
+    }, [password]);
+
     const onToggleDarkmodeSwitch = () => setIsDarkmodeOn(isDarkmodeOn => !isDarkmodeOn);
 
     const onChangeUserName = () => {
         console.log(`FIXME username change ${username}`);
     };
 
-    const onChangePasswordText = (text: string) => {
-        setPassword(text);
-        setPasswordError('');
-    };
 
     const onChangePassword = async () => {
         let errored = false;
@@ -47,7 +47,7 @@ function Settings() {
         } else if (newPasswordConfirm !== newPassword) {
             setNewPasswordError('Passwords do not match');
             errored = true;
-        } 
+        }
 
         if (!userId) {
             console.log('user is not set');
@@ -102,11 +102,10 @@ function Settings() {
             </Card>
             <Card style={styles.container}>
                 <Text variant='headlineMedium'>Password</Text>
-                <Text>Password</Text>
                 <TextInput
                     style={styles.textInput}
                     label='Old password'
-                    onChangeText={onChangePasswordText}
+                    onChangeText={setPassword}
                     error={passwordError !== ''}
                 ></TextInput>
                 <HelperText style={{ margin: 0 }} type='error' visible={passwordError !== ''}>
