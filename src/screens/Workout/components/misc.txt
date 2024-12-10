@@ -100,51 +100,58 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
-                    <View style={styles.statsContainer}>
-                        <Text style={{ fontWeight: 'bold' }}>Set</Text>
-                        <Text style={{ fontWeight: 'bold' }}>Previous</Text>
-                        <Text style={{ fontWeight: 'bold' }}>Weight (kg)</Text>
-                        <Text style={{ fontWeight: 'bold' }}>Reps</Text>
-                        <Image
-                            source={require('@assets/icons/check.png')}
-                            style={{
-                                width: 18,
-                                height: 18,
-                                tintColor: 'black',
-                                alignSelf: 'center'
-                            }}
-                        />
-                    </View>
                     {exerciseData.map((item, index) => (
-                        <View
-                            key={index}
-                            style={{ ...styles.setContainer, backgroundColor: 'lightgreen' }}
-                        >
-                            <View style={styles.setInfo}>
-                                <Text style={{ fontWeight: 'bold', flexDirection: 'column' }}>
-                                    {item.setNumber}
-                                </Text>
+                        <View key={index} style={styles.statsContainer}>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Set</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ fontWeight: 'bold', flexDirection: 'column' }}>
+                                        {item.setNumber}
+                                    </Text>
+                                </View>
                             </View>
-                            <View style={styles.setInfo}>
-                                <Text style={{ color: item.color, flexDirection: 'column' }}>
-                                    {item.previous}
-                                </Text>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Previous</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ color: item.color, flexDirection: 'column' }}>
+                                        {item.previous}
+                                    </Text>
+                                </View>
                             </View>
-                            <View style={styles.setInfo}>
-                                <Text style={{ color: item.color, flexDirection: 'column' }}>
-                                    {item.weight}
-                                </Text>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Weight (kg)</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ color: item.color, flexDirection: 'column' }}>
+                                        {item.weight}
+                                    </Text>
+                                </View>
                             </View>
-                            <View style={styles.setInfo}>
-                                <Text style={{ color: item.color, flexDirection: 'column' }}>
-                                    {item.reps}
-                                </Text>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Reps</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ color: item.color, flexDirection: 'column' }}>
+                                        {item.reps}
+                                    </Text>
+                                </View>
                             </View>
-                            <View style={{ ...styles.setInfo, paddingTop: -10 }}>
-                                <Checkbox
-                                    status={item.checked ? 'checked' : 'unchecked'}
-                                    onPress={() => onCheck(item.setNumber)}
+                            <View>
+                                <Image
+                                    source={require('@assets/icons/check.png')}
+                                    style={{
+                                        width: 18,
+                                        height: 18,
+                                        tintColor: 'black',
+                                        alignSelf: 'center'
+                                    }}
                                 />
+                                <View style={{ ...styles.setInfo, paddingTop: -10 }}>
+                                    <Checkbox
+                                        status={item.checked ? 'checked' : 'unchecked'}
+                                        onPress={() => {
+                                            onCheck(item.setNumber);
+                                        }}
+                                    />
+                                </View>
                             </View>
                         </View>
                     ))}
@@ -188,13 +195,9 @@ const styles = StyleSheet.create({
         left: 0,
         top: 0
     },
-    setContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
     setInfo: {
         flexDirection: 'column',
-        paddingTop: 10,
-        backgroundColor: 'lightblue'
+        alignItems: 'center',
+        paddingTop: 10
     }
 });
