@@ -77,6 +77,30 @@ Od teraz, przykładowo `navigation.navigate()` będzie miał podpowiedzi, do jak
 > navigation.navigate('Settings');
 > ```
 
+Do nawigacji można też użyć hooka `useNavigation` bez określania żadnych typów, ale wtedy typescript będzie wiedział tylko o tab navigatorze. Trzeba wówczas każdorazowo określać ekran, niezależnie czy ekran jest w tym samym stacku.
+
+Zakładająć że `Exercises` i `Debug` **są** w tym samym stacku:
+
+```ts
+function ExercisesScreen({ navigation }: ExercisesTabScreenProps<'Exercises'>) {
+    navigation.navigate('Debug', {
+        exercises: [1, 2, 3]
+    });
+}
+```
+
+jest równoznaczne z:
+
+```ts
+function ExercisesScreen() {
+    const navigation = useNavigation();
+    navigation.navigate('ExercisesTab', {
+        screen: 'Debug',
+        params: { exercises: [1, 2, 3] }
+    });
+}
+```
+
 ## Testowe API
 
 Aby uruchomić proces z testowym API:

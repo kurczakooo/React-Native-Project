@@ -4,6 +4,12 @@ import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/n
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+declare global {
+    namespace ReactNavigation {
+        interface RootParamList extends AppTabParamList {}
+    }
+}
+
 export type HomeStackParamList = {
     Home: undefined;
     Workout: undefined;
