@@ -9,7 +9,7 @@ function Register({ navigation }: any) {
     return (
         <View style={styles.container}>
             <Logo></Logo>
-            <RegisterFields></RegisterFields>
+            <RegisterFields navigation={navigation}></RegisterFields>
             <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>Already have an account?</Text>
                 <Text

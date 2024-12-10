@@ -4,7 +4,14 @@ import { View } from 'react-native';
 import { Button, HelperText, TextInput } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 
-const RegisterFields = () => {
+import { registerNewUser, UserAlreadyExsitsError } from 'src/api/register';
+import { onLogin } from 'src/api/login';
+
+interface props {
+    navigation: any;
+}
+
+const RegisterFields = ({ navigation }: props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -34,8 +41,18 @@ const RegisterFields = () => {
             didError = true;
         }
 
-        console.log('Register');
         if (didError) return;
+        console.log('Register sanity check checkpoint passed');
+
+        registerNewUser(username, password)
+            .then(() => {
+                navigation.navigate('Login');
+            })
+            .catch(e => {
+                if (e instanceof UserAlreadyExsitsError) {
+                    setUsernameError('Username is occupied');
+                }
+            });
     };
 
     return (
