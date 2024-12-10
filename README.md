@@ -40,7 +40,7 @@ export type ExecisesStackParamList = {
 };
 ```
 
-Parametry te przekazywane są dostępne w obiekcie `route.params` (jak dostać obiekt `route` z określonymi typami? _Patrz poniżej_).
+Parametry te są dostępne w obiekcie `route.params` (jak dostać obiekt `route` z określonymi typami? _Patrz poniżej_).
 
 Gdy dodamy nowy ekran do danej zakładki, należy również dodać wpis w odpowiednim typie. `undefined` oznacza, że ekran nie przyjmuje żadnych parametrów.
 
