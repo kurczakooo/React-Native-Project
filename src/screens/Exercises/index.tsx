@@ -12,6 +12,7 @@ import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
 import { StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 enum ActionType {
     FETCH,
@@ -111,7 +112,7 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
 };
 
 export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercises'>) {
-    const { navigation, route } = props;
+    const { navigation } = props;
 
     const [state, dispatch] = useReducer(reducer, initialState);
     const { shadowPrimary, screenPadding } = useTheme<Theme>();
@@ -146,7 +147,7 @@ export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercise
     };
 
     const handleSelectConfirm = () => {
-        navigation.navigate('HomeTab');
+        navigation.navigate('Debug', { exercises: state.selectedExercises });
     };
 
     const isExerciseSelected = (id: string) => {

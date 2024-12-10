@@ -16,6 +16,67 @@ npm start
 
 Po wciśnięciu `w` aplikacja otworzy się z wykorzystaniem przeglądarki pod adresem [http://localhost:8081](http://localhost:8081).
 
+## Info
+
+#### Typowanie nawigacji
+
+##### Jak zdefiniować typy parametrów przekazywanych do ekranu?
+
+W pliku [types.ts](https://github.com/kurczakooo/React-Native-Project/blob/main/src/types.ts) dla każdego stack navigatora (dla każdej zakładki - `Home`, `Exercises`, `Profile` i stacka z logowaniem `AuthStack`) określone są typy parametrów w postaci:
+
+```
+type <Nazwa stacka> = {
+    <Nazwa ekranu>: <Obiekt z parametrami>
+}
+```
+
+Przykład:
+
+```ts
+export type ExecisesStackParamList = {
+    Debug: { exercises: PredefinedExercise[] } | undefined;
+    Exercises: { mode: 'select' | 'view' } | undefined;
+    Settings: undefined;
+};
+```
+
+Parametry te przekazywane są dostępne w obiekcie `route.params` (jak dostać obiekt `route` z określonymi typami? _Patrz poniżej_).
+
+Gdy dodamy nowy ekran do danej zakładki, należy również dodać wpis w odpowiednim typie. `undefined` oznacza, że ekran nie przyjmuje żadnych parametrów.
+
+##### Jak zrobić typowanie nawigacji w komponencie?
+
+1. W zależności w jakiej zakładce komponent się znajduje trzeba zaimporować typy `HomeTabScreenProps`, `ProfileTabScreenProps` lub `ExercisesTabScreenProps`. Dla ekranów logowania które nie są w zakładce jest `AuthStackScreenProps`.
+2. Dajemy odpowiedni typ propsom komponentu ekranu. W template trzeba dać nazwę ekranu.
+
+Przykład:
+
+```ts
+export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercises'>) {
+    const { navigation, route } = props;
+    // ...
+}
+```
+
+Od teraz, przykładowo `navigation.navigate()` będzie miał podpowiedzi, do jakich ekranów można nawigować.
+
+> [!CAUTION]
+> Jeżeli chcemy nawigować do innej zakładki, trzeba określić screen.
+> W przeciwnym razie typescript wyrzuci błąd.
+> Dostaniemy błąd również jeżeli ekran nie istnieje w danym stacku.
+>
+> Przykład:
+>
+> ```ts
+> navigation.navigate('HomeTab', { screen: 'Home' });
+> ```
+>
+> Poruszając się wewnątrz danego stacka, składnia zostaje domyślna:
+>
+> ```ts
+> navigation.navigate('Settings');
+> ```
+
 ## Testowe API
 
 Aby uruchomić proces z testowym API:
