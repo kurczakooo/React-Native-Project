@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { api } from './config';
 
+export class InvalidPasswordError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'InvalidPasswordError';
+    }
+}
+
 /**
  *
  * @param userId user id to opearte on
@@ -15,18 +22,22 @@ export const changePassword = async (userId: string, password: string, newPasswo
     }
 
     // console.log('----');
-    const user = await api.get(`/users/?id=${userId}&password=${password}`);
+    const user = await api.get(`/users/?id=${userId}`);
 
     if (user.data.length === 0) {
         console.warn('No such account found');
         return false;
-    } else {
-        // console.log(user.data);
-        const resp = await api.patch(`/users/${userId}`, {
-            // ...user,
-            password: newPassword
-        });
-        const status = resp.status;
-        return status === 200;
     }
+
+    if (user.data[0].password !== password) {
+        throw new InvalidPasswordError('Incorrect password');
+    }
+
+    // console.log(user.data);
+    const resp = await api.patch(`/users/${userId}`, {
+        // ...user,
+        password: newPassword
+    });
+    const status = resp.status;
+    return status === 200;
 };

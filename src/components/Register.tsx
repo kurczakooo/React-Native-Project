@@ -5,7 +5,8 @@ import { Button, HelperText, TextInput } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 
 import { registerNewUser, UserAlreadyExsitsError } from 'src/api/register';
-import { onLogin } from 'src/api/login';
+import { authenticate } from 'src/api/login';
+import { InvalidPasswordError } from 'src/api/settings';
 
 interface props {
     navigation: any;

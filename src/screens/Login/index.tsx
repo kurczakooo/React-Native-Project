@@ -7,7 +7,7 @@ import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors
 import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
 import stylesGlobal from 'src/styles/style';
-import { onLogin } from 'src/api/login';
+import { authenticate } from 'src/api/login';
 
 export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('admin');
@@ -27,7 +27,7 @@ export default function Login({ navigation }: any) {
 
     const onLoginnn = async () => {
         setLoginFailed(false);
-        setUserId(await onLogin(username, password));
+        setUserId(await authenticate(username, password));
         if (userId === null) {
             setLoginFailed(true);
         }
@@ -59,8 +59,12 @@ export default function Login({ navigation }: any) {
             <HelperText type='error' visible={loginFailed}>
                 Incorrect username or password
             </HelperText>
-            <Button onPress={onLoginnn} mode='contained' style={{ ...styles.button, backgroundColor: 'black' }}>
-                <Text style={{color: 'white'}}>Login</Text>
+            <Button
+                onPress={onLoginnn}
+                mode='contained'
+                style={{ ...styles.button, backgroundColor: 'black' }}
+            >
+                <Text style={{ color: 'white' }}>Login</Text>
             </Button>
             <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>You still do not have account?</Text>
