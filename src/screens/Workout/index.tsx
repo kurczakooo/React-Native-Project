@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Pressable, View, Image, StyleSheet } from 'react-native';
 import { Button, Card, Text, TextInput, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
-import { Theme } from 'src/types';
+import { Theme, ExecisesStackParamList } from 'src/types';
 import CurrentExercise from './components/currentExercise';
 import { exercises } from 'src/screens/Exercises/exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export default function WorkoutScreen({ navigation }: any) {
     const iconSize = 24;

@@ -8,9 +8,12 @@ import BottomSheet, {
     BottomSheetBackdrop,
     BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
-import { Theme } from 'src/types';
+import { Theme, HomeStackParamList } from 'src/types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-export default function HomeScreen({ navigation }: any) {
+type HomeScreenProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
+
+export default function HomeScreen({ navigation }: HomeScreenProps) {
     const { shadowPrimary } = useTheme<Theme>();
     const nickname = 'User';
     //converting exampleWorkouts to array to test how deleting works
@@ -60,7 +63,7 @@ export default function HomeScreen({ navigation }: any) {
     );
 
     const onStartWorkout = () => {
-        navigation.navigate('WorkoutScreen');
+        navigation.navigate('Workout');
     };
 
     return (

@@ -1,5 +1,5 @@
 import { View, StyleSheet, Pressable, Image } from 'react-native';
-import { useTheme, Text } from 'react-native-paper';
+import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
 import ButtonWithIcon from './buttonWithIcon';
 import { useState } from 'react';
@@ -16,16 +16,51 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
 
     const tempData = [
         {
-            set: '1',
-            Previous: '',
-            'Weight (kg)': '80',
-            Reps: '10',
-            Done: 'false'
+            setNumber: 1,
+            previous: '-',
+            weight: '0',
+            reps: '0',
+            checked: false,
+            color: theme.colors.outline
         }
     ];
 
     const [rest, setRest] = useState('');
     const [visible, setVisible] = useState(false);
+    const [checked, setChecked] = useState(false);
+    const [exerciseData, setExerciseData] = useState(tempData);
+
+    const addSet = () => {
+        setExerciseData(prevData => [
+            ...prevData,
+            {
+                setNumber: prevData.length + 1,
+                previous: '0kgx0',
+                weight: '0',
+                reps: '0',
+                checked: false,
+                color: checked ? theme.colors.inversePrimary : theme.colors.outline
+            }
+        ]);
+    };
+
+    const onCheck = (setNumber: number) => {
+        setExerciseData(prevData =>
+            prevData.map(item =>
+                item.setNumber === setNumber
+                    ? {
+                          ...item,
+                          checked: !item.checked,
+                          color:
+                              item.color === theme.colors.outline
+                                  ? theme.colors.inversePrimary
+                                  : theme.colors.outline
+                      }
+                    : item
+            )
+        );
+        setChecked(!checked);
+    };
 
     const showDialog = () => setVisible(true);
 
@@ -65,37 +100,68 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
-                    <View style={styles.statsContainer}>
-                        <View>
-                            <Text style={{ fontWeight: 'bold' }}>Set</Text>
+                    {exerciseData.map((item, index) => (
+                        <View key={index} style={styles.statsContainer}>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Set</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ fontWeight: 'bold', flexDirection: 'column' }}>
+                                        {item.setNumber}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Previous</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ color: item.color, flexDirection: 'column' }}>
+                                        {item.previous}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Weight (kg)</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ color: item.color, flexDirection: 'column' }}>
+                                        {item.weight}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{ fontWeight: 'bold' }}>Reps</Text>
+                                <View style={styles.setInfo}>
+                                    <Text style={{ color: item.color, flexDirection: 'column' }}>
+                                        {item.reps}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View>
+                                <Image
+                                    source={require('@assets/icons/check.png')}
+                                    style={{
+                                        width: 18,
+                                        height: 18,
+                                        tintColor: 'black',
+                                        alignSelf: 'center'
+                                    }}
+                                />
+                                <View style={{ ...styles.setInfo, paddingTop: -10 }}>
+                                    <Checkbox
+                                        status={item.checked ? 'checked' : 'unchecked'}
+                                        onPress={() => {
+                                            onCheck(item.setNumber);
+                                        }}
+                                    />
+                                </View>
+                            </View>
                         </View>
-                        <View>
-                            <Text style={{ fontWeight: 'bold' }}>Previous</Text>
-                        </View>
-                        <View>
-                            <Text style={{ fontWeight: 'bold' }}>Weight (kg)</Text>
-                        </View>
-                        <View>
-                            <Text style={{ fontWeight: 'bold' }}>Reps</Text>
-                        </View>
-                        <View>
-                            <Image
-                                source={require('@assets/icons/check.png')}
-                                style={{
-                                    width: 18,
-                                    height: 18,
-                                    tintColor: 'black'
-                                }}
-                            />
-                        </View>
-                    </View>
+                    ))}
                     <ButtonWithIcon
                         iconSource={require('@assets/icons/add.png')}
                         label='Add set'
                         color='#1778f2'
                         backgroundColor='#fff'
                         outlineColor='#fff'
-                        onPress={() => {}}
+                        onPress={() => addSet()}
                     />
                 </View>
             </View>
@@ -128,5 +194,10 @@ const styles = StyleSheet.create({
         inset: 0,
         left: 0,
         top: 0
+    },
+    setInfo: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: 10
     }
 });
