@@ -1,6 +1,8 @@
 import { MD3Colors, MD3Theme } from 'react-native-paper/lib/typescript/types';
 import { StyleSheet } from 'react-native';
-import { NavigationProp, NavigatorScreenParams } from '@react-navigation/native';
+import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type HomeStackParamList = {
     Home: undefined;
@@ -8,29 +10,21 @@ export type HomeStackParamList = {
     Settings: undefined;
 };
 
-export type HomeStackNavigation = NavigationProp<HomeStackParamList>;
-
 export type ExecisesStackParamList = {
-    Debug: undefined;
-    Exercises: undefined;
+    Debug: { exercises: PredefinedExercise[] } | undefined;
+    Exercises: { mode: 'select' | 'view' } | undefined;
     Settings: undefined;
 };
-
-export type ExercisesStackNavigation = NavigationProp<ExecisesStackParamList>;
 
 export type ProfileStackParamList = {
     Profile: undefined;
     Settings: undefined;
 };
 
-export type ProfileStackNavigation = NavigationProp<ProfileStackParamList>;
-
 export type AuthStackParamList = {
     Login: undefined;
     Register: undefined;
 };
-
-export type AuthStackNavigation = NavigationProp<AuthStackParamList>;
 
 export type AppTabParamList = {
     HomeTab: NavigatorScreenParams<HomeStackParamList>;
@@ -38,7 +32,25 @@ export type AppTabParamList = {
     ProfileTab: NavigatorScreenParams<ProfileStackParamList>;
 };
 
-export type AppTabNavigation = NavigationProp<AppTabParamList>;
+export type HomeTabScreenProps<ScreenName extends keyof HomeStackParamList> = CompositeScreenProps<
+    NativeStackScreenProps<HomeStackParamList, ScreenName>,
+    BottomTabScreenProps<AppTabParamList, 'HomeTab'>
+>;
+
+export type ProfileTabScreenProps<ScreenName extends keyof ProfileStackParamList> =
+    CompositeScreenProps<
+        NativeStackScreenProps<ProfileStackParamList, ScreenName>,
+        BottomTabScreenProps<AppTabParamList, 'ProfileTab'>
+    >;
+
+export type ExercisesTabScreenProps<ScreenName extends keyof ExecisesStackParamList> =
+    CompositeScreenProps<
+        NativeStackScreenProps<ExecisesStackParamList, ScreenName>,
+        BottomTabScreenProps<AppTabParamList, 'ExercisesTab'>
+    >;
+
+export type AuthStackScreenProps<ScreenName extends keyof AuthStackParamList> =
+    NativeStackScreenProps<AuthStackParamList, ScreenName>;
 
 /**
  * Color theme which extends default React Native Paper pallete type.

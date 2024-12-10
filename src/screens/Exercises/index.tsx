@@ -1,26 +1,17 @@
 import { Button, Dialog, Portal, Searchbar, Text, useTheme } from 'react-native-paper';
 import { useEffect, useReducer } from 'react';
-import { Theme, PredefinedExercise as PredefinedExerciseType } from 'src/types';
+import {
+    Theme,
+    PredefinedExercise as PredefinedExerciseType,
+    ExercisesTabScreenProps,
+    ExecisesStackParamList
+} from 'src/types';
 import { exercises as devExercises } from './exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
 import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
 import { StyleSheet } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
-type ExercisesScreenRouteParams = {
-    Exercises:
-        | {
-              mode: 'view' | 'select';
-              onSelect: (modalExercises: PredefinedExerciseType[]) => void;
-          }
-        | undefined;
-};
-
-export type ExercisesScreenNavProps = NativeStackNavigationProp<
-    ExercisesScreenRouteParams,
-    'Exercises'
->;
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 enum ActionType {
     FETCH,
@@ -119,7 +110,9 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     ));
 };
 
-export default function ExercisesScreen(props: ExercisesScreenProps) {
+export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercises'>) {
+    const { navigation, route } = props;
+
     const [state, dispatch] = useReducer(reducer, initialState);
     const { shadowPrimary, screenPadding } = useTheme<Theme>();
 
@@ -153,7 +146,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
     };
 
     const handleSelectConfirm = () => {
-        props.route.params?.onSelect(state.selectedExercises);
+        navigation.navigate('HomeTab');
     };
 
     const isExerciseSelected = (id: string) => {
