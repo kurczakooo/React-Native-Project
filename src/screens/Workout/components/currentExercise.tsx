@@ -5,7 +5,7 @@ import ButtonWithIcon from './buttonWithIcon';
 import { useState } from 'react';
 import RestTimerDialog from './restTimerDialog';
 import React from 'react';
-import { Table, Row, Rows } from 'react-native-table-component';
+import { Table, Row, Rows, TableWrapper, Cell } from 'react-native-table-component';
 
 export default function CurrentExercise({ exercise }: { exercise: PredefinedExerciseType }) {
     const theme = useTheme<Theme>();
@@ -16,56 +16,39 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
         expert: theme.colors.expert
     };
 
-    const tempData = [
-        {
-            setNumber: 1,
-            previous: '-',
-            weight: '0',
-            reps: '0',
-            checked: false,
-            color: theme.colors.outline
-        }
-    ];
-    const tableHead = ['Set', 'Previous', 'Weight(kg)', 'Reps', '✔️'];
-    const tableData = [
-        ['1', '10x20kg', '345', '12', '[x]'],
-        ['1', '10x20kg', '345', '12', '[]']
-    ];
+    const tableData = [['1', '-', '55', '7', 'false']];
 
     const [rest, setRest] = useState('');
     const [visible, setVisible] = useState(false);
     const [checked, setChecked] = useState(false);
-    const [exerciseData, setExerciseData] = useState(tempData);
+    const [ExerciseTableData, setExerciseData] = useState(tableData);
 
     const addSet = () => {
-        setExerciseData(prevData => [
-            ...prevData,
-            {
-                setNumber: prevData.length + 1,
-                previous: '112kgx12',
-                weight: '80',
-                reps: '12',
-                checked: false,
-                color: checked ? theme.colors.inversePrimary : theme.colors.outline
-            }
-        ]);
+        setExerciseData(prevData => {
+            const lastRow = prevData[prevData.length - 1];
+            const set = lastRow[0] + 1;
+            //NEEDS FIXING, FOR SOME REASON WEIRD CONVERSION
+            const previous = `${lastRow[2]}kg x ${lastRow[3]}`;
+            console.log(previous);
+            return [...prevData, [set, previous, lastRow[2], lastRow[3], 'false']];
+        });
     };
 
     const onCheck = (setNumber: number) => {
-        setExerciseData(prevData =>
-            prevData.map(item =>
-                item.setNumber === setNumber
-                    ? {
-                          ...item,
-                          checked: !item.checked,
-                          color:
-                              item.color === theme.colors.outline
-                                  ? theme.colors.inversePrimary
-                                  : theme.colors.outline
-                      }
-                    : item
-            )
-        );
+        // setExerciseData(prevData =>
+        //     prevData.map(item =>
+        //         item.setNumber === setNumber
+        //             ? {
+        //                   ...item,
+        //                   checked: !item.checked,
+        //                   color:
+        //                       item.color === theme.colors.outline
+        //                           ? theme.colors.inversePrimary
+        //                           : theme.colors.outline
+        //               }
+        //             : item
+        //     )
+        // );
         setChecked(!checked);
     };
 
@@ -108,11 +91,7 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                         </Text>
                     </Pressable>
                     <View style={styles.statsContainer}>
-                        {/* <Text style={{ fontWeight: 'bold' }}>Set</Text>
-                        <Text style={{ fontWeight: 'bold' }}>Previous</Text>
-                        <Text style={{ fontWeight: 'bold' }}>Weight (kg)</Text>
-                        <Text style={{ fontWeight: 'bold' }}>Reps</Text>
-                        <Image
+                        {/*<Image
                             source={require('@assets/icons/check.png')}
                             style={{
                                 width: 18,
@@ -122,53 +101,38 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                             }}
                         /> */}
                     </View>
-                    {exerciseData.map((item, index) => (
-                        <View
-                            key={index}
-                            //style={{ ...styles.setContainer, backgroundColor: 'lightblue' }}
-                        >
-                            {/* <View style={styles.setInfo}>
-                                <Text style={{ fontWeight: 'bold', flexDirection: 'column' }}>
-                                    {item.setNumber}
-                                </Text>
-                            </View>
-                            <View style={styles.setInfo}>
-                                <Text style={{ color: item.color, flexDirection: 'column' }}>
-                                    {item.previous}
-                                </Text>
-                            </View>
-                            <View style={styles.setInfo}>
-                                <Text style={{ color: item.color, flexDirection: 'column' }}>
-                                    {item.weight}
-                                </Text>
-                            </View>
-                            <View style={styles.setInfo}>
-                                <Text style={{ color: item.color, flexDirection: 'column' }}>
-                                    {item.reps}
-                                </Text>
-                            </View>
-                            
-                            <View style={{ ...styles.checkBoxContainerInfo }}>
-                                <Checkbox
-                                    status={item.checked ? 'checked' : 'unchecked'}
-                                    onPress={() => onCheck(item.setNumber)}
-                                />
-                            </View> */}
-                            <Table borderStyle={{ borderWidth: 1 }}>
-                                <Row
-                                    data={tableHead}
-                                    textStyle={{
-                                        fontWeight: 'bold',
-                                        paddingBottom: 10
-                                    }}
-                                />
-                                <Rows
-                                    data={tableData}
-                                    textStyle={{ color: theme.colors.outline }}
-                                />
-                            </Table>
-                        </View>
-                    ))}
+                    <Table borderStyle={{ borderWidth: 0 }}>
+                        <Row
+                            data={['Set', 'Previous', 'Weight(kg)', 'Reps', '✔️']}
+                            textStyle={{
+                                fontWeight: 'bold',
+                                paddingBottom: 10,
+                                textAlign: 'center'
+                            }}
+                        />
+                        {tableData.map((rowData, rowIndex) => (
+                            <TableWrapper
+                                key={rowIndex}
+                                style={{ flexDirection: 'row', paddingBottom: 5 }}
+                            >
+                                {rowData.map((cellData, colIndex) => (
+                                    <Cell
+                                        key={colIndex}
+                                        data={
+                                            <Text
+                                                style={{
+                                                    fontWeight: colIndex === 0 ? 'bold' : 'normal',
+                                                    textAlign: 'center'
+                                                }}
+                                            >
+                                                {cellData}
+                                            </Text>
+                                        }
+                                    />
+                                ))}
+                            </TableWrapper>
+                        ))}
+                    </Table>
                     <ButtonWithIcon
                         iconSource={require('@assets/icons/add.png')}
                         label='Add set'
