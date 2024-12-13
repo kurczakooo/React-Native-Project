@@ -4,6 +4,8 @@ import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
 import ButtonWithIcon from './buttonWithIcon';
 import { useState } from 'react';
 import RestTimerDialog from './restTimerDialog';
+import React from 'react';
+import { Table, Row, Rows } from 'react-native-table-component';
 
 export default function CurrentExercise({ exercise }: { exercise: PredefinedExerciseType }) {
     const theme = useTheme<Theme>();
@@ -24,6 +26,11 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
             color: theme.colors.outline
         }
     ];
+    const tableHead = ['Set', 'Previous', 'Weight(kg)', 'Reps', '✔️'];
+    const tableData = [
+        ['1', '10x20kg', '345', '12', '[x]'],
+        ['1', '10x20kg', '345', '12', '[]']
+    ];
 
     const [rest, setRest] = useState('');
     const [visible, setVisible] = useState(false);
@@ -35,9 +42,9 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
             ...prevData,
             {
                 setNumber: prevData.length + 1,
-                previous: '0kgx0',
-                weight: '0',
-                reps: '0',
+                previous: '112kgx12',
+                weight: '80',
+                reps: '12',
                 checked: false,
                 color: checked ? theme.colors.inversePrimary : theme.colors.outline
             }
@@ -91,17 +98,17 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                         }}
                     >
                         <Text
-                            style={{ color: '#1778f2', fontWeight: '700' }}
+                            style={{ color: theme.colors.inversePrimary, fontWeight: '700' }}
                             onPress={() => setVisible(true)}
                         >
                             {'Rest timer:  '}
                         </Text>
-                        <Text style={{ color: '#1778f2', fontWeight: '700' }}>
+                        <Text style={{ color: theme.colors.inversePrimary, fontWeight: '700' }}>
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
                     <View style={styles.statsContainer}>
-                        <Text style={{ fontWeight: 'bold' }}>Set</Text>
+                        {/* <Text style={{ fontWeight: 'bold' }}>Set</Text>
                         <Text style={{ fontWeight: 'bold' }}>Previous</Text>
                         <Text style={{ fontWeight: 'bold' }}>Weight (kg)</Text>
                         <Text style={{ fontWeight: 'bold' }}>Reps</Text>
@@ -113,14 +120,14 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                                 tintColor: 'black',
                                 alignSelf: 'center'
                             }}
-                        />
+                        /> */}
                     </View>
                     {exerciseData.map((item, index) => (
                         <View
                             key={index}
-                            style={{ ...styles.setContainer, backgroundColor: 'lightgreen' }}
+                            //style={{ ...styles.setContainer, backgroundColor: 'lightblue' }}
                         >
-                            <View style={styles.setInfo}>
+                            {/* <View style={styles.setInfo}>
                                 <Text style={{ fontWeight: 'bold', flexDirection: 'column' }}>
                                     {item.setNumber}
                                 </Text>
@@ -140,12 +147,26 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                                     {item.reps}
                                 </Text>
                             </View>
-                            <View style={{ ...styles.setInfo, paddingTop: -10 }}>
+                            
+                            <View style={{ ...styles.checkBoxContainerInfo }}>
                                 <Checkbox
                                     status={item.checked ? 'checked' : 'unchecked'}
                                     onPress={() => onCheck(item.setNumber)}
                                 />
-                            </View>
+                            </View> */}
+                            <Table borderStyle={{ borderWidth: 1 }}>
+                                <Row
+                                    data={tableHead}
+                                    textStyle={{
+                                        fontWeight: 'bold',
+                                        paddingBottom: 10
+                                    }}
+                                />
+                                <Rows
+                                    data={tableData}
+                                    textStyle={{ color: theme.colors.outline }}
+                                />
+                            </Table>
                         </View>
                     ))}
                     <ButtonWithIcon
@@ -176,6 +197,7 @@ const styles = StyleSheet.create({
         paddingLeft: 5
     },
     statsContainer: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -190,11 +212,18 @@ const styles = StyleSheet.create({
     },
     setContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     setInfo: {
-        flexDirection: 'column',
-        paddingTop: 10,
-        backgroundColor: 'lightblue'
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'lightgreen'
+    },
+    checkBoxContainerInfo: {
+        width: 24,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: -10
     }
 });

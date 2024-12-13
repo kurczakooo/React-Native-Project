@@ -18,9 +18,7 @@ export default function WorkoutCard({
     const [title, setTitle] = useState('Workout Title');
     const [isEditing, setIsEditing] = useState(false);
 
-    const testPress = () => {
-        console.log('Pressed');
-    };
+    const testPress = () => {};
 
     return (
         <>

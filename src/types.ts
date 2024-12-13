@@ -14,6 +14,7 @@ export type HomeStackParamList = {
     Home: undefined;
     Workout: undefined;
     Settings: undefined;
+    Exercises: undefined;
 };
 
 export type ExecisesStackParamList = {

@@ -77,6 +77,7 @@ function HomeStack() {
             <Stack.Screen name='Home' component={HomeScreen} />
             <Stack.Screen name='Workout' component={WorkoutScreen} />
             <Stack.Screen name='Settings' component={SettingsScreen} />
+            <Stack.Screen name='Exercises' component={ExercisesScreen} />
         </Stack.Navigator>
     );
 }
