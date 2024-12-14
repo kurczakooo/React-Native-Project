@@ -16,7 +16,9 @@
     "@react-navigation/bottom-tabs": "^7.0.1",
     "@react-navigation/native": "^7.0.0",
     "@react-navigation/native-stack": "^7.0.0",
+    "@shopify/react-native-skia": "^1.7.3",
     "axios": "^1.7.8",
+    "dayjs": "^1.11.13",
     "expo": "~52.0.4",
     "expo-image-picker": "~16.0.3",
     "expo-status-bar": "~2.0.0",
@@ -33,7 +35,8 @@
     "react-native-super-grid": "^6.0.1",
     "react-native-table-component": "^1.2.2",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "victory-native": "^41.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
