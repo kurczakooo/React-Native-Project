@@ -50,12 +50,12 @@ function getWeeklyWorkoutData(workouts: Workout[]): WorkoutData[] {
 }
 
 const defaultProps: WorkoutTimeChartProps = {
-    height: 200,
+    height: 150,
     fontSize: 11,
     chartPadding: {
         left: 20,
         right: 20,
-        top: 20,
+        top: 10,
         bottom: 0
     }
 };
