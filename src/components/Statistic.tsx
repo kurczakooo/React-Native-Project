@@ -3,13 +3,15 @@ import { Text, useTheme } from 'react-native-paper';
 import { ImageSourcePropType } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Theme } from 'src/types';
+import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
 
 interface StatisticProps {
-    icon: ImageSourcePropType;
-    title: string;
-    value: string;
+    icon?: ImageSourcePropType;
+    title?: string;
+    value?: string;
     iconSize?: number;
     width?: number;
+    font?: VariantProp<never>;
 }
 
 /**
@@ -26,14 +28,26 @@ export default function Statistic(props: StatisticProps) {
     const theme = useTheme<Theme>();
     return (
         <View style={styles.container}>
-            <Image source={props.icon} style={{ ...styles.image, width: props.iconSize ?? 20 }} />
+            {props.icon && (
+                <Image
+                    source={props.icon}
+                    style={{ ...styles.image, width: props.iconSize ?? 20 }}
+                />
+            )}
             <View style={{ width: props.width ?? 'auto' }}>
-                <Text variant='bodySmall' style={styles.title}>
-                    {props.title}
-                </Text>
-                <Text variant='bodySmall' style={{ color: theme.colors.fontSecondary }}>
-                    {props.value}
-                </Text>
+                {props.title && (
+                    <Text variant={props.font ?? 'bodySmall'} style={styles.title}>
+                        {props.title}
+                    </Text>
+                )}
+                {props.value && (
+                    <Text
+                        variant={props.font ?? 'bodySmall'}
+                        style={{ color: theme.colors.fontSecondary }}
+                    >
+                        {props.value}
+                    </Text>
+                )}
             </View>
         </View>
     );
