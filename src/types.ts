@@ -26,6 +26,7 @@ export type ExecisesStackParamList = {
 export type ProfileStackParamList = {
     Profile: undefined;
     Settings: undefined;
+    Calendar: undefined;
 };
 
 export type AuthStackParamList = {
@@ -196,10 +197,10 @@ export interface Workout {
     totalDuration: number;
     totalSets: number;
     totalVolume: number;
-    targetMuscles: Array<{
+    targetMuscles: {
         muscleName: ExerciseMuscle;
         numberOfSets: number;
-    }>;
+    }[];
 }
 
 /**

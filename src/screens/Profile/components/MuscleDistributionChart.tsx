@@ -47,8 +47,6 @@ function getColorGradientPalette(start: HexColor, end: HexColor, steps: number):
     return colors;
 }
 
-function getChartShadowDimensions() {}
-
 function getMuscleChartData(
     workouts: Workout[],
     startColor: HexColor,
@@ -97,7 +95,7 @@ export default function MuscleDistributionChart(props: MuscleDistributionChartPr
         // fetch data ...
         const data = getMuscleChartData(workouts, theme.colors.primary, theme.colors.onPrimary);
         setChartData(data);
-    }, []);
+    }, [theme.colors.primary, theme.colors.onPrimary]);
 
     const handleChartLayout = (event: LayoutChangeEvent) => {
         const { width, height } = event.nativeEvent.layout;

@@ -27,7 +27,7 @@ type WorkoutTimeChartProps = {
 function getWeeklyWorkoutData(workouts: Workout[]): WorkoutData[] {
     const now = dayjs();
     const weeksCount = 12;
-    const weeks: Array<{ start: dayjs.Dayjs; totalDuration: number }> = [];
+    const weeks: { start: dayjs.Dayjs; totalDuration: number }[] = [];
 
     for (let i = 0; i < weeksCount; i++) {
         const startOfWeek = now.subtract(i, 'week').startOf('week');

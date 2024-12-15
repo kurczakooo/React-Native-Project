@@ -26,6 +26,7 @@ import ProfileScreen from 'src/screens/Profile';
 import WorkoutScreen from 'src/screens/Workout';
 import HeaderLogoIcon from './HeaderLogoIcon';
 import HeaderSettingsIcon from './HeaderSettingsIcon';
+import CalendarScreen from 'src/screens/Calendar';
 
 const config = {
     settingsScreenName: 'Settings',
@@ -99,6 +100,7 @@ function ProfileStack() {
         <Stack.Navigator screenOptions={getStackNavigatorOptions}>
             <Stack.Screen name='Profile' component={ProfileScreen} />
             <Stack.Screen name='Settings' component={SettingsScreen} />
+            <Stack.Screen name='Calendar' component={CalendarScreen} />
         </Stack.Navigator>
     );
 }

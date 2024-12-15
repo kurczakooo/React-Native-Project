@@ -2,9 +2,15 @@ import { View, StyleSheet } from 'react-native';
 import WorkoutTimeChart from './WorkoutTimeChart';
 import { Text, useTheme, Button } from 'react-native-paper';
 import { Theme } from 'src/types';
+import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutTimeCard() {
     const theme = useTheme<Theme>();
+    const navigation = useNavigation();
+
+    const handleButtonPress = () => {
+        navigation.navigate('ProfileTab', { screen: 'Calendar' });
+    };
 
     return (
         <View
@@ -19,7 +25,11 @@ export default function WorkoutTimeCard() {
                 <Text variant='titleSmall'>Last 3 months</Text>
             </View>
             <WorkoutTimeChart />
-            <Button mode='contained' style={{ boxShadow: theme.shadowPrimary }}>
+            <Button
+                mode='contained'
+                onPress={handleButtonPress}
+                style={{ boxShadow: theme.shadowPrimary }}
+            >
                 Show calendar
             </Button>
         </View>
