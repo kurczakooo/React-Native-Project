@@ -10,6 +10,7 @@ const defaultTheme: Theme = {
         ...MD3LightTheme.colors,
         fontPrimary: '#000000',
         fontSecondary: '#6b6b6b',
+        fontInactive: 'rgba(0, 0, 0, 0.2)',
         beginner: '#69ff9b',
         onBeginner: '#ffffff',
         intermediate: '#f3e97a',

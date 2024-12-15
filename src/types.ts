@@ -90,6 +90,13 @@ export interface Theme extends MD3Theme {
          */
         fontSecondary: string;
 
+        /**
+         * Use this color if you are unsure
+         * which color from theme should be
+         * used for some inactive text.
+         */
+        fontInactive: string;
+
         // Colors for exercise levels
         beginner: string;
         onBeginner: string;
