@@ -1,29 +1,38 @@
-import React from 'react';
-import { Card, Text, TextInput, Button } from 'react-native-paper';
+import { useState } from 'react';
+import { Card, Text, TextInput, Button, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
+import { View } from 'react-native';
+import { Theme } from 'src/types';
 
 const UsernameChange = () => {
-    const [username, setUsername] = React.useState('');
+    const theme = useTheme<Theme>();
+    const [username, setUsername] = useState('');
 
     const onChangeUserName = () => {
         console.log(`FIXME username change ${username}`);
     };
 
     return (
-        <Card style={styles.container}>
-            <Text variant='headlineMedium'>Username</Text>
-
+        <View
+            style={{
+                ...styles.container,
+                backgroundColor: theme.colors.elevation.level5,
+                boxShadow: theme.shadowPrimary
+            }}
+        >
+            <Text variant='titleLarge'>Username</Text>
             <TextInput
-                style={styles.textInput}
+                mode='outlined'
                 label='New username'
+                theme={{ roundness: 5 }}
                 onChangeText={text => {
                     setUsername(text);
                 }}
             ></TextInput>
-            <Button mode='contained' onPress={onChangeUserName} style={styles.button}>
+            <Button mode='contained' onPress={onChangeUserName}>
                 Change username
             </Button>
-        </Card>
+        </View>
     );
 };
 

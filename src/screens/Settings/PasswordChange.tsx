@@ -1,11 +1,13 @@
-import React from 'react';
-import { Card, Text, TextInput, HelperText, Button } from 'react-native-paper';
+import { Card, Text, TextInput, HelperText, Button, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 import { useState, useEffect, useContext } from 'react';
 import { userIdContext } from 'src/contexts/userIdContext';
 import { changePassword } from 'src/api/settings';
+import { View } from 'react-native';
+import { Theme } from 'src/types';
 
 export const PasswordChange = () => {
+    const theme = useTheme<Theme>();
     const { userId, setUserId } = useContext(userIdContext);
     const [passwordError, setPasswordError] = useState('');
     const [newPasswordDoNotMatchError, setNewPasswordError] = useState('');
@@ -56,37 +58,46 @@ export const PasswordChange = () => {
     }, [password]);
 
     return (
-        <Card style={styles.container}>
-            <Text variant='headlineMedium'>Password</Text>
+        <View
+            style={{
+                ...styles.container,
+                backgroundColor: theme.colors.elevation.level5,
+                boxShadow: theme.shadowPrimary
+            }}
+        >
+            <Text variant='titleLarge'>Password</Text>
             <TextInput
-                style={styles.textInput}
+                mode='outlined'
                 label='Old password'
                 onChangeText={setPassword}
                 error={passwordError !== ''}
+                theme={{ roundness: 5 }}
             ></TextInput>
-            <HelperText style={{ margin: 0 }} type='error' visible={passwordError !== ''}>
-                Password is required
-            </HelperText>
+            {passwordError !== '' && (
+                <HelperText style={{ margin: 0, padding: 0 }} type='error'>
+                    Password is required
+                </HelperText>
+            )}
             <TextInput
-                style={{ ...styles.textInput }}
+                mode='outlined'
                 label='New password'
                 onChangeText={text => setNewPassword(text)}
+                theme={{ roundness: 5 }}
             ></TextInput>
             <TextInput
-                style={styles.textInput}
+                mode='outlined'
                 label='Repeat new password'
                 onChangeText={text => setNewPasswordConfirm(text)}
+                theme={{ roundness: 5 }}
             ></TextInput>
-            <HelperText
-                style={{ margin: 0 }}
-                type='error'
-                visible={newPasswordDoNotMatchError !== ''}
-            >
-                {newPasswordDoNotMatchError}
-            </HelperText>
-            <Button onPress={onChangePassword} mode='contained' style={styles.button}>
+            {newPasswordDoNotMatchError !== '' && (
+                <HelperText style={{ margin: 0 }} type='error'>
+                    {newPasswordDoNotMatchError}
+                </HelperText>
+            )}
+            <Button onPress={onChangePassword} mode='contained'>
                 Change password
             </Button>
-        </Card>
+        </View>
     );
 };

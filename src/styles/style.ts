@@ -5,18 +5,11 @@ import { red } from 'react-native-reanimated/lib/typescript/Colors';
 
 export const styles = StyleSheet.create({
     container: {
-        borderRadius: 5,
-        paddingHorizontal: 10,
+        flexDirection: 'column',
         justifyContent: 'center',
-        paddingVertical: 15,
-        marginHorizontal: 20,
-        marginVertical: 5
-    },
-    button: {
-        marginTop: 10
-    },
-    textInput: {
-        marginTop: 10
+        borderRadius: 5,
+        padding: 20,
+        gap: 15
     }
 });
 
