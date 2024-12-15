@@ -2,10 +2,15 @@ import { View, StyleSheet, Pressable, Image } from 'react-native';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
 import ButtonWithIcon from './buttonWithIcon';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import RestTimerDialog from './restTimerDialog';
 import React from 'react';
 import { Table, Row, Rows, TableWrapper, Cell } from 'react-native-table-component';
+import CurrentExerciseSetInfoTable from './currentExerciseSetInfoTable';
+
+interface CurrentExerciseSetInfoTableRef {
+    addSet: () => void;
+}
 
 export default function CurrentExercise({ exercise }: { exercise: PredefinedExerciseType }) {
     const theme = useTheme<Theme>();
@@ -16,47 +21,21 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
         expert: theme.colors.expert
     };
 
-    const tableData = [['1', '-', '55', '7', 'false']];
-
     const [rest, setRest] = useState('');
     const [visible, setVisible] = useState(false);
-    const [checked, setChecked] = useState(false);
-    const [ExerciseTableData, setExerciseData] = useState(tableData);
-
-    const addSet = () => {
-        setExerciseData(prevData => {
-            const lastRow = prevData[prevData.length - 1];
-            const set = lastRow[0] + 1;
-            //NEEDS FIXING, FOR SOME REASON WEIRD CONVERSION
-            const previous = `${lastRow[2]}kg x ${lastRow[3]}`;
-            console.log(previous);
-            return [...prevData, [set, previous, lastRow[2], lastRow[3], 'false']];
-        });
-    };
-
-    const onCheck = (setNumber: number) => {
-        // setExerciseData(prevData =>
-        //     prevData.map(item =>
-        //         item.setNumber === setNumber
-        //             ? {
-        //                   ...item,
-        //                   checked: !item.checked,
-        //                   color:
-        //                       item.color === theme.colors.outline
-        //                           ? theme.colors.inversePrimary
-        //                           : theme.colors.outline
-        //               }
-        //             : item
-        //     )
-        // );
-        setChecked(!checked);
-    };
 
     const showDialog = () => setVisible(true);
 
     const hideDialog = (time: string) => {
         setRest(time);
         setVisible(false);
+    };
+
+    const addSetRef = useRef<CurrentExerciseSetInfoTableRef | null>(null);
+    const callAddSet = () => {
+        if (addSetRef.current) {
+            addSetRef.current.addSet();
+        }
     };
 
     return (
@@ -90,56 +69,14 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
-                    <View style={styles.statsContainer}>
-                        {/*<Image
-                            source={require('@assets/icons/check.png')}
-                            style={{
-                                width: 18,
-                                height: 18,
-                                tintColor: 'black',
-                                alignSelf: 'center'
-                            }}
-                        /> */}
-                    </View>
-                    <Table borderStyle={{ borderWidth: 0 }}>
-                        <Row
-                            data={['Set', 'Previous', 'Weight(kg)', 'Reps', '✔️']}
-                            textStyle={{
-                                fontWeight: 'bold',
-                                paddingBottom: 10,
-                                textAlign: 'center'
-                            }}
-                        />
-                        {tableData.map((rowData, rowIndex) => (
-                            <TableWrapper
-                                key={rowIndex}
-                                style={{ flexDirection: 'row', paddingBottom: 5 }}
-                            >
-                                {rowData.map((cellData, colIndex) => (
-                                    <Cell
-                                        key={colIndex}
-                                        data={
-                                            <Text
-                                                style={{
-                                                    fontWeight: colIndex === 0 ? 'bold' : 'normal',
-                                                    textAlign: 'center'
-                                                }}
-                                            >
-                                                {cellData}
-                                            </Text>
-                                        }
-                                    />
-                                ))}
-                            </TableWrapper>
-                        ))}
-                    </Table>
+                    <CurrentExerciseSetInfoTable ref={addSetRef} />
                     <ButtonWithIcon
                         iconSource={require('@assets/icons/add.png')}
                         label='Add set'
                         color='#1778f2'
                         backgroundColor='#fff'
                         outlineColor='#fff'
-                        onPress={() => addSet()}
+                        onPress={callAddSet}
                     />
                 </View>
             </View>
@@ -185,9 +122,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgreen'
     },
     checkBoxContainerInfo: {
-        width: 24,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: -10
+        alignItems: 'center'
     }
 });
