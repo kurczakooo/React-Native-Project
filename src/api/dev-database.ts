@@ -26,7 +26,11 @@ export const endpoints: DevApiEndpoints = {
             totalDuration: 3000,
             totalSets: 9,
             totalVolume: 4200,
-            targetMuscles: ['shoulders', 'biceps', 'chest']
+            targetMuscles: [
+                { muscleName: 'shoulders', numberOfSets: 3 },
+                { muscleName: 'biceps', numberOfSets: 3 },
+                { muscleName: 'chest', numberOfSets: 3 }
+            ]
         },
         {
             id: 'w1',
@@ -35,9 +39,13 @@ export const endpoints: DevApiEndpoints = {
             imageUrl: null,
             dateTimestamp: 1732550444,
             totalDuration: 3000,
-            totalSets: 9,
+            totalSets: 6,
             totalVolume: 4200,
-            targetMuscles: ['shoulders', 'biceps', 'chest']
+            targetMuscles: [
+                { muscleName: 'shoulders', numberOfSets: 3 },
+                { muscleName: 'biceps', numberOfSets: 2 },
+                { muscleName: 'chest', numberOfSets: 1 }
+            ]
         }
     ],
     exercises: [

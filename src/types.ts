@@ -196,7 +196,10 @@ export interface Workout {
     totalDuration: number;
     totalSets: number;
     totalVolume: number;
-    targetMuscles: ExerciseMuscle[];
+    targetMuscles: Array<{
+        muscleName: ExerciseMuscle;
+        numberOfSets: number;
+    }>;
 }
 
 /**

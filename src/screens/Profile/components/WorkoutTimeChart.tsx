@@ -63,7 +63,7 @@ const defaultProps: WorkoutTimeChartProps = {
 export default function WorkoutTimeChart(props: WorkoutTimeChartProps) {
     const { height, chartPadding, fontSize } = { ...defaultProps, ...props };
     const theme = useTheme<Theme>();
-    const font = useFont(require('@assets/fonts/Roboto.ttf'), fontSize);
+    const font = useFont(require('@assets/fonts/Roboto-Medium.ttf'), fontSize);
     const [workoutData, setWorkoutData] = useState<WorkoutData[]>([]);
 
     const axisOptions = {

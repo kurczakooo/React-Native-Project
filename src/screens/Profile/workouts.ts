@@ -10,7 +10,10 @@ const workouts: Workout[] = [
         totalDuration: 3600,
         totalSets: 12,
         totalVolume: 8500,
-        targetMuscles: ['shoulders', 'chest']
+        targetMuscles: [
+            { muscleName: 'shoulders', numberOfSets: 6 },
+            { muscleName: 'chest', numberOfSets: 6 }
+        ]
     },
     {
         id: 'w1',
@@ -21,7 +24,11 @@ const workouts: Workout[] = [
         totalDuration: 4200,
         totalSets: 15,
         totalVolume: 9500,
-        targetMuscles: ['triceps', 'chest', 'shoulders']
+        targetMuscles: [
+            { muscleName: 'triceps', numberOfSets: 5 },
+            { muscleName: 'chest', numberOfSets: 5 },
+            { muscleName: 'shoulders', numberOfSets: 5 }
+        ]
     },
     {
         id: 'w2',
@@ -32,7 +39,11 @@ const workouts: Workout[] = [
         totalDuration: 4800,
         totalSets: 18,
         totalVolume: 12000,
-        targetMuscles: ['quadriceps', 'hamstrings', 'glutes']
+        targetMuscles: [
+            { muscleName: 'quadriceps', numberOfSets: 6 },
+            { muscleName: 'hamstrings', numberOfSets: 6 },
+            { muscleName: 'glutes', numberOfSets: 6 }
+        ]
     },
     {
         id: 'w3',
@@ -43,7 +54,11 @@ const workouts: Workout[] = [
         totalDuration: 3600,
         totalSets: 10,
         totalVolume: 7200,
-        targetMuscles: ['lats', 'middle back', 'biceps']
+        targetMuscles: [
+            { muscleName: 'lats', numberOfSets: 4 },
+            { muscleName: 'middle back', numberOfSets: 3 },
+            { muscleName: 'biceps', numberOfSets: 3 }
+        ]
     },
     {
         id: 'w4',
@@ -54,7 +69,10 @@ const workouts: Workout[] = [
         totalDuration: 3000,
         totalSets: 8,
         totalVolume: 4500,
-        targetMuscles: ['abdominals', 'lower back']
+        targetMuscles: [
+            { muscleName: 'abdominals', numberOfSets: 4 },
+            { muscleName: 'lower back', numberOfSets: 4 }
+        ]
     },
     {
         id: 'w5',
@@ -65,7 +83,10 @@ const workouts: Workout[] = [
         totalDuration: 3300,
         totalSets: 10,
         totalVolume: 7800,
-        targetMuscles: ['shoulders', 'chest']
+        targetMuscles: [
+            { muscleName: 'shoulders', numberOfSets: 5 },
+            { muscleName: 'chest', numberOfSets: 5 }
+        ]
     },
     {
         id: 'w6',
@@ -76,7 +97,11 @@ const workouts: Workout[] = [
         totalDuration: 4200,
         totalSets: 14,
         totalVolume: 10500,
-        targetMuscles: ['quadriceps', 'hamstrings', 'glutes']
+        targetMuscles: [
+            { muscleName: 'quadriceps', numberOfSets: 5 },
+            { muscleName: 'hamstrings', numberOfSets: 5 },
+            { muscleName: 'glutes', numberOfSets: 4 }
+        ]
     },
     {
         id: 'w7',
@@ -87,7 +112,10 @@ const workouts: Workout[] = [
         totalDuration: 3600,
         totalSets: 12,
         totalVolume: 8600,
-        targetMuscles: ['lats', 'biceps']
+        targetMuscles: [
+            { muscleName: 'lats', numberOfSets: 6 },
+            { muscleName: 'biceps', numberOfSets: 6 }
+        ]
     },
     {
         id: 'w8',
@@ -98,7 +126,10 @@ const workouts: Workout[] = [
         totalDuration: 3000,
         totalSets: 9,
         totalVolume: 5000,
-        targetMuscles: ['abdominals', 'lower back']
+        targetMuscles: [
+            { muscleName: 'abdominals', numberOfSets: 5 },
+            { muscleName: 'lower back', numberOfSets: 4 }
+        ]
     },
     {
         id: 'w9',
@@ -109,7 +140,10 @@ const workouts: Workout[] = [
         totalDuration: 3700,
         totalSets: 11,
         totalVolume: 7600,
-        targetMuscles: ['triceps', 'shoulders']
+        targetMuscles: [
+            { muscleName: 'triceps', numberOfSets: 5 },
+            { muscleName: 'shoulders', numberOfSets: 6 }
+        ]
     },
     {
         id: 'w10',
@@ -120,7 +154,10 @@ const workouts: Workout[] = [
         totalDuration: 4400,
         totalSets: 16,
         totalVolume: 11000,
-        targetMuscles: ['quadriceps', 'hamstrings']
+        targetMuscles: [
+            { muscleName: 'quadriceps', numberOfSets: 8 },
+            { muscleName: 'hamstrings', numberOfSets: 8 }
+        ]
     },
     {
         id: 'w11',
@@ -131,7 +168,11 @@ const workouts: Workout[] = [
         totalDuration: 3900,
         totalSets: 13,
         totalVolume: 8800,
-        targetMuscles: ['lats', 'middle back', 'biceps']
+        targetMuscles: [
+            { muscleName: 'lats', numberOfSets: 4 },
+            { muscleName: 'middle back', numberOfSets: 5 },
+            { muscleName: 'biceps', numberOfSets: 4 }
+        ]
     },
     {
         id: 'w12',
@@ -142,7 +183,56 @@ const workouts: Workout[] = [
         totalDuration: 4300,
         totalSets: 15,
         totalVolume: 9600,
-        targetMuscles: ['chest', 'shoulders', 'triceps']
+        targetMuscles: [
+            { muscleName: 'chest', numberOfSets: 5 },
+            { muscleName: 'shoulders', numberOfSets: 5 },
+            { muscleName: 'triceps', numberOfSets: 5 }
+        ]
+    },
+    {
+        id: 'w13',
+        userId: 'u0',
+        title: 'Full Body Blast',
+        imageUrl: 'http://localhost:3000/image.png',
+        dateTimestamp: 1734211273, // this week
+        totalDuration: 5400,
+        totalSets: 15,
+        totalVolume: 13000,
+        targetMuscles: [
+            { muscleName: 'chest', numberOfSets: 5 },
+            { muscleName: 'quadriceps', numberOfSets: 5 },
+            { muscleName: 'biceps', numberOfSets: 5 }
+        ]
+    },
+    {
+        id: 'w14',
+        userId: 'u0',
+        title: 'Upper Body Strength',
+        imageUrl: 'http://localhost:3000/image.png',
+        dateTimestamp: 1734297673, // this week
+        totalDuration: 4800,
+        totalSets: 15,
+        totalVolume: 11000,
+        targetMuscles: [
+            { muscleName: 'shoulders', numberOfSets: 5 },
+            { muscleName: 'triceps', numberOfSets: 5 },
+            { muscleName: 'chest', numberOfSets: 5 }
+        ]
+    },
+    {
+        id: 'w15',
+        userId: 'u0',
+        title: 'Lower Body Power',
+        imageUrl: 'http://localhost:3000/image.png',
+        dateTimestamp: 1734384073, // this week
+        totalDuration: 4500,
+        totalSets: 14,
+        totalVolume: 11500,
+        targetMuscles: [
+            { muscleName: 'quadriceps', numberOfSets: 6 },
+            { muscleName: 'glutes', numberOfSets: 5 },
+            { muscleName: 'hamstrings', numberOfSets: 3 }
+        ]
     }
 ];
 
