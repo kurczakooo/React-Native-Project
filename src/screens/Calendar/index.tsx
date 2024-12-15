@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Theme } from 'src/types';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import ScreenContainer from 'src/components/ScreenContainer';
 import CalendarCard from './components/CalendarCard';
@@ -8,8 +9,10 @@ import CalendarStatistic from './components/CalendarStatistic';
 
 export default function CalendarScreen() {
     const { screenPadding } = useTheme<Theme>();
+    const tabBarHeight = useBottomTabBarHeight();
+
     return (
-        <ScreenContainer>
+        <ScreenContainer additionalSpaceBottom={tabBarHeight + screenPadding * 2}>
             <View style={{ flexDirection: 'row', gap: screenPadding }}>
                 <CalendarStatistic
                     title='Streak'

@@ -2,6 +2,7 @@ import { View, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Theme } from 'src/types';
 import { ReactNode } from 'react';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 /**
  * Wrapper for screen contents.
@@ -20,11 +21,23 @@ import { ReactNode } from 'react';
  *   );
  * }
  */
-export default function ScreenContainer({ children }: { children: ReactNode | ReactNode[] }) {
+export default function ScreenContainer({
+    children,
+    additionalSpaceBottom
+}: {
+    children: ReactNode | ReactNode[];
+    additionalSpaceBottom?: number;
+}) {
     const { screenPadding } = useTheme<Theme>();
+    const tabBarHeight = useBottomTabBarHeight();
+
     return (
         <ScrollView style={{ padding: screenPadding }}>
-            <View style={{ gap: 10, paddingBottom: screenPadding * 2 }}>{children}</View>
+            <View
+                style={{ gap: 10, paddingBottom: screenPadding * 2 + (additionalSpaceBottom ?? 0) }}
+            >
+                {children}
+            </View>
         </ScrollView>
     );
 }
