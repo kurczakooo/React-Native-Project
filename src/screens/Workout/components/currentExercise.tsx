@@ -69,15 +69,7 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
-                    <CurrentExerciseSetInfoTable ref={addSetRef} />
-                    <ButtonWithIcon
-                        iconSource={require('@assets/icons/add.png')}
-                        label='Add set'
-                        color='#1778f2'
-                        backgroundColor='#fff'
-                        outlineColor='#fff'
-                        onPress={callAddSet}
-                    />
+                    <CurrentExerciseSetInfoTable />
                 </View>
             </View>
             <RestTimerDialog visible={visible} hideDialog={hideDialog} />

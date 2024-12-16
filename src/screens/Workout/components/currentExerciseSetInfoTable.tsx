@@ -3,6 +3,7 @@ import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { View, StyleSheet, Image } from 'react-native';
 import { Theme } from 'src/types';
 import { useState } from 'react';
+import ButtonWithIcon from './buttonWithIcon';
 
 export default function CurrentExerciseSetInfoTable() {
     const theme = useTheme<Theme>();
@@ -33,66 +34,78 @@ export default function CurrentExerciseSetInfoTable() {
     };
 
     return (
-        <Table borderStyle={{ borderWidth: 0 }}>
-            <Row
-                data={[
-                    'Set',
-                    'Previous',
-                    'Weight(kg)',
-                    'Reps',
-                    <Image
-                        source={require('@assets/icons/check.png')}
-                        style={{
-                            width: 18,
-                            height: 18,
-                            tintColor: 'black',
-                            alignSelf: 'center'
-                        }}
-                    />
-                ]}
-                textStyle={{
-                    fontWeight: 'bold',
-                    paddingBottom: 10,
-                    textAlign: 'center'
-                }}
-            />
-            {exerciseTableData.map((rowData, rowIndex) => (
-                <TableWrapper key={rowIndex} style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                    {rowData.map((cellData, colIndex) => (
-                        <Cell
-                            key={colIndex}
-                            data={
-                                colIndex === rowData.length - 1 ? (
-                                    <View style={styles.checkBoxContainerInfo}>
-                                        <Checkbox
-                                            status={cellData === 'true' ? 'checked' : 'unchecked'}
-                                            onPress={() => onCheck(rowData[0])}
-                                        />
-                                    </View>
-                                ) : (
-                                    <Text
-                                        style={{
-                                            fontWeight: colIndex === 0 ? 'bold' : 'normal',
-                                            textAlign: 'center',
-                                            color:
-                                                rowData[rowData.length - 1] === 'true'
-                                                    ? theme.colors.inversePrimary
-                                                    : theme.colors.outline,
-                                            textDecorationLine:
-                                                rowData[rowData.length - 1] === 'true'
-                                                    ? 'line-through'
-                                                    : 'none'
-                                        }}
-                                    >
-                                        {cellData}
-                                    </Text>
-                                )
-                            }
+        <View>
+            <Table borderStyle={{ borderWidth: 0 }}>
+                <Row
+                    data={[
+                        'Set',
+                        'Previous',
+                        'Weight(kg)',
+                        'Reps',
+                        <Image
+                            source={require('@assets/icons/check.png')}
+                            style={{
+                                width: 18,
+                                height: 18,
+                                tintColor: 'black',
+                                alignSelf: 'center'
+                            }}
                         />
-                    ))}
-                </TableWrapper>
-            ))}
-        </Table>
+                    ]}
+                    textStyle={{
+                        fontWeight: 'bold',
+                        paddingBottom: 10,
+                        textAlign: 'center'
+                    }}
+                />
+                {exerciseTableData.map((rowData, rowIndex) => (
+                    <TableWrapper key={rowIndex} style={{ flexDirection: 'row', paddingBottom: 5 }}>
+                        {rowData.map((cellData, colIndex) => (
+                            <Cell
+                                key={colIndex}
+                                data={
+                                    colIndex === rowData.length - 1 ? (
+                                        <View style={styles.checkBoxContainerInfo}>
+                                            <Checkbox
+                                                status={
+                                                    cellData === 'true' ? 'checked' : 'unchecked'
+                                                }
+                                                onPress={() => onCheck(rowData[0])}
+                                            />
+                                        </View>
+                                    ) : (
+                                        <Text
+                                            style={{
+                                                fontWeight: colIndex === 0 ? 'bold' : 'normal',
+                                                textAlign: 'center',
+                                                color:
+                                                    rowData[rowData.length - 1] === 'true'
+                                                        ? theme.colors.inversePrimary
+                                                        : theme.colors.outline,
+                                                textDecorationLine:
+                                                    rowData[rowData.length - 1] === 'true'
+                                                        ? 'line-through'
+                                                        : 'none'
+                                            }}
+                                        >
+                                            {cellData}
+                                        </Text>
+                                    )
+                                }
+                            />
+                        ))}
+                    </TableWrapper>
+                ))}
+            </Table>
+            <ButtonWithIcon
+                iconSource={require('@assets/icons/add.png')}
+                label='Add set'
+                color='#1778f2'
+                backgroundColor='#fff'
+                outlineColor='#fff'
+                onPress={addSet}
+            />
+        </View>
     );
 }
 
