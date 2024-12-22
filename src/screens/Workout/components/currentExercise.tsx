@@ -27,6 +27,7 @@ export default function CurrentExercise({
     const openTimerDialog = () => {
         timerDialogHandler((time: string) => {
             if (time !== '') setRest(time);
+            else setRest('OFF');
         });
     };
 
@@ -36,7 +37,8 @@ export default function CurrentExercise({
                 style={{
                     ...styles.container,
                     backgroundColor: theme.colors.elevation.level5,
-                    boxShadow: theme.shadowPrimary
+                    boxShadow: theme.shadowPrimary,
+                    marginBottom: 10
                 }}
             >
                 <View

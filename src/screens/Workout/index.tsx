@@ -17,6 +17,7 @@ export default function WorkoutScreen({ navigation }: any) {
     const iconSize = 24;
     const { shadowPrimary } = useTheme<Theme>();
 
+    ///////////////////////////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
     const [image, setImage] = useState<string>('');
 
@@ -58,12 +59,7 @@ export default function WorkoutScreen({ navigation }: any) {
         }
     };
 
-    const onAddExercise = () => {
-        //const navigation = useNavigation();
-        //navigation.navigate('HomeTab', { screen: 'Exercises' });
-    };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////REST TIMER DIALOG SECTION/////////////////////////////////////////
     const [TimerDialogVisible, setTimerVisible] = useState(false);
     const [timerCallback, setTimerCallback] = useState<(time: string) => void | null>(null);
 
@@ -81,13 +77,18 @@ export default function WorkoutScreen({ navigation }: any) {
     };
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    const onAddExercise = () => {
+        //const navigation = useNavigation();
+        //navigation.navigate('HomeTab', { screen: 'Exercises' });
+    };
+
     return (
         <>
             <View style={{ gap: 10, padding: 10 }}>
                 <WorkoutCard showDialog={showDialog} image={image} />
 
-                <ScrollView style={{}}>
-                    {exercises.slice(0, 6).map((exercise, index) => (
+                <ScrollView style={{ height: 'auto', borderRadius: 11 }}>
+                    {exercises.slice(0, 7).map((exercise, index) => (
                         <CurrentExercise
                             key={index}
                             exercise={exercise}

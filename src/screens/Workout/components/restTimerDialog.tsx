@@ -21,7 +21,10 @@ export default function RestTimerDialog({
             return;
         }
 
-        hideDialog(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+        const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if (minutes !== 0 || seconds !== 0) hideDialog(formattedTime);
+        else hideDialog('OFF');
     };
 
     return (
