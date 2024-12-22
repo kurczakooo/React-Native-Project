@@ -1,18 +1,19 @@
-import { View, StyleSheet, Pressable, Image } from 'react-native';
-import { useTheme, Text, Checkbox } from 'react-native-paper';
+import { View, StyleSheet, Pressable } from 'react-native';
+import { useTheme, Text } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
-import ButtonWithIcon from './buttonWithIcon';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import RestTimerDialog from './restTimerDialog';
 import React from 'react';
-import { Table, Row, Rows, TableWrapper, Cell } from 'react-native-table-component';
+
 import CurrentExerciseSetInfoTable from './currentExerciseSetInfoTable';
 
-interface CurrentExerciseSetInfoTableRef {
-    addSet: () => void;
-}
-
-export default function CurrentExercise({ exercise }: { exercise: PredefinedExerciseType }) {
+export default function CurrentExercise({
+    exercise,
+    timerDialogHandler
+}: {
+    exercise: PredefinedExerciseType;
+    timerDialogHandler: (callback: (time: string) => void) => void;
+}) {
     const theme = useTheme<Theme>();
     const { name, level } = exercise;
     const indicatorColors = {
@@ -22,20 +23,11 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
     };
 
     const [rest, setRest] = useState('');
-    const [visible, setVisible] = useState(false);
 
-    const showDialog = () => setVisible(true);
-
-    const hideDialog = (time: string) => {
-        setRest(time);
-        setVisible(false);
-    };
-
-    const addSetRef = useRef<CurrentExerciseSetInfoTableRef | null>(null);
-    const callAddSet = () => {
-        if (addSetRef.current) {
-            addSetRef.current.addSet();
-        }
+    const openTimerDialog = () => {
+        timerDialogHandler((time: string) => {
+            if (time !== '') setRest(time);
+        });
     };
 
     return (
@@ -53,7 +45,7 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                 <View style={styles.nameContainer}>
                     <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{name}</Text>
                     <Pressable
-                        onPress={() => showDialog()}
+                        onPress={openTimerDialog}
                         style={{
                             flexDirection: 'row',
                             maxWidth: '50%'
@@ -61,7 +53,7 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                     >
                         <Text
                             style={{ color: theme.colors.inversePrimary, fontWeight: '700' }}
-                            onPress={() => setVisible(true)}
+                            //onPress={() => setVisible(true)}
                         >
                             {'Rest timer:  '}
                         </Text>
@@ -72,7 +64,6 @@ export default function CurrentExercise({ exercise }: { exercise: PredefinedExer
                     <CurrentExerciseSetInfoTable />
                 </View>
             </View>
-            <RestTimerDialog visible={visible} hideDialog={hideDialog} />
         </>
     );
 }

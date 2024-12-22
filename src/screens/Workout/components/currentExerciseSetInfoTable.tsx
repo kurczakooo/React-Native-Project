@@ -1,4 +1,4 @@
-import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
+import { Table, TableWrapper, Cell } from 'react-native-table-component';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { View, StyleSheet, Image } from 'react-native';
 import { Theme } from 'src/types';
@@ -8,6 +8,7 @@ import ButtonWithIcon from './buttonWithIcon';
 export default function CurrentExerciseSetInfoTable() {
     const theme = useTheme<Theme>();
 
+    ///////////////////////////////////////////////////////////EXERCISE TABLE SECTION////////////////////////////////////////////////////////////////////////
     const [exerciseTableData, setExerciseTableData] = useState([['1', '-', '0', '0', 'false']]);
 
     const addSet = () => {
@@ -36,28 +37,30 @@ export default function CurrentExerciseSetInfoTable() {
     return (
         <View>
             <Table borderStyle={{ borderWidth: 0 }}>
-                <Row
-                    data={[
-                        'Set',
-                        'Previous',
-                        'Weight(kg)',
-                        'Reps',
-                        <Image
-                            source={require('@assets/icons/check.png')}
-                            style={{
-                                width: 18,
-                                height: 18,
-                                tintColor: 'black',
-                                alignSelf: 'center'
-                            }}
+                <TableWrapper style={{ flexDirection: 'row' }}>
+                    {['Set', 'Previous', 'Weight(kg)', 'Reps', 'Check'].map((cell, index) => (
+                        <Cell
+                            key={index}
+                            data={
+                                index === 4 ? (
+                                    <Image
+                                        source={require('@assets/icons/check.png')}
+                                        style={{
+                                            width: 18,
+                                            height: 18,
+                                            tintColor: 'black',
+                                            alignSelf: 'center'
+                                        }}
+                                    />
+                                ) : (
+                                    <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                                        {cell}
+                                    </Text>
+                                )
+                            }
                         />
-                    ]}
-                    textStyle={{
-                        fontWeight: 'bold',
-                        paddingBottom: 10,
-                        textAlign: 'center'
-                    }}
-                />
+                    ))}
+                </TableWrapper>
                 {exerciseTableData.map((rowData, rowIndex) => (
                     <TableWrapper key={rowIndex} style={{ flexDirection: 'row', paddingBottom: 5 }}>
                         {rowData.map((cellData, colIndex) => (
@@ -79,11 +82,11 @@ export default function CurrentExerciseSetInfoTable() {
                                                 fontWeight: colIndex === 0 ? 'bold' : 'normal',
                                                 textAlign: 'center',
                                                 color:
-                                                    rowData[rowData.length - 1] === 'true'
+                                                    rowData.at(rowData.length - 1) === 'true'
                                                         ? theme.colors.inversePrimary
                                                         : theme.colors.outline,
                                                 textDecorationLine:
-                                                    rowData[rowData.length - 1] === 'true'
+                                                    rowData.at(rowData.length - 1) === 'true'
                                                         ? 'line-through'
                                                         : 'none'
                                             }}

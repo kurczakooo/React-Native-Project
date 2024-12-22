@@ -10,6 +10,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
+import RestTimerDialog from './components/restTimerDialog';
+import React from 'react';
 
 export default function WorkoutScreen({ navigation }: any) {
     const iconSize = 24;
@@ -61,24 +63,52 @@ export default function WorkoutScreen({ navigation }: any) {
         //navigation.navigate('HomeTab', { screen: 'Exercises' });
     };
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const [TimerDialogVisible, setTimerVisible] = useState(false);
+    const [timerCallback, setTimerCallback] = useState<(time: string) => void | null>(null);
+
+    const showTimerDialog = (callback: (time: string) => void) => {
+        setTimerVisible(true);
+        setTimerCallback(() => callback);
+    };
+
+    const hideTimerDialog = (time: string) => {
+        setTimerVisible(false);
+        if (timerCallback) {
+            timerCallback(time);
+            setTimerCallback(null);
+        }
+    };
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     return (
-        <ScreenContainer>
-            <WorkoutCard showDialog={showDialog} image={image} />
+        <>
+            <View style={{ gap: 10, padding: 10 }}>
+                <WorkoutCard showDialog={showDialog} image={image} />
 
-            <CurrentExercise exercise={exercises[0]} />
+                <ScrollView style={{}}>
+                    {exercises.slice(0, 6).map((exercise, index) => (
+                        <CurrentExercise
+                            key={index}
+                            exercise={exercise}
+                            timerDialogHandler={showTimerDialog}
+                        />
+                    ))}
+                </ScrollView>
 
-            <Button
-                onPress={() => {
-                    onAddExercise();
-                }}
-                mode='contained'
-                style={{
-                    padding: 3,
-                    boxShadow: shadowPrimary
-                }}
-            >
-                + Add exercise
-            </Button>
+                <Button
+                    onPress={() => {
+                        onAddExercise();
+                    }}
+                    mode='contained'
+                    style={{
+                        padding: 3,
+                        boxShadow: shadowPrimary
+                    }}
+                >
+                    + Add exercise
+                </Button>
+            </View>
             <ImageDialog
                 visible={visible}
                 hideDialog={hideDialog}
@@ -86,7 +116,8 @@ export default function WorkoutScreen({ navigation }: any) {
                 pickImageCallback={pickImage}
                 takePhotoCallback={takePhoto}
             />
-        </ScreenContainer>
+            <RestTimerDialog visible={TimerDialogVisible} hideDialog={hideTimerDialog} />
+        </>
     );
 }
 

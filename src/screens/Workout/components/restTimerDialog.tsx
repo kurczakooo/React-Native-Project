@@ -13,9 +13,15 @@ export default function RestTimerDialog({
     const [secText, setSecText] = useState('');
 
     const handleOkPress = () => {
-        const minutes = minText.padStart(2, '0');
-        const seconds = secText.padStart(2, '0');
-        hideDialog(`${minutes}:${seconds}`);
+        const minutes = parseInt(minText, 10) || 0;
+        const seconds = parseInt(secText, 10) || 0;
+
+        if (minutes < 0 || seconds < 0 || minutes > 60 || seconds >= 60) {
+            alert('Set minutes and seconds below 60');
+            return;
+        }
+
+        hideDialog(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     };
 
     return (
@@ -32,6 +38,7 @@ export default function RestTimerDialog({
                     value={minText}
                     onChangeText={text => setMinText(text)}
                     style={{ fontSize: 32 }}
+                    keyboardType='numeric'
                     maxLength={2}
                 ></TextInput>
                 <Text style={{ fontWeight: 'bold', fontSize: 32 }}>:</Text>
@@ -40,6 +47,7 @@ export default function RestTimerDialog({
                     value={secText}
                     onChangeText={text => setSecText(text)}
                     style={{ fontSize: 32 }}
+                    keyboardType='numeric'
                     maxLength={2}
                 ></TextInput>
             </Dialog.Content>
