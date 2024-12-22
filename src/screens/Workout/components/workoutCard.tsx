@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, Pressable, StyleSheet } from 'react-native';
 import { Card, useTheme } from 'react-native-paper';
 import ButtonWithIcon from './buttonWithIcon';
+import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutCard({
     showDialog,
@@ -10,6 +11,8 @@ export default function WorkoutCard({
     showDialog: () => void;
     image: string;
 }) {
+    const navigation = useNavigation();
+
     ///////////////////////////////////////////////////////////DURATION SECTION////////////////////////////////////////////////////////////////////////
     const [duration, setDuration] = useState(0);
     const [formattedDuration, setFormattedDuration] = useState('00:00:00');
@@ -41,12 +44,9 @@ export default function WorkoutCard({
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const iconSize = 24;
-    const theme = useTheme();
 
     const [title, setTitle] = useState('Workout Title');
     const [isEditing, setIsEditing] = useState(false);
-
-    const testPress = () => {};
 
     return (
         <>
@@ -130,7 +130,9 @@ export default function WorkoutCard({
                         outlineColor='red'
                         color='red'
                         backgroundColor='white'
-                        onPress={testPress}
+                        onPress={() => {
+                            navigation.navigate('HomeTab', { screen: 'Home' });
+                        }}
                         style={{ flex: 1, justifyContent: 'center' }}
                     />
                     <ButtonWithIcon
@@ -139,7 +141,7 @@ export default function WorkoutCard({
                         outlineColor='#1778f2'
                         color='white'
                         backgroundColor='#1778f2'
-                        onPress={testPress}
+                        onPress={() => {}}
                         style={{ flex: 1, justifyContent: 'center' }}
                     />
                 </View>

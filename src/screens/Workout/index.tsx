@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Pressable, View, Image, StyleSheet } from 'react-native';
-import { Button, Card, Text, TextInput, useTheme } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Button, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
-import { Theme, ExecisesStackParamList, HomeStackParamList } from 'src/types';
+import { Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
 import { exercises } from 'src/screens/Exercises/exercises';
-import ScreenContainer from 'src/components/ScreenContainer';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
@@ -77,18 +76,28 @@ export default function WorkoutScreen({ navigation }: any) {
     };
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    const [tmpExercises, setTmpExercises] = useState([]);
+
     const onAddExercise = () => {
-        //const navigation = useNavigation();
-        //navigation.navigate('HomeTab', { screen: 'Exercises' });
+        setTmpExercises(prev => {
+            const nextIndex = prev.length;
+            return [...prev, exercises[nextIndex]];
+        });
     };
 
     return (
         <>
-            <View style={{ gap: 10, padding: 10 }}>
+            <View
+                style={{
+                    gap: 10,
+                    padding: 10,
+                    backgroundColor: 'red'
+                }}
+            >
                 <WorkoutCard showDialog={showDialog} image={image} />
 
-                <ScrollView style={{ height: 'auto', borderRadius: 11 }}>
-                    {exercises.slice(0, 7).map((exercise, index) => (
+                <ScrollView style={{ borderRadius: 10 }}>
+                    {tmpExercises.map((exercise, index) => (
                         <CurrentExercise
                             key={index}
                             exercise={exercise}
@@ -96,7 +105,6 @@ export default function WorkoutScreen({ navigation }: any) {
                         />
                     ))}
                 </ScrollView>
-
                 <Button
                     onPress={() => {
                         onAddExercise();
