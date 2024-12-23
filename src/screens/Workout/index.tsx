@@ -60,7 +60,7 @@ export default function WorkoutScreen({ navigation }: any) {
 
     ///////////////////////////////////REST TIMER DIALOG SECTION/////////////////////////////////////////
     const [TimerDialogVisible, setTimerVisible] = useState(false);
-    const [timerCallback, setTimerCallback] = useState<(time: string) => void | null>(null);
+    const [timerCallback, setTimerCallback] = useState<((time: string) => void) | null>(null);
 
     const showTimerDialog = (callback: (time: string) => void) => {
         setTimerVisible(true);
@@ -78,6 +78,7 @@ export default function WorkoutScreen({ navigation }: any) {
 
     const [tmpExercises, setTmpExercises] = useState([]);
 
+    ///////this is temporary so don't worry about the error/////////////////////////////////////
     const onAddExercise = () => {
         setTmpExercises(prev => {
             const nextIndex = prev.length;
@@ -85,13 +86,18 @@ export default function WorkoutScreen({ navigation }: any) {
         });
     };
 
+    const onDeleteExercise = (name: string) => {
+        const updatedExercises = tmpExercises.filter(exercise => exercise.name !== name);
+        setTmpExercises(updatedExercises);
+    };
+
     return (
         <>
             <View
                 style={{
                     gap: 10,
-                    padding: 10,
-                    backgroundColor: 'red'
+                    padding: 10
+                    //backgroundColor: 'red'
                 }}
             >
                 <WorkoutCard showDialog={showDialog} image={image} />
@@ -102,6 +108,7 @@ export default function WorkoutScreen({ navigation }: any) {
                             key={index}
                             exercise={exercise}
                             timerDialogHandler={showTimerDialog}
+                            deleteExerciseHandler={onDeleteExercise}
                         />
                     ))}
                 </ScrollView>

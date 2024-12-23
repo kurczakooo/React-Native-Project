@@ -1,18 +1,18 @@
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, Pressable, Image } from 'react-native';
 import { useTheme, Text } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
 import { useState } from 'react';
-import RestTimerDialog from './restTimerDialog';
 import React from 'react';
-
 import CurrentExerciseSetInfoTable from './currentExerciseSetInfoTable';
 
 export default function CurrentExercise({
     exercise,
-    timerDialogHandler
+    timerDialogHandler,
+    deleteExerciseHandler
 }: {
     exercise: PredefinedExerciseType;
     timerDialogHandler: (callback: (time: string) => void) => void;
+    deleteExerciseHandler: (id: string) => void;
 }) {
     const theme = useTheme<Theme>();
     const { name, level } = exercise;
@@ -21,6 +21,7 @@ export default function CurrentExercise({
         intermediate: theme.colors.intermediate,
         expert: theme.colors.expert
     };
+    const deleteIcon = require('assets/icons/cross.png');
 
     const [rest, setRest] = useState('');
 
@@ -45,7 +46,27 @@ export default function CurrentExercise({
                     style={{ ...styles.levelIndicator, backgroundColor: indicatorColors[level] }}
                 ></View>
                 <View style={styles.nameContainer}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{name}</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text
+                            style={{
+                                fontWeight: 'bold',
+                                fontSize: 16,
+                                textAlign: 'right'
+                            }}
+                        >
+                            {name}
+                        </Text>
+                        <Pressable onPress={name => deleteExerciseHandler}>
+                            <Image
+                                source={deleteIcon}
+                                style={{
+                                    width: 18,
+                                    height: 18,
+                                    tintColor: 'red'
+                                }}
+                            />
+                        </Pressable>
+                    </View>
                     <Pressable
                         onPress={openTimerDialog}
                         style={{
@@ -53,10 +74,7 @@ export default function CurrentExercise({
                             maxWidth: '50%'
                         }}
                     >
-                        <Text
-                            style={{ color: theme.colors.inversePrimary, fontWeight: '700' }}
-                            //onPress={() => setVisible(true)}
-                        >
+                        <Text style={{ color: theme.colors.inversePrimary, fontWeight: '700' }}>
                             {'Rest timer:  '}
                         </Text>
                         <Text style={{ color: theme.colors.inversePrimary, fontWeight: '700' }}>
