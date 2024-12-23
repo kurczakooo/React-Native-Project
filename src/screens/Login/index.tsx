@@ -15,7 +15,7 @@ export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('admin');
 
-    const [loginFailed, setLoginFailed] = useState(false);
+    const [loginFailed, setLoginFailed] = useState('');
 
     const handleUsername = (newUsername: string) => {
         setUsername(newUsername);
@@ -28,11 +28,19 @@ export default function Login({ navigation }: any) {
     const { userId, setUserId } = useContext(userIdContext);
 
     const onLoginnn = async () => {
-        setLoginFailed(false);
-        setUserId(await authenticate(username, password));
-        if (userId === null) {
-            setLoginFailed(true);
-        }
+        setLoginFailed('');
+        authenticate(username, password)
+            .then(e => {
+                if (userId === null) {
+                    setLoginFailed('Incorrect username or password');
+                } else {
+                    setUserId(e);
+                }
+            })
+            .catch(e => {
+                console.error('Error during login ' + e);
+                setLoginFailed('Login request failed');
+            });
     };
 
     const onRegister = () => {
@@ -47,7 +55,7 @@ export default function Login({ navigation }: any) {
                 <TextInput
                     label='username'
                     value={username}
-                    error={loginFailed}
+                    error={loginFailed !== ''}
                     onChangeText={text => handleUsername(text)}
                 />
                 <HelperText type='error'>{''}</HelperText>
@@ -55,11 +63,11 @@ export default function Login({ navigation }: any) {
                     label='password'
                     secureTextEntry
                     value={password}
-                    error={loginFailed}
+                    error={loginFailed !== ''}
                     onChangeText={text => handlePassword(text)}
                 />
-                <HelperText type='error' visible={loginFailed}>
-                    Incorrect username or password
+                <HelperText type='error' visible={loginFailed !== ''}>
+                    {loginFailed}
                 </HelperText>
                 <Button onPress={onLoginnn} mode='contained'>
                     <Text style={{ color: 'white' }}>Login</Text>
