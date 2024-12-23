@@ -57,37 +57,37 @@ const RegisterFields = ({ navigation }: props) => {
     };
 
     return (
-        <View>
-            <TextInput
-                label='username'
-                value={username}
-                onChangeText={text => setUsername(text)}
-                style={styles.textInput}
-            />
-            <HelperText type='error' visible={usernameError !== ''}>
-                {usernameError}
-            </HelperText>
-            <TextInput
-                label='password'
-                secureTextEntry
-                value={password}
-                onChangeText={text => setPassword(text)}
-                style={styles.textInput}
-            />
-            <TextInput
-                label='confirm password'
-                secureTextEntry
-                value={password2}
-                onChangeText={text => setPassword2(text)}
-                style={styles.textInput}
-            />
-            <HelperText type='error' visible={passswordError !== ''}>
-                {passswordError}
-            </HelperText>
-            <Button onPress={onRegister} mode='contained' style={styles.button}>
-                Register
-            </Button>
-        </View>
+        <>
+            <View>
+                <TextInput
+                    label='username'
+                    value={username}
+                    onChangeText={text => setUsername(text)}
+                />
+                <HelperText type='error' visible={usernameError !== ''}>
+                    {usernameError}
+                </HelperText>
+                <TextInput
+                    label='password'
+                    secureTextEntry
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                />
+                <HelperText type='error'>{''}</HelperText>
+                <TextInput
+                    label='confirm password'
+                    secureTextEntry
+                    value={password2}
+                    onChangeText={text => setPassword2(text)}
+                />
+                <HelperText type='error' visible={passswordError !== ''}>
+                    {passswordError}
+                </HelperText>
+                <Button onPress={onRegister} mode='contained'>
+                    Register
+                </Button>
+            </View>
+        </>
     );
 };
 

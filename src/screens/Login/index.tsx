@@ -8,6 +8,8 @@ import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
 import stylesGlobal from 'src/styles/style';
 import { authenticate } from 'src/api/login';
+import { styles } from 'src/styles/style';
+import FooterText from 'src/components/FooterText';
 
 export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('admin');
@@ -41,59 +43,33 @@ export default function Login({ navigation }: any) {
     return (
         <View style={styles.container}>
             <Logo></Logo>
-            <TextInput
-                style={styles.textInput}
-                label='username'
-                value={username}
-                error={loginFailed}
-                onChangeText={text => handleUsername(text)}
-            />
-            <TextInput
-                style={styles.textInput}
-                label='password'
-                secureTextEntry
-                value={password}
-                error={loginFailed}
-                onChangeText={text => handlePassword(text)}
-            />
-            <HelperText type='error' visible={loginFailed}>
-                Incorrect username or password
-            </HelperText>
-            <Button
-                onPress={onLoginnn}
-                mode='contained'
-                style={{ ...styles.button, backgroundColor: 'black' }}
-            >
-                <Text style={{ color: 'white' }}>Login</Text>
-            </Button>
-            <View style={styles.bottomTextContainer}>
-                <Text style={styles.bottomText}>You still do not have account?</Text>
-                <Text onPress={onRegister} style={styles.signUpText}>
-                    Sign up NOW!!!
-                </Text>
+            <View>
+                <TextInput
+                    label='username'
+                    value={username}
+                    error={loginFailed}
+                    onChangeText={text => handleUsername(text)}
+                />
+                <HelperText type='error'>{''}</HelperText>
+                <TextInput
+                    label='password'
+                    secureTextEntry
+                    value={password}
+                    error={loginFailed}
+                    onChangeText={text => handlePassword(text)}
+                />
+                <HelperText type='error' visible={loginFailed}>
+                    Incorrect username or password
+                </HelperText>
+                <Button onPress={onLoginnn} mode='contained'>
+                    <Text style={{ color: 'white' }}>Login</Text>
+                </Button>
             </View>
+            <FooterText
+                text='You still do not have account?'
+                linkText='Sign up NOW!!!'
+                onPress={onRegister}
+            ></FooterText>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    ...stylesGlobal,
-    button: {
-        ...stylesGlobal.button
-    },
-    bottomTextContainer: {},
-    imageContainer: {
-        width: '100%',
-        height: '100%',
-        marginBottom: 30
-    },
-    bottomText: {
-        fontWeight: 'bold',
-        textAlign: 'center'
-    },
-    signUpText: {
-        fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        textAlign: 'center'
-    }
-});
