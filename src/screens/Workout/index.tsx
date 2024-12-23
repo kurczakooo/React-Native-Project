@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
-import { Theme } from 'src/types';
+import { PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
 import { exercises } from 'src/screens/Exercises/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -76,9 +76,9 @@ export default function WorkoutScreen({ navigation }: any) {
     };
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const [tmpExercises, setTmpExercises] = useState([]);
+    const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
 
-    ///////this is temporary so don't worry about the error/////////////////////////////////////
+    ///////this is temporary/////////////////////////////////////
     const onAddExercise = () => {
         setTmpExercises(prev => {
             const nextIndex = prev.length;

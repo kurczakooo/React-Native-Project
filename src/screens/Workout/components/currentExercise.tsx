@@ -56,7 +56,7 @@ export default function CurrentExercise({
                         >
                             {name}
                         </Text>
-                        <Pressable onPress={name => deleteExerciseHandler}>
+                        <Pressable onPress={() => deleteExerciseHandler(name)}>
                             <Image
                                 source={deleteIcon}
                                 style={{
