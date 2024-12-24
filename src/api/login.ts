@@ -10,6 +10,14 @@ export interface Credentials {
 }
 
 /**
+ * @brief Save credentials into save persistent store
+ * @param credentials
+ */
+export const saveCredentials = (credentials: Credentials) => {
+    SecureStore.setItem(credentialsStoreKey_c, JSON.stringify(credentials));
+};
+
+/**
  * Authenticate with username and password
  * @param user username
  * @param password password
@@ -24,19 +32,16 @@ export const authenticate = async ({
     if (users.length === 0) {
         return null;
     } else {
+        saveCredentials({ username: user, password });
         return users[0].id;
     }
-};
-
-/**
- * @brief Save credentials into save persistent store
- * @param credentials
- */
-export const saveCredentials = (credentials: Credentials) => {
-    SecureStore.setItem(credentialsStoreKey_c, JSON.stringify(credentials));
 };
 
 // @brief Read credentials from persistent store
 export const getCredentials = () => {
     return JSON.parse(SecureStore.getItem(credentialsStoreKey_c) ?? '{}');
+};
+
+export const logout = () => {
+    SecureStore.deleteItemAsync(credentialsStoreKey_c);
 };

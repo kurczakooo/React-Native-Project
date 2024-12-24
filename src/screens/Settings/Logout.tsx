@@ -5,13 +5,15 @@ import { useContext } from 'react';
 import { userIdContext } from 'src/contexts/userIdContext';
 import { View } from 'react-native';
 import { Theme } from 'src/types';
+import { logout } from 'src/api/login';
 
 const LogoutCard = () => {
     const theme = useTheme<Theme>();
     const { userId, setUserId } = useContext(userIdContext);
 
-    const onLogout = () => {
-        setUserId(null);
+    const onLogout = async () => {
+        logout();
+        await setUserId(null);
     };
 
     return (

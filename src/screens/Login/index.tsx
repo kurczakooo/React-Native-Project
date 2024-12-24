@@ -20,7 +20,7 @@ export default function Login({ navigation }: any) {
         authenticate(getCredentials()).then(e => {
             setUserId(e);
         });
-    }, [setUserId]);
+    });
 
     useEffect(() => {
         setLoginFailed('');
