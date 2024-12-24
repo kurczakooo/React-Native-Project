@@ -4,7 +4,7 @@ import { HelperText, Button, TextInput, Text, useTheme } from 'react-native-pape
 
 import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
-import { authenticate, getCredentials, saveCredentials } from 'src/api/login';
+import { authenticate, Credentials, getCredentials, saveCredentials } from 'src/api/login';
 import { styles } from 'src/styles/style';
 import FooterText from 'src/components/FooterText';
 
@@ -16,11 +16,7 @@ export default function Login({ navigation }: any) {
 
     const [loginFailed, setLoginFailed] = useState('');
 
-    useEffect(() => {
-        authenticate(getCredentials()).then(e => {
-            setUserId(e);
-        });
-    });
+    const [isLoginPending, setIsLoginPending] = useState(false);
 
     useEffect(() => {
         setLoginFailed('');
@@ -34,7 +30,8 @@ export default function Login({ navigation }: any) {
         setPassword(newPassword);
     };
 
-    const onLogin = async () => {
+    const onLogin = async ({ username, password }: Credentials) => {
+        setIsLoginPending(true);
         setLoginFailed('');
         authenticate({ username, password })
             .then(e => {
@@ -49,8 +46,19 @@ export default function Login({ navigation }: any) {
             .catch(e => {
                 console.error('Error during login ' + e);
                 setLoginFailed('Login request failed');
+            })
+            .finally(() => {
+                setIsLoginPending(false);
             });
     };
+
+    useEffect(() => {
+        getCredentials().then((e: Credentials) => {
+            if (e === null || e?.username === undefined || e?.password === undefined) return null;
+            onLogin(e);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onRegister = () => {
         console.log('Register');
@@ -78,7 +86,11 @@ export default function Login({ navigation }: any) {
                 <HelperText type='error' visible={loginFailed !== ''}>
                     {loginFailed}
                 </HelperText>
-                <Button onPress={onLogin} mode='contained'>
+                <Button
+                    onPress={() => onLogin({ username, password })}
+                    mode='contained'
+                    loading={isLoginPending}
+                >
                     <Text style={{ color: 'white' }}>Login</Text>
                 </Button>
             </View>

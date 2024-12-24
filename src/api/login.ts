@@ -38,10 +38,10 @@ export const authenticate = async ({
 };
 
 // @brief Read credentials from persistent store
-export const getCredentials = () => {
-    return JSON.parse(SecureStore.getItem(credentialsStoreKey_c) ?? '{}');
+export const getCredentials = async () => {
+    return SecureStore.getItemAsync(credentialsStoreKey_c).then(e => JSON.parse(e ?? '{}'));
 };
 
-export const logout = () => {
+export const logout = async () => {
     SecureStore.deleteItemAsync(credentialsStoreKey_c);
 };
