@@ -17,6 +17,10 @@ export default function Login({ navigation }: any) {
 
     const [loginFailed, setLoginFailed] = useState('');
 
+    useEffect(() => {
+        setLoginFailed('');
+    }, [username, password]);
+
     const handleUsername = (newUsername: string) => {
         setUsername(newUsername);
     };
@@ -31,7 +35,8 @@ export default function Login({ navigation }: any) {
         setLoginFailed('');
         authenticate(username, password)
             .then(e => {
-                if (userId === null) {
+                console.log(e);
+                if (e === null) {
                     setLoginFailed('Incorrect username or password');
                 } else {
                     setUserId(e);
