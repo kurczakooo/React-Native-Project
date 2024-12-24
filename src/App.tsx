@@ -13,7 +13,7 @@ export default function App() {
         <PaperProvider theme={lightTheme}>
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <userIdContext.Provider value={{ userId, setUserId }}>
-                    {/* zmienić tego propsa VVVVV na true żeby pomijać logowanie */}
+                    {/* WARN PITFALL NIE zmienić tego propsa VVVVV, dane do logowania są zapisywane */}
                     <Navigation userAuthenticated={userId !== null} />
                 </userIdContext.Provider>
             </GestureHandlerRootView>
