@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
@@ -79,6 +79,8 @@ export default function WorkoutScreen({ navigation }: any) {
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
 
     ///////this is temporary/////////////////////////////////////
+    const scrollViewRef = useRef(null);
+
     const onAddExercise = () => {
         setTmpExercises(prev => {
             const nextIndex = prev.length;
@@ -97,21 +99,29 @@ export default function WorkoutScreen({ navigation }: any) {
                 style={{
                     gap: 10,
                     padding: 10
-                    //backgroundColor: 'red'
                 }}
             >
                 <WorkoutCard showDialog={showDialog} image={image} />
-
-                <ScrollView style={{ borderRadius: 10 }}>
-                    {tmpExercises.map((exercise, index) => (
-                        <CurrentExercise
-                            key={index}
-                            exercise={exercise}
-                            timerDialogHandler={showTimerDialog}
-                            deleteExerciseHandler={onDeleteExercise}
-                        />
-                    ))}
-                </ScrollView>
+            </View>
+            <ScrollView
+                style={{
+                    borderRadius: 10,
+                    marginLeft: 10,
+                    marginRight: 10
+                }}
+                ref={scrollViewRef}
+                onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+            >
+                {tmpExercises.map((exercise, index) => (
+                    <CurrentExercise
+                        key={index}
+                        exercise={exercise}
+                        timerDialogHandler={showTimerDialog}
+                        deleteExerciseHandler={onDeleteExercise}
+                    />
+                ))}
+            </ScrollView>
+            <View style={{ paddingBottom: 115, padding: 10 }}>
                 <Button
                     onPress={() => {
                         onAddExercise();
@@ -125,6 +135,7 @@ export default function WorkoutScreen({ navigation }: any) {
                     + Add exercise
                 </Button>
             </View>
+
             <ImageDialog
                 visible={visible}
                 hideDialog={hideDialog}
