@@ -1,7 +1,7 @@
 import { View, StyleSheet, Pressable, Image } from 'react-native';
-import { useTheme, Text } from 'react-native-paper';
+import { useTheme, Text, Snackbar } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import CurrentExerciseSetInfoTable from './currentExerciseSetInfoTable';
 
@@ -22,7 +22,7 @@ export default function CurrentExercise({
         expert: theme.colors.expert
     };
     const deleteIcon = require('assets/icons/cross.png');
-
+    ///////////////////////////////////////////////////////////SETTING REST TIMER SECTION////////////////////////////////////////////////////////////////////////
     const [rest, setRest] = useState('');
 
     const openTimerDialog = () => {
@@ -31,6 +31,41 @@ export default function CurrentExercise({
             else setRest('OFF');
         });
     };
+    ///////////////////////////////////////////////////////////RUNNING REST TIMER SECTION////////////////////////////////////////////////////////////////////////
+    const [snackBarTimerVisible, setsnackBarTimerVisible] = useState(false);
+    const [snackBarTimerText, setSnackBarTimerText] = useState('');
+
+    const startTimer = () => {
+        setsnackBarTimerVisible(true);
+        setSnackBarTimerText(rest);
+    };
+
+    useEffect(() => {
+        var timer: string | number | NodeJS.Timeout | undefined;
+
+        if (snackBarTimerVisible) {
+            let [minutes, seconds] = snackBarTimerText.split(':').map(Number);
+
+            timer = setInterval(() => {
+                if (seconds === 0 && minutes === 0) {
+                    clearInterval(timer);
+                    //setsnackBarTimerVisible(false);
+                } else {
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    setSnackBarTimerText(
+                        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+                    );
+                }
+            }, 1000);
+        }
+
+        return () => clearInterval(timer);
+    }, [snackBarTimerVisible, snackBarTimerText]);
 
     return (
         <>
@@ -81,9 +116,12 @@ export default function CurrentExercise({
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
-                    <CurrentExerciseSetInfoTable />
+                    <CurrentExerciseSetInfoTable startRestTimerSignal={startTimer} />
                 </View>
             </View>
+            <Snackbar visible={snackBarTimerVisible} onDismiss={() => {}}>
+                {snackBarTimerText}
+            </Snackbar>
         </>
     );
 }

@@ -5,7 +5,11 @@ import { Theme } from 'src/types';
 import { useState } from 'react';
 import ButtonWithIcon from './buttonWithIcon';
 
-export default function CurrentExerciseSetInfoTable() {
+export default function CurrentExerciseSetInfoTable({
+    startRestTimerSignal
+}: {
+    startRestTimerSignal: () => void;
+}) {
     const theme = useTheme<Theme>();
 
     ///////////////////////////////////////////////////////////EXERCISE TABLE SECTION////////////////////////////////////////////////////////////////////////
@@ -32,6 +36,7 @@ export default function CurrentExerciseSetInfoTable() {
                     : row
             )
         );
+        startRestTimerSignal();
     };
 
     return (

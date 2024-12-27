@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
@@ -79,13 +79,16 @@ export default function WorkoutScreen({ navigation }: any) {
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
 
     ///////this is temporary/////////////////////////////////////
-    const scrollViewRef = useRef(null);
+    const scrollViewRef = useRef<ScrollView>(null);
+    const [shouldScroll, setShouldScroll] = useState(false);
 
     const onAddExercise = () => {
         setTmpExercises(prev => {
-            const nextIndex = prev.length;
+            const nextIndex = prev.length + 1;
+            setShouldScroll(true);
             return [...prev, exercises[nextIndex]];
         });
+        scrollViewRef.current?.scrollToEnd({ animated: true });
     };
 
     const onDeleteExercise = (name: string) => {
@@ -110,7 +113,12 @@ export default function WorkoutScreen({ navigation }: any) {
                     marginRight: 10
                 }}
                 ref={scrollViewRef}
-                onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+                onContentSizeChange={() => {
+                    if (shouldScroll) {
+                        scrollViewRef.current?.scrollToEnd({ animated: true });
+                        setShouldScroll(false);
+                    }
+                }}
             >
                 {tmpExercises.map((exercise, index) => (
                     <CurrentExercise
