@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Image, Pressable, StyleSheet } from 'react-native';
-import { Card, useTheme } from 'react-native-paper';
+import { Button, Card, Dialog, useTheme } from 'react-native-paper';
 import ButtonWithIcon from './buttonWithIcon';
 import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutCard({
     showDialog,
-    image
+    image,
+    showDiscardDialog,
+    showSaveDialog
 }: {
     showDialog: () => void;
     image: string;
+    showDiscardDialog: () => void;
+    showSaveDialog: () => void;
 }) {
     const navigation = useNavigation();
 
@@ -40,8 +44,6 @@ export default function WorkoutCard({
             secs.toString().padStart(2, '0')
         ].join(':');
     };
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const iconSize = 24;
 
@@ -130,9 +132,7 @@ export default function WorkoutCard({
                         outlineColor='red'
                         color='red'
                         backgroundColor='white'
-                        onPress={() => {
-                            navigation.navigate('HomeTab', { screen: 'Home' });
-                        }}
+                        onPress={() => showDiscardDialog()}
                         style={{ flex: 1, justifyContent: 'center' }}
                     />
                     <ButtonWithIcon
@@ -141,7 +141,7 @@ export default function WorkoutCard({
                         outlineColor='#1778f2'
                         color='white'
                         backgroundColor='#1778f2'
-                        onPress={() => {}}
+                        onPress={() => showSaveDialog()}
                         style={{ flex: 1, justifyContent: 'center' }}
                     />
                 </View>

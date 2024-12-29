@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Snackbar, useTheme } from 'react-native-paper';
+import { View, StyleSheet, Vibration, Text } from 'react-native';
+import { Button, Dialog, Snackbar, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
 import { PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
@@ -12,9 +12,10 @@ import { useNavigation } from '@react-navigation/native';
 import RestTimerDialog from './components/restTimerDialog';
 import React from 'react';
 
-export default function WorkoutScreen({ navigation }: any) {
+export default function WorkoutScreen() {
     const iconSize = 24;
     const { shadowPrimary } = useTheme<Theme>();
+    const navigation = useNavigation();
 
     ///////////////////////////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
@@ -74,6 +75,7 @@ export default function WorkoutScreen({ navigation }: any) {
             setTimerCallback(null);
         }
     };
+
     ///////////////////////////////////REST TIMER SNACKBAR SECTION/////////////////////////////////////////
     const [snackBarTimerVisible, setSnackBarTimerVisible] = useState(false);
     const [snackBarTimerText, setSnackBarTimerText] = useState('');
@@ -102,6 +104,7 @@ export default function WorkoutScreen({ navigation }: any) {
                     clearInterval(timer);
                     setSnackBarTimerVisible(false);
                     //TUTAJ WYWOŁAĆ WIBRACJE URZĄDZENIA////////////////////////////////////////////////////
+                    Vibration.vibrate([1 * 1000], false);
                 } else {
                     if (seconds === 0) {
                         minutes -= 1;
@@ -118,8 +121,22 @@ export default function WorkoutScreen({ navigation }: any) {
 
         return () => clearInterval(timer);
     }, [snackBarTimerVisible, snackBarTimerText]);
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////DISCARD AND SAVE WORKOUT HANDLERS////////////////////////////////////////////////////
+    const [discardDialogVisible, setDiscardDialogVisible] = useState(false);
+    const [saveDialogVisible, setSaveDialogVisible] = useState(false);
+
+    const handleDiscardOk = () => {
+        //bedzie albo usuniecie danych z kontekstu albo z api juz
+        navigation.navigate('HomeTab', { screen: 'Home' });
+    };
+
+    const handleSaveOk = () => {
+        //bedzie albo zapisaie danych do kontekstu albo do api juz
+        navigation.navigate('HomeTab', { screen: 'Home' });
+    };
+
+    /////////////////////////////////////////EXERCISES ARRAY, TMP ADDING AND DELETING///////////////////////////////////////////////////
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
 
     const scrollViewRef = useRef<ScrollView>(null);
@@ -144,8 +161,14 @@ export default function WorkoutScreen({ navigation }: any) {
     return (
         <>
             <View style={{ gap: 10, padding: 10 }}>
-                <WorkoutCard showDialog={showDialog} image={image} />
+                <WorkoutCard
+                    showDialog={showDialog}
+                    image={image}
+                    showDiscardDialog={() => setDiscardDialogVisible(true)}
+                    showSaveDialog={() => setSaveDialogVisible(true)}
+                />
             </View>
+
             <ScrollView
                 style={styles.scrollView}
                 ref={scrollViewRef}
@@ -166,7 +189,8 @@ export default function WorkoutScreen({ navigation }: any) {
                     />
                 ))}
             </ScrollView>
-            <View style={{ paddingBottom: snackBarTimerVisible ? 150 : 115, padding: 10 }}>
+
+            <View style={{ paddingBottom: snackBarTimerVisible ? 170 : 115, padding: 10 }}>
                 <Button
                     onPress={() => {
                         onAddExercise();
@@ -188,14 +212,51 @@ export default function WorkoutScreen({ navigation }: any) {
                 pickImageCallback={pickImage}
                 takePhotoCallback={takePhoto}
             />
+
             <RestTimerDialog visible={TimerDialogVisible} hideDialog={hideTimerDialog} />
+
             <Snackbar
-                style={{ borderRadius: 5, marginBottom: 200 }}
+                style={{ borderRadius: 5, marginBottom: 115 }}
                 visible={snackBarTimerVisible}
                 onDismiss={() => {}}
             >
                 {`Rest timer: ${snackBarTimerText}`}
             </Snackbar>
+
+            <Dialog
+                visible={discardDialogVisible}
+                onDismiss={() => setDiscardDialogVisible(false)}
+                dismissable={false}
+                style={{ marginTop: -150 }}
+            >
+                <Dialog.Title>Discard Workout</Dialog.Title>
+                <Dialog.Content>
+                    <Text>
+                        Are you sure you want to discard your workout? You will lose your current
+                        progress
+                    </Text>
+                </Dialog.Content>
+                <Dialog.Actions>
+                    <Button onPress={() => setDiscardDialogVisible(false)}>Cancel</Button>
+                    <Button onPress={handleDiscardOk}>OK</Button>
+                </Dialog.Actions>
+            </Dialog>
+
+            <Dialog
+                visible={saveDialogVisible}
+                onDismiss={() => setSaveDialogVisible(false)}
+                dismissable={false}
+                style={{ marginTop: -150 }}
+            >
+                <Dialog.Title>End Workout</Dialog.Title>
+                <Dialog.Content>
+                    <Text>Are you sure you want to end your workout?</Text>
+                </Dialog.Content>
+                <Dialog.Actions>
+                    <Button onPress={() => setSaveDialogVisible(false)}>Cancel</Button>
+                    <Button onPress={handleSaveOk}>OK</Button>
+                </Dialog.Actions>
+            </Dialog>
         </>
     );
 }
