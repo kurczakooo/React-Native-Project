@@ -50,12 +50,7 @@ export default function CurrentExerciseSetInfoTable({
                                 index === 4 ? (
                                     <Image
                                         source={require('@assets/icons/check.png')}
-                                        style={{
-                                            width: 18,
-                                            height: 18,
-                                            tintColor: 'black',
-                                            alignSelf: 'center'
-                                        }}
+                                        style={styles.checkImage}
                                     />
                                 ) : (
                                     <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
@@ -155,5 +150,11 @@ const styles = StyleSheet.create({
     },
     checkBoxContainerInfo: {
         alignItems: 'center'
+    },
+    checkImage: {
+        width: 18,
+        height: 18,
+        tintColor: 'black',
+        alignSelf: 'center'
     }
 });

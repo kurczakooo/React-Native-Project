@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, useTheme } from 'react-native-paper';
+import { Button, Snackbar, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
 import { PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
@@ -74,20 +74,65 @@ export default function WorkoutScreen({ navigation }: any) {
             setTimerCallback(null);
         }
     };
+    ///////////////////////////////////REST TIMER SNACKBAR SECTION/////////////////////////////////////////
+    const [snackBarTimerVisible, setSnackBarTimerVisible] = useState(false);
+    const [snackBarTimerText, setSnackBarTimerText] = useState('');
+
+    const handleSnackBarTimer = (rest: string) => {
+        if (rest !== '') {
+            setSnackBarTimerText(rest);
+            if (!snackBarTimerVisible) setSnackBarTimerVisible(true);
+        } else {
+            setSnackBarTimerText('Timer not set');
+            setSnackBarTimerVisible(true);
+            setTimeout(() => {
+                setSnackBarTimerVisible(false);
+            }, 1000);
+        }
+    };
+
+    useEffect(() => {
+        var timer: string | number | NodeJS.Timeout | undefined;
+
+        if (snackBarTimerVisible) {
+            let [minutes, seconds] = snackBarTimerText.split(':').map(Number);
+
+            timer = setInterval(() => {
+                if (seconds === 0 && minutes === 0) {
+                    clearInterval(timer);
+                    setSnackBarTimerVisible(false);
+                    //TUTAJ WYWOŁAĆ WIBRACJE URZĄDZENIA////////////////////////////////////////////////////
+                } else {
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    setSnackBarTimerText(
+                        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+                    );
+                }
+            }, 1000);
+        }
+
+        return () => clearInterval(timer);
+    }, [snackBarTimerVisible, snackBarTimerText]);
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
 
-    ///////this is temporary/////////////////////////////////////
     const scrollViewRef = useRef<ScrollView>(null);
     const [shouldScroll, setShouldScroll] = useState(false);
 
     const onAddExercise = () => {
+        ///////this is temporary/////////////////////////////////////
         setTmpExercises(prev => {
             const nextIndex = prev.length + 1;
             setShouldScroll(true);
             return [...prev, exercises[nextIndex]];
         });
+        ///////////////////////////////////
         scrollViewRef.current?.scrollToEnd({ animated: true });
     };
 
@@ -98,20 +143,11 @@ export default function WorkoutScreen({ navigation }: any) {
 
     return (
         <>
-            <View
-                style={{
-                    gap: 10,
-                    padding: 10
-                }}
-            >
+            <View style={{ gap: 10, padding: 10 }}>
                 <WorkoutCard showDialog={showDialog} image={image} />
             </View>
             <ScrollView
-                style={{
-                    borderRadius: 10,
-                    marginLeft: 10,
-                    marginRight: 10
-                }}
+                style={styles.scrollView}
                 ref={scrollViewRef}
                 onContentSizeChange={() => {
                     if (shouldScroll) {
@@ -126,10 +162,11 @@ export default function WorkoutScreen({ navigation }: any) {
                         exercise={exercise}
                         timerDialogHandler={showTimerDialog}
                         deleteExerciseHandler={onDeleteExercise}
+                        timerSnackbarHandler={handleSnackBarTimer}
                     />
                 ))}
             </ScrollView>
-            <View style={{ paddingBottom: 115, padding: 10 }}>
+            <View style={{ paddingBottom: snackBarTimerVisible ? 150 : 115, padding: 10 }}>
                 <Button
                     onPress={() => {
                         onAddExercise();
@@ -152,8 +189,21 @@ export default function WorkoutScreen({ navigation }: any) {
                 takePhotoCallback={takePhoto}
             />
             <RestTimerDialog visible={TimerDialogVisible} hideDialog={hideTimerDialog} />
+            <Snackbar
+                style={{ borderRadius: 5, marginBottom: 200 }}
+                visible={snackBarTimerVisible}
+                onDismiss={() => {}}
+            >
+                {`Rest timer: ${snackBarTimerText}`}
+            </Snackbar>
         </>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    scrollView: {
+        borderRadius: 10,
+        marginLeft: 10,
+        marginRight: 10
+    }
+});
