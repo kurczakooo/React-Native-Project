@@ -1,7 +1,6 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Button, Text, useTheme, Icon } from 'react-native-paper';
 import { RecentWorkoutCard } from './recentWorkoutCard';
-import { exampleCards } from './exampleCards';
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import BottomSheet, {
     BottomSheetView,

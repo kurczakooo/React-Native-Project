@@ -72,7 +72,7 @@ export const RecentWorkoutCard: React.FC<recentWorkoutCardProps> = ({
                     <Icon source={timeIcon} size={20} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Time</Text>
-                        <Text style={styles.date}>{totalDuration} min</Text>
+                        <Text style={styles.date}>{totalDuration / 60} min</Text>
                     </View>
                 </View>
                 <View style={styles.dataDescView}>

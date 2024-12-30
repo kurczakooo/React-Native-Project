@@ -17,7 +17,7 @@ export default function WorkoutScreen() {
     const { shadowPrimary } = useTheme<Theme>();
     const navigation = useNavigation();
 
-    ///////////////////////////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
+    // #region ////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
     const [image, setImage] = useState<string>('');
 
@@ -58,8 +58,9 @@ export default function WorkoutScreen() {
             setImage(result.assets[0].uri);
         }
     };
+    // #endregion
 
-    ///////////////////////////////////REST TIMER DIALOG SECTION/////////////////////////////////////////
+    // #region ///////REST TIMER DIALOG SECTION/////////////////////////////////////////
     const [TimerDialogVisible, setTimerVisible] = useState(false);
     const [timerCallback, setTimerCallback] = useState<((time: string) => void) | null>(null);
 
@@ -75,8 +76,9 @@ export default function WorkoutScreen() {
             setTimerCallback(null);
         }
     };
+    // #endregion
 
-    ///////////////////////////////////REST TIMER SNACKBAR SECTION/////////////////////////////////////////
+    // #region ////////////REST TIMER SNACKBAR SECTION/////////////////////////////////////////
     const [snackBarTimerVisible, setSnackBarTimerVisible] = useState(false);
     const [snackBarTimerText, setSnackBarTimerText] = useState('');
 
@@ -121,8 +123,9 @@ export default function WorkoutScreen() {
 
         return () => clearInterval(timer);
     }, [snackBarTimerVisible, snackBarTimerText]);
+    // #endregion
 
-    /////////////////////////////////////////////DISCARD AND SAVE WORKOUT HANDLERS////////////////////////////////////////////////////
+    // #region ///DISCARD AND SAVE WORKOUT HANDLERS////////////////////////////////////////////////////
     const [discardDialogVisible, setDiscardDialogVisible] = useState(false);
     const [saveDialogVisible, setSaveDialogVisible] = useState(false);
 
@@ -135,8 +138,9 @@ export default function WorkoutScreen() {
         //bedzie albo zapisaie danych do kontekstu albo do api juz
         navigation.navigate('HomeTab', { screen: 'Home' });
     };
+    // #endregion
 
-    /////////////////////////////////////////EXERCISES ARRAY, TMP ADDING AND DELETING///////////////////////////////////////////////////
+    // #region //////////////////EXERCISES ARRAY, TMP ADDING AND DELETING///////////////////////////////////////////////////
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
 
     const scrollViewRef = useRef<ScrollView>(null);
@@ -157,6 +161,8 @@ export default function WorkoutScreen() {
         const updatedExercises = tmpExercises.filter(exercise => exercise.name !== name);
         setTmpExercises(updatedExercises);
     };
+
+    // #endregion
 
     return (
         <>

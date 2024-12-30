@@ -17,7 +17,7 @@ export default function WorkoutCard({
 }) {
     const navigation = useNavigation();
 
-    ///////////////////////////////////////////////////////////DURATION SECTION////////////////////////////////////////////////////////////////////////
+    // #region //////////////DURATION SECTION////////////////////////////////////////////////////////////////////////
     const [duration, setDuration] = useState(0);
     const [formattedDuration, setFormattedDuration] = useState('00:00:00');
 
@@ -44,6 +44,7 @@ export default function WorkoutCard({
             secs.toString().padStart(2, '0')
         ].join(':');
     };
+    // #endregion
 
     const iconSize = 24;
 
@@ -99,12 +100,15 @@ export default function WorkoutCard({
                                 <TextInput
                                     style={styles.titleInput}
                                     value={title}
-                                    onChangeText={text => setTitle(text)}
+                                    onChangeText={newText => setTitle(newText)}
                                     onBlur={() => setIsEditing(false)}
                                     autoFocus={true}
+                                    maxLength={20}
                                 />
                             ) : (
-                                <Text style={styles.title}>{title}</Text>
+                                <Text style={styles.title} onPress={() => setIsEditing(true)}>
+                                    {title}
+                                </Text>
                             )}
                         </View>
                         <View style={{ flexDirection: 'row', gap: 10 }}>
