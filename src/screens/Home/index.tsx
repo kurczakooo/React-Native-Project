@@ -2,23 +2,33 @@ import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Button, Text, useTheme, Icon } from 'react-native-paper';
 import { RecentWorkoutCard } from './recentWorkoutCard';
 import { exampleCards } from './exampleCards';
-import React, { useState, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import BottomSheet, {
     BottomSheetView,
     BottomSheetBackdrop,
     BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
-import { Theme, HomeStackParamList } from 'src/types';
+import { Theme, HomeStackParamList, Workout } from 'src/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { readWorkouts } from 'src/api/home';
 
 type HomeScreenProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
     const { shadowPrimary } = useTheme<Theme>();
     const nickname = 'User';
-    //converting exampleWorkouts to array to test how deleting works
-    const workoutsArray = exampleCards;
 
+    const [workouts, setWorkouts] = useState<Workout[]>([]);
+
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const data = await readWorkouts('u0'); ////REAPLACE THIS WITH ACTUAL USER ID
+            setWorkouts(data);
+        };
+        fetchWorkouts();
+    }, []);
+
+    // #region WORKOUT BOTTOM SHELF SECTION ///////////////////////////////////////////
     const bottomSheetRef = useRef<BottomSheet>(null);
     const snapPoints = useMemo(() => ['25%', '10%'], []);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -33,23 +43,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         bottomSheetRef.current?.close();
     }, []);
 
-    //TO DO: implement these functions
-    const handleEditWorkout = useCallback(() => {
-        console.log('Workout edit');
-        bottomSheetRef.current?.close();
-    }, []);
-
-    const handleDeleteWorkout = useCallback(() => {
-        // const idx = workoutsArray.indexOf(selectedWorkout.id);
-
-        // if (idx > -1) {
-        //     workoutsArray.splice(idx, 1);
-        // }
-
-        console.log('Workout deleted');
-        bottomSheetRef.current?.close();
-    }, []);
-
     const renderBackdrop = useCallback(
         (props: BottomSheetBackdropProps) => (
             <BottomSheetBackdrop
@@ -61,6 +54,19 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         ),
         []
     );
+
+    //TO DO: implement these functions
+    const handleEditWorkout = useCallback(() => {
+        console.log('Workout edit');
+        bottomSheetRef.current?.close();
+    }, []);
+
+    const handleDeleteWorkout = useCallback(() => {
+        console.log('Workout deleted');
+        bottomSheetRef.current?.close();
+    }, []);
+
+    // #endregion //////////////////////////////////////////////////////////////////////////////////////
 
     const onStartWorkout = () => {
         navigation.navigate('Workout');
@@ -86,17 +92,18 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     Recent workouts
                 </Text>
                 <ScrollView>
-                    {workoutsArray.map(card => (
+                    {workouts.map(workout => (
                         <RecentWorkoutCard
-                            key={card.id}
-                            imageUrl=''
-                            title={card.name}
-                            dateTimestamp={card.date}
-                            totalDuration={card.time}
-                            totalSets={card.sets}
-                            totalVolume={card.volume}
-                            targetMuscles={card.targetMuscles}
-                            exercises={[]}
+                            key={workout.id}
+                            id={workout.id}
+                            userId={workout.userId}
+                            imageUrl={''}
+                            title={workout.title}
+                            dateTimestamp={workout.dateTimestamp}
+                            totalDuration={workout.totalDuration}
+                            totalSets={workout.totalSets}
+                            totalVolume={workout.totalVolume}
+                            targetMuscles={workout.targetMuscles}
                             onPressProps={(workout: any) => handleOpenBottomSheet(workout)}
                         />
                     ))}
@@ -111,27 +118,11 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 index={-1}
             >
                 <BottomSheetView style={{ padding: 20, gap: 10 }}>
-                    <Pressable
-                        style={{
-                            flexDirection: 'row',
-                            gap: 15,
-                            padding: 10,
-                            alignItems: 'center'
-                        }}
-                        onPress={handleEditWorkout}
-                    >
+                    <Pressable style={styles.bottomSheetPressable} onPress={handleEditWorkout}>
                         <Icon source={require('@assets/icons/edit.png')} size={28} />
                         <Text style={{ fontSize: 20 }}>Edit workout</Text>
                     </Pressable>
-                    <Pressable
-                        style={{
-                            flexDirection: 'row',
-                            gap: 15,
-                            padding: 10,
-                            alignItems: 'center'
-                        }}
-                        onPress={handleDeleteWorkout}
-                    >
+                    <Pressable style={styles.bottomSheetPressable} onPress={handleDeleteWorkout}>
                         <Icon source={require('@assets/icons/cross.png')} size={28} color='red' />
                         <Text style={{ fontSize: 20, color: 'red' }}>Delete workout</Text>
                     </Pressable>
@@ -152,5 +143,11 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#FFFFFF',
         fontSize: 18
+    },
+    bottomSheetPressable: {
+        flexDirection: 'row',
+        gap: 15,
+        padding: 10,
+        alignItems: 'center'
     }
 });

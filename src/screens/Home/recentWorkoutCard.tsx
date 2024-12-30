@@ -1,10 +1,15 @@
 import { View, Image, StyleSheet, Pressable } from 'react-native';
-import React, { useCallback, useMemo, useRef } from 'react';
+import React from 'react';
 import { Card, Icon, Text } from 'react-native-paper';
 import { Workout } from 'src/types';
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
-export const RecentWorkoutCard: React.FC<Workout> = ({
+interface handlersProps {
+    onPressProps: any;
+}
+
+type recentWorkoutCardProps = Workout & handlersProps;
+
+export const RecentWorkoutCard: React.FC<recentWorkoutCardProps> = ({
     id,
     title,
     dateTimestamp,
@@ -63,21 +68,21 @@ export const RecentWorkoutCard: React.FC<Workout> = ({
                     gap: 20
                 }}
             >
-                <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, gap: 10 }}>
+                <View style={styles.dataDescView}>
                     <Icon source={timeIcon} size={20} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Time</Text>
                         <Text style={styles.date}>{totalDuration} min</Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, gap: 10 }}>
+                <View style={styles.dataDescView}>
                     <Icon source={setsIcon} size={22} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Sets</Text>
                         <Text style={styles.date}>{totalSets}</Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10, gap: 10 }}>
+                <View style={styles.dataDescView}>
                     <Icon source={volumeIcon} size={20} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Volume</Text>
@@ -88,9 +93,9 @@ export const RecentWorkoutCard: React.FC<Workout> = ({
             <Card.Content style={{ gap: 15 }}>
                 <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Target Muscles</Text>
                 <View style={{ flexDirection: 'row', gap: 10 }}>
-                    {targetMuscles.map((muscleObj, index) => (
+                    {targetMuscles.map((muscle, index) => (
                         <Text key={index} style={styles.targetMuscles}>
-                            {muscleObj.muscle}
+                            {muscle.muscleName}
                         </Text>
                     ))}
                 </View>
@@ -116,5 +121,11 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingRight: 15,
         fontSize: 12
+    },
+    dataDescView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        gap: 10
     }
 });
