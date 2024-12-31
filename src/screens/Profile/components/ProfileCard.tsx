@@ -1,15 +1,26 @@
+import { useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
+import { getTotalWorkouts, getTotalWorkoutTime } from 'src/api/endpoints/workouts';
 import Statistic from 'src/components/Statistic';
+import { useUserId } from 'src/contexts/userIdContext';
 import { Theme } from 'src/types';
 
-interface ProfileCardProps {
-    totalWorkouts?: number;
-    totalTime?: number;
-}
-
-export default function ProfileCard({ totalWorkouts, totalTime }: ProfileCardProps) {
+export default function ProfileCard() {
     const theme = useTheme<Theme>();
+    const { userId } = useUserId();
+    const [totalWorkouts, setTotalWorkouts] = useState(0);
+    const [totalTime, setTotalTime] = useState(0);
+
+    useEffect(() => {
+        async function fetchWorkoutData() {
+            setTotalWorkouts(await getTotalWorkouts(userId));
+            setTotalTime(await getTotalWorkoutTime(userId));
+        }
+
+        fetchWorkoutData();
+    }, []);
+
     return (
         <View
             style={{
@@ -27,12 +38,12 @@ export default function ProfileCard({ totalWorkouts, totalTime }: ProfileCardPro
                     <Statistic
                         font='bodyMedium'
                         title='Total workouts'
-                        value={totalWorkouts?.toString() ?? '0'}
+                        value={totalWorkouts.toString() ?? '0'}
                     />
                     <Statistic
                         font='bodyMedium'
                         title='Total time'
-                        value={(totalTime?.toString() ?? '0') + ' hrs'}
+                        value={(totalTime.toString() ?? '0') + ' hrs'}
                     />
                 </View>
             </View>

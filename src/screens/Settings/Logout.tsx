@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { userIdContext } from 'src/contexts/userIdContext';
 import { View } from 'react-native';
 import { Theme } from 'src/types';
-import { logout } from 'src/api/login';
+import { logout } from 'src/api/endpoints/login';
 
 const LogoutCard = () => {
     const theme = useTheme<Theme>();
@@ -15,7 +15,7 @@ const LogoutCard = () => {
     const onLogout = async () => {
         setLogoutIndicator(true);
         logout()
-            .then(() => setUserId(null))
+            .then(() => setUserId(''))
             .finally(() => {
                 setLogoutIndicator(false);
             });

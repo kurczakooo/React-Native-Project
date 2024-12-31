@@ -4,9 +4,9 @@ import { View } from 'react-native';
 import { Button, HelperText, TextInput } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 
-import { registerNewUser, UserAlreadyExsitsError } from 'src/api/register';
-import { authenticate } from 'src/api/login';
-import { InvalidPasswordError } from 'src/api/settings';
+import { registerNewUser, UserAlreadyExsitsError } from 'src/api/endpoints/register';
+import { authenticate } from 'src/api/endpoints/login';
+import { InvalidPasswordError } from 'src/api/endpoints/settings';
 
 interface props {
     navigation: any;

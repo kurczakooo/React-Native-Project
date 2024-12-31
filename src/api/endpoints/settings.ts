@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { api } from './config';
+import { api } from '../config';
 
 export class InvalidPasswordError extends Error {
     constructor(message: string) {

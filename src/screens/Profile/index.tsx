@@ -6,7 +6,7 @@ import MuscleDistributionCard from './components/MuscleDistributionCard';
 export default function ProfileScreen() {
     return (
         <ScreenContainer>
-            <ProfileCard totalWorkouts={50} totalTime={123} />
+            <ProfileCard />
             <WorkoutTimeCard />
             <MuscleDistributionCard />
         </ScreenContainer>

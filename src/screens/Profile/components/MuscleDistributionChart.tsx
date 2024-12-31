@@ -6,7 +6,8 @@ import { useEffect, useLayoutEffect, useRef, useState, RefAttributes } from 'rea
 import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
 import dayjs from 'dayjs';
 import { Theme, Workout } from 'src/types';
-import workouts from '../workouts';
+import { getWorkouts } from 'src/api/endpoints/workouts';
+import { useUserId } from 'src/contexts/userIdContext';
 
 type MuscleDistributionChartProps = {
     height?: number;
@@ -88,13 +89,22 @@ const defaultProps: MuscleDistributionChartProps = {
 export default function MuscleDistributionChart(props: MuscleDistributionChartProps) {
     const { height, font } = { ...defaultProps, ...props };
     const theme = useTheme<Theme>();
+    const { userId } = useUserId();
     const [chartData, setChartData] = useState<MuscleData[]>([]);
     const [chartShadowSizing, setChartShadowSizing] = useState({});
 
     useEffect(() => {
-        // fetch data ...
-        const data = getMuscleChartData(workouts, theme.colors.primary, theme.colors.onPrimary);
-        setChartData(data);
+        async function fetchChartData() {
+            const workouts = await getWorkouts(userId);
+            const chartData = getMuscleChartData(
+                workouts,
+                theme.colors.primary,
+                theme.colors.onPrimary
+            );
+            setChartData(chartData);
+        }
+
+        fetchChartData();
     }, [theme.colors.primary, theme.colors.onPrimary]);
 
     const handleChartLayout = (event: LayoutChangeEvent) => {
@@ -109,23 +119,27 @@ export default function MuscleDistributionChart(props: MuscleDistributionChartPr
 
     return (
         <View style={style.chartContainer}>
-            <View onLayout={handleChartLayout} style={{ height }}>
-                <PolarChart
-                    data={chartData}
-                    labelKey={'label'}
-                    valueKey={'value'}
-                    colorKey={'color'}
-                >
-                    <Pie.Chart />
-                </PolarChart>
-                <View
-                    style={{
-                        ...style.chartShadow,
-                        ...chartShadowSizing,
-                        boxShadow: theme.shadowPrimary
-                    }}
-                ></View>
-            </View>
+            {chartData.length === 0 ? (
+                <Text>No workouts in the past 7 days.</Text>
+            ) : (
+                <View onLayout={handleChartLayout} style={{ height }}>
+                    <PolarChart
+                        data={chartData}
+                        labelKey={'label'}
+                        valueKey={'value'}
+                        colorKey={'color'}
+                    >
+                        <Pie.Chart />
+                    </PolarChart>
+                    <View
+                        style={{
+                            ...style.chartShadow,
+                            ...chartShadowSizing,
+                            boxShadow: theme.shadowPrimary
+                        }}
+                    ></View>
+                </View>
+            )}
             <View style={style.legend}>
                 {chartData.map((d, i) => (
                     <View key={i} style={style.legendItemContainer}>

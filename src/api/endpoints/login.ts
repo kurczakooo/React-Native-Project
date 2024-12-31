@@ -1,5 +1,5 @@
 import { User } from 'src/types';
-import { api } from './config';
+import { api } from '../config';
 import * as SecureStore from 'expo-secure-store';
 
 const credentialsStoreKey_c = 'Credentials';

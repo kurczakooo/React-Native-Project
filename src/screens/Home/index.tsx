@@ -9,19 +9,20 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import { Theme, HomeStackParamList, Workout } from 'src/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { readWorkouts } from 'src/api/home';
+import { getTotalWorkouts } from 'src/api/endpoints/workouts';
+import { useUserId } from 'src/contexts/userIdContext';
+import { getWorkouts } from 'src/api/endpoints/workouts';
 
 type HomeScreenProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
     const { shadowPrimary } = useTheme<Theme>();
     const nickname = 'User';
-
     const [workouts, setWorkouts] = useState<Workout[]>([]);
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const data = await readWorkouts('u0'); ////REAPLACE THIS WITH ACTUAL USER ID
+            const data = await getWorkouts('u0'); ////REAPLACE THIS WITH ACTUAL USER ID
             setWorkouts(data);
         };
         fetchWorkouts();

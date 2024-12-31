@@ -1,9 +1,13 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 export const userIdContext = createContext<{
-    userId: string | null;
-    setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+    userId: string;
+    setUserId: React.Dispatch<React.SetStateAction<string>>;
 }>({
-    userId: null,
-    setUserId: () => {}
+    userId: '',
+    setUserId: () => ''
 });
+
+export const useUserId = () => {
+    return useContext(userIdContext);
+};

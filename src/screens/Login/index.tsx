@@ -4,7 +4,12 @@ import { HelperText, Button, TextInput, Text, useTheme } from 'react-native-pape
 
 import Logo from 'src/components/Logo';
 import { userIdContext } from 'src/contexts/userIdContext';
-import { authenticate, Credentials, getCredentials, saveCredentials } from 'src/api/login';
+import {
+    authenticate,
+    Credentials,
+    getCredentials,
+    saveCredentials
+} from 'src/api/endpoints/login';
 import { styles } from 'src/styles/style';
 import FooterText from 'src/components/FooterText';
 

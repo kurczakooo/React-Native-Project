@@ -2,7 +2,7 @@ import { Card, Text, TextInput, HelperText, Button, useTheme } from 'react-nativ
 import { styles } from 'src/styles/style';
 import { useState, useEffect, useContext } from 'react';
 import { userIdContext } from 'src/contexts/userIdContext';
-import { changePassword } from 'src/api/settings';
+import { changePassword } from 'src/api/endpoints/settings';
 import { View } from 'react-native';
 import { Theme } from 'src/types';
 
