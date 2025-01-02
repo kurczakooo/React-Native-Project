@@ -12,9 +12,11 @@ import {
 } from 'src/api/endpoints/login';
 import { styles } from 'src/styles/style';
 import FooterText from 'src/components/FooterText';
+import { userDataContext } from 'src/contexts/ userDataContext';
 
 export default function Login({ navigation }: any) {
     const { userId, setUserId } = useContext(userIdContext);
+    const { userData, setUserData } = useContext(userDataContext);
 
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('admin');
@@ -46,6 +48,7 @@ export default function Login({ navigation }: any) {
                 } else {
                     saveCredentials({ username, password });
                     setUserId(e);
+                    setUserData({ username: username });
                 }
             })
             .catch(e => {

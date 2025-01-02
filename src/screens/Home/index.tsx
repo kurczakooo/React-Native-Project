@@ -1,7 +1,7 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Button, Text, useTheme, Icon } from 'react-native-paper';
 import { RecentWorkoutCard } from './recentWorkoutCard';
-import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect, useContext } from 'react';
 import BottomSheet, {
     BottomSheetView,
     BottomSheetBackdrop,
@@ -12,12 +12,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { getTotalWorkouts } from 'src/api/endpoints/workouts';
 import { useUserId } from 'src/contexts/userIdContext';
 import { getWorkouts } from 'src/api/endpoints/workouts';
+import { userDataContext } from 'src/contexts/ userDataContext';
 
 type HomeScreenProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
     const { shadowPrimary } = useTheme<Theme>();
-    const nickname = 'User';
+    const nickname = useContext(userDataContext).userData.username ?? 'User';
     const [workouts, setWorkouts] = useState<Workout[]>([]);
 
     useEffect(() => {

@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { getTotalWorkouts, getTotalWorkoutTime } from 'src/api/endpoints/workouts';
 import Statistic from 'src/components/Statistic';
+import { userDataContext } from 'src/contexts/ userDataContext';
 import { useUserId } from 'src/contexts/userIdContext';
 import { Theme } from 'src/types';
 
 export default function ProfileCard() {
     const theme = useTheme<Theme>();
     const { userId } = useUserId();
+    const username = useContext(userDataContext).userData.username ?? 'User';
     const [totalWorkouts, setTotalWorkouts] = useState(0);
     const [totalTime, setTotalTime] = useState(0);
 
@@ -32,7 +34,7 @@ export default function ProfileCard() {
             <Image source={require('@assets/icons/profile.png')} style={style.profileImage} />
             <View style={style.profileNameContainer}>
                 <Text variant='titleLarge' style={style.username}>
-                    admin
+                    {username}
                 </Text>
                 <View style={style.statContainer}>
                     <Statistic
