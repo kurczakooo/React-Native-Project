@@ -13,6 +13,7 @@ import Fuse from 'fuse.js';
 import { StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import React from 'react';
 
 enum ActionType {
     FETCH,

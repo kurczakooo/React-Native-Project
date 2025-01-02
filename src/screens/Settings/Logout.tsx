@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, TextInput, Button, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 import { useContext } from 'react';
-import { userIdContext } from 'src/contexts/userIdContext';
+import { userIdContext, USERNOTLOGINVALUE } from 'src/contexts/userIdContext';
 import { View } from 'react-native';
 import { Theme } from 'src/types';
 import { logout } from 'src/api/endpoints/login';
@@ -15,7 +15,7 @@ const LogoutCard = () => {
     const onLogout = async () => {
         setLogoutIndicator(true);
         logout()
-            .then(() => setUserId(''))
+            .then(() => setUserId(USERNOTLOGINVALUE))
             .finally(() => {
                 setLogoutIndicator(false);
             });
