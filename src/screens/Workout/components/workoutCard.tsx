@@ -20,8 +20,7 @@ export default function WorkoutCard({
     const navigation = useNavigation();
     const iconSize = 24;
 
-    const [title, setTitle] = useState('Workout Title');
-    const [isEditing, setIsEditing] = useState(false);
+    const [title, setTitle] = useState('');
 
     return (
         <>
@@ -58,30 +57,22 @@ export default function WorkoutCard({
                         }}
                     >
                         <View style={{ flexDirection: 'row', gap: 10 }}>
-                            <Pressable style={{ paddingTop: 5 }} onPress={() => setIsEditing(true)}>
-                                <Image
-                                    source={require('@assets/icons/edit.png')}
-                                    style={{
-                                        width: iconSize,
-                                        height: iconSize,
-                                        tintColor: 'black'
-                                    }}
-                                />
-                            </Pressable>
-                            {isEditing ? (
-                                <TextInput
-                                    style={styles.titleInput}
-                                    value={title}
-                                    onChangeText={newText => setTitle(newText)}
-                                    onBlur={() => setIsEditing(false)}
-                                    autoFocus={true}
-                                    maxLength={20}
-                                />
-                            ) : (
-                                <Text style={styles.title} onPress={() => setIsEditing(true)}>
-                                    {title}
-                                </Text>
-                            )}
+                            <Image
+                                source={require('@assets/icons/edit.png')}
+                                style={{
+                                    marginTop: 5,
+                                    width: iconSize,
+                                    height: iconSize,
+                                    tintColor: 'black'
+                                }}
+                            />
+                            <TextInput
+                                style={styles.titleInput}
+                                onChangeText={setTitle}
+                                value={title}
+                                placeholder='Workout Title'
+                                maxLength={20}
+                            />
                         </View>
                         <View style={{ flexDirection: 'row', gap: 10 }}>
                             <Pressable style={{ paddingTop: 5 }} onPress={() => {}}>
@@ -143,6 +134,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         height: 35,
+        width: '100%',
         padding: 0,
         flexWrap: 'wrap'
     },
