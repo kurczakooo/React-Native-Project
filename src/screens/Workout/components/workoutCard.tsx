@@ -7,45 +7,17 @@ import { useNavigation } from '@react-navigation/native';
 export default function WorkoutCard({
     showDialog,
     image,
+    formattedDuration,
     showDiscardDialog,
     showSaveDialog
 }: {
     showDialog: () => void;
     image: string;
+    formattedDuration: string;
     showDiscardDialog: () => void;
     showSaveDialog: () => void;
 }) {
     const navigation = useNavigation();
-
-    // #region //////////////DURATION SECTION////////////////////////////////////////////////////////////////////////
-    const [duration, setDuration] = useState(0);
-    const [formattedDuration, setFormattedDuration] = useState('00:00:00');
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setDuration(prevDuration => {
-                const newSeconds = prevDuration + 1;
-                setFormattedDuration(formatDuration(newSeconds)); // Aktualizujemy sformatowany czas
-                return newSeconds;
-            });
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const formatDuration = (duration: number): string => {
-        const hours = Math.floor(duration / 3600);
-        const minutes = Math.floor((duration % 3600) / 60);
-        const secs = duration % 60;
-
-        return [
-            hours.toString().padStart(2, '0'),
-            minutes.toString().padStart(2, '0'),
-            secs.toString().padStart(2, '0')
-        ].join(':');
-    };
-    // #endregion
-
     const iconSize = 24;
 
     const [title, setTitle] = useState('Workout Title');

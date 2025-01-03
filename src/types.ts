@@ -14,12 +14,12 @@ export type HomeStackParamList = {
     Home: undefined;
     Workout: undefined;
     Settings: undefined;
-    Exercises: { mode: 'select' | 'view' } | undefined;
+    Exercises: { mode: 'select' | 'view'; renderType: 'stack' | 'tab' } | undefined;
 };
 
 export type ExecisesStackParamList = {
     Debug: { exercises: PredefinedExercise[] } | undefined;
-    Exercises: { mode: 'select' | 'view' } | undefined;
+    Exercises: { mode: 'select' | 'view'; renderType: 'stack' | 'tab' } | undefined;
     Settings: undefined;
 };
 
@@ -214,8 +214,8 @@ export interface CurrentUser {
     id?: string;
     username?: string;
     workout?: {
-        exercises: PredefinedExercise[];
-        formattedDuration: string;
-        image: string;
+        exercises?: PredefinedExercise[];
+        formattedDuration?: string;
+        image?: string;
     };
 }

@@ -15,6 +15,8 @@ import { StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { CompositeScreenProps, useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 enum ActionType {
     FETCH,
@@ -45,8 +47,8 @@ interface State {
 }
 
 type ExercisesScreenProps = CompositeScreenProps<
-    ExercisesTabScreenProps<'Exercises'>,
-    HomeTabScreenProps<'Exercises'>
+    HomeTabScreenProps<'Exercises'>,
+    ExercisesTabScreenProps<'Exercises'>
 >;
 
 function reducer(state: State, action: Action): State {
@@ -123,10 +125,14 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     const { shadowPrimary, screenPadding } = useTheme<Theme>();
+    const { userData, setUserData } = useCurrentUser();
+    const tabBarHeight = useBottomTabBarHeight();
 
     const exercisesCount = state.selectedExercises.length;
     const selectButtonVisible = exercisesCount > 0;
     const selectButtonText = `+ Add ${exercisesCount} exercise${exercisesCount > 1 ? 's' : ''}`;
+    const isStackScreen = route.params?.renderType === 'stack';
+    const isSelectMode = route.params?.mode === 'select';
 
     useEffect(() => {
         // Fetch exercises...
@@ -154,10 +160,14 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
     };
 
     const handleSelectConfirm = () => {
-        // const exercises = route.params?.exercises
-        //     ? [...state.selectedExercises, ...route.params?.exercises]
-        //     : state.selectedExercises;
-        // navigation.navigate('HomeTab', { screen: 'Workout' });
+        const exercises = userData.workout?.exercises
+            ? [...userData.workout?.exercises, ...state.selectedExercises]
+            : state.selectedExercises;
+        setUserData({ ...userData, workout: { ...userData.workout, exercises } });
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Workout' }]
+        });
     };
 
     const isExerciseSelected = (id: string) => {
@@ -166,7 +176,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
 
     return (
         <>
-            <ScreenContainer>
+            <ScreenContainer additionalSpaceBottom={isStackScreen ? tabBarHeight / 2 : 0}>
                 <Portal>
                     <Dialog
                         visible={state.dialogVisible}
@@ -192,7 +202,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
                     <PredefinedExercise
                         key={e.id}
                         exercise={e}
-                        onPress={route.params?.mode === 'select' ? selectExercise : showDialog}
+                        onPress={isSelectMode ? selectExercise : showDialog}
                         selected={isExerciseSelected(e.id)}
                     />
                 ))}
@@ -203,7 +213,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
                     mode='contained'
                     style={{
                         ...styles.button,
-                        bottom: screenPadding / 2,
+                        bottom: tabBarHeight - screenPadding,
                         boxShadow: shadowPrimary
                     }}
                 >

@@ -11,11 +11,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import RestTimerDialog from './components/restTimerDialog';
 import React from 'react';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const iconSize = 24;
     const { shadowPrimary } = useTheme<Theme>();
     const { navigation, route } = props;
+    const { userData, setUserData } = useCurrentUser();
 
     // #region ////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
@@ -75,6 +77,35 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             timerCallback(time);
             setTimerCallback(null);
         }
+    };
+    // #endregion
+
+    // #region //////////////DURATION SECTION////////////////////////////////////////////////////////////////////////
+    const [duration, setDuration] = useState(0);
+    const [formattedDuration, setFormattedDuration] = useState('00:00:00');
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDuration(prevDuration => {
+                const newSeconds = prevDuration + 1;
+                setFormattedDuration(formatDuration(newSeconds)); // Aktualizujemy sformatowany czas
+                return newSeconds;
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const formatDuration = (duration: number): string => {
+        const hours = Math.floor(duration / 3600);
+        const minutes = Math.floor((duration % 3600) / 60);
+        const secs = duration % 60;
+
+        return [
+            hours.toString().padStart(2, '0'),
+            minutes.toString().padStart(2, '0'),
+            secs.toString().padStart(2, '0')
+        ].join(':');
     };
     // #endregion
 
@@ -141,7 +172,9 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     // #endregion
 
     // #region //////////////////EXERCISES ARRAY, TMP ADDING AND DELETING///////////////////////////////////////////////////
-    const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>([]);
+    const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>(
+        userData.workout?.exercises ?? []
+    );
 
     const scrollViewRef = useRef<ScrollView>(null);
     const [shouldScroll, setShouldScroll] = useState(false);
@@ -155,12 +188,20 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
         // });
         ///////////////////////////////////
 
-        navigation.navigate('Exercises', { mode: 'select' });
+        setUserData({
+            ...userData,
+            workout: { exercises: tmpExercises, formattedDuration, image }
+        });
+        navigation.navigate('Exercises', { mode: 'select', renderType: 'stack' });
     };
 
     const onDeleteExercise = (name: string) => {
         const updatedExercises = tmpExercises.filter(exercise => exercise.name !== name);
         setTmpExercises(updatedExercises);
+        setUserData({
+            ...userData,
+            workout: { exercises: updatedExercises, formattedDuration, image }
+        });
     };
 
     // #endregion
@@ -171,6 +212,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 <WorkoutCard
                     showDialog={showDialog}
                     image={image}
+                    formattedDuration={formattedDuration}
                     showDiscardDialog={() => setDiscardDialogVisible(true)}
                     showSaveDialog={() => setSaveDialogVisible(true)}
                 />
