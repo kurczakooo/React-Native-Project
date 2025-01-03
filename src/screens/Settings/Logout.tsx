@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Text, TextInput, Button, useTheme } from 'react-native-paper';
+import { useState } from 'react';
+import { Text, Button, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
-import { useContext } from 'react';
-import { userIdContext, USERNOTLOGINVALUE } from 'src/contexts/userIdContext';
 import { View } from 'react-native';
 import { Theme } from 'src/types';
 import { logout } from 'src/api/endpoints/login';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 const LogoutCard = () => {
     const theme = useTheme<Theme>();
-    const { userId, setUserId } = useContext(userIdContext);
+    const { userData, setUserData } = useCurrentUser();
     const [logoutInidicator, setLogoutIndicator] = useState(false);
 
     const onLogout = async () => {
         setLogoutIndicator(true);
         logout()
-            .then(() => setUserId(USERNOTLOGINVALUE))
+            .then(() => setUserData({}))
             .finally(() => {
                 setLogoutIndicator(false);
             });

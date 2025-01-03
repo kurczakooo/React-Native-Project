@@ -14,7 +14,7 @@ export type HomeStackParamList = {
     Home: undefined;
     Workout: undefined;
     Settings: undefined;
-    Exercises: undefined;
+    Exercises: { mode: 'select' | 'view' } | undefined;
 };
 
 export type ExecisesStackParamList = {
@@ -210,11 +210,12 @@ export interface Workout {
     }[];
 }
 
-/**
- * User's profile.
- */
-export interface User {
-    id: string;
-    username: string;
-    password: string;
+export interface CurrentUser {
+    id?: string;
+    username?: string;
+    workout?: {
+        exercises: PredefinedExercise[];
+        formattedDuration: string;
+        image: string;
+    };
 }

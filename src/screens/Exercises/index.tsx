@@ -4,7 +4,8 @@ import {
     Theme,
     PredefinedExercise as PredefinedExerciseType,
     ExercisesTabScreenProps,
-    ExecisesStackParamList
+    ExecisesStackParamList,
+    HomeTabScreenProps
 } from 'src/types';
 import { exercises as devExercises } from './exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
@@ -12,7 +13,7 @@ import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
 import { StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { CompositeScreenProps, useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 
 enum ActionType {
@@ -42,6 +43,11 @@ interface State {
     searchQuery: string;
     dialogVisible: boolean;
 }
+
+type ExercisesScreenProps = CompositeScreenProps<
+    ExercisesTabScreenProps<'Exercises'>,
+    HomeTabScreenProps<'Exercises'>
+>;
 
 function reducer(state: State, action: Action): State {
     switch (action.type) {
@@ -112,8 +118,8 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     ));
 };
 
-export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercises'>) {
-    const { navigation } = props;
+export default function ExercisesScreen(props: ExercisesScreenProps) {
+    const { navigation, route } = props;
 
     const [state, dispatch] = useReducer(reducer, initialState);
     const { shadowPrimary, screenPadding } = useTheme<Theme>();
@@ -148,7 +154,10 @@ export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercise
     };
 
     const handleSelectConfirm = () => {
-        navigation.navigate('Debug', { exercises: state.selectedExercises });
+        // const exercises = route.params?.exercises
+        //     ? [...state.selectedExercises, ...route.params?.exercises]
+        //     : state.selectedExercises;
+        // navigation.navigate('HomeTab', { screen: 'Workout' });
     };
 
     const isExerciseSelected = (id: string) => {
@@ -183,10 +192,7 @@ export default function ExercisesScreen(props: ExercisesTabScreenProps<'Exercise
                     <PredefinedExercise
                         key={e.id}
                         exercise={e}
-                        onPress={
-                            selectExercise
-                            //props.route.params?.mode === 'select' ? selectExercise : showDialog
-                        }
+                        onPress={route.params?.mode === 'select' ? selectExercise : showDialog}
                         selected={isExerciseSelected(e.id)}
                     />
                 ))}

@@ -4,10 +4,10 @@ import { Pie, PolarChart } from 'victory-native';
 import { Text, useTheme } from 'react-native-paper';
 import { useEffect, useLayoutEffect, useRef, useState, RefAttributes } from 'react';
 import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
-import dayjs from 'dayjs';
 import { Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
-import { useUserId } from 'src/contexts/userIdContext';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import dayjs from 'dayjs';
 
 type MuscleDistributionChartProps = {
     height?: number;
@@ -89,13 +89,13 @@ const defaultProps: MuscleDistributionChartProps = {
 export default function MuscleDistributionChart(props: MuscleDistributionChartProps) {
     const { height, font } = { ...defaultProps, ...props };
     const theme = useTheme<Theme>();
-    const { userId } = useUserId();
+    const { userData } = useCurrentUser();
     const [chartData, setChartData] = useState<MuscleData[]>([]);
     const [chartShadowSizing, setChartShadowSizing] = useState({});
 
     useEffect(() => {
         async function fetchChartData() {
-            const workouts = await getWorkouts(userId);
+            const workouts = await getWorkouts(userData.id);
             const chartData = getMuscleChartData(
                 workouts,
                 theme.colors.primary,
@@ -105,7 +105,7 @@ export default function MuscleDistributionChart(props: MuscleDistributionChartPr
         }
 
         fetchChartData();
-    }, [theme.colors.primary, theme.colors.onPrimary]);
+    }, [theme.colors.primary, theme.colors.onPrimary, userData.id]);
 
     const handleChartLayout = (event: LayoutChangeEvent) => {
         const { width, height } = event.nativeEvent.layout;

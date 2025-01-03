@@ -1,14 +1,14 @@
-import { Card, Text, TextInput, HelperText, Button, useTheme } from 'react-native-paper';
+import { Text, TextInput, HelperText, Button, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
-import { useState, useEffect, useContext } from 'react';
-import { userIdContext } from 'src/contexts/userIdContext';
+import { useState, useEffect } from 'react';
 import { changePassword } from 'src/api/endpoints/settings';
 import { View } from 'react-native';
 import { Theme } from 'src/types';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 export const PasswordChange = () => {
     const theme = useTheme<Theme>();
-    const { userId, setUserId } = useContext(userIdContext);
+    const { userData, setUserData } = useCurrentUser();
     const [passwordError, setPasswordError] = useState('');
     const [newPasswordDoNotMatchError, setNewPasswordError] = useState('');
 
@@ -31,14 +31,14 @@ export const PasswordChange = () => {
             errored = true;
         }
 
-        if (!userId) {
+        if (!userData.id) {
             console.log('user is not set');
             return;
         }
 
         if (errored) return;
 
-        const didChangeSucced = await changePassword(userId, password, newPassword);
+        const didChangeSucced = await changePassword(userData.id, password, newPassword);
 
         console.log(didChangeSucced);
         if (didChangeSucced) {

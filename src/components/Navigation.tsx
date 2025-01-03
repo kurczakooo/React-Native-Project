@@ -27,6 +27,7 @@ import WorkoutScreen from 'src/screens/Workout';
 import HeaderLogoIcon from './HeaderLogoIcon';
 import HeaderSettingsIcon from './HeaderSettingsIcon';
 import CalendarScreen from 'src/screens/Calendar';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 const config = {
     settingsScreenName: 'Settings',
@@ -138,8 +139,11 @@ function AppTab() {
     );
 }
 
-export default function Navigation({ userAuthenticated }: { userAuthenticated?: boolean }) {
+export default function Navigation() {
+    const currentUser = useCurrentUser();
     return (
-        <NavigationContainer>{userAuthenticated ? <AppTab /> : <AuthStack />}</NavigationContainer>
+        <NavigationContainer>
+            {currentUser.userData.id ? <AppTab /> : <AuthStack />}
+        </NavigationContainer>
     );
 }

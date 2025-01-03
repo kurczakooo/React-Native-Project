@@ -1,7 +1,7 @@
 import { Workout } from 'src/types';
 import { api } from '../config';
 
-export async function getWorkouts(userId: string): Promise<Workout[]> {
+export async function getWorkouts(userId: string | undefined): Promise<Workout[]> {
     try {
         const response = await api.get(`/workouts?userId=${userId}`);
         return response.data;
@@ -11,7 +11,7 @@ export async function getWorkouts(userId: string): Promise<Workout[]> {
     }
 }
 
-export async function getTotalWorkouts(userId: string): Promise<number> {
+export async function getTotalWorkouts(userId: string | undefined): Promise<number> {
     try {
         return (await api.get(`/workouts?userId=${userId}`)).data.length;
     } catch {
@@ -20,7 +20,7 @@ export async function getTotalWorkouts(userId: string): Promise<number> {
     }
 }
 
-export async function getTotalWorkoutTime(userId: string): Promise<number> {
+export async function getTotalWorkoutTime(userId: string | undefined): Promise<number> {
     try {
         const workouts: Workout[] = (await api.get(`/workouts?userId=${userId}`)).data;
         const totalTime = workouts.map(e => e.totalDuration).reduce((acc, curr) => acc + curr);

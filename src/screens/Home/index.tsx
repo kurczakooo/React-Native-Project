@@ -10,15 +10,15 @@ import BottomSheet, {
 import { Theme, HomeStackParamList, Workout } from 'src/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { getTotalWorkouts } from 'src/api/endpoints/workouts';
-import { useUserId } from 'src/contexts/userIdContext';
 import { getWorkouts } from 'src/api/endpoints/workouts';
-import { userDataContext } from 'src/contexts/ userDataContext';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 type HomeScreenProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
     const { shadowPrimary } = useTheme<Theme>();
-    const nickname = useContext(userDataContext).userData.username ?? 'User';
+    const { userData } = useCurrentUser();
+    const nickname = userData.username ?? 'User';
     const [workouts, setWorkouts] = useState<Workout[]>([]);
 
     useEffect(() => {

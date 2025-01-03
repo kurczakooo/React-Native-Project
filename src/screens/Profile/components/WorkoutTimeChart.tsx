@@ -5,9 +5,9 @@ import { useFont } from '@shopify/react-native-skia';
 import { useTheme } from 'react-native-paper';
 import { Theme, Workout } from 'src/types';
 import { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
 import { getWorkouts } from 'src/api/endpoints/workouts';
-import { useUserId } from 'src/contexts/userIdContext';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import dayjs from 'dayjs';
 
 type BarGeneratorProps = {
     points: { totalHours: PointsArray };
@@ -66,7 +66,7 @@ export default function WorkoutTimeChart(props: WorkoutTimeChartProps) {
     const theme = useTheme<Theme>();
     const font = useFont(require('@assets/fonts/Roboto-Medium.ttf'), fontSize);
     const [workoutData, setWorkoutData] = useState<WorkoutData[]>([]);
-    const { userId } = useUserId();
+    const { userData } = useCurrentUser();
 
     const axisOptions = {
         font,
@@ -79,13 +79,13 @@ export default function WorkoutTimeChart(props: WorkoutTimeChartProps) {
 
     useEffect(() => {
         async function fetchChartData() {
-            const workouts = await getWorkouts(userId);
+            const workouts = await getWorkouts(userData.id);
             const data = getWeeklyWorkoutData(workouts);
             setWorkoutData(data);
         }
 
         fetchChartData();
-    }, []);
+    }, [userData.id]);
 
     const chartBar = ({ points, chartBounds }: BarGeneratorProps) => (
         <Bar points={points.totalHours} chartBounds={chartBounds} color={theme.colors.primary} />

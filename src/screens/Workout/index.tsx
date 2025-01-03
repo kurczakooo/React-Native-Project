@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Vibration, Text } from 'react-native';
 import { Button, Dialog, Snackbar, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
-import { PredefinedExercise, Theme } from 'src/types';
+import { HomeTabScreenProps, PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
 import { exercises } from 'src/screens/Exercises/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -12,10 +12,10 @@ import { useNavigation } from '@react-navigation/native';
 import RestTimerDialog from './components/restTimerDialog';
 import React from 'react';
 
-export default function WorkoutScreen() {
+export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const iconSize = 24;
     const { shadowPrimary } = useTheme<Theme>();
-    const navigation = useNavigation();
+    const { navigation, route } = props;
 
     // #region ////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
@@ -148,13 +148,14 @@ export default function WorkoutScreen() {
 
     const onAddExercise = () => {
         ///////this is temporary/////////////////////////////////////
-        setTmpExercises(prev => {
-            const nextIndex = prev.length + 1;
-            setShouldScroll(true);
-            return [...prev, exercises[nextIndex]];
-        });
+        // setTmpExercises(prev => {
+        //     const nextIndex = prev.length + 1;
+        //     setShouldScroll(true);
+        //     return [...prev, exercises[nextIndex]];
+        // });
         ///////////////////////////////////
-        scrollViewRef.current?.scrollToEnd({ animated: true });
+
+        navigation.navigate('Exercises', { mode: 'select' });
     };
 
     const onDeleteExercise = (name: string) => {

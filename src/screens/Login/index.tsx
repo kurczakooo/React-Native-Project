@@ -3,7 +3,6 @@ import { View, StyleSheet, Image, ImageComponent } from 'react-native';
 import { HelperText, Button, TextInput, Text, useTheme } from 'react-native-paper';
 
 import Logo from 'src/components/Logo';
-import { userIdContext } from 'src/contexts/userIdContext';
 import {
     authenticate,
     Credentials,
@@ -12,11 +11,10 @@ import {
 } from 'src/api/endpoints/login';
 import { styles } from 'src/styles/style';
 import FooterText from 'src/components/FooterText';
-import { userDataContext } from 'src/contexts/ userDataContext';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 export default function Login({ navigation }: any) {
-    const { userId, setUserId } = useContext(userIdContext);
-    const { userData, setUserData } = useContext(userDataContext);
+    const { setUserData } = useCurrentUser();
 
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('admin');
@@ -41,14 +39,13 @@ export default function Login({ navigation }: any) {
         setIsLoginPending(true);
         setLoginFailed('');
         authenticate({ username, password })
-            .then(e => {
-                console.log(e);
-                if (e === null) {
+            .then(id => {
+                console.log(id);
+                if (id === null) {
                     setLoginFailed('Incorrect username or password');
                 } else {
                     saveCredentials({ username, password });
-                    setUserId(e);
-                    setUserData({ username: username });
+                    setUserData({ id, username });
                 }
             })
             .catch(e => {
