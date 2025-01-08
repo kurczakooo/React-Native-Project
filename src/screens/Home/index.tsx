@@ -7,19 +7,17 @@ import BottomSheet, {
     BottomSheetBackdrop,
     BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
-import { Theme, HomeStackParamList, Workout } from 'src/types';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { getTotalWorkouts } from 'src/api/endpoints/workouts';
+import { Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { useNavigation } from '@react-navigation/native';
 
-type HomeScreenProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
-
-export default function HomeScreen({ navigation }: HomeScreenProps) {
+export default function HomeScreen() {
     const { shadowPrimary } = useTheme<Theme>();
     const { userData } = useCurrentUser();
     const nickname = userData.username ?? 'User';
     const [workouts, setWorkouts] = useState<Workout[]>([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -70,7 +68,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     // #endregion //////////////////////////////////////////////////////////////////////////////////////
 
     const onStartWorkout = () => {
-        navigation.navigate('Workout');
+        navigation.navigate('HomeTab', { screen: 'Workout' });
     };
 
     return (
@@ -94,19 +92,25 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 </Text>
                 <ScrollView>
                     {workouts.map(workout => (
-                        <RecentWorkoutCard
+                        <Pressable
                             key={workout.id}
-                            id={workout.id}
-                            userId={workout.userId}
-                            imageUrl={''}
-                            title={workout.title}
-                            dateTimestamp={workout.dateTimestamp}
-                            totalDuration={workout.totalDuration}
-                            totalSets={workout.totalSets}
-                            totalVolume={workout.totalVolume}
-                            targetMuscles={workout.targetMuscles}
-                            onPressProps={(workout: any) => handleOpenBottomSheet(workout)}
-                        />
+                            onPress={() => {
+                                navigation.navigate('HomeTab', { screen: 'Workout Details' });
+                            }}
+                        >
+                            <RecentWorkoutCard
+                                id={workout.id}
+                                userId={workout.userId}
+                                imageUrl={''}
+                                title={workout.title}
+                                dateTimestamp={workout.dateTimestamp}
+                                totalDuration={workout.totalDuration}
+                                totalSets={workout.totalSets}
+                                totalVolume={workout.totalVolume}
+                                targetMuscles={workout.targetMuscles}
+                                onPressProps={(workout: any) => handleOpenBottomSheet(workout)}
+                            />
+                        </Pressable>
                     ))}
                 </ScrollView>
             </View>

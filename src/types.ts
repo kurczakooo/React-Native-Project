@@ -15,6 +15,7 @@ export type HomeStackParamList = {
     Workout: undefined;
     Settings: undefined;
     Exercises: { mode: 'select' | 'view'; renderType: 'stack' | 'tab' } | undefined;
+    'Workout Details': { workout: Workout } | undefined;
 };
 
 export type ExecisesStackParamList = {

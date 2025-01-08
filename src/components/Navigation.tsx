@@ -22,6 +22,7 @@ import LoginScreen from 'src/screens/Login';
 import RegisterScreen from 'src/screens/Register';
 import ExercisesScreen from 'src/screens/Exercises';
 import HomeScreen from 'src/screens/Home';
+import RecentWorkoutDetailsScreen from 'src/screens/Home';
 import ProfileScreen from 'src/screens/Profile';
 import WorkoutScreen from 'src/screens/Workout';
 import HeaderLogoIcon from './HeaderLogoIcon';
@@ -80,6 +81,7 @@ function HomeStack() {
             <Stack.Screen name='Workout' component={WorkoutScreen} />
             <Stack.Screen name='Settings' component={SettingsScreen} />
             <Stack.Screen name='Exercises' component={ExercisesScreen} />
+            <Stack.Screen name='Workout Details' component={RecentWorkoutDetailsScreen} />
         </Stack.Navigator>
     );
 }
