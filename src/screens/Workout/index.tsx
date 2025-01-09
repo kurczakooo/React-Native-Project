@@ -84,6 +84,12 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [duration, setDuration] = useState(0);
     const [formattedDuration, setFormattedDuration] = useState('00:00:00');
 
+
+    // Ten interval powoduje u Państwa rerender całego ekranu w nieskończoność
+    // Żeby zobaczyć te rerendery poniżej wrzucam console.laga, który wykonuję się w nieskończoność
+    // Ten interval powinien być na poziomie komponentu a nie ekranu
+
+    console.log('rerender');
     useEffect(() => {
         const interval = setInterval(() => {
             setDuration(prevDuration => {
@@ -92,6 +98,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 return newSeconds;
             });
         }, 1000);
+
+        console.log(interval); // powinno zwrócić id intervala, a u Państwa zwraca to id dwa razy co można zobaczyć za pomocą console.log
 
         return () => clearInterval(interval);
     }, []);
@@ -238,6 +246,9 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     />
                 ))}
             </ScrollView>
+
+            // import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+            // zamiast paddingBottom: snackBarTimerVisible ? 170 : 115 użyjcie react-native-safe-area-context
 
             <View style={{ paddingBottom: snackBarTimerVisible ? 170 : 115, padding: 10 }}>
                 <Button
