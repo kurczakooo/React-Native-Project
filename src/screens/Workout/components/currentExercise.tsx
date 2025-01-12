@@ -17,7 +17,7 @@ export default function CurrentExercise({
     timerSnackbarHandler: (rest: string) => void;
 }) {
     const theme = useTheme<Theme>();
-    const { name, level } = exercise;
+    const { id, name, level } = exercise;
     const indicatorColors = {
         beginner: theme.colors.beginner,
         intermediate: theme.colors.intermediate,

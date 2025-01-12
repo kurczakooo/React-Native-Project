@@ -12,7 +12,7 @@ export default function CurrentExerciseSetInfoTable({
 }) {
     const theme = useTheme<Theme>();
 
-    ///////////////////////////////////////////////////////////EXERCISE TABLE SECTION////////////////////////////////////////////////////////////////////////
+    // #region /////////EXERCISE TABLE SECTION////////////////////////////////////////////////////////////
     const [exerciseTableData, setExerciseTableData] = useState([['1', '-', '0', '0', 'false']]);
 
     const addSet = () => {
@@ -39,6 +39,8 @@ export default function CurrentExerciseSetInfoTable({
         startRestTimerSignal();
     };
 
+    // #endregion
+
     return (
         <View>
             <Table borderStyle={{ borderWidth: 0 }}>
@@ -53,7 +55,13 @@ export default function CurrentExerciseSetInfoTable({
                                         style={styles.checkImage}
                                     />
                                 ) : (
-                                    <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                                    <Text
+                                        style={{
+                                            fontWeight: 'bold',
+                                            textAlign: 'center',
+                                            fontSize: 13
+                                        }}
+                                    >
                                         {cell}
                                     </Text>
                                 )
@@ -74,6 +82,7 @@ export default function CurrentExerciseSetInfoTable({
                                                     cellData === 'true' ? 'checked' : 'unchecked'
                                                 }
                                                 onPress={() => onCheck(rowData[0])}
+                                                disabled={cellData === 'true' ? true : false}
                                             />
                                         </View>
                                     ) : (

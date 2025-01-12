@@ -4,20 +4,23 @@ import { Button, Dialog, Snackbar, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
 import { HomeTabScreenProps, PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
-import { exercises } from 'src/screens/Exercises/exercises';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
-import { useNavigation } from '@react-navigation/native';
 import RestTimerDialog from './components/restTimerDialog';
 import React from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { SafeAreaView, SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const iconSize = 24;
+    const insets = useSafeAreaInsets();
     const { shadowPrimary } = useTheme<Theme>();
     const { navigation, route } = props;
     const { userData, setUserData } = useCurrentUser();
+    const [formattedDuration, setFormattedDuration] = useState('');
+    const workoutCardRef = useRef<{ getFormattedDuration: () => string }>(null);
 
     // #region ////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
@@ -80,43 +83,6 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     };
     // #endregion
 
-    // #region //////////////DURATION SECTION////////////////////////////////////////////////////////////////////////
-    const [duration, setDuration] = useState(0);
-    const [formattedDuration, setFormattedDuration] = useState('00:00:00');
-
-
-    // Ten interval powoduje u Państwa rerender całego ekranu w nieskończoność
-    // Żeby zobaczyć te rerendery poniżej wrzucam console.laga, który wykonuję się w nieskończoność
-    // Ten interval powinien być na poziomie komponentu a nie ekranu
-
-    console.log('rerender');
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setDuration(prevDuration => {
-                const newSeconds = prevDuration + 1;
-                setFormattedDuration(formatDuration(newSeconds)); // Aktualizujemy sformatowany czas
-                return newSeconds;
-            });
-        }, 1000);
-
-        console.log(interval); // powinno zwrócić id intervala, a u Państwa zwraca to id dwa razy co można zobaczyć za pomocą console.log
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const formatDuration = (duration: number): string => {
-        const hours = Math.floor(duration / 3600);
-        const minutes = Math.floor((duration % 3600) / 60);
-        const secs = duration % 60;
-
-        return [
-            hours.toString().padStart(2, '0'),
-            minutes.toString().padStart(2, '0'),
-            secs.toString().padStart(2, '0')
-        ].join(':');
-    };
-    // #endregion
-
     // #region ////////////REST TIMER SNACKBAR SECTION/////////////////////////////////////////
     const [snackBarTimerVisible, setSnackBarTimerVisible] = useState(false);
     const [snackBarTimerText, setSnackBarTimerText] = useState('');
@@ -168,6 +134,14 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [discardDialogVisible, setDiscardDialogVisible] = useState(false);
     const [saveDialogVisible, setSaveDialogVisible] = useState(false);
 
+    const discardHandler = (duration: string) => {
+        setFormattedDuration(duration);
+    };
+
+    const saveHandler = (duration: string) => {
+        setFormattedDuration(duration);
+    };
+
     const handleDiscardOk = () => {
         //bedzie albo usuniecie danych z kontekstu albo z api juz
         navigation.navigate('HomeTab', { screen: 'Home' });
@@ -179,7 +153,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     };
     // #endregion
 
-    // #region //////////////////EXERCISES ARRAY, TMP ADDING AND DELETING///////////////////////////////////////////////////
+    // #region //////////////////EXERCISES ARRAY ADDING AND DELETING///////////////////////////////////////////////////
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>(
         userData.workout?.exercises ?? []
     );
@@ -188,13 +162,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [shouldScroll, setShouldScroll] = useState(false);
 
     const onAddExercise = () => {
-        ///////this is temporary/////////////////////////////////////
-        // setTmpExercises(prev => {
-        //     const nextIndex = prev.length + 1;
-        //     setShouldScroll(true);
-        //     return [...prev, exercises[nextIndex]];
-        // });
-        ///////////////////////////////////
+        const dur = workoutCardRef.current?.getFormattedDuration() ?? '';
+        setFormattedDuration(dur);
 
         setUserData({
             ...userData,
@@ -206,6 +175,10 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const onDeleteExercise = (name: string) => {
         const updatedExercises = tmpExercises.filter(exercise => exercise.name !== name);
         setTmpExercises(updatedExercises);
+
+        const dur = workoutCardRef.current?.getFormattedDuration() ?? '';
+        setFormattedDuration(dur);
+
         setUserData({
             ...userData,
             workout: { exercises: updatedExercises, formattedDuration, image }
@@ -218,16 +191,16 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
         <>
             <View style={{ gap: 10, padding: 10 }}>
                 <WorkoutCard
+                    ref={workoutCardRef}
                     showDialog={showDialog}
                     image={image}
-                    formattedDuration={formattedDuration}
-                    showDiscardDialog={() => setDiscardDialogVisible(true)}
-                    showSaveDialog={() => setSaveDialogVisible(true)}
+                    discardWorkoutHandler={discardHandler}
+                    saveWorkoutHandler={saveHandler}
                 />
             </View>
 
             <ScrollView
-                style={styles.scrollView}
+                style={{ ...styles.scrollView, backgroundColor: 'red' }}
                 ref={scrollViewRef}
                 onContentSizeChange={() => {
                     if (shouldScroll) {
@@ -247,10 +220,15 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 ))}
             </ScrollView>
 
-            // import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-            // zamiast paddingBottom: snackBarTimerVisible ? 170 : 115 użyjcie react-native-safe-area-context
+            {/* zamiast paddingBottom: snackBarTimerVisible ? 170 : 115 użyjcie react-native-safe-area-context */}
 
             <View style={{ paddingBottom: snackBarTimerVisible ? 170 : 115, padding: 10 }}>
+                {/* <View
+                style={{
+                    paddingBottom: snackBarTimerVisible ? insets.bottom + 70 : insets.bottom + 15,
+                    padding: 10
+                }}
+            > */}
                 <Button
                     onPress={() => {
                         onAddExercise();
@@ -276,7 +254,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             <RestTimerDialog visible={TimerDialogVisible} hideDialog={hideTimerDialog} />
 
             <Snackbar
-                style={{ borderRadius: 5, marginBottom: 115 }}
+                style={{ borderRadius: 5 }}
                 visible={snackBarTimerVisible}
                 onDismiss={() => {}}
             >
@@ -323,7 +301,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
 const styles = StyleSheet.create({
     scrollView: {
-        borderRadius: 10,
+        borderRadius: 5,
         marginLeft: 10,
         marginRight: 10
     }
