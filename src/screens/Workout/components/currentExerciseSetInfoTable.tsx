@@ -1,6 +1,6 @@
 import { Table, TableWrapper, Cell } from 'react-native-table-component';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TextInput } from 'react-native';
 import { Theme } from 'src/types';
 import { useState } from 'react';
 import ButtonWithIcon from './buttonWithIcon';
@@ -74,36 +74,67 @@ export default function CurrentExerciseSetInfoTable({
                         {rowData.map((cellData, colIndex) => (
                             <Cell
                                 key={colIndex}
-                                data={
-                                    colIndex === rowData.length - 1 ? (
-                                        <View style={styles.checkBoxContainerInfo}>
-                                            <Checkbox
-                                                status={
-                                                    cellData === 'true' ? 'checked' : 'unchecked'
-                                                }
-                                                onPress={() => onCheck(rowData[0])}
-                                                disabled={cellData === 'true' ? true : false}
-                                            />
-                                        </View>
-                                    ) : (
-                                        <Text
-                                            style={{
-                                                fontWeight: colIndex === 0 ? 'bold' : 'normal',
-                                                textAlign: 'center',
-                                                color:
+                                data={(() => {
+                                    if (colIndex === rowData.length - 1) {
+                                        return (
+                                            <View style={styles.checkBoxContainerInfo}>
+                                                <Checkbox
+                                                    status={
+                                                        cellData === 'true'
+                                                            ? 'checked'
+                                                            : 'unchecked'
+                                                    }
+                                                    onPress={() => onCheck(rowData[0])}
+                                                    disabled={cellData === 'true' ? true : false}
+                                                />
+                                            </View>
+                                        );
+                                    } else if (colIndex > 1) {
+                                        return (
+                                            <TextInput
+                                                style={{
+                                                    fontWeight: 'normal',
+                                                    textAlign: 'center',
+                                                    width: '100%',
+                                                    color:
+                                                        rowData.at(rowData.length - 1) === 'true'
+                                                            ? theme.colors.inversePrimary
+                                                            : theme.colors.outline,
+                                                    textDecorationLine:
+                                                        rowData.at(rowData.length - 1) === 'true'
+                                                            ? 'line-through'
+                                                            : 'none',
+                                                    borderBottomWidth: 0
+                                                }}
+                                                placeholderTextColor={
                                                     rowData.at(rowData.length - 1) === 'true'
                                                         ? theme.colors.inversePrimary
-                                                        : theme.colors.outline,
-                                                textDecorationLine:
-                                                    rowData.at(rowData.length - 1) === 'true'
-                                                        ? 'line-through'
-                                                        : 'none'
-                                            }}
-                                        >
-                                            {cellData}
-                                        </Text>
-                                    )
-                                }
+                                                        : theme.colors.outline
+                                                }
+                                                value={cellData}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <Text
+                                                style={{
+                                                    fontWeight: colIndex === 0 ? 'bold' : 'normal',
+                                                    textAlign: 'center',
+                                                    color:
+                                                        rowData.at(rowData.length - 1) === 'true'
+                                                            ? theme.colors.inversePrimary
+                                                            : theme.colors.outline,
+                                                    textDecorationLine:
+                                                        rowData.at(rowData.length - 1) === 'true'
+                                                            ? 'line-through'
+                                                            : 'none'
+                                                }}
+                                            >
+                                                {cellData}
+                                            </Text>
+                                        );
+                                    }
+                                })()}
                             />
                         ))}
                     </TableWrapper>
