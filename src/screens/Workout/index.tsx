@@ -188,8 +188,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     // #endregion
 
     return (
-        <>
-            <View style={{ gap: 10, padding: 10 }}>
+        <SafeAreaView>
+            <View style={{ gap: 10, padding: 10, backgroundColor: 'green' }}>
                 <WorkoutCard
                     ref={workoutCardRef}
                     showDialog={showDialog}
@@ -222,7 +222,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
             {/* zamiast paddingBottom: snackBarTimerVisible ? 170 : 115 użyjcie react-native-safe-area-context */}
 
-            <View style={{ paddingBottom: snackBarTimerVisible ? 170 : 115, padding: 10 }}>
+            <View style={{ padding: 10 }}>
                 {/* <View
                 style={{
                     paddingBottom: snackBarTimerVisible ? insets.bottom + 70 : insets.bottom + 15,
@@ -254,7 +254,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             <RestTimerDialog visible={TimerDialogVisible} hideDialog={hideTimerDialog} />
 
             <Snackbar
-                style={{ borderRadius: 5 }}
+                style={{ borderRadius: 5, backgroundColor: 'yellow' }}
                 visible={snackBarTimerVisible}
                 onDismiss={() => {}}
             >
@@ -295,7 +295,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     <Button onPress={handleSaveOk}>OK</Button>
                 </Dialog.Actions>
             </Dialog>
-        </>
+        </SafeAreaView>
     );
 }
 
