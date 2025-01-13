@@ -1,7 +1,7 @@
-import { User, Workout, PredefinedExercise, WorkoutExercise, WorkoutSet } from '../types';
+import { DatabaseUser, Workout, PredefinedExercise, WorkoutExercise, WorkoutSet } from '../types';
 
 interface DevApiEndpoints {
-    users: User[];
+    users: DatabaseUser[];
     workouts: Workout[];
     exercises: WorkoutExercise[];
     sets: WorkoutSet[];
@@ -22,7 +22,7 @@ export const endpoints: DevApiEndpoints = {
             userId: 'u0',
             title: 'First workout',
             imageUrl: null,
-            dateTimestamp: 1732550444,
+            dateTimestamp: 1736606424,
             totalDuration: 3000,
             totalSets: 9,
             totalVolume: 4200,
@@ -37,7 +37,7 @@ export const endpoints: DevApiEndpoints = {
             userId: 'u0',
             title: 'Second workout',
             imageUrl: null,
-            dateTimestamp: 1732550444,
+            dateTimestamp: 1736420024,
             totalDuration: 3000,
             totalSets: 6,
             totalVolume: 4200,

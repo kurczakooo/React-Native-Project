@@ -1,5 +1,6 @@
 import { Workout } from 'src/types';
 import { api } from '../config';
+import dayjs from 'dayjs';
 
 export async function getWorkouts(userId: string | undefined): Promise<Workout[]> {
     try {
@@ -7,6 +8,17 @@ export async function getWorkouts(userId: string | undefined): Promise<Workout[]
         return response.data;
     } catch (error) {
         console.error('Error fetching workouts:', error);
+        return [];
+    }
+}
+
+export async function getWorkoutsFromLastMonths(userId: string | undefined, months: number) {
+    try {
+        const workouts = await getWorkouts(userId);
+        const cutoffDate = dayjs().subtract(months, 'month');
+        return workouts.filter(workout => dayjs.unix(workout.dateTimestamp).isAfter(cutoffDate));
+    } catch (error) {
+        console.error('Error fetching workouts from last months:', error);
         return [];
     }
 }

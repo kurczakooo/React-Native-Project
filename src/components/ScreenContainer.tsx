@@ -29,8 +29,6 @@ export default function ScreenContainer({
     additionalSpaceBottom?: number;
 }) {
     const { screenPadding } = useTheme<Theme>();
-    const tabBarHeight = useBottomTabBarHeight();
-
     return (
         <ScrollView style={{ padding: screenPadding }}>
             <View

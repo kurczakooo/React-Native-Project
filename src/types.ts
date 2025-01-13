@@ -211,6 +211,12 @@ export interface Workout {
     }[];
 }
 
+export interface DatabaseUser {
+    id: string;
+    username: string;
+    password: string;
+}
+
 export interface CurrentUser {
     id?: string;
     username?: string;
