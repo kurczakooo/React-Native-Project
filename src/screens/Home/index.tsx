@@ -29,7 +29,7 @@ export default function HomeScreen() {
 
     // #region WORKOUT BOTTOM SHELF SECTION ///////////////////////////////////////////
     const bottomSheetRef = useRef<BottomSheet>(null);
-    const snapPoints = useMemo(() => ['25%', '10%'], []);
+    const snapPoints = useMemo(() => ['25%', 0], []);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
 
     const handleOpenBottomSheet = useCallback((workout: React.SetStateAction<null>) => {
@@ -114,7 +114,9 @@ export default function HomeScreen() {
                     ))}
                 </ScrollView>
             </View>
-            <BottomSheet
+            {/* ten bottom sheet wyjebac i wtedy jest git*/}
+
+            {/* <BottomSheet
                 ref={bottomSheetRef}
                 snapPoints={snapPoints}
                 enablePanDownToClose
@@ -132,7 +134,7 @@ export default function HomeScreen() {
                         <Text style={{ fontSize: 20, color: 'red' }}>Delete workout</Text>
                     </Pressable>
                 </BottomSheetView>
-            </BottomSheet>
+            </BottomSheet> */}
         </>
     );
 }

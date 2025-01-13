@@ -213,10 +213,8 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
                     mode='contained'
                     style={{
                         ...styles.button,
-                        bottom: tabBarHeight - screenPadding,
-                        boxShadow: shadowPrimary,
-                        //temp for working on other things
-                        marginBottom: 50
+                        bottom: screenPadding,
+                        boxShadow: shadowPrimary
                     }}
                 >
                     {selectButtonText}

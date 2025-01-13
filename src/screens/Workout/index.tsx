@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, Vibration, Text } from 'react-native';
+import { View, StyleSheet, Vibration, Text, ScrollView } from 'react-native';
 import { Button, Dialog, Snackbar, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
 import { HomeTabScreenProps, PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
-import { ScrollView } from 'react-native-gesture-handler';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
 import RestTimerDialog from './components/restTimerDialog';
