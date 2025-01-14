@@ -6,7 +6,7 @@ import { HomeTabScreenProps, PredefinedExercise, Theme } from 'src/types';
 import CurrentExercise from './components/currentExercise';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
-import RestTimerDialog from './components/restTimerDialog';
+import RestTimerDialog from './components/CurrentExerciseComonents/restTimerDialog';
 import React from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useNavigation } from '@react-navigation/native';
@@ -133,10 +133,12 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
     const discardHandler = (duration: string) => {
         setFormattedDuration(duration);
+        setDiscardDialogVisible(true);
     };
 
     const saveHandler = (duration: string) => {
         setFormattedDuration(duration);
+        setSaveDialogVisible(true);
     };
 
     const handleDiscardOk = () => {
@@ -260,7 +262,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 <Dialog.Content>
                     <Text>
                         Are you sure you want to discard your workout? You will lose your current
-                        progress
+                        progress.
                     </Text>
                 </Dialog.Content>
                 <Dialog.Actions>
@@ -277,7 +279,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             >
                 <Dialog.Title>End Workout</Dialog.Title>
                 <Dialog.Content>
-                    <Text>Are you sure you want to end your workout?</Text>
+                    <Text>Are you sure you want to end and save your workout?</Text>
                 </Dialog.Content>
                 <Dialog.Actions>
                     <Button onPress={() => setSaveDialogVisible(false)}>Cancel</Button>

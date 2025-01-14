@@ -11,12 +11,13 @@ export default function HomeScreen() {
     const { shadowPrimary } = useTheme<Theme>();
     const { userData } = useCurrentUser();
     const nickname = userData.username ?? 'User';
+    const userID = userData.id;
     const [workouts, setWorkouts] = useState<Workout[]>([]);
     const navigation = useNavigation();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const data = await getWorkouts('u0'); ////REAPLACE THIS WITH ACTUAL USER ID
+            const data = await getWorkouts(userID);
             setWorkouts(data);
         };
         fetchWorkouts();

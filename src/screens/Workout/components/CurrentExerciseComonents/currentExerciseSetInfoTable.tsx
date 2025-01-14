@@ -3,7 +3,9 @@ import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { View, StyleSheet, Image, TextInput } from 'react-native';
 import { Theme } from 'src/types';
 import { useState } from 'react';
-import ButtonWithIcon from './buttonWithIcon';
+import ButtonWithIcon from '../buttonWithIcon';
+import WeightInput from './weightInput';
+import RepsInput from './repsInput';
 
 export default function CurrentExerciseSetInfoTable({
     startRestTimerSignal
@@ -89,31 +91,10 @@ export default function CurrentExerciseSetInfoTable({
                                                 />
                                             </View>
                                         );
-                                    } else if (colIndex > 1) {
-                                        return (
-                                            <TextInput
-                                                style={{
-                                                    fontWeight: 'normal',
-                                                    textAlign: 'center',
-                                                    width: '100%',
-                                                    color:
-                                                        rowData.at(rowData.length - 1) === 'true'
-                                                            ? theme.colors.inversePrimary
-                                                            : theme.colors.outline,
-                                                    textDecorationLine:
-                                                        rowData.at(rowData.length - 1) === 'true'
-                                                            ? 'line-through'
-                                                            : 'none',
-                                                    borderBottomWidth: 0
-                                                }}
-                                                placeholderTextColor={
-                                                    rowData.at(rowData.length - 1) === 'true'
-                                                        ? theme.colors.inversePrimary
-                                                        : theme.colors.outline
-                                                }
-                                                value={cellData}
-                                            />
-                                        );
+                                    } else if (colIndex === 2) {
+                                        return <WeightInput rowData={rowData} />;
+                                    } else if (colIndex === 3) {
+                                        return <RepsInput rowData={rowData} />;
                                     } else {
                                         return (
                                             <Text

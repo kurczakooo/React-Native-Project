@@ -3,7 +3,7 @@ import { useTheme, Text, Snackbar } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import CurrentExerciseSetInfoTable from './currentExerciseSetInfoTable';
+import CurrentExerciseSetInfoTable from './CurrentExerciseComonents/currentExerciseSetInfoTable';
 
 export default function CurrentExercise({
     exercise,

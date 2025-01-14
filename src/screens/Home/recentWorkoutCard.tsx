@@ -11,20 +11,13 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
     const timeIcon = require('@assets/icons/time.png');
     const setsIcon = require('@assets/icons/set.png');
     const volumeIcon = require('@assets/icons/volume.png');
+    const optionsIcon = require('@assets/icons/options.png');
+    const editIcon = require('@assets/icons/edit.png');
+    const deleteIcon = require('@assets/icons/cross.png');
+    const backIcon = require('@assets/icons/back.png');
 
     // #region WORKOUT EDIT OR DELETE MODAL SECTION ///////////////////////////////////////////
     const [dialogVisible, setDialogVisible] = useState(false);
-    const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
-
-    const showDialog = (workout: Workout) => {
-        setSelectedWorkout(workout);
-        setDialogVisible(true);
-    };
-
-    const hideDialog = () => {
-        setDialogVisible(false);
-        setSelectedWorkout(null);
-    };
 
     //TO DO: implement these functions
     const handleDetailsWorkout = () => {
@@ -42,7 +35,7 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
         setDialogVisible(false);
     };
 
-    // #endregion //////////////////////////////////////////////////////////////////////////////////////
+    // #endregion ////////////////////////////////////////////////////////////////////////////
 
     return (
         <Card style={{ padding: 15, margin: 5 }}>
@@ -61,30 +54,24 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
                 </Card.Content>
                 <Card.Actions>
                     {dialogVisible ? (
-                        <Pressable onPress={() => hideDialog()}>
-                            <Image
-                                source={require('@assets/icons/back.png')}
-                                style={{ width: 24, height: 24 }}
-                            />
+                        <Pressable onPress={() => setDialogVisible(false)}>
+                            <Image source={backIcon} style={{ width: 24, height: 24 }} />
                         </Pressable>
                     ) : (
-                        <Pressable onPress={() => showDialog(currentWorkout)}>
-                            <Image
-                                source={require('@assets/icons/options.png')}
-                                style={{ width: 24, height: 24 }}
-                            />
+                        <Pressable onPress={() => setDialogVisible(true)}>
+                            <Image source={optionsIcon} style={{ width: 24, height: 24 }} />
                         </Pressable>
                     )}
                 </Card.Actions>
             </View>
             {dialogVisible ? (
                 <View style={{ flexDirection: 'row' }}>
-                    <View style={styles.workoutEditPressable}>
-                        <Icon source={require('@assets/icons/options.png')} size={25} />
-                        <Icon source={require('@assets/icons/edit.png')} size={25} />
-                        <Icon source={require('@assets/icons/cross.png')} size={25} color='red' />
+                    <View style={styles.workoutEdit}>
+                        <Icon source={optionsIcon} size={25} />
+                        <Icon source={editIcon} size={25} />
+                        <Icon source={deleteIcon} size={25} color='red' />
                     </View>
-                    <View style={styles.workoutEditPressable}>
+                    <View style={styles.workoutEdit}>
                         <Pressable onPress={handleDetailsWorkout}>
                             <Text style={{ fontSize: 18 }}>Workout Details</Text>
                         </Pressable>
@@ -164,7 +151,7 @@ const styles = StyleSheet.create({
         padding: 10,
         gap: 10
     },
-    workoutEditPressable: {
+    workoutEdit: {
         gap: 15,
         padding: 10
     }
