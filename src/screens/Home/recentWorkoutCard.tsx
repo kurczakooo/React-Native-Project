@@ -2,11 +2,12 @@ import { View, Image, StyleSheet, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import { Button, Card, Dialog, Icon, Text } from 'react-native-paper';
 import { Workout } from 'src/types';
+import ThemedIcon from 'src/components/ThemedIcon';
+import dayjs from 'dayjs';
 
 export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
     const [currentWorkout, setCurrentWorkout] = useState(workout);
-    const convertedDate = new Date(currentWorkout.dateTimestamp);
-    const formattedDate = `${convertedDate.getFullYear()}-${(convertedDate.getMonth() + 1).toString().padStart(2, '0')}-${convertedDate.getDate().toString().padStart(2, '0')}`;
+    const formattedDate = dayjs.unix(currentWorkout.dateTimestamp).format('YYYY-MM-DD');
 
     const timeIcon = require('@assets/icons/time.png');
     const setsIcon = require('@assets/icons/set.png');
@@ -38,14 +39,13 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
     // #endregion ////////////////////////////////////////////////////////////////////////////
 
     return (
-        <Card style={{ padding: 15, margin: 5 }}>
+        <Card style={{ padding: 15, paddingVertical: 25, margin: 5 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Card.Content>
                     <Text
                         style={{
                             fontSize: 20,
-                            fontWeight: 'bold',
-                            color: 'black'
+                            fontWeight: 'bold'
                         }}
                     >
                         {currentWorkout.title}
@@ -55,11 +55,11 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
                 <Card.Actions>
                     {dialogVisible ? (
                         <Pressable onPress={() => setDialogVisible(false)}>
-                            <Image source={backIcon} style={{ width: 24, height: 24 }} />
+                            <ThemedIcon source={backIcon} style={{ width: 24, height: 24 }} />
                         </Pressable>
                     ) : (
                         <Pressable onPress={() => setDialogVisible(true)}>
-                            <Image source={optionsIcon} style={{ width: 24, height: 24 }} />
+                            <ThemedIcon source={optionsIcon} style={{ width: 24, height: 24 }} />
                         </Pressable>
                     )}
                 </Card.Actions>
@@ -67,8 +67,8 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
             {dialogVisible ? (
                 <View style={{ flexDirection: 'row' }}>
                     <View style={styles.workoutEdit}>
-                        <Icon source={optionsIcon} size={25} />
-                        <Icon source={editIcon} size={25} />
+                        <ThemedIcon source={optionsIcon} style={{ width: 25, height: 25 }} />
+                        <ThemedIcon source={editIcon} style={{ width: 25, height: 25 }} />
                         <Icon source={deleteIcon} size={25} color='red' />
                     </View>
                     <View style={styles.workoutEdit}>
@@ -85,9 +85,9 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
                 </View>
             ) : (
                 <>
-                    <View style={{ flexDirection: 'row', gap: 20 }}>
+                    <View style={{ flexDirection: 'row', gap: 20, paddingLeft: 15 }}>
                         <View style={styles.dataDescView}>
-                            <Icon source={timeIcon} size={20} />
+                            <ThemedIcon source={timeIcon} style={{ width: 20, height: 20 }} />
                             <View>
                                 <Text style={{ fontWeight: 'bold' }}>Time</Text>
                                 <Text style={styles.date}>
@@ -96,14 +96,18 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
                             </View>
                         </View>
                         <View style={styles.dataDescView}>
-                            <Icon source={setsIcon} size={22} />
+                            <ThemedIcon
+                                source={setsIcon}
+                                style={{ width: 20, height: 24 }}
+                                resizeMode='center'
+                            />
                             <View>
                                 <Text style={{ fontWeight: 'bold' }}>Sets</Text>
                                 <Text style={styles.date}>{currentWorkout.totalSets}</Text>
                             </View>
                         </View>
                         <View style={styles.dataDescView}>
-                            <Icon source={volumeIcon} size={20} />
+                            <ThemedIcon source={volumeIcon} style={{ width: 20, height: 20 }} />
                             <View>
                                 <Text style={{ fontWeight: 'bold' }}>Volume</Text>
                                 <Text style={styles.date}>{currentWorkout.totalVolume} kg</Text>
@@ -148,11 +152,11 @@ const styles = StyleSheet.create({
     dataDescView: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
+        paddingVertical: 10,
         gap: 10
     },
     workoutEdit: {
         gap: 15,
-        padding: 10
+        padding: 15
     }
 });
