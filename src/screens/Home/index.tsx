@@ -1,6 +1,6 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Button, Text, useTheme, Modal, Portal, Icon, Dialog } from 'react-native-paper';
-import { RecentWorkoutCard } from './recentWorkoutCard';
+import RecentWorkoutCard from './recentWorkoutCard';
 import React, { useState, useCallback, useMemo, useRef, useEffect, useContext } from 'react';
 import { Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
@@ -21,35 +21,6 @@ export default function HomeScreen() {
         };
         fetchWorkouts();
     }, []);
-
-    // #region WORKOUT EDIT OR DELETE MODAL SECTION ///////////////////////////////////////////
-    const [dialogVisible, setDialogVisible] = useState(false);
-    const [dialogTitle, setDialogTitle] = useState('');
-    const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
-
-    const showDialog = (workout: Workout) => {
-        setSelectedWorkout(workout);
-        setDialogTitle(workout?.title || 'title not found');
-        setDialogVisible(true);
-    };
-
-    const hideDialog = () => {
-        setDialogVisible(false);
-        setSelectedWorkout(null);
-    };
-
-    //TO DO: implement these functions
-    const handleEditWorkout = () => {
-        console.log('Workout edit');
-        setDialogVisible(false);
-    };
-
-    const handleDeleteWorkout = () => {
-        console.log('Workout deleted');
-        setDialogVisible(false);
-    };
-
-    // #endregion //////////////////////////////////////////////////////////////////////////////////////
 
     const onStartWorkout = () => {
         navigation.navigate('HomeTab', { screen: 'Workout' });
@@ -76,46 +47,10 @@ export default function HomeScreen() {
                 </Text>
                 <ScrollView>
                     {workouts.map(workout => (
-                        <Pressable
-                            key={workout.id}
-                            onPress={() => {
-                                navigation.navigate('HomeTab', { screen: 'Workout Details' });
-                            }}
-                        >
-                            <RecentWorkoutCard
-                                id={workout.id}
-                                userId={workout.userId}
-                                imageUrl={''}
-                                title={workout.title}
-                                dateTimestamp={workout.dateTimestamp}
-                                totalDuration={workout.totalDuration}
-                                totalSets={workout.totalSets}
-                                totalVolume={workout.totalVolume}
-                                targetMuscles={workout.targetMuscles}
-                                onPressProps={(workout: Workout) => showDialog(workout)}
-                            />
-                        </Pressable>
+                        <RecentWorkoutCard workout={workout} />
                     ))}
                 </ScrollView>
             </View>
-            <Dialog visible={dialogVisible} onDismiss={() => hideDialog()}>
-                <Dialog.Title>
-                    <Text style={{ fontWeight: 'bold' }}>{dialogTitle}</Text>
-                </Dialog.Title>
-                <Dialog.Content>
-                    <Pressable style={styles.bottomSheetPressable} onPress={handleEditWorkout}>
-                        <Icon source={require('@assets/icons/edit.png')} size={25} />
-                        <Text style={{ fontSize: 18 }}>Edit workout</Text>
-                    </Pressable>
-                    <Pressable style={styles.bottomSheetPressable} onPress={handleDeleteWorkout}>
-                        <Icon source={require('@assets/icons/cross.png')} size={25} color='red' />
-                        <Text style={{ fontSize: 18, color: 'red' }}>Delete workout</Text>
-                    </Pressable>
-                </Dialog.Content>
-                <Dialog.Actions>
-                    <Button onPress={() => hideDialog()}>Close</Button>
-                </Dialog.Actions>
-            </Dialog>
         </>
     );
 }
@@ -131,11 +66,5 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#FFFFFF',
         fontSize: 18
-    },
-    bottomSheetPressable: {
-        flexDirection: 'row',
-        gap: 15,
-        padding: 10,
-        alignItems: 'center'
     }
 });

@@ -20,7 +20,6 @@ export default function ButtonWithIcon({
     return (
         <Pressable
             style={{
-                ...style,
                 flexDirection: 'row',
                 alignItems: 'center',
                 borderWidth: 2,
