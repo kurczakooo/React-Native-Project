@@ -1,45 +1,43 @@
 {
-  "expo": {
-    "name": "big-gain",
-    "slug": "big-gain",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/logo/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/logo/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/logo/icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/logo/icon.png"
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
-        }
-      ],
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/Roboto.ttf"
-          ]
-        }
-      ],
-      "expo-secure-store"
-    ]
-  }
+    "expo": {
+        "name": "big-gain",
+        "slug": "big-gain",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/logo/logo.png",
+        "userInterfaceStyle": "light",
+        "newArchEnabled": true,
+        "splash": {
+            "image": "./assets/logo/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/logo/icon.png",
+                "backgroundColor": "#ffffff"
+            }
+        },
+        "web": {
+            "favicon": "./assets/logo/icon.png"
+        },
+        "plugins": [
+            [
+                "expo-image-picker",
+                {
+                    "photosPermission": "The app accesses your photos to let you share them with your friends."
+                }
+            ],
+            [
+                "expo-font",
+                {
+                    "fonts": ["./assets/fonts/Roboto.ttf"]
+                }
+            ],
+            "expo-secure-store"
+        ]
+    }
 }
