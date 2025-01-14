@@ -8,6 +8,7 @@ const defaultTheme: Theme = {
     shadowPrimary: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
     colors: {
         ...MD3LightTheme.colors,
+        form: '#ffffff',
         fontPrimary: '#000000',
         fontSecondary: '#6b6b6b',
         fontInactive: 'rgba(0, 0, 0, 0.2)',

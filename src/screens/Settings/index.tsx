@@ -10,7 +10,6 @@ import { Theme } from 'src/types';
 function Settings() {
     const { screenPadding } = useTheme<Theme>();
     const tabBarHeight = useBottomTabBarHeight();
-
     return (
         <ScreenContainer additionalSpaceBottom={tabBarHeight + screenPadding * 2}>
             <AppSettings />

@@ -87,7 +87,7 @@ export default function CalendarScreen() {
         }
 
         fetchWorkouts();
-    }, []);
+    }, [userData.id]);
 
     return (
         <ScreenContainer additionalSpaceBottom={tabBarHeight + 2 * screenPadding}>

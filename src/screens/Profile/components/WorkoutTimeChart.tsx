@@ -74,7 +74,8 @@ export default function WorkoutTimeChart(props: WorkoutTimeChartProps) {
         labelColor: {
             x: theme.colors.fontPrimary,
             y: theme.colors.fontPrimary
-        }
+        },
+        lineColor: theme.colors.fontSecondary
     };
 
     useEffect(() => {

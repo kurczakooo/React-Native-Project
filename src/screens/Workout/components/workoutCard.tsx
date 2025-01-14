@@ -157,6 +157,8 @@ const WorkoutCard = forwardRef(
     }
 );
 
+WorkoutCard.displayName = 'WorkoutCard';
+
 const styles = StyleSheet.create({
     addPicturePressable: {
         alignSelf: 'flex-start',

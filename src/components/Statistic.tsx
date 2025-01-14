@@ -4,6 +4,7 @@ import { ImageSourcePropType } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Theme } from 'src/types';
 import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
+import ThemedIcon from './ThemedIcon';
 
 interface StatisticProps {
     icon?: ImageSourcePropType;
@@ -29,7 +30,7 @@ export default function Statistic(props: StatisticProps) {
     return (
         <View style={styles.container}>
             {props.icon && (
-                <Image
+                <ThemedIcon
                     source={props.icon}
                     style={{ ...styles.image, width: props.iconSize ?? 20 }}
                 />

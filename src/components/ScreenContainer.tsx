@@ -28,11 +28,16 @@ export default function ScreenContainer({
     children: ReactNode | ReactNode[];
     additionalSpaceBottom?: number;
 }) {
-    const { screenPadding } = useTheme<Theme>();
+    const theme = useTheme<Theme>();
     return (
-        <ScrollView style={{ padding: screenPadding }}>
+        <ScrollView
+            style={{ padding: theme.screenPadding, backgroundColor: theme.colors.background }}
+        >
             <View
-                style={{ gap: 10, paddingBottom: screenPadding * 2 + (additionalSpaceBottom ?? 0) }}
+                style={{
+                    gap: 10,
+                    paddingBottom: theme.screenPadding * 2 + (additionalSpaceBottom ?? 0)
+                }}
             >
                 {children}
             </View>

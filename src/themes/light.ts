@@ -7,6 +7,8 @@ const lightTheme: Theme = {
         // custom colors taken from default theme
         ...defaultTheme.colors,
 
+        background: '#f5f5f5',
+
         // Colors used by Paper components
         surface: '#ffffff',
         onSurface: '#000000',

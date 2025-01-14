@@ -71,8 +71,8 @@ export const PasswordChange = () => {
                 label='Old password'
                 onChangeText={setPassword}
                 error={passwordError !== ''}
-                theme={{ roundness: 5 }}
-            ></TextInput>
+                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+            />
             {passwordError !== '' && (
                 <HelperText style={{ margin: 0, padding: 0 }} type='error'>
                     Password is required
@@ -82,14 +82,14 @@ export const PasswordChange = () => {
                 mode='outlined'
                 label='New password'
                 onChangeText={text => setNewPassword(text)}
-                theme={{ roundness: 5 }}
-            ></TextInput>
+                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+            />
             <TextInput
                 mode='outlined'
                 label='Repeat new password'
                 onChangeText={text => setNewPasswordConfirm(text)}
-                theme={{ roundness: 5 }}
-            ></TextInput>
+                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+            />
             {newPasswordDoNotMatchError !== '' && (
                 <HelperText style={{ margin: 0 }} type='error'>
                     {newPasswordDoNotMatchError}

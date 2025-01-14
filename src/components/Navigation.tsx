@@ -37,7 +37,7 @@ const config = {
 
 const tabNavigatorOptions: BottomTabNavigationOptions = {
     headerShown: false,
-    tabBarStyle: { backgroundColor: 'black', height: 60 },
+    tabBarStyle: { backgroundColor: 'black', height: 60, borderTopWidth: 0 },
     tabBarLabelStyle: { fontSize: 14 },
     tabBarIconStyle: { width: 24, height: 24 },
     tabBarActiveTintColor: '#1778f2',
@@ -111,7 +111,7 @@ function ProfileStack() {
 function AuthStack() {
     const Stack = createNativeStackNavigator<AuthStackParamList>();
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Login' component={LoginScreen} />
             <Stack.Screen name='Register' component={RegisterScreen} />
         </Stack.Navigator>

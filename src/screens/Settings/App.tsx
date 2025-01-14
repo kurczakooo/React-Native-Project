@@ -1,14 +1,35 @@
 import { Theme } from 'src/types';
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-import { Card, Text, Switch, useTheme } from 'react-native-paper';
+import { Text, Switch, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
+import { useChangeTheme } from 'src/hooks/useChangeTheme';
+import lightTheme from 'src/themes/light';
+import darkTheme from 'src/themes/dark';
+import useIsDarkMode from 'src/hooks/useIsDarkMode';
 
 const AppSettings = () => {
     const theme = useTheme<Theme>();
-    const [isDarkmodeOn, setIsDarkmodeOn] = React.useState(false);
+    const changeTheme = useChangeTheme();
+    const initialMode = useIsDarkMode();
+    const [swtichToggled, setSwtichToggled] = useState(initialMode);
+    const isFirstRender = useRef(true);
 
-    const onToggleDarkmodeSwitch = () => setIsDarkmodeOn(isDarkmodeOn => !isDarkmodeOn);
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+
+        if (swtichToggled) {
+            changeTheme(darkTheme, { darkMode: true });
+        } else {
+            changeTheme(lightTheme);
+        }
+    }, [swtichToggled, changeTheme, isFirstRender]);
+
+    const onToggleDarkmodeSwitch = () => setSwtichToggled(prev => !prev);
+
     return (
         <View
             style={{
@@ -25,8 +46,8 @@ const AppSettings = () => {
                     justifyContent: 'space-between'
                 }}
             >
-                <Text>Dark mode</Text>
-                <Switch value={isDarkmodeOn} onValueChange={onToggleDarkmodeSwitch} />
+                <Text style={{ color: theme.colors.fontSecondary }}>Dark mode</Text>
+                <Switch value={swtichToggled} onValueChange={onToggleDarkmodeSwitch} />
             </View>
         </View>
     );

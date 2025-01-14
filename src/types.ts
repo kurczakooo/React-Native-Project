@@ -77,6 +77,8 @@ export interface Theme extends MD3Theme {
     shadowPrimary: string;
 
     colors: MD3Colors & {
+        form: string;
+
         /**
          * Use this color if you are unsure
          * which color from theme should be

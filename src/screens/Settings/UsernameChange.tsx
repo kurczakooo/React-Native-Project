@@ -24,11 +24,11 @@ const UsernameChange = () => {
             <TextInput
                 mode='outlined'
                 label='New username'
-                theme={{ roundness: 5 }}
+                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                 onChangeText={text => {
                     setUsername(text);
                 }}
-            ></TextInput>
+            />
             <Button mode='contained' onPress={onChangeUserName}>
                 Change username
             </Button>

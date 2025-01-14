@@ -8,7 +8,7 @@ import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
-    const { shadowPrimary } = useTheme<Theme>();
+    const theme = useTheme<Theme>();
     const { userData } = useCurrentUser();
     const nickname = userData.username ?? 'User';
     const userID = userData.id;
@@ -29,7 +29,9 @@ export default function HomeScreen() {
 
     return (
         <>
-            <View style={{ flex: 1, padding: 15, gap: 15 }}>
+            <View
+                style={{ flex: 1, padding: 15, gap: 15, backgroundColor: theme.colors.background }}
+            >
                 <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Hi, {nickname}! 👋</Text>
                 <Button
                     onPress={() => {
@@ -38,7 +40,7 @@ export default function HomeScreen() {
                     mode='contained'
                     style={{
                         padding: 3,
-                        boxShadow: shadowPrimary
+                        boxShadow: theme.shadowPrimary
                     }}
                 >
                     + Start new workout

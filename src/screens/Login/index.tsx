@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { View, StyleSheet, Image, ImageComponent } from 'react-native';
 import { HelperText, Button, TextInput, Text, useTheme } from 'react-native-paper';
+import styles from 'src/styles/style';
 
 import Logo from 'src/components/Logo';
 import {
@@ -9,15 +10,16 @@ import {
     getCredentials,
     saveCredentials
 } from 'src/api/endpoints/login';
-import { styles } from 'src/styles/style';
 import FooterText from 'src/components/FooterText';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { Theme } from 'src/types';
 
 export default function Login({ navigation }: any) {
+    const theme = useTheme<Theme>();
     const { setUserData } = useCurrentUser();
 
-    const [username, setUsername] = useState('admin');
-    const [password, setPassword] = useState('admin');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const [loginFailed, setLoginFailed] = useState('');
 
@@ -71,18 +73,29 @@ export default function Login({ navigation }: any) {
     };
 
     return (
-        <View style={styles.container}>
-            <Logo></Logo>
+        <View
+            style={{
+                ...styles.container,
+                backgroundColor: theme.colors.background,
+                flex: 1,
+                borderRadius: 0
+            }}
+        >
+            <Logo />
             <View>
                 <TextInput
-                    label='username'
+                    mode='outlined'
+                    label='Username'
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                     value={username}
                     error={loginFailed !== ''}
                     onChangeText={text => handleUsername(text)}
                 />
                 <HelperText type='error'>{''}</HelperText>
                 <TextInput
-                    label='password'
+                    mode='outlined'
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+                    label='Password'
                     secureTextEntry
                     value={password}
                     error={loginFailed !== ''}
@@ -100,10 +113,10 @@ export default function Login({ navigation }: any) {
                 </Button>
             </View>
             <FooterText
-                text='You still do not have account?'
-                linkText='Sign up NOW!!!'
+                text="Don't have an account yet?"
+                linkText='Sign up!'
                 onPress={onRegister}
-            ></FooterText>
+            />
         </View>
     );
 }

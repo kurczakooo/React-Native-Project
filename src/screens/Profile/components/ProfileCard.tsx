@@ -3,6 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { getTotalWorkouts, getTotalWorkoutTime } from 'src/api/endpoints/workouts';
 import Statistic from 'src/components/Statistic';
+import ThemedIcon from 'src/components/ThemedIcon';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { Theme } from 'src/types';
 
@@ -29,10 +30,10 @@ export default function ProfileCard() {
                 boxShadow: theme.shadowPrimary
             }}
         >
-            <Image source={require('@assets/icons/profile.png')} style={style.profileImage} />
+            <ThemedIcon source={require('@assets/icons/profile.png')} style={style.profileImage} />
             <View style={style.profileNameContainer}>
                 <Text variant='titleLarge' style={style.username}>
-                    {userData.username}
+                    {userData.username || 'User'}
                 </Text>
                 <View style={style.statContainer}>
                     <Statistic

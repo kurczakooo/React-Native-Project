@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { View } from 'react-native';
-import { Button, HelperText, TextInput } from 'react-native-paper';
+import { Button, HelperText, TextInput, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 
 import { registerNewUser, UserAlreadyExsitsError } from 'src/api/endpoints/register';
 import { authenticate } from 'src/api/endpoints/login';
 import { InvalidPasswordError } from 'src/api/endpoints/settings';
+import { Theme } from 'src/types';
 
 interface props {
     navigation: any;
 }
 
 const RegisterFields = ({ navigation }: props) => {
+    const theme = useTheme<Theme>();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -60,25 +63,31 @@ const RegisterFields = ({ navigation }: props) => {
         <>
             <View>
                 <TextInput
-                    label='username'
+                    mode='outlined'
+                    label='Username'
                     value={username}
                     onChangeText={text => setUsername(text)}
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                 />
                 <HelperText type='error' visible={usernameError !== ''}>
                     {usernameError}
                 </HelperText>
                 <TextInput
-                    label='password'
+                    mode='outlined'
+                    label='Password'
                     secureTextEntry
                     value={password}
                     onChangeText={text => setPassword(text)}
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                 />
                 <HelperText type='error'>{''}</HelperText>
                 <TextInput
-                    label='confirm password'
+                    mode='outlined'
+                    label='Confirm password'
                     secureTextEntry
                     value={password2}
                     onChangeText={text => setPassword2(text)}
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                 />
                 <HelperText type='error' visible={passswordError !== ''}>
                     {passswordError}

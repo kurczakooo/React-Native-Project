@@ -1,17 +1,20 @@
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
+import ThemedIcon from './ThemedIcon';
 
 export const Logo = () => {
     return (
-        <Image
-            style={{
-                justifyContent: 'center',
-                width: '70%',
-                margin: 'auto',
-                height: '40%'
-            }}
-            resizeMode='center'
-            source={require('@assets/logo/logo.png')}
-        ></Image>
+        <View>
+            <ThemedIcon
+                style={{
+                    justifyContent: 'center',
+                    margin: 'auto',
+                    height: 250,
+                    width: 220
+                }}
+                resizeMode='center'
+                source={require('@assets/logo/logo.png')}
+            />
+        </View>
     );
 };
 
