@@ -1,12 +1,7 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { Button, Text, useTheme, Icon } from 'react-native-paper';
+import { Button, Text, useTheme, Modal, Portal, Icon, Dialog } from 'react-native-paper';
 import { RecentWorkoutCard } from './recentWorkoutCard';
 import React, { useState, useCallback, useMemo, useRef, useEffect, useContext } from 'react';
-import BottomSheet, {
-    BottomSheetView,
-    BottomSheetBackdrop,
-    BottomSheetBackdropProps
-} from '@gorhom/bottom-sheet';
 import { Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
@@ -27,43 +22,32 @@ export default function HomeScreen() {
         fetchWorkouts();
     }, []);
 
-    // #region WORKOUT BOTTOM SHELF SECTION ///////////////////////////////////////////
-    const bottomSheetRef = useRef<BottomSheet>(null);
-    const snapPoints = useMemo(() => ['25%', 0], []);
-    const [selectedWorkout, setSelectedWorkout] = useState(null);
+    // #region WORKOUT EDIT OR DELETE MODAL SECTION ///////////////////////////////////////////
+    const [dialogVisible, setDialogVisible] = useState(false);
+    const [dialogTitle, setDialogTitle] = useState('');
+    const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
 
-    const handleOpenBottomSheet = useCallback((workout: React.SetStateAction<null>) => {
+    const showDialog = (workout: Workout) => {
         setSelectedWorkout(workout);
-        bottomSheetRef.current?.expand();
-    }, []);
+        setDialogTitle(workout?.title || 'title not found');
+        setDialogVisible(true);
+    };
 
-    const handleCloseBottomSheet = useCallback(() => {
+    const hideDialog = () => {
+        setDialogVisible(false);
         setSelectedWorkout(null);
-        bottomSheetRef.current?.close();
-    }, []);
-
-    const renderBackdrop = useCallback(
-        (props: BottomSheetBackdropProps) => (
-            <BottomSheetBackdrop
-                {...props}
-                disappearsOnIndex={-1}
-                appearsOnIndex={0}
-                opacity={0.5}
-            />
-        ),
-        []
-    );
+    };
 
     //TO DO: implement these functions
-    const handleEditWorkout = useCallback(() => {
+    const handleEditWorkout = () => {
         console.log('Workout edit');
-        bottomSheetRef.current?.close();
-    }, []);
+        setDialogVisible(false);
+    };
 
-    const handleDeleteWorkout = useCallback(() => {
+    const handleDeleteWorkout = () => {
         console.log('Workout deleted');
-        bottomSheetRef.current?.close();
-    }, []);
+        setDialogVisible(false);
+    };
 
     // #endregion //////////////////////////////////////////////////////////////////////////////////////
 
@@ -108,33 +92,30 @@ export default function HomeScreen() {
                                 totalSets={workout.totalSets}
                                 totalVolume={workout.totalVolume}
                                 targetMuscles={workout.targetMuscles}
-                                onPressProps={(workout: any) => handleOpenBottomSheet(workout)}
+                                onPressProps={(workout: Workout) => showDialog(workout)}
                             />
                         </Pressable>
                     ))}
                 </ScrollView>
             </View>
-            {/* ten bottom sheet wyjebac i wtedy jest git*/}
-
-            {/* <BottomSheet
-                ref={bottomSheetRef}
-                snapPoints={snapPoints}
-                enablePanDownToClose
-                onClose={handleCloseBottomSheet}
-                backdropComponent={renderBackdrop}
-                index={-1}
-            >
-                <BottomSheetView style={{ padding: 20, gap: 10 }}>
+            <Dialog visible={dialogVisible} onDismiss={() => hideDialog()}>
+                <Dialog.Title>
+                    <Text style={{ fontWeight: 'bold' }}>{dialogTitle}</Text>
+                </Dialog.Title>
+                <Dialog.Content>
                     <Pressable style={styles.bottomSheetPressable} onPress={handleEditWorkout}>
-                        <Icon source={require('@assets/icons/edit.png')} size={28} />
-                        <Text style={{ fontSize: 20 }}>Edit workout</Text>
+                        <Icon source={require('@assets/icons/edit.png')} size={25} />
+                        <Text style={{ fontSize: 18 }}>Edit workout</Text>
                     </Pressable>
                     <Pressable style={styles.bottomSheetPressable} onPress={handleDeleteWorkout}>
-                        <Icon source={require('@assets/icons/cross.png')} size={28} color='red' />
-                        <Text style={{ fontSize: 20, color: 'red' }}>Delete workout</Text>
+                        <Icon source={require('@assets/icons/cross.png')} size={25} color='red' />
+                        <Text style={{ fontSize: 18, color: 'red' }}>Delete workout</Text>
                     </Pressable>
-                </BottomSheetView>
-            </BottomSheet> */}
+                </Dialog.Content>
+                <Dialog.Actions>
+                    <Button onPress={() => hideDialog()}>Close</Button>
+                </Dialog.Actions>
+            </Dialog>
         </>
     );
 }

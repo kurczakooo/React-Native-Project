@@ -9,12 +9,10 @@ import * as ImagePicker from 'expo-image-picker';
 import RestTimerDialog from './components/restTimerDialog';
 import React from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
-import { SafeAreaView, SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const iconSize = 24;
-    const insets = useSafeAreaInsets();
     const { shadowPrimary } = useTheme<Theme>();
     const { navigation, route } = props;
     const { userData, setUserData } = useCurrentUser();
@@ -187,8 +185,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     // #endregion
 
     return (
-        <SafeAreaView>
-            <View style={{ gap: 10, padding: 10, backgroundColor: 'green' }}>
+        <>
+            <View style={{ gap: 10, padding: 10 }}>
                 <WorkoutCard
                     ref={workoutCardRef}
                     showDialog={showDialog}
@@ -199,7 +197,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             </View>
 
             <ScrollView
-                style={{ ...styles.scrollView, backgroundColor: 'red' }}
+                style={{ ...styles.scrollView }}
                 ref={scrollViewRef}
                 onContentSizeChange={() => {
                     if (shouldScroll) {
@@ -219,15 +217,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 ))}
             </ScrollView>
 
-            {/* zamiast paddingBottom: snackBarTimerVisible ? 170 : 115 użyjcie react-native-safe-area-context */}
-
-            <View style={{ padding: 10 }}>
-                {/* <View
-                style={{
-                    paddingBottom: snackBarTimerVisible ? insets.bottom + 70 : insets.bottom + 15,
-                    padding: 10
-                }}
-            > */}
+            <View style={{ padding: 10, paddingBottom: snackBarTimerVisible ? 70 : 15 }}>
                 <Button
                     onPress={() => {
                         onAddExercise();
@@ -253,7 +243,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             <RestTimerDialog visible={TimerDialogVisible} hideDialog={hideTimerDialog} />
 
             <Snackbar
-                style={{ borderRadius: 5, backgroundColor: 'yellow' }}
+                style={{ borderRadius: 5 }}
                 visible={snackBarTimerVisible}
                 onDismiss={() => {}}
             >
@@ -294,7 +284,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     <Button onPress={handleSaveOk}>OK</Button>
                 </Dialog.Actions>
             </Dialog>
-        </SafeAreaView>
+        </>
     );
 }
 
