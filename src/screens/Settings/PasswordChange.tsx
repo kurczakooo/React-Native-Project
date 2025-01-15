@@ -62,51 +62,65 @@ export const PasswordChange = () => {
             style={{
                 ...styles.container,
                 backgroundColor: theme.colors.elevation.level5,
-                boxShadow: theme.shadowPrimary,
-                gap: 0
+                boxShadow: theme.shadowPrimary
             }}
         >
             <Text variant='titleLarge'>Password</Text>
-            <TextInput
-                mode='outlined'
-                label='Old password'
-                onChangeText={setPassword}
-                error={passwordError !== ''}
-                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
-            />
-            <HelperText
-                style={{ margin: 0, padding: 0 }}
-                type='error'
-                visible={passwordError !== ''}
-            >
-                Password is required
-            </HelperText>
+            <View>
+                <TextInput
+                    mode='outlined'
+                    label='Old password'
+                    onChangeText={setPassword}
+                    error={passwordError !== ''}
+                    secureTextEntry
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+                />
+                (
+                {passwordError === '' || (
+                    <HelperText
+                        style={{ margin: 0, padding: 0 }}
+                        type='error'
+                        visible={passwordError !== ''}
+                    >
+                        Password is required
+                    </HelperText>
+                )}
+                )
+            </View>
             )
-            <TextInput
-                mode='outlined'
-                label='New password'
-                onChangeText={text => setNewPassword(text)}
-                value={newPassword}
-                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
-            />
+            <View>
+                <TextInput
+                    mode='outlined'
+                    label='New password'
+                    onChangeText={text => setNewPassword(text)}
+                    value={newPassword}
+                    secureTextEntry
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+                />
+            </View>
             <TextInput
                 mode='outlined'
                 label='Repeat new password'
                 onChangeText={text => setNewPasswordConfirm(text)}
-                value={newPassword}
+                value={newPasswordConfirm}
+                secureTextEntry
                 theme={{ roundness: 5, colors: { background: theme.colors.form } }}
             />
-            <HelperText
-                style={{ margin: 0 }}
-                type='error'
-                visible={newPasswordDoNotMatchError !== ''}
-            >
-                {newPasswordDoNotMatchError}
-            </HelperText>
-            )
-            <Button onPress={onChangePassword} mode='contained'>
-                Change password
-            </Button>
+            <View>
+                {newPasswordDoNotMatchError === '' || (
+                    <HelperText
+                        style={{ margin: 0 }}
+                        type='error'
+                        visible={newPasswordDoNotMatchError !== ''}
+                    >
+                        {newPasswordDoNotMatchError}
+                    </HelperText>
+                )}
+                )
+                <Button onPress={onChangePassword} mode='contained'>
+                    Change password
+                </Button>
+            </View>
         </View>
     );
 };
