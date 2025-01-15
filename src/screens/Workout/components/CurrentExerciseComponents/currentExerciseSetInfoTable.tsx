@@ -9,6 +9,7 @@ import RepsInput from './repsInput';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { getPreviousSets } from 'src/api/endpoints/sets';
 import { WorkoutSet } from 'src/types';
+import ThemedIcon from 'src/components/ThemedIcon';
 
 export default function CurrentExerciseSetInfoTable({
     startRestTimerSignal,
@@ -69,12 +70,12 @@ export default function CurrentExerciseSetInfoTable({
         <View>
             <Table borderStyle={{ borderWidth: 0 }}>
                 <TableWrapper style={{ flexDirection: 'row' }}>
-                    {['Set', 'Previous', 'Weight(kg)', 'Reps', 'Check'].map((cell, index) => (
+                    {['Set', 'Previous', 'Weight', 'Reps', 'Check'].map((cell, index) => (
                         <Cell
                             key={index}
                             data={
                                 index === 4 ? (
-                                    <Image
+                                    <ThemedIcon
                                         source={require('@assets/icons/check.png')}
                                         style={styles.checkImage}
                                     />

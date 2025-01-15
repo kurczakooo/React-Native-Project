@@ -102,8 +102,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
         padding: 20,
-        paddingVertical: 15,
-        position: 'relative'
+        paddingLeft: 25
     },
     nameContainer: {
         flexDirection: 'column',

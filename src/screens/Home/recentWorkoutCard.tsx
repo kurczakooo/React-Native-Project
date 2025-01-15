@@ -20,7 +20,10 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
     };
 
     return (
-        <Card style={{ padding: 10, paddingVertical: 10, margin: 5 }} onPress={handleCardClick}>
+        <Card
+            style={{ padding: 10, paddingTop: 20, margin: 5, borderRadius: 5 }}
+            onPress={handleCardClick}
+        >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Card.Content>
                     <Text
