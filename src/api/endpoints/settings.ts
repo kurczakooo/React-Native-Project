@@ -25,8 +25,7 @@ export const changePassword = async (userId: string, password: string, newPasswo
     const user = await api.get(`/users/?id=${userId}`);
 
     if (user.data.length === 0) {
-        console.warn('No such account found');
-        return false;
+        throw Error('No such account found');
     }
 
     if (user.data[0].password !== password) {
@@ -34,12 +33,16 @@ export const changePassword = async (userId: string, password: string, newPasswo
     }
 
     // console.log(user.data);
-    const resp = await api.patch(`/users/${userId}`, {
-        // ...user,
-        password: newPassword
-    });
-    const status = resp.status;
-    return status === 200;
+    return api
+        .patch(`/users/${userId}`, {
+            // ...user,
+            password: newPassword
+        })
+        .then(resp => {
+            if (resp.status !== 200) {
+                throw new Error('Failed to change passwword');
+            }
+        });
 };
 
 export const changeUsername = async (userId: string, newUsername: string) => {
