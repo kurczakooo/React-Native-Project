@@ -6,7 +6,7 @@ import { HomeTabScreenProps, PredefinedExercise, Theme, Workout } from 'src/type
 import CurrentExercise from './components/currentExercise';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
-import RestTimerDialog from './components/CurrentExerciseComonents/restTimerDialog';
+import RestTimerDialog from './components/CurrentExerciseComponents/restTimerDialog';
 import React from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useNavigation } from '@react-navigation/native';
@@ -146,12 +146,21 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     };
 
     const handleDiscardOk = () => {
-        //bedzie albo usuniecie danych z kontekstu albo z api juz
+        setUserData({
+            ...userData,
+            workout: {}
+        });
         navigation.navigate('HomeTab', { screen: 'Home' });
     };
 
     const handleSaveOk = () => {
-        //bedzie albo zapisaie danych do kontekstu albo do api juz
+        //bedzie zapisanie danych do api
+
+        setUserData({
+            ...userData,
+            workout: {}
+        });
+
         navigation.navigate('HomeTab', { screen: 'Home' });
     };
     // #endregion
@@ -160,9 +169,6 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [tmpExercises, setTmpExercises] = useState<PredefinedExercise[]>(
         userData.workout?.exercises ?? []
     );
-
-    const scrollViewRef = useRef<ScrollView>(null);
-    const [shouldScroll, setShouldScroll] = useState(false);
 
     const onAddExercise = () => {
         const dur = workoutCardRef.current?.getFormattedDuration() ?? '';
@@ -202,16 +208,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 />
             </View>
 
-            <ScrollView
-                style={{ ...styles.scrollView, backgroundColor: theme.colors.background }}
-                ref={scrollViewRef}
-                onContentSizeChange={() => {
-                    if (shouldScroll) {
-                        scrollViewRef.current?.scrollToEnd({ animated: true });
-                        setShouldScroll(false);
-                    }
-                }}
-            >
+            <ScrollView style={{ ...styles.scrollView, backgroundColor: theme.colors.background }}>
                 {tmpExercises.map((exercise, index) => (
                     <CurrentExercise
                         key={index}
@@ -270,7 +267,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             >
                 <Dialog.Title>Discard Workout</Dialog.Title>
                 <Dialog.Content>
-                    <Text>
+                    <Text style={{ color: theme.colors.fontPrimary }}>
                         Are you sure you want to discard your workout? You will lose your current
                         progress.
                     </Text>
@@ -289,7 +286,9 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             >
                 <Dialog.Title>End Workout</Dialog.Title>
                 <Dialog.Content>
-                    <Text>Are you sure you want to end and save your workout?</Text>
+                    <Text style={{ color: theme.colors.fontPrimary }}>
+                        Are you sure you want to end and save your workout?
+                    </Text>
                 </Dialog.Content>
                 <Dialog.Actions>
                     <Button onPress={() => setSaveDialogVisible(false)}>Cancel</Button>

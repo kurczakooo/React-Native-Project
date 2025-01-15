@@ -3,7 +3,7 @@ import { useTheme, Text, Snackbar } from 'react-native-paper';
 import { PredefinedExercise as PredefinedExerciseType, Theme } from 'src/types';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import CurrentExerciseSetInfoTable from './CurrentExerciseComonents/currentExerciseSetInfoTable';
+import CurrentExerciseSetInfoTable from './CurrentExerciseComponents/currentExerciseSetInfoTable';
 
 export default function CurrentExercise({
     exercise,
@@ -88,7 +88,10 @@ export default function CurrentExercise({
                             {rest === '' ? 'OFF' : rest}
                         </Text>
                     </Pressable>
-                    <CurrentExerciseSetInfoTable startRestTimerSignal={handleTimer} />
+                    <CurrentExerciseSetInfoTable
+                        startRestTimerSignal={handleTimer}
+                        exerciseId={id}
+                    />
                 </View>
             </View>
         </>

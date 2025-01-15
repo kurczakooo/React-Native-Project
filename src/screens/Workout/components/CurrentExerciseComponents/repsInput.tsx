@@ -1,12 +1,16 @@
 import { useTheme } from 'react-native-paper';
 import { TextInput } from 'react-native';
 import { Theme } from 'src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function RepsInput({ rowData }: { rowData: string[] }) {
     const theme = useTheme<Theme>();
 
     const [reps, setReps] = useState(rowData[3]);
+
+    useEffect(() => {
+        rowData[3] = reps;
+    }, [reps]);
 
     return (
         <TextInput

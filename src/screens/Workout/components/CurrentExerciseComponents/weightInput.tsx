@@ -1,12 +1,16 @@
 import { useTheme } from 'react-native-paper';
 import { TextInput } from 'react-native';
 import { Theme } from 'src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function WeightInput({ rowData }: { rowData: string[] }) {
     const theme = useTheme<Theme>();
 
     const [weight, setWeight] = useState(rowData[2]);
+
+    useEffect(() => {
+        rowData[2] = weight;
+    }, [weight]);
 
     return (
         <TextInput
@@ -30,14 +34,12 @@ export default function WeightInput({ rowData }: { rowData: string[] }) {
             value={weight}
             onChangeText={text => {
                 //do poprawy bo musi akceptować int i float
-                // Sprawdzamy, czy tekst to poprawna liczba
                 const isValidNumber = (value: string) => {
-                    if (value === '') return true; // Pozwalamy na pusty tekst
+                    if (value === '') return true;
                     const num = parseFloat(value);
                     return !isNaN(num) && String(num) === value.trim();
                 };
 
-                // Jeśli tekst jest poprawny, ustawiamy wartość
                 if (isValidNumber(text)) {
                     setWeight(text);
                 }

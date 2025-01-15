@@ -2,19 +2,37 @@ import { Table, TableWrapper, Cell } from 'react-native-table-component';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { View, StyleSheet, Image, TextInput } from 'react-native';
 import { Theme } from 'src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ButtonWithIcon from '../../../../components/ButtonWithIcon';
 import WeightInput from './weightInput';
 import RepsInput from './repsInput';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { getPreviousSets } from 'src/api/endpoints/sets';
+import { WorkoutSet } from 'src/types';
 
 export default function CurrentExerciseSetInfoTable({
-    startRestTimerSignal
+    startRestTimerSignal,
+    exerciseId
 }: {
     startRestTimerSignal: () => void;
+    exerciseId: string;
 }) {
     const theme = useTheme<Theme>();
+    const { userData, setUserData } = useCurrentUser();
 
     // #region /////////EXERCISE TABLE SECTION////////////////////////////////////////////////////////////
+    const [prevSet, setPrevSet] = useState('');
+
+    useEffect(() => {
+        var tmpSets: WorkoutSet[] = [];
+        async function fetchPreviousSets() {
+            tmpSets = await getPreviousSets(exerciseId, userData.id);
+        }
+        fetchPreviousSets();
+
+        console.log(tmpSets);
+    });
+
     const [exerciseTableData, setExerciseTableData] = useState([['1', '-', '0', '0', 'false']]);
 
     const addSet = () => {
@@ -40,6 +58,10 @@ export default function CurrentExerciseSetInfoTable({
         );
         startRestTimerSignal();
     };
+
+    // useEffect(() => {
+    //     console.log(exerciseTableData);
+    // }, [exerciseTableData]);
 
     // #endregion
 
