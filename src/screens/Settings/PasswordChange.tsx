@@ -2,9 +2,11 @@ import { Text, TextInput, HelperText, Button, useTheme } from 'react-native-pape
 import { styles } from 'src/styles/style';
 import { useState, useEffect } from 'react';
 import { changePassword } from 'src/api/endpoints/settings';
-import { View } from 'react-native';
+import { ToastAndroid, View } from 'react-native';
 import { Theme } from 'src/types';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import Login from '../Login';
+import { authenticate, saveCredentials, saveCredentialsAsync } from 'src/api/endpoints/login';
 
 export const PasswordChange = () => {
     const theme = useTheme<Theme>();
@@ -15,6 +17,8 @@ export const PasswordChange = () => {
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+
+    const [isPasswordChangePending, setIsPasswordChangePending] = useState(false);
 
     const onChangePassword = async () => {
         let errored = false;
@@ -37,16 +41,32 @@ export const PasswordChange = () => {
         }
 
         if (errored) return;
+        setIsPasswordChangePending(true);
+        changePassword(userData.id, password, newPassword)
+            .then(() => {
+                console.log('Password changed');
+                ToastAndroid.show('Password changed', 2000);
 
-        const didChangeSucced = await changePassword(userData.id, password, newPassword);
-
-        console.log(didChangeSucced);
-        if (didChangeSucced) {
-            console.log('Password changed');
-            setPassword('');
-            setNewPassword('');
-            setNewPasswordConfirm('');
-        }
+                const curUser = userData.username;
+                if (curUser === undefined) {
+                    throw new Error('Current user not found');
+                }
+                // to update local storage data
+                saveCredentialsAsync({ username: curUser, password: newPassword })
+                    .then(e => {
+                        console.log('updataed');
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+            })
+            .catch(e => {
+                // console.error(e);
+                ToastAndroid.show(e.message, 5000);
+            })
+            .finally(() => {
+                setIsPasswordChangePending(false);
+            });
     };
 
     useEffect(() => {
@@ -88,16 +108,14 @@ export const PasswordChange = () => {
                 )
             </View>
             )
-            <View>
-                <TextInput
-                    mode='outlined'
-                    label='New password'
-                    onChangeText={text => setNewPassword(text)}
-                    value={newPassword}
-                    secureTextEntry
-                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
-                />
-            </View>
+            <TextInput
+                mode='outlined'
+                label='New password'
+                onChangeText={text => setNewPassword(text)}
+                value={newPassword}
+                secureTextEntry
+                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+            />
             <TextInput
                 mode='outlined'
                 label='Repeat new password'
@@ -117,7 +135,11 @@ export const PasswordChange = () => {
                     </HelperText>
                 )}
                 )
-                <Button onPress={onChangePassword} mode='contained'>
+                <Button
+                    onPress={onChangePassword}
+                    mode='contained'
+                    loading={isPasswordChangePending}
+                >
                     Change password
                 </Button>
             </View>

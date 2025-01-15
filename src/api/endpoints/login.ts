@@ -17,6 +17,10 @@ export const saveCredentials = (credentials: Credentials) => {
     SecureStore.setItem(credentialsStoreKey_c, JSON.stringify(credentials));
 };
 
+export const saveCredentialsAsync = (credentials: Credentials) => {
+    return SecureStore.setItemAsync(credentialsStoreKey_c, JSON.stringify(credentials));
+};
+
 /**
  * Authenticate with username and password
  * @param user username
