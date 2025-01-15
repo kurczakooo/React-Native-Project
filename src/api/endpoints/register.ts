@@ -1,5 +1,4 @@
 import { api } from '../config';
-import { User } from 'src/types';
 
 /**
  * @brief Self explanatory

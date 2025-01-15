@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { ToastAndroid, View } from 'react-native';
 import { Button, HelperText, TextInput, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
 
@@ -50,6 +50,7 @@ const RegisterFields = ({ navigation }: props) => {
 
         registerNewUser(username, password)
             .then(() => {
+                ToastAndroid.show('Registered new user', 2000);
                 navigation.navigate('Login');
             })
             .catch(e => {

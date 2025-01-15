@@ -21,13 +21,17 @@ export default function Login({ navigation }: any) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    // this is for whole login process and password
     const [loginFailed, setLoginFailed] = useState('');
+    // this is for username field
+    const [usernameFailed, setUsernameFailed] = useState('');
 
     const [isLoginPending, setIsLoginPending] = useState(false);
 
     useEffect(() => {
         setLoginFailed('');
-    }, [username, password]);
+        setUsernameFailed('');
+    }, [password, username]);
 
     const handleUsername = (newUsername: string) => {
         setUsername(newUsername);
@@ -37,32 +41,51 @@ export default function Login({ navigation }: any) {
         setPassword(newPassword);
     };
 
-    const onLogin = async ({ username, password }: Credentials) => {
+    const validateInputs = () => {
+        let success = true;
+
+        if (username?.length === 0) {
+            setUsernameFailed('Username is required');
+            success = false;
+        }
+
+        if (password?.length === 0) {
+            setLoginFailed('Password is required');
+            success = false;
+        }
+
+        return success;
+    };
+
+    const handleLogin = async ({ username, password }: Credentials) => {
         setIsLoginPending(true);
-        setLoginFailed('');
         authenticate({ username, password })
             .then(id => {
                 console.log(id);
                 if (id === null) {
                     setLoginFailed('Incorrect username or password');
                 } else {
-                    saveCredentials({ username, password });
                     setUserData({ id, username });
                 }
             })
             .catch(e => {
                 console.error('Error during login ' + e);
-                setLoginFailed('Login request failed');
+                setLoginFailed('' + e);
             })
             .finally(() => {
                 setIsLoginPending(false);
             });
     };
 
+    const onLogin = () => {
+        if (!validateInputs()) return;
+        handleLogin({ username, password });
+    };
+
     useEffect(() => {
         getCredentials().then((e: Credentials) => {
             if (e === null || e?.username === undefined || e?.password === undefined) return null;
-            onLogin(e);
+            handleLogin(e);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -91,7 +114,9 @@ export default function Login({ navigation }: any) {
                     error={loginFailed !== ''}
                     onChangeText={text => handleUsername(text)}
                 />
-                <HelperText type='error'>{''}</HelperText>
+                <HelperText type='error' visible={usernameFailed !== ''}>
+                    {usernameFailed}
+                </HelperText>
                 <TextInput
                     mode='outlined'
                     theme={{ roundness: 5, colors: { background: theme.colors.form } }}
@@ -104,11 +129,7 @@ export default function Login({ navigation }: any) {
                 <HelperText type='error' visible={loginFailed !== ''}>
                     {loginFailed}
                 </HelperText>
-                <Button
-                    onPress={() => onLogin({ username, password })}
-                    mode='contained'
-                    loading={isLoginPending}
-                >
+                <Button onPress={() => onLogin()} mode='contained' loading={isLoginPending}>
                     <Text style={{ color: 'white' }}>Login</Text>
                 </Button>
             </View>

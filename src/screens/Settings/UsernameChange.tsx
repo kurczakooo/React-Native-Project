@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import { Card, Text, TextInput, Button, useTheme } from 'react-native-paper';
 import { styles } from 'src/styles/style';
-import { View } from 'react-native';
+import { ToastAndroid, View } from 'react-native';
 import { Theme } from 'src/types';
+import { changePassword, changeUsername } from 'src/api/endpoints/settings';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 const UsernameChange = () => {
     const theme = useTheme<Theme>();
     const [username, setUsername] = useState('');
 
+    const { userData } = useCurrentUser();
+
     const onChangeUserName = () => {
-        console.log(`FIXME username change ${username}`);
+        changeUsername(userData?.id ?? '', username).catch(e => {
+            ToastAndroid.show('Username change failed', 3000);
+            console.error(e);
+        });
     };
 
     return (

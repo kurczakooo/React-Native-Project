@@ -1,4 +1,4 @@
-import { User } from 'src/types';
+import { DatabaseUser } from 'src/types';
 import { api } from '../config';
 import * as SecureStore from 'expo-secure-store';
 
@@ -27,7 +27,11 @@ export const authenticate = async ({
     username: user,
     password: password
 }: Credentials): Promise<string | null> => {
-    const users: User[] = (await api.get(`/users?username=${user}&password=${password}`)).data;
+    if (user?.length === 0 || password?.length === 0) {
+        throw new Error('no data to authenticate with provided');
+    }
+    const users: DatabaseUser[] = (await api.get(`/users?username=${user}&password=${password}`))
+        .data;
     console.log(users);
     if (users.length === 0) {
         return null;

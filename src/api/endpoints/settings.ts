@@ -41,3 +41,10 @@ export const changePassword = async (userId: string, password: string, newPasswo
     const status = resp.status;
     return status === 200;
 };
+
+export const changeUsername = async (userId: string, newUsername: string) => {
+    if (userId === '') {
+        throw new Error('Invalid user');
+    }
+    return api.patch(`/users/${userId}`, { username: newUsername });
+};

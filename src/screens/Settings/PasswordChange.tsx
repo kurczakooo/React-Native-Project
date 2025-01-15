@@ -62,7 +62,8 @@ export const PasswordChange = () => {
             style={{
                 ...styles.container,
                 backgroundColor: theme.colors.elevation.level5,
-                boxShadow: theme.shadowPrimary
+                boxShadow: theme.shadowPrimary,
+                gap: 0
             }}
         >
             <Text variant='titleLarge'>Password</Text>
@@ -73,28 +74,36 @@ export const PasswordChange = () => {
                 error={passwordError !== ''}
                 theme={{ roundness: 5, colors: { background: theme.colors.form } }}
             />
-            {passwordError !== '' && (
-                <HelperText style={{ margin: 0, padding: 0 }} type='error'>
-                    Password is required
-                </HelperText>
-            )}
+            <HelperText
+                style={{ margin: 0, padding: 0 }}
+                type='error'
+                visible={passwordError !== ''}
+            >
+                Password is required
+            </HelperText>
+            )
             <TextInput
                 mode='outlined'
                 label='New password'
                 onChangeText={text => setNewPassword(text)}
+                value={newPassword}
                 theme={{ roundness: 5, colors: { background: theme.colors.form } }}
             />
             <TextInput
                 mode='outlined'
                 label='Repeat new password'
                 onChangeText={text => setNewPasswordConfirm(text)}
+                value={newPassword}
                 theme={{ roundness: 5, colors: { background: theme.colors.form } }}
             />
-            {newPasswordDoNotMatchError !== '' && (
-                <HelperText style={{ margin: 0 }} type='error'>
-                    {newPasswordDoNotMatchError}
-                </HelperText>
-            )}
+            <HelperText
+                style={{ margin: 0 }}
+                type='error'
+                visible={newPasswordDoNotMatchError !== ''}
+            >
+                {newPasswordDoNotMatchError}
+            </HelperText>
+            )
             <Button onPress={onChangePassword} mode='contained'>
                 Change password
             </Button>
