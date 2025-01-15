@@ -104,7 +104,7 @@ export default function CurrentExerciseSetInfoTable({
                                                     color:
                                                         rowData.at(rowData.length - 1) === 'true'
                                                             ? theme.colors.inversePrimary
-                                                            : theme.colors.outline,
+                                                            : theme.colors.fontSecondary,
                                                     textDecorationLine:
                                                         rowData.at(rowData.length - 1) === 'true'
                                                             ? 'line-through'
@@ -125,8 +125,8 @@ export default function CurrentExerciseSetInfoTable({
                 iconSource={require('@assets/icons/add.png')}
                 label='Add set'
                 color='#1778f2'
-                backgroundColor='#fff'
-                outlineColor='#fff'
+                backgroundColor={theme.colors.elevation.level5}
+                outlineColor={theme.colors.elevation.level5}
                 onPress={addSet}
             />
         </View>

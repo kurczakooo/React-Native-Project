@@ -10,10 +10,11 @@ import RestTimerDialog from './components/CurrentExerciseComonents/restTimerDial
 import React from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useNavigation } from '@react-navigation/native';
+import ScreenContainer from 'src/components/ScreenContainer';
 
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const iconSize = 24;
-    const { shadowPrimary } = useTheme<Theme>();
+    const theme = useTheme<Theme>();
     const { navigation, route } = props;
     const { userData, setUserData } = useCurrentUser();
     const [formattedDuration, setFormattedDuration] = useState('');
@@ -188,7 +189,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
     return (
         <>
-            <View style={{ gap: 10, padding: 10 }}>
+            <View style={{ gap: 10, padding: 10, backgroundColor: theme.colors.background }}>
                 <WorkoutCard
                     ref={workoutCardRef}
                     showDialog={showDialog}
@@ -199,7 +200,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             </View>
 
             <ScrollView
-                style={{ ...styles.scrollView }}
+                style={{ ...styles.scrollView, backgroundColor: theme.colors.background }}
                 ref={scrollViewRef}
                 onContentSizeChange={() => {
                     if (shouldScroll) {
@@ -219,7 +220,13 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 ))}
             </ScrollView>
 
-            <View style={{ padding: 10, paddingBottom: snackBarTimerVisible ? 70 : 15 }}>
+            <View
+                style={{
+                    padding: 10,
+                    paddingBottom: snackBarTimerVisible ? 70 : 15,
+                    backgroundColor: theme.colors.background
+                }}
+            >
                 <Button
                     onPress={() => {
                         onAddExercise();
@@ -227,7 +234,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     mode='contained'
                     style={{
                         padding: 3,
-                        boxShadow: shadowPrimary
+                        boxShadow: theme.shadowPrimary
                     }}
                 >
                     + Add exercise
@@ -292,8 +299,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
 const styles = StyleSheet.create({
     scrollView: {
-        borderRadius: 5,
-        marginLeft: 10,
-        marginRight: 10
+        paddingLeft: 10,
+        paddingRight: 10
     }
 });

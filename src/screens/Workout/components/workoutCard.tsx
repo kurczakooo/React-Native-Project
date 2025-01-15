@@ -3,6 +3,7 @@ import { View, Text, TextInput, Image, Pressable, StyleSheet } from 'react-nativ
 import { Button, Card, Dialog, useTheme } from 'react-native-paper';
 import ButtonWithIcon from './buttonWithIcon';
 import { useNavigation } from '@react-navigation/native';
+import { Theme } from 'src/types';
 
 const WorkoutCard = forwardRef(
     (
@@ -19,6 +20,7 @@ const WorkoutCard = forwardRef(
         },
         ref
     ) => {
+        const theme = useTheme<Theme>();
         const navigation = useNavigation();
         const iconSize = 24;
         const [title, setTitle] = useState('');
@@ -75,7 +77,10 @@ const WorkoutCard = forwardRef(
                             </Pressable>
                         ) : (
                             <Pressable
-                                style={styles.addPicturePressable}
+                                style={{
+                                    ...styles.addPicturePressable,
+                                    borderColor: theme.colors.fontPrimary
+                                }}
                                 onPress={() => showDialog()}
                             >
                                 <Image
@@ -83,7 +88,7 @@ const WorkoutCard = forwardRef(
                                     style={{
                                         width: iconSize + 0.1 * iconSize,
                                         height: iconSize,
-                                        tintColor: 'black',
+                                        tintColor: theme.colors.fontPrimary,
                                         margin: iconSize * 1.5
                                     }}
                                 />
@@ -102,15 +107,19 @@ const WorkoutCard = forwardRef(
                                         marginTop: 5,
                                         width: iconSize,
                                         height: iconSize,
-                                        tintColor: 'black'
+                                        tintColor: theme.colors.fontPrimary
                                     }}
                                 />
                                 <TextInput
-                                    style={styles.titleInput}
+                                    style={{
+                                        ...styles.titleInput,
+                                        color: theme.colors.fontPrimary
+                                    }}
                                     onChangeText={setTitle}
                                     value={title}
                                     placeholder='Workout Title'
                                     maxLength={20}
+                                    placeholderTextColor={theme.colors.fontSecondary}
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
@@ -120,12 +129,19 @@ const WorkoutCard = forwardRef(
                                         style={{
                                             width: iconSize,
                                             height: iconSize,
-                                            tintColor: 'black'
+                                            tintColor: theme.colors.fontPrimary
                                         }}
                                     />
                                 </Pressable>
                                 <View style={{ flexDirection: 'column' }}>
-                                    <Text style={{ fontWeight: 'bold' }}>Duration</Text>
+                                    <Text
+                                        style={{
+                                            fontWeight: 'bold',
+                                            color: theme.colors.fontPrimary
+                                        }}
+                                    >
+                                        Duration
+                                    </Text>
                                     <Text style={styles.time}>{formattedDuration}</Text>
                                 </View>
                             </View>
@@ -137,7 +153,7 @@ const WorkoutCard = forwardRef(
                             label='Discard'
                             outlineColor='red'
                             color='red'
-                            backgroundColor='white'
+                            backgroundColor={theme.colors.elevation.level5}
                             onPress={() => discardWorkoutHandler(formattedDuration)}
                             style={{ flex: 1, justifyContent: 'center' }}
                         />
@@ -162,7 +178,6 @@ WorkoutCard.displayName = 'WorkoutCard';
 const styles = StyleSheet.create({
     addPicturePressable: {
         alignSelf: 'flex-start',
-        borderColor: 'black',
         borderWidth: 3,
         borderRadius: 10,
         borderStyle: 'dashed'

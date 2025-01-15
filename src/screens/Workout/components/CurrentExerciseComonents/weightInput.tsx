@@ -17,7 +17,7 @@ export default function WeightInput({ rowData }: { rowData: string[] }) {
                 color:
                     rowData.at(rowData.length - 1) === 'true'
                         ? theme.colors.inversePrimary
-                        : theme.colors.outline,
+                        : theme.colors.fontSecondary,
                 textDecorationLine:
                     rowData.at(rowData.length - 1) === 'true' ? 'line-through' : 'none',
                 borderBottomWidth: 0
@@ -25,7 +25,7 @@ export default function WeightInput({ rowData }: { rowData: string[] }) {
             placeholderTextColor={
                 rowData.at(rowData.length - 1) === 'true'
                     ? theme.colors.inversePrimary
-                    : theme.colors.outline
+                    : theme.colors.fontSecondary
             }
             value={weight}
             onChangeText={text => {
