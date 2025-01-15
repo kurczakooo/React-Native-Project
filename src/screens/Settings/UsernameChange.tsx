@@ -13,8 +13,12 @@ const UsernameChange = () => {
     const { userData } = useCurrentUser();
 
     const onChangeUserName = () => {
-        changeUsername(userData?.id ?? '', username).catch(e => {
-            ToastAndroid.show('Username change failed', 3000);
+        let uid = userData?.id;
+        if (uid === undefined) {
+            throw new Error('User is not present');
+        }
+        changeUsername(uid, username).catch(e => {
+            ToastAndroid.show(e.message, ToastAndroid.SHORT);
             console.error(e);
         });
     };
