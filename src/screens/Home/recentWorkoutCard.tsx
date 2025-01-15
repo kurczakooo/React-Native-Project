@@ -4,8 +4,10 @@ import { Button, Card, Dialog, Icon, Text } from 'react-native-paper';
 import { Workout } from 'src/types';
 import ThemedIcon from 'src/components/ThemedIcon';
 import dayjs from 'dayjs';
+import { useNavigation } from '@react-navigation/native';
 
 export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
+    const navigation = useNavigation();
     const [currentWorkout, setCurrentWorkout] = useState(workout);
     const formattedDate = dayjs.unix(currentWorkout.dateTimestamp).format('YYYY-MM-DD');
 
@@ -38,8 +40,12 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
 
     // #endregion ////////////////////////////////////////////////////////////////////////////
 
+    const handleCardClick = () => {
+        navigation.navigate('HomeTab', { screen: 'Workout Details', params: { workout } });
+    };
+
     return (
-        <Card style={{ padding: 15, paddingVertical: 25, margin: 5 }}>
+        <Card style={{ padding: 15, paddingVertical: 25, margin: 5 }} onPress={handleCardClick}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Card.Content>
                     <Text

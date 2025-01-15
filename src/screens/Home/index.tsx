@@ -1,26 +1,44 @@
 import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { Button, Text, useTheme, Modal, Portal, Icon, Dialog } from 'react-native-paper';
+import { Button, Text, useTheme, Snackbar } from 'react-native-paper';
 import RecentWorkoutCard from './recentWorkoutCard';
-import React, { useState, useCallback, useMemo, useRef, useEffect, useContext } from 'react';
-import { Theme, Workout } from 'src/types';
+import React, { useState, useEffect } from 'react';
+import { HomeTabScreenProps, Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreen() {
+export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
+    const shouldRenderSnackbar = props.route.params?.snackbarContent !== undefined;
     const theme = useTheme<Theme>();
     const { userData } = useCurrentUser();
     const nickname = userData.username ?? 'User';
     const userID = userData.id;
     const [workouts, setWorkouts] = useState<Workout[]>([]);
+    const [snackbarVisible, setSnackbarVisible] = useState(shouldRenderSnackbar);
+    const [snackbarTimout, setSnackbarTimout] = useState<NodeJS.Timeout>();
     const navigation = useNavigation();
 
+    const cleanup = () => {
+        clearTimeout(snackbarTimout);
+        setSnackbarTimout(undefined);
+    };
+
     useEffect(() => {
+        navigation.addListener('blur', cleanup);
+
+        if (shouldRenderSnackbar) {
+            const timout = setTimeout(() => setSnackbarVisible(false), 1500);
+            setSnackbarTimout(timout);
+        }
+
         const fetchWorkouts = async () => {
             const data = await getWorkouts(userID);
             setWorkouts(data);
         };
+
         fetchWorkouts();
+
+        return cleanup;
     }, [userID]);
 
     const onStartWorkout = () => {
@@ -50,10 +68,17 @@ export default function HomeScreen() {
                 </Text>
                 <ScrollView>
                     {workouts.map(workout => (
-                        <RecentWorkoutCard workout={workout} />
+                        <RecentWorkoutCard key={workout.id} workout={workout} />
                     ))}
                 </ScrollView>
             </View>
+            <Snackbar
+                style={styles.snackbar}
+                visible={snackbarVisible}
+                onDismiss={() => setSnackbarVisible(false)}
+            >
+                {props.route.params?.snackbarContent}
+            </Snackbar>
         </>
     );
 }
@@ -69,5 +94,8 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#FFFFFF',
         fontSize: 18
+    },
+    snackbar: {
+        borderRadius: 5
     }
 });

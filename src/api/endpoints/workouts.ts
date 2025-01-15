@@ -42,3 +42,13 @@ export async function getTotalWorkoutTime(userId: string | undefined): Promise<n
         return 0;
     }
 }
+
+export async function deleteWorkout(workoutId: string | undefined): Promise<boolean> {
+    try {
+        await api.delete(`/workouts/${workoutId}`);
+        return true;
+    } catch (error) {
+        console.error(`Error deleting workout ${workoutId}: `, error);
+        return false;
+    }
+}

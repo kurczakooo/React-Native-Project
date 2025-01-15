@@ -1,13 +1,15 @@
 import { Image, StyleSheet, View } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { Dialog, Portal, Text, Button, useTheme } from 'react-native-paper';
 import ScreenContainer from 'src/components/ScreenContainer';
-import { HomeTabScreenProps, Theme, Workout, WorkoutExercise, WorkoutSet } from 'src/types';
+import { HomeTabScreenProps, Theme, WorkoutExercise, WorkoutSet } from 'src/types';
 import Statistic from 'src/components/Statistic';
 import ExerciseDetailsCard from './components/ExerciseDetailsCard';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import { useEffect, useState } from 'react';
 import { getExercises } from 'src/api/endpoints/exercises';
 import { getSets } from 'src/api/endpoints/sets';
+import { deleteWorkout } from 'src/api/endpoints/workouts';
+import { useNavigation } from '@react-navigation/native';
 
 function getFormattedTime(seconds: number | null): string | null {
     return seconds ? new Date(seconds * 1000).toISOString().substring(14, 19) : null;
@@ -20,6 +22,7 @@ type WorkoutDetailsData = {
 
 export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout Details'>) {
     const [workoutData, setWorkoutData] = useState<WorkoutDetailsData[]>([]);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const theme = useTheme<Theme>();
     const workout = props.route.params?.workout;
 
@@ -39,6 +42,16 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
         fetchWorkoutData();
     }, [workout?.id]);
 
+    const handleWorkoutDelete = async () => {
+        const deleted = await deleteWorkout(workout?.id);
+        setShowDeleteConfirm(false);
+        props.navigation.navigate('Home', {
+            snackbarContent: deleted
+                ? 'Workout was successfully deleted.'
+                : 'There was an error while deleting a workout.'
+        });
+    };
+
     if (!workout) {
         console.error('Component did not receive a workout object.');
         return null;
@@ -53,6 +66,20 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
                     boxShadow: theme.shadowPrimary
                 }}
             >
+                <Portal>
+                    <Dialog visible={showDeleteConfirm} dismissable={false}>
+                        <Dialog.Title>Delete workout</Dialog.Title>
+                        <Dialog.Content>
+                            <Text variant='bodyMedium'>
+                                Are you sure you want to delete this workout?
+                            </Text>
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button onPress={handleWorkoutDelete}>Delete</Button>
+                            <Button onPress={() => setShowDeleteConfirm(false)}>Cancel</Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
                 <Text variant='titleLarge'>{workout.title}</Text>
                 <View style={styles.statisticContainer}>
                     <Statistic
@@ -99,16 +126,16 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
             <View style={styles.buttonContainer}>
                 <ButtonWithIcon
                     iconSource={require('@assets/icons/cross.png')}
-                    label='Usuń'
+                    label='Delete'
                     color={theme.colors.onExpert}
                     backgroundColor={theme.colors.expert}
                     outlineColor={theme.colors.expert}
-                    onPress={() => null}
+                    onPress={() => setShowDeleteConfirm(true)}
                     style={{ ...styles.button, boxShadow: theme.shadowPrimary }}
                 />
                 <ButtonWithIcon
                     iconSource={require('@assets/icons/edit.png')}
-                    label='Edytuj'
+                    label='Edit'
                     color={theme.colors.onPrimary}
                     backgroundColor={theme.colors.primary}
                     outlineColor={theme.colors.primary}

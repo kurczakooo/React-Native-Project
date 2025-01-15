@@ -11,7 +11,7 @@ declare global {
 }
 
 export type HomeStackParamList = {
-    Home: undefined;
+    Home: { snackbarContent: string } | undefined;
     Workout: undefined;
     Settings: undefined;
     Exercises: { mode: 'select' | 'view'; renderType: 'stack' | 'tab' } | undefined;
