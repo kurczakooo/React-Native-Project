@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { View, Text, TextInput, Image, Pressable, StyleSheet } from 'react-native';
 import { Button, Card, Dialog, useTheme } from 'react-native-paper';
-import ButtonWithIcon from './buttonWithIcon';
+import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import { useNavigation } from '@react-navigation/native';
 import { Theme } from 'src/types';
 

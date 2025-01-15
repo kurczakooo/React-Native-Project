@@ -33,6 +33,7 @@ export default function Statistic(props: StatisticProps) {
                 <ThemedIcon
                     source={props.icon}
                     style={{ ...styles.image, width: props.iconSize ?? 20 }}
+                    resizeMode='center'
                 />
             )}
             <View style={{ width: props.width ?? 'auto' }}>

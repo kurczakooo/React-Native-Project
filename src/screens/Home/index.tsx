@@ -21,7 +21,7 @@ export default function HomeScreen() {
             setWorkouts(data);
         };
         fetchWorkouts();
-    }, []);
+    }, [userID]);
 
     const onStartWorkout = () => {
         navigation.navigate('HomeTab', { screen: 'Workout' });

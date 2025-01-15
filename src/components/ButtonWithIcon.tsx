@@ -15,7 +15,7 @@ export default function ButtonWithIcon({
     backgroundColor: string;
     outlineColor: string;
     onPress: Function;
-    style?: StyleProp<ViewStyle>;
+    style?: StyleProp<any>;
 }) {
     return (
         <Pressable

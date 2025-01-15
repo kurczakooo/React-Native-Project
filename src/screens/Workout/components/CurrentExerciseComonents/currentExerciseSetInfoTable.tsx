@@ -3,7 +3,7 @@ import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { View, StyleSheet, Image, TextInput } from 'react-native';
 import { Theme } from 'src/types';
 import { useState } from 'react';
-import ButtonWithIcon from '../buttonWithIcon';
+import ButtonWithIcon from '../../../../components/ButtonWithIcon';
 import WeightInput from './weightInput';
 import RepsInput from './repsInput';
 
