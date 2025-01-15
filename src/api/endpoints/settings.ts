@@ -49,5 +49,8 @@ export const changeUsername = async (userId: string, newUsername: string) => {
     if (userId === '') {
         throw new Error('Invalid user');
     }
+    if (newUsername.length === 0) {
+        throw new Error('Can not set empty username');
+    }
     return api.patch(`/users/${userId}`, { username: newUsername });
 };
