@@ -14,7 +14,7 @@ const WorkoutCard = forwardRef(
             saveWorkoutHandler
         }: {
             showDialog: () => void;
-            image: string;
+            image: string | null;
             discardWorkoutHandler: (duration: string) => void;
             saveWorkoutHandler: (duration: string) => void;
         },
@@ -64,7 +64,7 @@ const WorkoutCard = forwardRef(
             <>
                 <Card style={{ padding: 15, borderRadius: 10 }}>
                     <View style={{ flexDirection: 'row', gap: 20 }}>
-                        {image !== '' ? (
+                        {image !== '' && image !== null ? (
                             <Pressable onPress={() => showDialog()}>
                                 <Image
                                     source={{ uri: image }}

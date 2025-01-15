@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Vibration, Text, ScrollView } from 'react-native';
 import { Button, Dialog, Snackbar, useTheme } from 'react-native-paper';
 import WorkoutCard from './components/workoutCard';
-import { HomeTabScreenProps, PredefinedExercise, Theme } from 'src/types';
+import { HomeTabScreenProps, PredefinedExercise, Theme, Workout } from 'src/types';
 import CurrentExercise from './components/currentExercise';
 import ImageDialog from './components/imageDialog';
 import * as ImagePicker from 'expo-image-picker';
@@ -19,6 +19,9 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const { userData, setUserData } = useCurrentUser();
     const [formattedDuration, setFormattedDuration] = useState('');
     const workoutCardRef = useRef<{ getFormattedDuration: () => string }>(null);
+
+    const workoutToEdit = route.params?.workout;
+    const isEditMode = workoutToEdit !== undefined;
 
     // #region ////////////ADDING A WORKOUT PHOTO DIALOG SECTION/////////////////////////////////////////
     const [visible, setVisible] = useState(false);
@@ -193,7 +196,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 <WorkoutCard
                     ref={workoutCardRef}
                     showDialog={showDialog}
-                    image={image}
+                    image={isEditMode ? workoutToEdit.imageUrl : image}
                     discardWorkoutHandler={discardHandler}
                     saveWorkoutHandler={saveHandler}
                 />
