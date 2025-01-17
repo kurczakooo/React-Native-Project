@@ -3,6 +3,7 @@ import { MediaType, launchImageLibraryAsync, launchCameraAsync } from 'expo-imag
 import { StyleSheet } from 'react-native';
 import PhotoPicker from './PhotoPicker';
 import Card from 'src/components/Card';
+import WorkoutTitle from './WorkoutTitle';
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -21,6 +22,7 @@ async function getMediaUri(source: 'images' | 'camera') {
 export default function WorkoutInfoCard() {
     const [dialogVisible, setDialogVisible] = useState(false);
     const [imageUri, setImageUri] = useState('');
+    const [title, setTitle] = useState('');
 
     const showDialog = () => {
         setDialogVisible(true);
@@ -39,6 +41,10 @@ export default function WorkoutInfoCard() {
         setImageUri('');
     };
 
+    const handleTitleInput = (text: string) => {
+        setTitle(text);
+    };
+
     return (
         <Card>
             <PhotoPicker
@@ -50,6 +56,7 @@ export default function WorkoutInfoCard() {
                 onImagePick={() => handleMediaPick('images')}
                 onPhotoPick={() => handleMediaPick('camera')}
             />
+            <WorkoutTitle value={title} onChangeText={handleTitleInput} />
         </Card>
     );
 }
