@@ -1,49 +1,57 @@
-import { Image, Pressable } from 'react-native';
-import { Dialog, Button, Text } from 'react-native-paper';
+import { Pressable, StyleSheet } from 'react-native';
+import { Dialog, Button, Text, Portal } from 'react-native-paper';
+import ThemedIcon from 'src/components/ThemedIcon';
 
-export default function PhotoPickDialog({
-    visible,
-    hideDialog,
-    pickImageCallback,
-    takePhotoCallback
-}: {
-    visible: boolean;
-    hideDialog: any;
-    pickImageCallback: Function;
-    takePhotoCallback: Function;
-}) {
+type PhotoPickDialogProps = {
+    visible?: boolean;
+    onPickImage?: () => void;
+    onTakePhoto?: () => void;
+    onCancel?: () => void;
+};
+
+export default function PhotoPickDialog(props: PhotoPickDialogProps) {
+    const { visible, onPickImage, onTakePhoto, onCancel } = props;
     return (
-        <Dialog
-            visible={visible}
-            onDismiss={hideDialog}
-            style={{ marginTop: -150 }}
-            dismissable={false}
-        >
-            <Dialog.Title>Choose image</Dialog.Title>
-            <Dialog.Content style={{ gap: 25, paddingTop: 20 }}>
-                <Pressable
-                    style={{ flexDirection: 'row', gap: 10 }}
-                    onPress={() => takePhotoCallback()}
-                >
-                    <Image source={require('@assets/icons/add_photo.png')} />
-                    <Text>Take a photo</Text>
-                </Pressable>
-                <Pressable
-                    style={{ flexDirection: 'row', gap: 10 }}
-                    onPress={() => pickImageCallback()}
-                >
-                    <Image
-                        source={require('@assets/icons/add_image.png')}
-                        style={{
-                            tintColor: 'black'
-                        }}
-                    />
-                    <Text>Select from device</Text>
-                </Pressable>
-            </Dialog.Content>
-            <Dialog.Actions>
-                <Button onPress={hideDialog}>Cancel</Button>
-            </Dialog.Actions>
-        </Dialog>
+        <Portal>
+            <Dialog visible={visible ?? false} dismissable={false}>
+                <Dialog.Title>Choose image</Dialog.Title>
+                <Dialog.Content style={styles.content}>
+                    <Pressable style={styles.pressable} onPress={onTakePhoto}>
+                        <ThemedIcon
+                            source={require('@assets/icons/add_photo.png')}
+                            resizeMode='center'
+                            style={styles.icon}
+                        />
+                        <Text>Take a photo</Text>
+                    </Pressable>
+                    <Pressable style={styles.pressable} onPress={onPickImage}>
+                        <ThemedIcon
+                            source={require('@assets/icons/add_image.png')}
+                            resizeMode='center'
+                            style={styles.icon}
+                        />
+                        <Text>Select from device</Text>
+                    </Pressable>
+                </Dialog.Content>
+                <Dialog.Actions>
+                    <Button onPress={onCancel}>Cancel</Button>
+                </Dialog.Actions>
+            </Dialog>
+        </Portal>
     );
 }
+
+const styles = StyleSheet.create({
+    content: {
+        gap: 25,
+        paddingTop: 20
+    },
+    pressable: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    icon: {
+        width: 22,
+        height: 22
+    }
+});
