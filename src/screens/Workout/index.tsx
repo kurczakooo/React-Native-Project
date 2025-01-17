@@ -1,11 +1,11 @@
 import ScreenContainer from 'src/components/ScreenContainer';
-import WorkoutInfoCard from './components/WorkoutInfoCard';
 import PhotoPicker from './components/PhotoPicker';
+import WorkoutInfoCard from './components/WorkoutInfoCard';
 
 export default function WorkoutScreen() {
     return (
         <ScreenContainer>
-            <PhotoPicker />
+            <WorkoutInfoCard />
         </ScreenContainer>
     );
 }
