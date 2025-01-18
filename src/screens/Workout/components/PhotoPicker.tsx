@@ -3,6 +3,7 @@ import PhotoPickButton from './PhotoPickButton';
 import PhotoPickDialog from './PhotoPickDialog';
 
 type PhotoPickerProps = {
+    size: number;
     imageUri: string;
     dialogVisible: boolean;
     onDialogCancel?: () => void;
@@ -19,6 +20,7 @@ export default function PhotoPicker(props: PhotoPickerProps) {
                 onPick={props.onButtonClick}
                 onDelete={props.onMediaDelete}
                 imageUri={props.imageUri}
+                size={props.size}
             />
             <PhotoPickDialog
                 visible={props.dialogVisible}
