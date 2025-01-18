@@ -7,9 +7,16 @@ import PhotoPicker from './components/PhotoPicker';
 import WorkoutTitle from './components/WorkoutTitle';
 import ScreenContainer from 'src/components/ScreenContainer';
 import { Button, Text, useTheme } from 'react-native-paper';
-import { Theme } from 'src/types';
+import { Theme, WorkoutExercise, WorkoutSet } from 'src/types';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import EndDialog from './components/EndDialog';
+import ExerciseCard from './components/ExerciseCard';
+
+// omit id because api will assign auto generated one
+type WorkoutScreenExercise = {
+    exercise: Omit<WorkoutExercise, 'id'>;
+    sets: Omit<WorkoutSet, 'id'>[];
+};
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -37,6 +44,7 @@ export default function WorkoutScreen() {
     const [imageUri, setImageUri] = useState('');
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState(0);
+    const [exercises, setExercises] = useState<WorkoutScreenExercise[]>([]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -108,6 +116,39 @@ export default function WorkoutScreen() {
                     />
                 </View>
             </Card>
+            <View>
+                <ExerciseCard
+                    name='Exercise'
+                    level='beginner'
+                    restTimeSeconds={200}
+                    tableRows={[
+                        {
+                            setNumber: 1,
+                            weight: null,
+                            reps: 10,
+                            prevWeight: 10,
+                            prevReps: 10,
+                            checked: true,
+                            onCheck: () => null,
+                            onWeightChange: (text: string) => null,
+                            onRepsChange: (text: string) => null,
+                            onDelete: () => null
+                        },
+                        {
+                            setNumber: 1,
+                            weight: null,
+                            reps: 10,
+                            prevWeight: 10,
+                            prevReps: 10,
+                            checked: true,
+                            onCheck: () => null,
+                            onWeightChange: (text: string) => null,
+                            onRepsChange: (text: string) => null,
+                            onDelete: () => null
+                        }
+                    ]}
+                />
+            </View>
         </ScreenContainer>
     );
 }
@@ -122,7 +163,8 @@ const styles = StyleSheet.create({
         gap: 15
     },
     info: {
-        gap: 5
+        gap: 5,
+        justifyContent: 'center'
     },
     controls: {
         flexDirection: 'row',

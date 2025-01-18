@@ -14,13 +14,12 @@ export default function ButtonWithIcon({
     color: string;
     backgroundColor: string;
     outlineColor: string;
-    onPress: Function;
+    onPress?: () => void;
     style?: StyleProp<any>;
 }) {
     return (
         <Pressable
             style={{
-                ...style,
                 flexDirection: 'row',
                 alignItems: 'center',
                 borderWidth: 2,
@@ -29,11 +28,10 @@ export default function ButtonWithIcon({
                 paddingTop: 10,
                 paddingBottom: 10,
                 backgroundColor: backgroundColor,
-                gap: 5
+                gap: 5,
+                ...style
             }}
-            onPress={() => {
-                onPress();
-            }}
+            onPress={onPress}
         >
             <Image
                 source={iconSource}
