@@ -7,16 +7,17 @@ import React from 'react';
 
 type PhotoPickButtonProps = {
     imageUri: string;
+    size: number;
     onPick?: () => void;
     onDelete?: () => void;
 };
 
 export default function PhotoPickButton(props: PhotoPickButtonProps) {
     const theme = useTheme<Theme>();
-    const { imageUri, onPick, onDelete } = props;
+    const { size, imageUri, onPick, onDelete } = props;
 
     return (
-        <Card>
+        <Card style={{ width: size }}>
             <Pressable
                 onPress={onPick}
                 style={{
@@ -54,9 +55,6 @@ export default function PhotoPickButton(props: PhotoPickButtonProps) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 15
-    },
     photoIcon: {
         width: 24,
         height: 24
@@ -67,13 +65,13 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     cancelIcon: {
-        width: 20,
-        height: 20
+        width: 16,
+        height: 16
     },
     cancelPressable: {
         position: 'absolute',
-        top: 15,
-        right: 15,
+        top: 7,
+        left: 7,
         borderRadius: '50%',
         padding: 5
     },
