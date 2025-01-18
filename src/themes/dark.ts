@@ -13,6 +13,7 @@ const darkTheme: Theme = {
         background: '#252525',
         onBackground: '#959595',
         form: '#4f4f4f',
+        fontInactive: 'rgba(255, 255, 255, 0.15)',
 
         // Colors used by Paper components
         error: '#ed4337',
