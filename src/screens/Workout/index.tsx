@@ -7,13 +7,15 @@ import Statistic from 'src/components/Statistic';
 import PhotoPicker from './components/PhotoPicker';
 import WorkoutTitle from './components/WorkoutTitle';
 import ScreenContainer from 'src/components/ScreenContainer';
-import { Button, Text, useTheme } from 'react-native-paper';
+import { Button, Text, useTheme, Portal } from 'react-native-paper';
 import { HomeTabScreenProps, Theme, WorkoutScreenExercise } from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import EndDialog from './components/EndDialog';
 import ExerciseCard from './components/ExerciseCard';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import RestTimeDialog from './components/RestTimeDialog';
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -35,11 +37,14 @@ function formatDuration(seconds: number) {
 
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const theme = useTheme<Theme>();
-    const { userData } = useCurrentUser();
+    const tabBarHeight = useBottomTabBarHeight();
+    const { userData, setUserData } = useCurrentUser();
 
     const [pickDialogVisible, setPickDialogVisible] = useState(false);
     const [saveDialogVisible, setSaveDialogVisible] = useState(false);
     const [discardDialogVisible, setDiscardDialogVisible] = useState(false);
+    const [restDialogVisible, setRestDialogVisible] = useState(false);
+    const [restDialogExerciseId, setRestDialogExerciseId] = useState<string>('');
     const [imageUri, setImageUri] = useState('');
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState(0);
@@ -63,19 +68,29 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
     return (
         <>
-            <ScreenContainer>
-                <EndDialog
-                    content='Are you sure you want to end the session?'
-                    visible={saveDialogVisible}
-                    onConfirm={() => setSaveDialogVisible(false)}
-                    onCancel={() => setSaveDialogVisible(false)}
-                />
-                <EndDialog
-                    content='Are you sure you want to discard the session?'
-                    visible={discardDialogVisible}
-                    onConfirm={() => setDiscardDialogVisible(false)}
-                    onCancel={() => setDiscardDialogVisible(false)}
-                />
+            <ScreenContainer additionalSpaceBottom={tabBarHeight}>
+                <Portal>
+                    <RestTimeDialog
+                        setUserData={setUserData}
+                        workoutExercises={userData.workout?.exercises || []}
+                        exerciseId={restDialogExerciseId}
+                        visible={restDialogVisible}
+                        visibilitySetter={setRestDialogVisible}
+                        exerciseIdSetter={setRestDialogExerciseId}
+                    />
+                    <EndDialog
+                        content='Are you sure you want to end the session?'
+                        visible={saveDialogVisible}
+                        onConfirm={() => setSaveDialogVisible(false)}
+                        onCancel={() => setSaveDialogVisible(false)}
+                    />
+                    <EndDialog
+                        content='Are you sure you want to discard the session?'
+                        visible={discardDialogVisible}
+                        onConfirm={() => setDiscardDialogVisible(false)}
+                        onCancel={() => setDiscardDialogVisible(false)}
+                    />
+                </Portal>
                 <Card style={styles.infoCard}>
                     <View style={styles.cardTop}>
                         <PhotoPicker
@@ -120,8 +135,13 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     </View>
                 </Card>
                 <View style={styles.exercisesContainer}>
-                    {userData.workout?.exercises?.map(e => (
-                        <ExerciseCard key={e.exercise.id} cardExercise={e} />
+                    {userData.workout?.exercises?.map((e, i) => (
+                        <ExerciseCard
+                            key={e.exercise.id + i}
+                            cardExercise={e}
+                            restDialogExerciseIdSetter={setRestDialogExerciseId}
+                            restDialogVisibilitySetter={setRestDialogVisible}
+                        />
                     ))}
                 </View>
             </ScreenContainer>

@@ -7,9 +7,12 @@ import Card from 'src/components/Card';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import ThemedIcon from 'src/components/ThemedIcon';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import { Dispatch, SetStateAction } from 'react';
 
 type ExerciseCardProps = {
     cardExercise: WorkoutScreenExercise;
+    restDialogExerciseIdSetter: Dispatch<SetStateAction<string>>;
+    restDialogVisibilitySetter: Dispatch<SetStateAction<boolean>>;
 };
 
 function tabelarizeRowData(
@@ -75,16 +78,15 @@ function formatRestTime(seconds: number) {
 export default function ExerciseCard(props: ExerciseCardProps) {
     const theme = useTheme<Theme>();
     const { userData, setUserData } = useCurrentUser();
-    const { cardExercise } = props;
+    const { cardExercise, restDialogExerciseIdSetter, restDialogVisibilitySetter } = props;
 
     if (!userData.workout?.exercises) return null;
 
     const updateExerciseRows = (current: WorkoutScreenExercise, rows: ExerciseTableRow[]) =>
         current.exercise.id === cardExercise.exercise.id
             ? {
-                  exercise: current.exercise,
-                  rows: rows,
-                  restTimeSeconds: current.restTimeSeconds
+                  ...current,
+                  rows
               }
             : current;
 
@@ -144,6 +146,11 @@ export default function ExerciseCard(props: ExerciseCardProps) {
         }));
     };
 
+    const handleRestTimerPress = () => {
+        restDialogExerciseIdSetter(cardExercise.exercise.id);
+        restDialogVisibilitySetter(true);
+    };
+
     return (
         <Card>
             <Pressable onPress={handleExerciseDelete}>
@@ -162,7 +169,7 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 <Text variant='titleSmall' style={styles.exerciseName}>
                     {cardExercise.exercise.name}
                 </Text>
-                <Pressable>
+                <Pressable onPress={handleRestTimerPress}>
                     <Text variant='titleSmall' style={{ color: theme.colors.primary }}>
                         Rest time:{' '}
                         {cardExercise.restTimeSeconds
