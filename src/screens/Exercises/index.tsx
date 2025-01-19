@@ -120,6 +120,12 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     ));
 };
 
+const toWorkoutScreenExercise = (exercise: PredefinedExerciseType) => ({
+    exercise: exercise,
+    rows: [],
+    restTimeSeconds: null
+});
+
 export default function ExercisesScreen(props: ExercisesScreenProps) {
     const { navigation, route } = props;
 
@@ -131,7 +137,6 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
     const exercisesCount = state.selectedExercises.length;
     const selectButtonVisible = exercisesCount > 0;
     const selectButtonText = `+ Add ${exercisesCount} exercise${exercisesCount > 1 ? 's' : ''}`;
-    const isStackScreen = route.params?.renderType === 'stack';
     const isSelectMode = route.params?.mode === 'select';
 
     useEffect(() => {
@@ -161,9 +166,20 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
 
     const handleSelectConfirm = () => {
         const exercises = userData.workout?.exercises
-            ? [...userData.workout?.exercises, ...state.selectedExercises]
-            : state.selectedExercises;
-        setUserData({ ...userData, workout: { ...userData.workout, exercises } });
+            ? [
+                  ...userData.workout?.exercises,
+                  ...state.selectedExercises.map(toWorkoutScreenExercise)
+              ]
+            : state.selectedExercises.map(toWorkoutScreenExercise);
+
+        setUserData({
+            ...userData,
+            workout: {
+                ...userData.workout,
+                exercises
+            }
+        });
+
         navigation.reset({
             index: 0,
             routes: [{ name: 'Workout' }]
@@ -176,7 +192,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
 
     return (
         <>
-            <ScreenContainer additionalSpaceBottom={isStackScreen ? tabBarHeight / 2 : 0}>
+            <ScreenContainer>
                 <Portal>
                     <Dialog
                         visible={state.dialogVisible}

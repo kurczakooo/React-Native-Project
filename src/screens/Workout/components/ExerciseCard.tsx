@@ -1,18 +1,16 @@
 import { Pressable, View, TextInput, Image, StyleSheet } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
-import { Theme } from 'src/types';
+import { Theme, WorkoutScreenExercise } from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import Card from 'src/components/Card';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import ThemedIcon from 'src/components/ThemedIcon';
+import { Dispatch, SetStateAction } from 'react';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 type ExerciseCardProps = {
-    name: string;
-    level: 'beginner' | 'intermediate' | 'expert';
-    restTimeSeconds?: number;
-    tableRows?: ExerciseTableRow[];
-    tableRowsSetter?: (rows: ExerciseTableRow[]) => void;
+    cardExercise: WorkoutScreenExercise;
 };
 
 function tabelarizeRowData(
@@ -77,35 +75,58 @@ function formatRestTime(seconds: number) {
 
 export default function ExerciseCard(props: ExerciseCardProps) {
     const theme = useTheme<Theme>();
-    const { name, level, restTimeSeconds, tableRowsSetter, tableRows = [] } = props;
+    const { userData, setUserData } = useCurrentUser();
+    const { cardExercise } = props;
+
+    const updateExerciseRows = (current: WorkoutScreenExercise, rows: ExerciseTableRow[]) =>
+        current.exercise.id === cardExercise.exercise.id
+            ? {
+                  exercise: current.exercise,
+                  rows: rows,
+                  restTimeSeconds: current.restTimeSeconds
+              }
+            : current;
+
+    const setOrAppendUserSets = (setRows: ExerciseTableRow | ExerciseTableRow[]) => {
+        setUserData(data => ({
+            ...data,
+            workout: {
+                ...data.workout,
+                exercises: data.workout?.exercises?.map(e => {
+                    const newRows = Array.isArray(setRows) ? setRows : [...e.rows, setRows];
+                    return updateExerciseRows(e, newRows);
+                })
+            }
+        }));
+    };
 
     const handleAddSet = () => {
-        if (tableRowsSetter) {
-            const newSetNumber = tableRows.length + 1;
-            const newRow: ExerciseTableRow = {
-                setNumber: newSetNumber,
-                weight: null,
-                reps: null,
-                checked: false
-            };
-            tableRowsSetter([...tableRows, newRow]);
-        }
+        if (!userData.workout?.exercises) return;
+
+        const newSetNumber = cardExercise.rows.length + 1;
+        const newRow: ExerciseTableRow = {
+            setNumber: newSetNumber,
+            weight: null,
+            reps: null,
+            checked: false
+        };
+
+        setOrAppendUserSets(newRow);
     };
 
     const handleRowUpdate = (updatedRow: ExerciseTableRow) => {
-        if (tableRowsSetter) {
-            const updatedRows = tableRows.map(row =>
-                row.setNumber === updatedRow.setNumber ? updatedRow : row
-            );
-            tableRowsSetter(updatedRows);
-        }
+        if (!userData.workout?.exercises) return;
+
+        const updatedRows = cardExercise.rows.map(row =>
+            row.setNumber === updatedRow.setNumber ? updatedRow : row
+        );
+
+        setOrAppendUserSets(updatedRows);
     };
 
     const handleRowDelete = (setNumber: number) => {
-        if (tableRowsSetter) {
-            const updatedRows = tableRows.filter(row => row.setNumber !== setNumber);
-            tableRowsSetter(updatedRows);
-        }
+        const updatedRows = cardExercise.rows.filter(row => row.setNumber !== setNumber);
+        setOrAppendUserSets(updatedRows);
     };
 
     return (
@@ -119,24 +140,32 @@ export default function ExerciseCard(props: ExerciseCardProps) {
             <View
                 style={{
                     ...styles.levelIndicator,
-                    backgroundColor: theme.colors[level]
+                    backgroundColor: theme.colors[cardExercise.exercise.level]
                 }}
             ></View>
             <View style={styles.container}>
-                <Text variant='titleSmall'>{name}</Text>
+                <Text variant='titleSmall'>{cardExercise.exercise.name}</Text>
                 <Pressable>
                     <Text variant='titleSmall' style={{ color: theme.colors.primary }}>
-                        Rest time: {restTimeSeconds ? formatRestTime(restTimeSeconds) : 'OFF'}
+                        Rest time:{' '}
+                        {cardExercise.restTimeSeconds
+                            ? formatRestTime(cardExercise.restTimeSeconds)
+                            : 'OFF'}
                     </Text>
                 </Pressable>
-                {tableRows.length !== 0 && (
+                {cardExercise.rows.length !== 0 && (
                     <Table>
                         <Row
                             data={getTableHeaders(['', 'Set', 'Previous', 'Weight', 'Reps', ''])}
                             flexArr={[1, 2, 3, 3, 2, 2]}
                         />
                         <Rows
-                            data={getTableData(tableRows, theme, handleRowUpdate, handleRowDelete)}
+                            data={getTableData(
+                                cardExercise.rows,
+                                theme,
+                                handleRowUpdate,
+                                handleRowDelete
+                            )}
                             flexArr={[1, 2, 3, 3, 2, 2]}
                         />
                     </Table>
