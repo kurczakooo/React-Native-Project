@@ -14,13 +14,13 @@ export type HomeStackParamList = {
     Home: { snackbarContent: string } | undefined;
     Workout: { workout: Workout } | undefined;
     Settings: undefined;
-    Exercises: { mode: 'select' | 'view'; renderType: 'stack' | 'tab' } | undefined;
+    Exercises: { mode: 'select' | 'view' } | undefined;
     'Workout Details': { workout: Workout } | undefined;
 };
 
 export type ExecisesStackParamList = {
     Debug: { exercises: PredefinedExercise[] } | undefined;
-    Exercises: { mode: 'select' | 'view'; renderType: 'stack' | 'tab' } | undefined;
+    Exercises: { mode: 'select' | 'view' } | undefined;
     Settings: undefined;
 };
 
@@ -219,11 +219,17 @@ export interface DatabaseUser {
     password: string;
 }
 
+export interface WorkoutScreenExercise {
+    exercise: PredefinedExercise;
+    rows: ExerciseTableRow[];
+    restTimeSeconds: number | null;
+}
+
 export interface CurrentUser {
     id?: string;
     username?: string;
     workout?: {
-        exercises?: PredefinedExercise[];
+        exercises?: WorkoutScreenExercise[];
         formattedDuration?: string;
         image?: string;
     };
