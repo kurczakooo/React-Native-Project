@@ -12,32 +12,30 @@ type PhotoPickDialogProps = {
 export default function PhotoPickDialog(props: PhotoPickDialogProps) {
     const { visible, onPickImage, onTakePhoto, onCancel } = props;
     return (
-        <Portal>
-            <Dialog visible={visible ?? false} dismissable={false}>
-                <Dialog.Title>Choose image</Dialog.Title>
-                <Dialog.Content style={styles.content}>
-                    <Pressable style={styles.pressable} onPress={onTakePhoto}>
-                        <ThemedIcon
-                            source={require('@assets/icons/add_photo.png')}
-                            resizeMode='center'
-                            style={styles.icon}
-                        />
-                        <Text>Take a photo</Text>
-                    </Pressable>
-                    <Pressable style={styles.pressable} onPress={onPickImage}>
-                        <ThemedIcon
-                            source={require('@assets/icons/add_image.png')}
-                            resizeMode='center'
-                            style={styles.icon}
-                        />
-                        <Text>Select from device</Text>
-                    </Pressable>
-                </Dialog.Content>
-                <Dialog.Actions>
-                    <Button onPress={onCancel}>Cancel</Button>
-                </Dialog.Actions>
-            </Dialog>
-        </Portal>
+        <Dialog visible={visible ?? false} dismissable={false}>
+            <Dialog.Title>Choose image</Dialog.Title>
+            <Dialog.Content style={styles.content}>
+                <Pressable style={styles.pressable} onPress={onTakePhoto}>
+                    <ThemedIcon
+                        source={require('@assets/icons/add_photo.png')}
+                        resizeMode='center'
+                        style={styles.icon}
+                    />
+                    <Text>Take a photo</Text>
+                </Pressable>
+                <Pressable style={styles.pressable} onPress={onPickImage}>
+                    <ThemedIcon
+                        source={require('@assets/icons/add_image.png')}
+                        resizeMode='center'
+                        style={styles.icon}
+                    />
+                    <Text>Select from device</Text>
+                </Pressable>
+            </Dialog.Content>
+            <Dialog.Actions>
+                <Button onPress={onCancel}>Cancel</Button>
+            </Dialog.Actions>
+        </Dialog>
     );
 }
 

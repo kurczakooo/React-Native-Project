@@ -176,7 +176,10 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
             ...userData,
             workout: {
                 ...userData.workout,
-                exercises
+                exercises: exercises.map(e => ({
+                    ...e,
+                    exercise: { ...e.exercise, id: e.exercise.id + '_' + Date.now() }
+                }))
             }
         });
 
