@@ -119,7 +119,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                         />
                     </View>
                 </Card>
-                <View>
+                <View style={styles.exercisesContainer}>
                     {userData.workout?.exercises?.map(e => (
                         <ExerciseCard key={e.exercise.id} cardExercise={e} />
                     ))}
@@ -170,5 +170,8 @@ const styles = StyleSheet.create({
         padding: 3,
         justifyContent: 'center',
         borderRadius: 5
+    },
+    exercisesContainer: {
+        gap: 10
     }
 });

@@ -1,12 +1,11 @@
 import { Pressable, View, TextInput, Image, StyleSheet } from 'react-native';
-import { Table, Row, Rows } from 'react-native-table-component';
+import { Table, Row, Rows } from 'react-native-reanimated-table';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
 import { Theme, WorkoutScreenExercise } from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import Card from 'src/components/Card';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import ThemedIcon from 'src/components/ThemedIcon';
-import { Dispatch, SetStateAction } from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 type ExerciseCardProps = {
@@ -52,7 +51,7 @@ function tabelarizeRowData(
 
 function getTableHeaders(headers: string[]): JSX.Element[] {
     return headers.map(header => (
-        <Text style={styles.cellHeader} variant='labelMedium'>
+        <Text variant='labelMedium' style={styles.cellHeader}>
             {header}
         </Text>
     ));
@@ -78,6 +77,8 @@ export default function ExerciseCard(props: ExerciseCardProps) {
     const { userData, setUserData } = useCurrentUser();
     const { cardExercise } = props;
 
+    if (!userData.workout?.exercises) return null;
+
     const updateExerciseRows = (current: WorkoutScreenExercise, rows: ExerciseTableRow[]) =>
         current.exercise.id === cardExercise.exercise.id
             ? {
@@ -101,8 +102,6 @@ export default function ExerciseCard(props: ExerciseCardProps) {
     };
 
     const handleAddSet = () => {
-        if (!userData.workout?.exercises) return;
-
         const newSetNumber = cardExercise.rows.length + 1;
         const newRow: ExerciseTableRow = {
             setNumber: newSetNumber,
@@ -115,8 +114,6 @@ export default function ExerciseCard(props: ExerciseCardProps) {
     };
 
     const handleRowUpdate = (updatedRow: ExerciseTableRow) => {
-        if (!userData.workout?.exercises) return;
-
         const updatedRows = cardExercise.rows.map(row =>
             row.setNumber === updatedRow.setNumber ? updatedRow : row
         );
@@ -125,13 +122,31 @@ export default function ExerciseCard(props: ExerciseCardProps) {
     };
 
     const handleRowDelete = (setNumber: number) => {
-        const updatedRows = cardExercise.rows.filter(row => row.setNumber !== setNumber);
+        const updatedRows = cardExercise.rows
+            .filter(row => row.setNumber !== setNumber)
+            .map((row, i) => ({
+                ...row,
+                setNumber: i + 1
+            }));
+
         setOrAppendUserSets(updatedRows);
+    };
+
+    const handleExerciseDelete = () => {
+        setUserData(data => ({
+            ...data,
+            workout: {
+                ...data.workout,
+                exercises: data.workout?.exercises?.filter(
+                    e => e.exercise.id !== cardExercise.exercise.id
+                )
+            }
+        }));
     };
 
     return (
         <Card>
-            <Pressable>
+            <Pressable onPress={handleExerciseDelete}>
                 <Image
                     source={require('@assets/icons/cross.png')}
                     style={{ ...styles.workoutDeleteIcon, tintColor: theme.colors.expert }}
@@ -144,7 +159,9 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 }}
             ></View>
             <View style={styles.container}>
-                <Text variant='titleSmall'>{cardExercise.exercise.name}</Text>
+                <Text variant='titleSmall' style={styles.exerciseName}>
+                    {cardExercise.exercise.name}
+                </Text>
                 <Pressable>
                     <Text variant='titleSmall' style={{ color: theme.colors.primary }}>
                         Rest time:{' '}
@@ -156,16 +173,18 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 {cardExercise.rows.length !== 0 && (
                     <Table>
                         <Row
-                            data={getTableHeaders(['', 'Set', 'Previous', 'Weight', 'Reps', ''])}
                             flexArr={[1, 2, 3, 3, 2, 2]}
+                            data={getTableHeaders(['', 'Set', 'Previous', 'Weight', 'Reps', ''])}
                         />
                         <Rows
-                            data={getTableData(
-                                cardExercise.rows,
-                                theme,
-                                handleRowUpdate,
-                                handleRowDelete
-                            )}
+                            data={
+                                getTableData(
+                                    cardExercise.rows,
+                                    theme,
+                                    handleRowUpdate,
+                                    handleRowDelete
+                                ) ?? []
+                            }
                             flexArr={[1, 2, 3, 3, 2, 2]}
                         />
                     </Table>
@@ -191,6 +210,9 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         paddingVertical: 15,
         gap: 5
+    },
+    exerciseName: {
+        width: '80%'
     },
     cell: {
         textAlign: 'center'
