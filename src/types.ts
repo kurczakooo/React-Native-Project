@@ -228,3 +228,12 @@ export interface CurrentUser {
         image?: string;
     };
 }
+
+export interface ExerciseTableRow {
+    setNumber: number;
+    weight: number | null;
+    reps: number | null;
+    checked: boolean;
+    prevWeight?: number;
+    prevReps?: number;
+}
