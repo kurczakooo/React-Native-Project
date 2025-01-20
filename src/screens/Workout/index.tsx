@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { MediaType, launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Vibration } from 'react-native';
 import Card from 'src/components/Card';
 import Statistic from 'src/components/Statistic';
 import PhotoPicker from './components/PhotoPicker';
@@ -63,6 +63,23 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
         return () => clearInterval(interval);
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (restTimeSeconds !== null && restTimeSeconds > 0) {
+                const newValue = restTimeSeconds - 1;
+                setRestTimeSeconds(newValue);
+
+                if (newValue === 0) {
+                    setRestSnackbarVisible(false);
+                    clearInterval(interval);
+                    Vibration.vibrate(500);
+                }
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [restTimeSeconds]);
+
     const handleMediaPick = async (source: 'images' | 'camera') => {
         setImageUri(await getMediaUri(source));
         setPickDialogVisible(false);
@@ -73,7 +90,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     };
 
     const handleRestSkip = () => {
-        setRestTimeSeconds(null);
+        setRestTimeSeconds(0);
         setRestSnackbarVisible(false);
     };
 
@@ -158,7 +175,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 </View>
             </ScreenContainer>
             <Snackbar
-                visible={restTimeSeconds !== null && restSnackbarVisible}
+                visible={restTimeSeconds !== null && restTimeSeconds > 0 && restSnackbarVisible}
                 onDismiss={() => null}
                 action={{
                     label: 'Skip',
@@ -166,7 +183,9 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                 }}
                 style={styles.restSnackbar}
             >
-                <Text variant='labelLarge'>Rest: {formatRestTime(restTimeSeconds as number)}</Text>
+                <Text variant='labelLarge' style={{ color: theme.colors.onPrimary }}>
+                    Rest: {formatRestTime(restTimeSeconds as number)}
+                </Text>
             </Snackbar>
             <ButtonWithIcon
                 iconSource={require('@assets/icons/add.png')}

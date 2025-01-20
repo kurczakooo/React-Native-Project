@@ -4,6 +4,7 @@ import { Theme } from 'src/types';
 import ThemedIcon from 'src/components/ThemedIcon';
 import Card from 'src/components/Card';
 import React from 'react';
+import { BoxShadow } from '@shopify/react-native-skia';
 
 type PhotoPickButtonProps = {
     imageUri: string;
@@ -17,7 +18,7 @@ export default function PhotoPickButton(props: PhotoPickButtonProps) {
     const { size, imageUri, onPick, onDelete } = props;
 
     return (
-        <Card style={{ width: size }}>
+        <Card style={{ width: size, boxShadow: 'none' }}>
             <Pressable
                 onPress={onPick}
                 style={{
