@@ -85,11 +85,12 @@ export default function Login({ navigation }: any) {
     useEffect(() => {
         getCredentials().then((e: Credentials) => {
             console.log('saved creds' + JSON.stringify(e));
-
-            handleLogin(e).finally(() => {
-                setUsernameFailed('');
-                setLoginFailed('');
-            });
+            if (e?.password !== undefined && e?.username !== undefined) {
+                handleLogin(e).finally(() => {
+                    setUsernameFailed('');
+                    setLoginFailed('');
+                });
+            }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
