@@ -1,6 +1,7 @@
 import React from 'react';
 import PhotoPickButton from './PhotoPickButton';
 import PhotoPickDialog from './PhotoPickDialog';
+import { Portal } from 'react-native-paper';
 
 type PhotoPickerProps = {
     size: number;
@@ -22,12 +23,14 @@ export default function PhotoPicker(props: PhotoPickerProps) {
                 imageUri={props.imageUri}
                 size={props.size}
             />
-            <PhotoPickDialog
-                visible={props.dialogVisible}
-                onCancel={props.onDialogCancel}
-                onPickImage={props.onImagePick}
-                onTakePhoto={props.onPhotoPick}
-            />
+            <Portal>
+                <PhotoPickDialog
+                    visible={props.dialogVisible}
+                    onCancel={props.onDialogCancel}
+                    onPickImage={props.onImagePick}
+                    onTakePhoto={props.onPhotoPick}
+                />
+            </Portal>
         </>
     );
 }

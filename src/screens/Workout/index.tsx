@@ -76,7 +76,6 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                         exerciseId={restDialogExerciseId}
                         visible={restDialogVisible}
                         visibilitySetter={setRestDialogVisible}
-                        exerciseIdSetter={setRestDialogExerciseId}
                     />
                     <EndDialog
                         content='Are you sure you want to end the session?'
