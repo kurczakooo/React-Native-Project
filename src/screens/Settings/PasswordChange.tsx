@@ -5,8 +5,7 @@ import { changePassword } from 'src/api/endpoints/settings';
 import { ToastAndroid, View } from 'react-native';
 import { Theme } from 'src/types';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
-import Login from '../Login';
-import { authenticate, saveCredentials, saveCredentialsAsync } from 'src/api/endpoints/login';
+import { saveCredentialsAsync } from 'src/api/endpoints/login';
 
 export const PasswordChange = () => {
     const theme = useTheme<Theme>();
@@ -54,14 +53,13 @@ export const PasswordChange = () => {
                 // to update local storage data
                 saveCredentialsAsync({ username: curUser, password: newPassword })
                     .then(e => {
-                        console.log('updataed');
+                        console.log('updated');
                     })
                     .catch(e => {
                         console.error(e);
                     });
             })
             .catch(e => {
-                // console.error(e);
                 ToastAndroid.show(e.message, 5000);
             })
             .finally(() => {
@@ -95,37 +93,36 @@ export const PasswordChange = () => {
                     secureTextEntry
                     theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                 />
-                (
-                {passwordError === '' || (
+                {passwordError !== '' && (
                     <HelperText
                         style={{ margin: 0, padding: 0 }}
                         type='error'
                         visible={passwordError !== ''}
                     >
-                        Password is required
+                        {passwordError}
                     </HelperText>
                 )}
-                )
             </View>
-            )
+
             <TextInput
                 mode='outlined'
                 label='New password'
-                onChangeText={text => setNewPassword(text)}
+                onChangeText={setNewPassword}
                 value={newPassword}
                 secureTextEntry
                 theme={{ roundness: 5, colors: { background: theme.colors.form } }}
             />
+
             <TextInput
                 mode='outlined'
                 label='Repeat new password'
-                onChangeText={text => setNewPasswordConfirm(text)}
+                onChangeText={setNewPasswordConfirm}
                 value={newPasswordConfirm}
                 secureTextEntry
                 theme={{ roundness: 5, colors: { background: theme.colors.form } }}
             />
             <View>
-                {newPasswordDoNotMatchError === '' || (
+                {newPasswordDoNotMatchError !== '' && (
                     <HelperText
                         style={{ margin: 0 }}
                         type='error'
@@ -134,7 +131,6 @@ export const PasswordChange = () => {
                         {newPasswordDoNotMatchError}
                     </HelperText>
                 )}
-                )
                 <Button
                     onPress={onChangePassword}
                     mode='contained'
