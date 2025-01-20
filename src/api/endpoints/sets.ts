@@ -1,6 +1,16 @@
 import { WorkoutSet } from 'src/types';
 import { api } from '../config';
 
+export async function saveSet(set: WorkoutSet): Promise<string | null> {
+    try {
+        const response = await api.post('/sets');
+        return response.data.id as string;
+    } catch (error) {
+        console.error('Error while saving workou:', error);
+        return null;
+    }
+}
+
 export async function getSets(exerciseId: string | undefined): Promise<WorkoutSet[]> {
     try {
         const response = await api.get(`/sets?exerciseId=${exerciseId}`);

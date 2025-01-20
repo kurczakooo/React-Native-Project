@@ -10,3 +10,13 @@ export async function getExercises(workoutId: string | undefined): Promise<Worko
         return [];
     }
 }
+
+export async function saveExercise(exercise: WorkoutExercise): Promise<string | null> {
+    try {
+        const response = await api.post('/exercises');
+        return response.data.id as string;
+    } catch (error) {
+        console.error('Error while saving workou:', error);
+        return null;
+    }
+}

@@ -2,6 +2,16 @@ import { Workout } from 'src/types';
 import { api } from '../config';
 import dayjs from 'dayjs';
 
+export async function saveWorkout(workout: Workout): Promise<string | null> {
+    try {
+        const response = await api.post('/workouts');
+        return response.data.id as string;
+    } catch (error) {
+        console.error('Error while saving workou:', error);
+        return null;
+    }
+}
+
 export async function getWorkouts(userId: string | undefined): Promise<Workout[]> {
     try {
         const response = await api.get(`/workouts?userId=${userId}`);
