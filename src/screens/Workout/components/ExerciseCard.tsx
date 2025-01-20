@@ -33,7 +33,7 @@ function tabelarizeRowData(
         </Text>,
         <TextInput
             value={row.weight?.toString() ?? ''}
-            placeholder={row.prevWeight?.toString() ?? '0'}
+            placeholder={row.prevWeight?.toString() ?? row.weight?.toString() ?? '0'}
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
@@ -41,7 +41,7 @@ function tabelarizeRowData(
         />,
         <TextInput
             value={row.reps?.toString() ?? ''}
-            placeholder={row.prevReps?.toString() ?? '0'}
+            placeholder={row.prevReps?.toString() ?? row.repsPlaceholder.toString()}
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
@@ -113,10 +113,12 @@ export default function ExerciseCard(props: ExerciseCardProps) {
 
     const handleAddSet = () => {
         const newSetNumber = cardExercise.rows.length + 1;
+        const lastSet = cardExercise.rows.at(-1);
         const newRow: ExerciseTableRow = {
             setNumber: newSetNumber,
-            weight: null,
+            weight: lastSet?.weight ?? null,
             reps: null,
+            repsPlaceholder: lastSet?.reps ?? 0,
             checked: false
         };
 

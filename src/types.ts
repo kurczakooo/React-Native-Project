@@ -239,6 +239,7 @@ export interface ExerciseTableRow {
     setNumber: number;
     weight: number | null;
     reps: number | null;
+    repsPlaceholder: number;
     checked: boolean;
     prevWeight?: number;
     prevReps?: number;
