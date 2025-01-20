@@ -7,7 +7,7 @@ import Statistic from 'src/components/Statistic';
 import PhotoPicker from './components/PhotoPicker';
 import WorkoutTitle from './components/WorkoutTitle';
 import ScreenContainer from 'src/components/ScreenContainer';
-import { Button, Text, useTheme, Portal } from 'react-native-paper';
+import { Button, Text, useTheme, Portal, Snackbar } from 'react-native-paper';
 import { HomeTabScreenProps, Theme, WorkoutScreenExercise } from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
@@ -35,6 +35,10 @@ function formatDuration(seconds: number) {
     return new Date(seconds * 1000).toISOString().substring(11, 19);
 }
 
+function formatRestTime(seconds: number) {
+    return new Date(seconds * 1000).toISOString().substring(14, 19);
+}
+
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const theme = useTheme<Theme>();
     const tabBarHeight = useBottomTabBarHeight();
@@ -45,6 +49,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [discardDialogVisible, setDiscardDialogVisible] = useState(false);
     const [restDialogVisible, setRestDialogVisible] = useState(false);
     const [restDialogExerciseId, setRestDialogExerciseId] = useState<string>('');
+    const [restSnackbarVisible, setRestSnackbarVisible] = useState(true);
+    const [restTimeSeconds, setRestTimeSeconds] = useState<number | null>(null);
     const [imageUri, setImageUri] = useState('');
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState(0);
@@ -64,6 +70,11 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
     const handleExerciseAdd = () => {
         props.navigation.navigate('Exercises', { mode: 'select' });
+    };
+
+    const handleRestSkip = () => {
+        setRestTimeSeconds(null);
+        setRestSnackbarVisible(false);
     };
 
     return (
@@ -140,10 +151,23 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                             cardExercise={e}
                             restDialogExerciseIdSetter={setRestDialogExerciseId}
                             restDialogVisibilitySetter={setRestDialogVisible}
+                            restSnackbarTimeSetter={setRestTimeSeconds}
+                            restSnackbarVisibilitySetter={setRestSnackbarVisible}
                         />
                     ))}
                 </View>
             </ScreenContainer>
+            <Snackbar
+                visible={restTimeSeconds !== null && restSnackbarVisible}
+                onDismiss={() => null}
+                action={{
+                    label: 'Skip',
+                    onPress: handleRestSkip
+                }}
+                style={styles.restSnackbar}
+            >
+                <Text variant='labelLarge'>Rest: {formatRestTime(restTimeSeconds as number)}</Text>
+            </Snackbar>
             <ButtonWithIcon
                 iconSource={require('@assets/icons/add.png')}
                 label='Add exercise'
@@ -192,5 +216,11 @@ const styles = StyleSheet.create({
     },
     exercisesContainer: {
         gap: 10
+    },
+    restSnackbar: {
+        marginBottom: 70,
+        width: '95%',
+        alignSelf: 'center',
+        borderRadius: 5
     }
 });

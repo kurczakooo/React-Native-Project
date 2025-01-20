@@ -13,6 +13,8 @@ type ExerciseCardProps = {
     cardExercise: WorkoutScreenExercise;
     restDialogExerciseIdSetter: Dispatch<SetStateAction<string>>;
     restDialogVisibilitySetter: Dispatch<SetStateAction<boolean>>;
+    restSnackbarTimeSetter: Dispatch<SetStateAction<number | null>>;
+    restSnackbarVisibilitySetter: Dispatch<SetStateAction<boolean>>;
 };
 
 function tabelarizeRowData(
@@ -78,7 +80,13 @@ function formatRestTime(seconds: number) {
 export default function ExerciseCard(props: ExerciseCardProps) {
     const theme = useTheme<Theme>();
     const { userData, setUserData } = useCurrentUser();
-    const { cardExercise, restDialogExerciseIdSetter, restDialogVisibilitySetter } = props;
+    const {
+        cardExercise,
+        restDialogExerciseIdSetter,
+        restDialogVisibilitySetter,
+        restSnackbarTimeSetter,
+        restSnackbarVisibilitySetter
+    } = props;
 
     if (!userData.workout?.exercises) return null;
 
@@ -121,6 +129,11 @@ export default function ExerciseCard(props: ExerciseCardProps) {
         );
 
         setOrAppendUserSets(updatedRows);
+
+        if (updatedRow.checked) {
+            restSnackbarTimeSetter(cardExercise.restTimeSeconds);
+            restSnackbarVisibilitySetter(true);
+        }
     };
 
     const handleRowDelete = (setNumber: number) => {
