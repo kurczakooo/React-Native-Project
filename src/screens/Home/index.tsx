@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, StyleSheet, ScrollView, Pressable, Image } from 'react-native';
 import { Button, Text, useTheme, Snackbar } from 'react-native-paper';
 import RecentWorkoutCard from './recentWorkoutCard';
 import React, { useState, useEffect } from 'react';
@@ -51,11 +51,20 @@ export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
                 <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'grey' }}>
                     Recent workouts
                 </Text>
-                <ScrollView>
+                <View style={styles.dataEmptyContainer}>
+                    <Image
+                        source={require('@assets/icons/meh.png')}
+                        style={{ ...styles.iconEmpty, tintColor: theme.colors.fontInactive }}
+                    />
+                    <Text style={{ color: theme.colors.fontInactive, ...styles.textEmpty }}>
+                        This space is a workout-free zone.{'\n'}For now.
+                    </Text>
+                </View>
+                {/* <ScrollView>
                     {workouts.map(workout => (
                         <RecentWorkoutCard key={workout.id} workout={workout} />
                     ))}
-                </ScrollView>
+                </ScrollView> */}
             </View>
             <Snackbar
                 style={styles.snackbar}
@@ -83,5 +92,19 @@ const styles = StyleSheet.create({
     },
     snackbar: {
         borderRadius: 5
+    },
+    dataEmptyContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 15,
+        marginTop: 20
+    },
+    iconEmpty: {
+        width: 80,
+        height: 80
+    },
+    textEmpty: {
+        textAlign: 'center',
+        fontSize: 16
     }
 });
