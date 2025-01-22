@@ -24,7 +24,7 @@ export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
         };
 
         fetchWorkouts();
-    }, []);
+    }, [userID]);
 
     const onStartWorkout = () => {
         navigation.navigate('HomeTab', { screen: 'Workout' });

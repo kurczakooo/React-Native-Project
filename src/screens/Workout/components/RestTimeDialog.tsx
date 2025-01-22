@@ -4,7 +4,7 @@ import { Portal, Dialog, Button, Text, TextInput } from 'react-native-paper';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { CurrentUser, WorkoutScreenExercise } from 'src/types';
 
-type RestTimeDialog = {
+type RestTimeDialogProps = {
     setUserData: Dispatch<SetStateAction<CurrentUser>>;
     workoutExercises: WorkoutScreenExercise[];
     exerciseId: string;
@@ -12,7 +12,7 @@ type RestTimeDialog = {
     visibilitySetter: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function RestTimeDialog(props: RestTimeDialog) {
+export default function RestTimeDialog(props: RestTimeDialogProps) {
     const { setUserData, workoutExercises, exerciseId, visible, visibilitySetter } = props;
 
     const [seconds, setSeconds] = useState('');
