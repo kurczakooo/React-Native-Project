@@ -103,7 +103,6 @@ export const PasswordChange = () => {
                     </HelperText>
                 )}
             </View>
-
             <TextInput
                 mode='outlined'
                 label='New password'

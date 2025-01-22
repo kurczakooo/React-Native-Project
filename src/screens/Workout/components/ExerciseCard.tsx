@@ -13,6 +13,8 @@ type ExerciseCardProps = {
     cardExercise: WorkoutScreenExercise;
     restDialogExerciseIdSetter: Dispatch<SetStateAction<string>>;
     restDialogVisibilitySetter: Dispatch<SetStateAction<boolean>>;
+    restSnackbarTimeSetter: Dispatch<SetStateAction<number | null>>;
+    restSnackbarVisibilitySetter: Dispatch<SetStateAction<boolean>>;
 };
 
 function tabelarizeRowData(
@@ -31,7 +33,7 @@ function tabelarizeRowData(
         </Text>,
         <TextInput
             value={row.weight?.toString() ?? ''}
-            placeholder={row.prevWeight?.toString() ?? '0'}
+            placeholder={row.prevWeight?.toString() ?? row.weight?.toString() ?? '0'}
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
@@ -39,7 +41,7 @@ function tabelarizeRowData(
         />,
         <TextInput
             value={row.reps?.toString() ?? ''}
-            placeholder={row.prevReps?.toString() ?? '0'}
+            placeholder={row.prevReps?.toString() ?? row.repsPlaceholder.toString()}
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
@@ -78,7 +80,13 @@ function formatRestTime(seconds: number) {
 export default function ExerciseCard(props: ExerciseCardProps) {
     const theme = useTheme<Theme>();
     const { userData, setUserData } = useCurrentUser();
-    const { cardExercise, restDialogExerciseIdSetter, restDialogVisibilitySetter } = props;
+    const {
+        cardExercise,
+        restDialogExerciseIdSetter,
+        restDialogVisibilitySetter,
+        restSnackbarTimeSetter,
+        restSnackbarVisibilitySetter
+    } = props;
 
     if (!userData.workout?.exercises) return null;
 
@@ -105,10 +113,12 @@ export default function ExerciseCard(props: ExerciseCardProps) {
 
     const handleAddSet = () => {
         const newSetNumber = cardExercise.rows.length + 1;
+        const lastSet = cardExercise.rows.at(-1);
         const newRow: ExerciseTableRow = {
             setNumber: newSetNumber,
-            weight: null,
+            weight: lastSet?.weight ?? null,
             reps: null,
+            repsPlaceholder: lastSet?.reps ?? 0,
             checked: false
         };
 
@@ -121,6 +131,11 @@ export default function ExerciseCard(props: ExerciseCardProps) {
         );
 
         setOrAppendUserSets(updatedRows);
+
+        if (updatedRow.checked) {
+            restSnackbarTimeSetter(cardExercise.restTimeSeconds);
+            restSnackbarVisibilitySetter(true);
+        }
     };
 
     const handleRowDelete = (setNumber: number) => {

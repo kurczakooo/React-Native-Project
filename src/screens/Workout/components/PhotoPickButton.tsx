@@ -17,7 +17,7 @@ export default function PhotoPickButton(props: PhotoPickButtonProps) {
     const { size, imageUri, onPick, onDelete } = props;
 
     return (
-        <Card style={{ width: size }}>
+        <Card style={{ width: size, boxShadow: 'none' }}>
             <Pressable
                 onPress={onPick}
                 style={{

@@ -4,13 +4,12 @@ import { SimpleGrid } from 'react-native-super-grid';
 import { Theme, WorkoutExercise, WorkoutSet } from 'src/types';
 
 type ExerciseDetailsCardProps = {
-    formattedRestTime: string | null;
     exercise: WorkoutExercise;
     sets: WorkoutSet[];
 };
 
 export default function ExerciseDetailsCard(props: ExerciseDetailsCardProps) {
-    const { formattedRestTime, exercise, sets } = props;
+    const { exercise, sets } = props;
     const theme = useTheme<Theme>();
     const setsTableHeaders = ['Set', 'Weight', 'Reps'];
 
@@ -36,11 +35,6 @@ export default function ExerciseDetailsCard(props: ExerciseDetailsCardProps) {
             ></View>
             <View style={styles.tableContainer}>
                 <Text variant='titleSmall'>{exercise.name}</Text>
-                {formattedRestTime && (
-                    <Text variant='labelLarge' style={{ color: theme.colors.primary }}>
-                        Rest time: {formattedRestTime}
-                    </Text>
-                )}
                 <SimpleGrid
                     listKey={''}
                     maxItemsPerRow={3}

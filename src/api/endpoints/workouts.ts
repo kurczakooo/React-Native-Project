@@ -1,6 +1,22 @@
-import { Workout } from 'src/types';
+import { Workout, WorkoutExercise, WorkoutSet } from 'src/types';
 import { api } from '../config';
 import dayjs from 'dayjs';
+
+// export async function saveCompleteWorkout(
+//     workout: Workout,
+//     exercises: WorkoutExercise[],
+//     sets: WorkoutSet[]
+// ) {}
+
+export async function postWorkout(workout: Omit<Workout, 'id'>): Promise<string | null> {
+    try {
+        const response = await api.post('/workouts', workout);
+        return response.data.id as string;
+    } catch (error) {
+        console.error('Error while saving workou:', error);
+        return null;
+    }
+}
 
 export async function getWorkouts(userId: string | undefined): Promise<Workout[]> {
     try {

@@ -15,10 +15,10 @@ export default function Card(props: CardProps) {
     return (
         <View
             style={{
-                ...style,
                 borderRadius: 5,
                 backgroundColor: theme.colors.elevation.level5,
-                boxShadow: theme.shadowPrimary
+                boxShadow: theme.shadowPrimary,
+                ...style
             }}
         >
             {children}

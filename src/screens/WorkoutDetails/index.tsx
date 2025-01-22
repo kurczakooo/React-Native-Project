@@ -6,10 +6,9 @@ import Statistic from 'src/components/Statistic';
 import ExerciseDetailsCard from './components/ExerciseDetailsCard';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import { useEffect, useState } from 'react';
-import { getExercises } from 'src/api/endpoints/exercises';
-import { getSets } from 'src/api/endpoints/sets';
+import { deleteExercise, getExercises } from 'src/api/endpoints/exercises';
+import { deleteSet, getSets } from 'src/api/endpoints/sets';
 import { deleteWorkout } from 'src/api/endpoints/workouts';
-import { useNavigation } from '@react-navigation/native';
 
 function getFormattedTime(seconds: number | null): string | null {
     return seconds ? new Date(seconds * 1000).toISOString().substring(14, 19) : null;
@@ -42,8 +41,18 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
         fetchWorkoutData();
     }, [workout?.id]);
 
+    const deleteWorkoutData = async () => {
+        const result = await Promise.all([
+            deleteWorkout(workout?.id),
+            workoutData.map(e => deleteExercise(e.exercise.id)),
+            workoutData.flatMap(e => e.sets.map(set => deleteSet(set.id)))
+        ]);
+
+        return result.every(e => e);
+    };
+
     const handleWorkoutDelete = async () => {
-        const deleted = await deleteWorkout(workout?.id);
+        const deleted = await deleteWorkoutData();
         setShowDeleteConfirm(false);
         props.navigation.navigate('Home', {
             snackbarContent: deleted
@@ -107,17 +116,18 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
                     )}
                 </View>
             </View>
-            <Text
-                variant='titleLarge'
-                style={{ ...styles.exerciseHeader, color: theme.colors.fontSecondary }}
-            >
-                Exercises
-            </Text>
+            {workoutData.length > 0 && (
+                <Text
+                    variant='titleLarge'
+                    style={{ ...styles.exerciseHeader, color: theme.colors.fontSecondary }}
+                >
+                    Exercises
+                </Text>
+            )}
             <View style={styles.cardContainer}>
                 {workoutData.map(data => (
                     <ExerciseDetailsCard
                         key={data.exercise.id}
-                        formattedRestTime={getFormattedTime(data.exercise.restDuration)}
                         exercise={data.exercise}
                         sets={data.sets}
                     />
@@ -153,11 +163,13 @@ const styles = StyleSheet.create({
         aspectRatio: 1 / 1,
         resizeMode: 'cover',
         borderRadius: 5,
-        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'
+        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+        marginBottom: 10
     },
     container: {
         borderRadius: 5,
         padding: 20,
+        paddingBottom: 10,
         gap: 15
     },
     cardContainer: {

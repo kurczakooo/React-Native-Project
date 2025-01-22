@@ -42,7 +42,9 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
                     <ThemedIcon source={timeIcon} style={{ width: 20, height: 20 }} />
                     <View>
                         <Text style={{ fontWeight: 'bold' }}>Time</Text>
-                        <Text style={styles.date}>{currentWorkout.totalDuration / 60} min</Text>
+                        <Text style={styles.date}>
+                            {Math.round((currentWorkout.totalDuration * 10) / 60) / 10} min
+                        </Text>
                     </View>
                 </View>
                 <View style={styles.dataDescView}>
@@ -65,16 +67,18 @@ export default function RecentWorkoutCard({ workout }: { workout: Workout }) {
                 </View>
             </View>
 
-            <Card.Content style={{ gap: 15 }}>
-                <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Target Muscles</Text>
-                <View style={{ flexDirection: 'row', gap: 10 }}>
-                    {currentWorkout.targetMuscles.map((muscle, index) => (
-                        <Text key={index} style={styles.targetMuscles}>
-                            {muscle.muscleName}
-                        </Text>
-                    ))}
-                </View>
-            </Card.Content>
+            {currentWorkout.targetMuscles.length > 0 && (
+                <Card.Content style={{ gap: 15 }}>
+                    <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Target Muscles</Text>
+                    <View style={{ flexDirection: 'row', gap: 10 }}>
+                        {currentWorkout.targetMuscles.map((muscle, index) => (
+                            <Text key={index} style={styles.targetMuscles}>
+                                {muscle.muscleName}
+                            </Text>
+                        ))}
+                    </View>
+                </Card.Content>
+            )}
         </Card>
     );
 }
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
     dataDescView: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 10,
+        paddingVertical: 15,
         gap: 10
     }
 });

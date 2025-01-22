@@ -10,18 +10,10 @@ type RestTimeDialog = {
     exerciseId: string;
     visible: boolean;
     visibilitySetter: Dispatch<SetStateAction<boolean>>;
-    exerciseIdSetter: Dispatch<SetStateAction<string>>;
 };
 
 export default function RestTimeDialog(props: RestTimeDialog) {
-    const {
-        setUserData,
-        workoutExercises,
-        exerciseId,
-        visible,
-        visibilitySetter,
-        exerciseIdSetter
-    } = props;
+    const { setUserData, workoutExercises, exerciseId, visible, visibilitySetter } = props;
 
     const [seconds, setSeconds] = useState('');
     const [minutes, setMinutes] = useState('');
@@ -33,24 +25,12 @@ export default function RestTimeDialog(props: RestTimeDialog) {
         return number > 59 ? String(59) : number.toString();
     };
 
-    const changeDialogVisibility = (visible: boolean) => {
-        setUserData(data => ({
-            ...data,
-            workout: {
-                ...data.workout,
-                exercises: data.workout?.exercises?.map(e =>
-                    e.exercise.id === exerciseId ? { ...e, restTimeDialogVisible: visible } : e
-                )
-            }
-        }));
-    };
-
     const handleConfirm = () => {
         let changedExercise = workoutExercises.find(e => e.exercise.id === exerciseId);
 
         if (!changedExercise) return;
 
-        changedExercise.restTimeSeconds = parseInt(minutes) * 60 + parseInt(seconds);
+        changedExercise.restTimeSeconds = parseInt(minutes || '0') * 60 + parseInt(seconds || '0');
 
         setUserData(data => ({
             ...data,
@@ -70,7 +50,7 @@ export default function RestTimeDialog(props: RestTimeDialog) {
     };
 
     return (
-        <Dialog visible={props.visible} dismissable={false}>
+        <Dialog visible={visible} dismissable={false}>
             <Dialog.Title>End Workout</Dialog.Title>
             <Dialog.Content style={styles.inputContainer}>
                 <TextInput
