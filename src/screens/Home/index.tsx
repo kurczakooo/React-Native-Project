@@ -15,31 +15,16 @@ export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
     const userID = userData.id;
     const [workouts, setWorkouts] = useState<Workout[]>([]);
     const [snackbarVisible, setSnackbarVisible] = useState(shouldRenderSnackbar);
-    const [snackbarTimout, setSnackbarTimout] = useState<NodeJS.Timeout>();
     const navigation = useNavigation();
 
     useEffect(() => {
-        const cleanup = () => {
-            clearTimeout(snackbarTimout);
-            setSnackbarTimout(undefined);
-        };
-
-        navigation.addListener('blur', cleanup);
-
-        if (shouldRenderSnackbar) {
-            const timout = setTimeout(() => setSnackbarVisible(false), 1500);
-            setSnackbarTimout(timout);
-        }
-
         const fetchWorkouts = async () => {
             const data = await getWorkouts(userID);
             setWorkouts(data);
         };
 
         fetchWorkouts();
-
-        return cleanup;
-    }, [userID, navigation, shouldRenderSnackbar, snackbarTimout]);
+    }, []);
 
     const onStartWorkout = () => {
         navigation.navigate('HomeTab', { screen: 'Workout' });
@@ -76,6 +61,7 @@ export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
                 style={styles.snackbar}
                 visible={snackbarVisible}
                 onDismiss={() => setSnackbarVisible(false)}
+                duration={1500}
             >
                 {props.route.params?.snackbarContent}
             </Snackbar>

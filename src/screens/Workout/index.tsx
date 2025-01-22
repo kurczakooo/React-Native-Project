@@ -8,7 +8,17 @@ import PhotoPicker from './components/PhotoPicker';
 import WorkoutTitle from './components/WorkoutTitle';
 import ScreenContainer from 'src/components/ScreenContainer';
 import { Button, Text, useTheme, Portal, Snackbar } from 'react-native-paper';
-import { HomeTabScreenProps, Theme, WorkoutScreenExercise } from 'src/types';
+import {
+    CurrentUser,
+    ExerciseMuscle,
+    HomeTabScreenProps,
+    Theme,
+    Workout,
+    WorkoutScreenExercise,
+    TargetMuscle,
+    WorkoutExercise,
+    WorkoutSet
+} from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import EndDialog from './components/EndDialog';
@@ -16,6 +26,9 @@ import ExerciseCard from './components/ExerciseCard';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import RestTimeDialog from './components/RestTimeDialog';
+import { postWorkout } from 'src/api/endpoints/workouts';
+import { postExercise } from 'src/api/endpoints/exercises';
+import { postSet } from 'src/api/endpoints/sets';
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -39,6 +52,33 @@ function formatRestTime(seconds: number) {
     return new Date(seconds * 1000).toISOString().substring(14, 19);
 }
 
+function getExerciseVolume(exercise: WorkoutScreenExercise): number {
+    return exercise.rows.reduce((sum, row) => sum + (row.weight ?? 0), 0);
+}
+
+function getTargetMuscles(exercises: WorkoutScreenExercise[]): TargetMuscle[] {
+    const muscleSetMap: Map<ExerciseMuscle, number> = new Map();
+
+    exercises.forEach(exercise => {
+        const muscle = exercise.exercise.primaryMuscle;
+        const setsCount = exercise.rows.length;
+        muscleSetMap.set(muscle, (muscleSetMap.get(muscle) || 0) + setsCount);
+    });
+
+    return Array.from(muscleSetMap.entries()).map(([muscleName, numberOfSets]) => ({
+        muscleName,
+        numberOfSets
+    }));
+}
+
+function getTotalSets(exercises: WorkoutScreenExercise[]) {
+    return exercises.reduce((acc, e) => acc + e.rows.length, 0);
+}
+
+function getTotalVolume(exercises: WorkoutScreenExercise[]) {
+    return exercises.reduce((acc, e) => acc + getExerciseVolume(e), 0);
+}
+
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const theme = useTheme<Theme>();
     const tabBarHeight = useBottomTabBarHeight();
@@ -54,6 +94,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [imageUri, setImageUri] = useState('');
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState(0);
+
+    const exercises = userData.workout?.exercises ?? [];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -79,6 +121,71 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
         return () => clearInterval(interval);
     }, [restTimeSeconds]);
+
+    const saveWorkout = () => {
+        const payload: Omit<Workout, 'id'> = {
+            userId: userData.id as string,
+            title: title || 'Untitled workout',
+            imageUrl: imageUri || null,
+            dateTimestamp: Math.floor(Date.now() / 1000),
+            totalDuration: duration,
+            totalSets: getTotalSets(exercises),
+            totalVolume: getTotalVolume(exercises),
+            targetMuscles: getTargetMuscles(exercises)
+        };
+        return postWorkout(payload);
+    };
+
+    const saveExercises = async () => {
+        const workoutId = await saveWorkout();
+        if (!workoutId) return null;
+
+        const payload: { exercise: Omit<WorkoutExercise, 'id'>; rows: ExerciseTableRow[] }[] =
+            exercises.map(e => ({
+                exercise: {
+                    workoutId: workoutId as string,
+                    name: e.exercise.name,
+                    level: e.exercise.level
+                },
+                rows: e.rows
+            }));
+
+        return Promise.all(
+            payload.map(async p => ({
+                exerciseId: await postExercise(p.exercise),
+                rows: p.rows
+            }))
+        );
+    };
+
+    const saveSets = async () => {
+        const setData = await saveExercises();
+        if (!setData || setData.some(e => !e.exerciseId)) return null;
+
+        const payload: Omit<WorkoutSet, 'id'>[] = setData.flatMap(exercise =>
+            exercise.rows
+                .filter(row => row.weight && row.reps)
+                .map(row => ({
+                    exerciseId: exercise.exerciseId as string,
+                    setNumber: row.setNumber,
+                    weight: row.weight as number,
+                    reps: row.reps as number
+                }))
+        );
+
+        return Promise.all(payload.map(p => postSet(p)));
+    };
+
+    const handleWorkoutSave = async () => {
+        const saveResults = await saveSets();
+        const isError = !saveResults || saveResults.some(e => !e);
+        const message = isError
+            ? 'Wystąpił błąd przy zapisywaniu treningu.'
+            : 'Trening został pomyślnie zapisany.';
+
+        setSaveDialogVisible(false);
+        props.navigation.navigate('Home', { snackbarContent: message });
+    };
 
     const handleMediaPick = async (source: 'images' | 'camera') => {
         setImageUri(await getMediaUri(source));
@@ -108,7 +215,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     <EndDialog
                         content='Are you sure you want to end the session?'
                         visible={saveDialogVisible}
-                        onConfirm={() => setSaveDialogVisible(false)}
+                        onConfirm={handleWorkoutSave}
                         onCancel={() => setSaveDialogVisible(false)}
                     />
                     <EndDialog

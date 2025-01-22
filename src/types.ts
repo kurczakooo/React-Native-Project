@@ -177,7 +177,6 @@ export interface PredefinedExercise {
 export interface WorkoutSet {
     id: string;
     exerciseId: string;
-    previousSetId: string | null;
     setNumber: number;
     weight: number;
     reps: number;
@@ -189,10 +188,13 @@ export interface WorkoutSet {
 export interface WorkoutExercise {
     id: string;
     workoutId: string;
-    exerciseNumber: number;
     name: string;
     level: ExerciseLevel;
-    restDuration: number | null;
+}
+
+export interface TargetMuscle {
+    muscleName: ExerciseMuscle;
+    numberOfSets: number;
 }
 
 /**
@@ -207,10 +209,7 @@ export interface Workout {
     totalDuration: number;
     totalSets: number;
     totalVolume: number;
-    targetMuscles: {
-        muscleName: ExerciseMuscle;
-        numberOfSets: number;
-    }[];
+    targetMuscles: TargetMuscle[];
 }
 
 export interface DatabaseUser {
