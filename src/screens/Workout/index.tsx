@@ -180,8 +180,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
         const saveResults = await saveSets();
         const isError = !saveResults || saveResults.some(e => !e);
         const message = isError
-            ? 'Wystąpił błąd przy zapisywaniu treningu.'
-            : 'Trening został pomyślnie zapisany.';
+            ? 'An error occurred while saving the workout.'
+            : 'The workout was successfully saved.';
 
         setSaveDialogVisible(false);
         props.navigation.navigate('Home', { snackbarContent: message });
