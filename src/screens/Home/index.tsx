@@ -51,20 +51,23 @@ export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
                 <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'grey' }}>
                     Recent workouts
                 </Text>
-                <View style={styles.dataEmptyContainer}>
-                    <Image
-                        source={require('@assets/icons/meh.png')}
-                        style={{ ...styles.iconEmpty, tintColor: theme.colors.fontInactive }}
-                    />
-                    <Text style={{ color: theme.colors.fontInactive, ...styles.textEmpty }}>
-                        This space is a workout-free zone.{'\n'}For now.
-                    </Text>
-                </View>
-                {/* <ScrollView>
-                    {workouts.map(workout => (
-                        <RecentWorkoutCard key={workout.id} workout={workout} />
-                    ))}
-                </ScrollView> */}
+                {workouts.length > 0 ? (
+                    <ScrollView>
+                        {workouts.map(workout => (
+                            <RecentWorkoutCard key={workout.id} workout={workout} />
+                        ))}
+                    </ScrollView>
+                ) : (
+                    <View style={styles.dataEmptyContainer}>
+                        <Image
+                            source={require('@assets/icons/meh.png')}
+                            style={{ ...styles.iconEmpty, tintColor: theme.colors.fontInactive }}
+                        />
+                        <Text style={{ color: theme.colors.fontInactive, ...styles.textEmpty }}>
+                            This space is a workout-free zone.{'\n'}For now.
+                        </Text>
+                    </View>
+                )}
             </View>
             <Snackbar
                 style={styles.snackbar}
