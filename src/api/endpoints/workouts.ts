@@ -2,12 +2,6 @@ import { Workout, WorkoutExercise, WorkoutSet } from 'src/types';
 import { api } from '../config';
 import dayjs from 'dayjs';
 
-// export async function saveCompleteWorkout(
-//     workout: Workout,
-//     exercises: WorkoutExercise[],
-//     sets: WorkoutSet[]
-// ) {}
-
 export async function postWorkout(workout: Omit<Workout, 'id'>): Promise<string | null> {
     try {
         const response = await api.post('/workouts', workout);
@@ -51,6 +45,8 @@ export async function getTotalWorkouts(userId: string | undefined): Promise<numb
 export async function getTotalWorkoutTime(userId: string | undefined): Promise<number> {
     try {
         const workouts: Workout[] = (await api.get(`/workouts?userId=${userId}`)).data;
+        if (workouts.length === 0) return 0;
+
         const totalTime = workouts.map(e => e.totalDuration).reduce((acc, curr) => acc + curr);
         return Math.round(totalTime / 3600);
     } catch {
