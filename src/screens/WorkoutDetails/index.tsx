@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View } from 'react-native';
 import { Dialog, Portal, Text, Button, useTheme } from 'react-native-paper';
 import ScreenContainer from 'src/components/ScreenContainer';
-import { HomeTabScreenProps, Theme, WorkoutExercise, WorkoutSet } from 'src/types';
+import { HomeTabScreenProps, Theme, Workout, WorkoutExercise, WorkoutSet } from 'src/types';
 import Statistic from 'src/components/Statistic';
 import ExerciseDetailsCard from './components/ExerciseDetailsCard';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { deleteExercise, getExercises } from 'src/api/endpoints/exercises';
 import { deleteSet, getSets } from 'src/api/endpoints/sets';
 import { deleteWorkout } from 'src/api/endpoints/workouts';
+import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 function getFormattedTime(seconds: number | null): string | null {
     return seconds ? new Date(seconds * 1000).toISOString().substring(14, 19) : null;
@@ -23,6 +24,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
     const [workoutData, setWorkoutData] = useState<WorkoutDetailsData[]>([]);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const theme = useTheme<Theme>();
+    const { userData, setUserData } = useCurrentUser();
     const workout = props.route.params?.workout;
 
     useEffect(() => {
@@ -58,6 +60,32 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
             snackbarContent: deleted
                 ? 'Workout was successfully deleted.'
                 : 'There was an error while deleting a workout.'
+        });
+    };
+
+    const handleWorkoutEdit = async () => {
+        setUserData(prev => ({
+            ...prev,
+            workout: {
+                exercises: workoutData.map(e => ({
+                    id: e.exercise.id,
+                    exercise: e.exercise,
+                    rows: e.sets.map(set => ({
+                        id: set.id,
+                        setNumber: set.setNumber,
+                        weight: set.weight,
+                        reps: set.reps,
+                        repsPlaceholder: set.reps,
+                        checked: true
+                    })),
+                    restTimeSeconds: null
+                }))
+            }
+        }));
+
+        props.navigation.navigate('Workout', {
+            editMode: true,
+            workout: workout as Workout
         });
     };
 
@@ -149,7 +177,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
                     color={theme.colors.onPrimary}
                     backgroundColor={theme.colors.primary}
                     outlineColor={theme.colors.primary}
-                    onPress={() => null}
+                    onPress={handleWorkoutEdit}
                     style={{ ...styles.button, boxShadow: theme.shadowPrimary }}
                 />
             </View>

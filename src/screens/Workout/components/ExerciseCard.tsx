@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 type ExerciseCardProps = {
     cardExercise: WorkoutScreenExercise;
+    editMode: boolean | undefined;
     restDialogExerciseIdSetter: Dispatch<SetStateAction<string>>;
     restDialogVisibilitySetter: Dispatch<SetStateAction<boolean>>;
     restSnackbarTimeSetter: Dispatch<SetStateAction<number | null>>;
@@ -81,6 +82,7 @@ export default function ExerciseCard(props: ExerciseCardProps) {
     const theme = useTheme<Theme>();
     const { userData, setUserData } = useCurrentUser();
     const {
+        editMode,
         cardExercise,
         restDialogExerciseIdSetter,
         restDialogVisibilitySetter,
@@ -184,14 +186,16 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 <Text variant='titleSmall' style={styles.exerciseName}>
                     {cardExercise.exercise.name}
                 </Text>
-                <Pressable onPress={handleRestTimerPress}>
-                    <Text variant='titleSmall' style={{ color: theme.colors.primary }}>
-                        Rest time:{' '}
-                        {cardExercise.restTimeSeconds
-                            ? formatRestTime(cardExercise.restTimeSeconds)
-                            : 'OFF'}
-                    </Text>
-                </Pressable>
+                {!editMode && (
+                    <Pressable onPress={handleRestTimerPress}>
+                        <Text variant='titleSmall' style={{ color: theme.colors.primary }}>
+                            Rest time:{' '}
+                            {cardExercise.restTimeSeconds
+                                ? formatRestTime(cardExercise.restTimeSeconds)
+                                : 'OFF'}
+                        </Text>
+                    </Pressable>
+                )}
                 {cardExercise.rows.length !== 0 && (
                     <Table>
                         <Row

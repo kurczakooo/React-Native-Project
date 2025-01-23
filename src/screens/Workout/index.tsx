@@ -8,17 +8,6 @@ import PhotoPicker from './components/PhotoPicker';
 import WorkoutTitle from './components/WorkoutTitle';
 import ScreenContainer from 'src/components/ScreenContainer';
 import { Button, Text, useTheme, Portal, Snackbar } from 'react-native-paper';
-import {
-    CurrentUser,
-    ExerciseMuscle,
-    HomeTabScreenProps,
-    Theme,
-    Workout,
-    WorkoutScreenExercise,
-    TargetMuscle,
-    WorkoutExercise,
-    WorkoutSet
-} from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import EndDialog from './components/EndDialog';
@@ -29,6 +18,16 @@ import RestTimeDialog from './components/RestTimeDialog';
 import { postWorkout } from 'src/api/endpoints/workouts';
 import { postExercise } from 'src/api/endpoints/exercises';
 import { postSet } from 'src/api/endpoints/sets';
+import {
+    ExerciseMuscle,
+    HomeTabScreenProps,
+    Theme,
+    Workout,
+    WorkoutScreenExercise,
+    TargetMuscle,
+    WorkoutExercise,
+    WorkoutSet
+} from 'src/types';
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -83,6 +82,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const theme = useTheme<Theme>();
     const tabBarHeight = useBottomTabBarHeight();
     const { userData, setUserData } = useCurrentUser();
+    const { editMode, workout } = props.route.params ?? {};
 
     const [pickDialogVisible, setPickDialogVisible] = useState(false);
     const [saveDialogVisible, setSaveDialogVisible] = useState(false);
@@ -91,19 +91,21 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [restDialogExerciseId, setRestDialogExerciseId] = useState<string>('');
     const [restSnackbarVisible, setRestSnackbarVisible] = useState(true);
     const [restTimeSeconds, setRestTimeSeconds] = useState<number | null>(null);
-    const [imageUri, setImageUri] = useState('');
-    const [title, setTitle] = useState('');
-    const [duration, setDuration] = useState(0);
+    const [imageUri, setImageUri] = useState(editMode ? (workout?.imageUrl as string) : '');
+    const [title, setTitle] = useState(editMode ? (workout?.title as string) : '');
+    const [duration, setDuration] = useState(editMode ? (workout?.totalDuration as number) : 0);
 
     const exercises = userData.workout?.exercises ?? [];
 
     useEffect(() => {
+        if (editMode) return;
+
         const interval = setInterval(() => {
             setDuration(prev => prev + 1);
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [editMode]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -144,6 +146,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             exercises.map(e => ({
                 exercise: {
                     workoutId: workoutId as string,
+                    primaryMuscle: e.exercise.primaryMuscle,
                     name: e.exercise.name,
                     level: e.exercise.level
                 },
@@ -250,7 +253,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     <View style={styles.controls}>
                         <ButtonWithIcon
                             iconSource={require('@assets/icons/cross.png')}
-                            label='Discard'
+                            label={editMode ? 'Delete' : 'Discard'}
                             outlineColor={theme.colors.expert}
                             color={theme.colors.expert}
                             backgroundColor={theme.colors.elevation.level5}
@@ -272,6 +275,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     {userData.workout?.exercises?.map((e, i) => (
                         <ExerciseCard
                             key={e.exercise.id + i}
+                            editMode={editMode}
                             cardExercise={e}
                             restDialogExerciseIdSetter={setRestDialogExerciseId}
                             restDialogVisibilitySetter={setRestDialogVisible}

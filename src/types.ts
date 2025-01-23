@@ -12,7 +12,12 @@ declare global {
 
 export type HomeStackParamList = {
     Home: { snackbarContent: string } | undefined;
-    Workout: { workout: Workout } | undefined;
+    Workout:
+        | {
+              editMode: boolean;
+              workout: Workout;
+          }
+        | undefined;
     Settings: undefined;
     Exercises: { mode: 'select' | 'view' } | undefined;
     'Workout Details': { workout: Workout } | undefined;
@@ -188,6 +193,7 @@ export interface WorkoutSet {
 export interface WorkoutExercise {
     id: string;
     workoutId: string;
+    primaryMuscle: ExerciseMuscle;
     name: string;
     level: ExerciseLevel;
 }
@@ -219,7 +225,8 @@ export interface DatabaseUser {
 }
 
 export interface WorkoutScreenExercise {
-    exercise: PredefinedExercise;
+    id?: string;
+    exercise: WorkoutExercise;
     rows: ExerciseTableRow[];
     restTimeSeconds: number | null;
 }
@@ -229,12 +236,11 @@ export interface CurrentUser {
     username?: string;
     workout?: {
         exercises?: WorkoutScreenExercise[];
-        formattedDuration?: string;
-        image?: string;
     };
 }
 
 export interface ExerciseTableRow {
+    id?: string;
     setNumber: number;
     weight: number | null;
     reps: number | null;

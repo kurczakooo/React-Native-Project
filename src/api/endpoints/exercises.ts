@@ -1,4 +1,4 @@
-import { WorkoutExercise } from 'src/types';
+import { PredefinedExercise, WorkoutExercise } from 'src/types';
 import { api } from '../config';
 
 export async function getExercises(workoutId: string | undefined): Promise<WorkoutExercise[]> {
