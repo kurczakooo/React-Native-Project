@@ -5,7 +5,8 @@ import {
     PredefinedExercise as PredefinedExerciseType,
     ExercisesTabScreenProps,
     ExecisesStackParamList,
-    HomeTabScreenProps
+    HomeTabScreenProps,
+    WorkoutScreenExercise
 } from 'src/types';
 import { exercises as devExercises } from './exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
@@ -120,7 +121,7 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
     ));
 };
 
-const toWorkoutScreenExercise = (exercise: PredefinedExerciseType) => ({
+const toWorkoutScreenExercise = (exercise: PredefinedExerciseType): WorkoutScreenExercise => ({
     exercise: exercise,
     rows: [],
     restTimeSeconds: null
@@ -175,11 +176,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
         setUserData({
             ...userData,
             workout: {
-                ...userData.workout,
-                exercises: exercises.map(e => ({
-                    ...e,
-                    exercise: { ...e.exercise, id: e.exercise.id + '_' + Date.now() }
-                }))
+                exercises: exercises
             }
         });
 

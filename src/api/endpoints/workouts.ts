@@ -55,12 +55,26 @@ export async function getTotalWorkoutTime(userId: string | undefined): Promise<n
     }
 }
 
-export async function deleteWorkout(workoutId: string | undefined): Promise<boolean> {
+export async function deleteWorkout(workoutId: string | undefined): Promise<Workout | null> {
     try {
-        await api.delete(`/workouts/${workoutId}`);
-        return true;
+        const response = await api.delete(`/workouts/${workoutId}`);
+        return response.data as Workout;
     } catch (error) {
         console.error(`Error deleting workout ${workoutId}: `, error);
-        return false;
+        return null;
+    }
+}
+
+export async function putWorkout(
+    workoutId: string | undefined,
+    workout: Omit<Workout, 'id'> | undefined
+): Promise<Workout | null> {
+    try {
+        if (!workout || !workoutId) return null;
+        const response = await api.put(`/workouts/${workoutId}`, { ...workout, id: workoutId });
+        return response.data as Workout;
+    } catch (error) {
+        console.error(`Error editing workout ${workoutId}: `, error);
+        return null;
     }
 }

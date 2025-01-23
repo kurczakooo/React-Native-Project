@@ -2,16 +2,17 @@ import { Portal, Dialog, Button, Text } from 'react-native-paper';
 
 type EndDialogProps = {
     content: string;
+    title?: string;
     visible?: boolean;
     onCancel?: () => void;
     onConfirm?: () => void;
 };
 
 export default function EndDialog(props: EndDialogProps) {
-    const { content, visible, onCancel, onConfirm } = props;
+    const { title, content, visible, onCancel, onConfirm } = props;
     return (
         <Dialog visible={visible ?? false} dismissable={false}>
-            <Dialog.Title>End Workout</Dialog.Title>
+            <Dialog.Title>{title ?? 'End Workout'}</Dialog.Title>
             <Dialog.Content>
                 <Text variant='bodyMedium'>{content}</Text>
             </Dialog.Content>

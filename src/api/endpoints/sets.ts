@@ -11,6 +11,20 @@ export async function deleteSet(setId: string): Promise<WorkoutSet | null> {
     }
 }
 
+export async function putSet(
+    setId: string | undefined,
+    set: WorkoutSet | undefined
+): Promise<WorkoutSet | null> {
+    try {
+        if (!setId || !set) return null;
+        const response = await api.put(`/sets/${setId}`, set);
+        return response.data;
+    } catch (error) {
+        console.error('Error while editing set:', error);
+        return null;
+    }
+}
+
 export async function postSet(set: Omit<WorkoutSet, 'id'>): Promise<string | null> {
     try {
         const response = await api.post('/sets', set);

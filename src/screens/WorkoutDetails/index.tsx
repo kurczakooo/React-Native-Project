@@ -24,7 +24,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
     const [workoutData, setWorkoutData] = useState<WorkoutDetailsData[]>([]);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const theme = useTheme<Theme>();
-    const { userData, setUserData } = useCurrentUser();
+    const { setUserData } = useCurrentUser();
     const workout = props.route.params?.workout;
 
     useEffect(() => {
@@ -46,7 +46,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
     const deleteWorkoutData = async () => {
         const result = await Promise.all([
             deleteWorkout(workout?.id),
-            workoutData.map(e => deleteExercise(e.exercise.id)),
+            workoutData.map(e => deleteExercise(e.exercise.id as string)),
             workoutData.flatMap(e => e.sets.map(set => deleteSet(set.id)))
         ]);
 

@@ -21,13 +21,19 @@ type ExerciseCardProps = {
 function tabelarizeRowData(
     row: ExerciseTableRow,
     theme: Theme,
+    editMode: boolean,
     onRowUpdate: (updatedRow: ExerciseTableRow) => void,
     onRowDelete: (setNumber: number) => void
-): JSX.Element[] {
+): (JSX.Element | null)[] {
     return [
-        <Pressable onPress={() => onRowDelete(row.setNumber)}>
-            <ThemedIcon source={require('@assets/icons/cross.png')} style={styles.setDeleteIcon} />
-        </Pressable>,
+        editMode ? null : (
+            <Pressable onPress={() => onRowDelete(row.setNumber)}>
+                <ThemedIcon
+                    source={require('@assets/icons/cross.png')}
+                    style={styles.setDeleteIcon}
+                />
+            </Pressable>
+        ),
         <Text style={styles.cell}>{row.setNumber}</Text>,
         <Text style={styles.cell}>
             {row.prevWeight && row.prevReps ? `${row.prevWeight} kg x ${row.prevReps}` : '-'}
@@ -50,6 +56,7 @@ function tabelarizeRowData(
         />,
         <Checkbox
             status={row.checked ? 'checked' : 'unchecked'}
+            disabled={editMode}
             onPress={() => onRowUpdate({ ...row, checked: !row.checked })}
         />
     ];
@@ -66,12 +73,17 @@ function getTableHeaders(headers: string[]): JSX.Element[] {
 function getTableData(
     rows: ExerciseTableRow[] | undefined,
     theme: Theme,
+    editMode: boolean,
     onRowUpdate: (updatedRow: ExerciseTableRow) => void,
     onRowDelete: (setNumber: number) => void
-): JSX.Element[][] | undefined {
-    return rows
-        ? rows.map(row => tabelarizeRowData(row, theme, onRowUpdate, onRowDelete))
-        : undefined;
+) {
+    const tabelarizedRows = rows?.map(row =>
+        tabelarizeRowData(row, theme, editMode, onRowUpdate, onRowDelete)
+    );
+
+    if (rows) {
+        return editMode ? tabelarizedRows?.map(r => r.slice(1, r.length)) : tabelarizedRows;
+    }
 }
 
 function formatRestTime(seconds: number) {
@@ -170,12 +182,14 @@ export default function ExerciseCard(props: ExerciseCardProps) {
 
     return (
         <Card>
-            <Pressable onPress={handleExerciseDelete}>
-                <Image
-                    source={require('@assets/icons/cross.png')}
-                    style={{ ...styles.workoutDeleteIcon, tintColor: theme.colors.expert }}
-                />
-            </Pressable>
+            {!editMode && (
+                <Pressable onPress={handleExerciseDelete}>
+                    <Image
+                        source={require('@assets/icons/cross.png')}
+                        style={{ ...styles.workoutDeleteIcon, tintColor: theme.colors.expert }}
+                    />
+                </Pressable>
+            )}
             <View
                 style={{
                     ...styles.levelIndicator,
@@ -199,31 +213,38 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 {cardExercise.rows.length !== 0 && (
                     <Table>
                         <Row
-                            flexArr={[1, 2, 3, 3, 2, 2]}
-                            data={getTableHeaders(['', 'Set', 'Previous', 'Weight', 'Reps', ''])}
+                            flexArr={editMode ? [2, 3, 3, 3, 2] : [1, 2, 3, 3, 2, 2]}
+                            data={getTableHeaders(
+                                editMode
+                                    ? ['Set', 'Previous', 'Weight', 'Reps', '']
+                                    : ['', 'Set', 'Previous', 'Weight', 'Reps', '']
+                            )}
                         />
                         <Rows
                             data={
                                 getTableData(
                                     cardExercise.rows,
                                     theme,
+                                    editMode ?? false,
                                     handleRowUpdate,
                                     handleRowDelete
                                 ) ?? []
                             }
-                            flexArr={[1, 2, 3, 3, 2, 2]}
+                            flexArr={editMode ? [2, 3, 3, 3, 2] : [1, 2, 3, 3, 2, 2]}
                         />
                     </Table>
                 )}
-                <ButtonWithIcon
-                    iconSource={require('@assets/icons/add.png')}
-                    label='Add set'
-                    backgroundColor={theme.colors.elevation.level5}
-                    outlineColor={theme.colors.elevation.level5}
-                    color={theme.colors.primary}
-                    style={styles.addSetButton}
-                    onPress={handleAddSet}
-                />
+                {!editMode && (
+                    <ButtonWithIcon
+                        iconSource={require('@assets/icons/add.png')}
+                        label='Add set'
+                        backgroundColor={theme.colors.elevation.level5}
+                        outlineColor={theme.colors.elevation.level5}
+                        color={theme.colors.primary}
+                        style={styles.addSetButton}
+                        onPress={handleAddSet}
+                    />
+                )}
             </View>
         </Card>
     );

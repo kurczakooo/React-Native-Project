@@ -15,9 +15,9 @@ import ExerciseCard from './components/ExerciseCard';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import RestTimeDialog from './components/RestTimeDialog';
-import { postWorkout } from 'src/api/endpoints/workouts';
-import { postExercise } from 'src/api/endpoints/exercises';
-import { postSet } from 'src/api/endpoints/sets';
+import { postWorkout, putWorkout } from 'src/api/endpoints/workouts';
+import { postExercise, putExercise } from 'src/api/endpoints/exercises';
+import { postSet, putSet } from 'src/api/endpoints/sets';
 import {
     ExerciseMuscle,
     HomeTabScreenProps,
@@ -58,9 +58,9 @@ function getExerciseVolume(exercise: WorkoutScreenExercise): number {
 function getTargetMuscles(exercises: WorkoutScreenExercise[]): TargetMuscle[] {
     const muscleSetMap: Map<ExerciseMuscle, number> = new Map();
 
-    exercises.forEach(exercise => {
-        const muscle = exercise.exercise.primaryMuscle;
-        const setsCount = exercise.rows.length;
+    exercises.forEach(e => {
+        const muscle = e.exercise.primaryMuscle;
+        const setsCount = e.rows.length;
         muscleSetMap.set(muscle, (muscleSetMap.get(muscle) || 0) + setsCount);
     });
 
@@ -129,23 +129,29 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             userId: userData.id as string,
             title: title || 'Untitled workout',
             imageUrl: imageUri || null,
-            dateTimestamp: Math.floor(Date.now() / 1000),
+            dateTimestamp: Math.floor(
+                (editMode ? (workout?.dateTimestamp as number) : Date.now()) / 1000
+            ),
             totalDuration: duration,
             totalSets: getTotalSets(exercises),
             totalVolume: getTotalVolume(exercises),
             targetMuscles: getTargetMuscles(exercises)
         };
-        return postWorkout(payload);
+        return editMode ? putWorkout(workout?.id, payload) : postWorkout(payload);
     };
 
     const saveExercises = async () => {
-        const workoutId = await saveWorkout();
-        if (!workoutId) return null;
+        const saveResult = await saveWorkout();
+        if (!saveResult) return null;
 
-        const payload: { exercise: Omit<WorkoutExercise, 'id'>; rows: ExerciseTableRow[] }[] =
-            exercises.map(e => ({
+        const workoutId = editMode ? (saveResult as Workout).id : (saveResult as string);
+
+        const payload = exercises
+            .filter(e => e.rows.length > 0)
+            .map(e => ({
                 exercise: {
-                    workoutId: workoutId as string,
+                    ...(editMode && { id: e.id as string }),
+                    workoutId: workoutId,
                     primaryMuscle: e.exercise.primaryMuscle,
                     name: e.exercise.name,
                     level: e.exercise.level
@@ -155,7 +161,9 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
         return Promise.all(
             payload.map(async p => ({
-                exerciseId: await postExercise(p.exercise),
+                exercise: editMode
+                    ? await putExercise(p.exercise.id, p.exercise as WorkoutExercise)
+                    : await postExercise(p.exercise),
                 rows: p.rows
             }))
         );
@@ -163,20 +171,25 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
     const saveSets = async () => {
         const setData = await saveExercises();
-        if (!setData || setData.some(e => !e.exerciseId)) return null;
+        if (!setData || setData.some(e => !e.exercise)) return null;
 
-        const payload: Omit<WorkoutSet, 'id'>[] = setData.flatMap(exercise =>
-            exercise.rows
-                .filter(row => row.weight && row.reps)
+        const payload = setData.flatMap(e =>
+            e.rows
+                .filter(row => row.weight && row.reps && row.checked)
                 .map(row => ({
-                    exerciseId: exercise.exerciseId as string,
+                    ...(editMode && { id: row.id as string }),
+                    exerciseId: editMode
+                        ? (e.exercise as WorkoutExercise).id
+                        : (e.exercise as string),
                     setNumber: row.setNumber,
                     weight: row.weight as number,
                     reps: row.reps as number
                 }))
         );
 
-        return Promise.all(payload.map(p => postSet(p)));
+        return Promise.all(
+            payload.map(p => (editMode ? putSet(p.id, p as WorkoutSet) : postSet(p)))
+        );
     };
 
     const handleWorkoutSave = async () => {
@@ -206,7 +219,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
     return (
         <>
-            <ScreenContainer additionalSpaceBottom={tabBarHeight}>
+            <ScreenContainer additionalSpaceBottom={editMode ? 0 : tabBarHeight}>
                 <Portal>
                     <RestTimeDialog
                         setUserData={setUserData}
@@ -222,7 +235,12 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                         onCancel={() => setSaveDialogVisible(false)}
                     />
                     <EndDialog
-                        content='Are you sure you want to discard the session?'
+                        title={editMode ? 'Delete Workout' : undefined}
+                        content={
+                            editMode
+                                ? 'Are you sure you want to delete this session?'
+                                : 'Are you sure you want to discard the session?'
+                        }
                         visible={discardDialogVisible}
                         onConfirm={() => setDiscardDialogVisible(false)}
                         onCancel={() => setDiscardDialogVisible(false)}
@@ -267,14 +285,16 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                             color={theme.colors.onPrimary}
                             backgroundColor={theme.colors.primary}
                             style={styles.controlButton}
-                            onPress={() => setSaveDialogVisible(true)}
+                            onPress={() =>
+                                editMode ? handleWorkoutSave() : setSaveDialogVisible(true)
+                            }
                         />
                     </View>
                 </Card>
                 <View style={styles.exercisesContainer}>
                     {userData.workout?.exercises?.map((e, i) => (
                         <ExerciseCard
-                            key={e.exercise.id + i}
+                            key={e.exercise.name + i}
                             editMode={editMode}
                             cardExercise={e}
                             restDialogExerciseIdSetter={setRestDialogExerciseId}
@@ -298,19 +318,21 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     Rest: {formatRestTime(restTimeSeconds as number)}
                 </Text>
             </Snackbar>
-            <ButtonWithIcon
-                iconSource={require('@assets/icons/add.png')}
-                label='Add exercise'
-                outlineColor={theme.colors.primary}
-                color={theme.colors.onPrimary}
-                backgroundColor={theme.colors.primary}
-                onPress={handleExerciseAdd}
-                style={{
-                    ...styles.addExerciseButton,
-                    bottom: theme.screenPadding,
-                    boxShadow: theme.shadowPrimary
-                }}
-            />
+            {!editMode && (
+                <ButtonWithIcon
+                    iconSource={require('@assets/icons/add.png')}
+                    label='Add exercise'
+                    outlineColor={theme.colors.primary}
+                    color={theme.colors.onPrimary}
+                    backgroundColor={theme.colors.primary}
+                    onPress={handleExerciseAdd}
+                    style={{
+                        ...styles.addExerciseButton,
+                        bottom: theme.screenPadding,
+                        boxShadow: theme.shadowPrimary
+                    }}
+                />
+            )}
         </>
     );
 }

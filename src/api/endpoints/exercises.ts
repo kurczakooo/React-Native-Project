@@ -30,3 +30,17 @@ export async function deleteExercise(exerciseId: string): Promise<WorkoutExercis
         return null;
     }
 }
+
+export async function putExercise(
+    exerciseId: string | undefined,
+    exercise: WorkoutExercise | undefined
+): Promise<WorkoutExercise | null> {
+    try {
+        if (!exerciseId || !exercise) return null;
+        const response = await api.put(`/exercises/${exerciseId}`, exercise);
+        return response.data;
+    } catch (error) {
+        console.error('Error while editing workout:', error);
+        return null;
+    }
+}

@@ -1,32 +1,38 @@
 import { View, StyleSheet, ScrollView, Pressable, Image } from 'react-native';
 import { Button, Text, useTheme, Snackbar } from 'react-native-paper';
 import RecentWorkoutCard from './recentWorkoutCard';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { HomeTabScreenProps, Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
     const shouldRenderSnackbar = props.route.params?.snackbarContent !== undefined;
     const theme = useTheme<Theme>();
-    const { userData } = useCurrentUser();
+    const { userData, setUserData } = useCurrentUser();
     const nickname = userData.username ?? 'User';
     const userID = userData.id;
     const [workouts, setWorkouts] = useState<Workout[]>([]);
     const [snackbarVisible, setSnackbarVisible] = useState(shouldRenderSnackbar);
     const navigation = useNavigation();
 
-    useEffect(() => {
-        const fetchWorkouts = async () => {
-            const data = await getWorkouts(userID);
-            setWorkouts(data);
-        };
+    useFocusEffect(
+        useCallback(() => {
+            const fetchWorkouts = async () => {
+                const data = await getWorkouts(userID);
+                setWorkouts(data.reverse());
+            };
 
-        fetchWorkouts();
-    }, [userID]);
+            fetchWorkouts();
+        }, [userID])
+    );
 
     const onStartWorkout = () => {
+        let newUserData = userData;
+        delete userData.workout;
+
+        setUserData(newUserData);
         navigation.navigate('HomeTab', { screen: 'Workout' });
     };
 
