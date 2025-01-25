@@ -1,5 +1,44 @@
-import { WorkoutSet } from 'src/types';
+import { Workout, WorkoutExercise, WorkoutSet } from 'src/types';
 import { api } from '../config';
+import { getWorkouts } from './workouts';
+import { getExercises } from './exercises';
+
+export async function getPrevSet(
+    userId: string | undefined,
+    exerciseName: string | undefined,
+    setNumber: number | undefined
+) {
+    try {
+        if (!userId || !exerciseName || !setNumber) return null;
+
+        const workouts = await getWorkouts(userId);
+        const workoutsWithTime = await Promise.all(
+            workouts.map(async workout => {
+                const exercises = await getExercises(workout.id);
+                return {
+                    timestamp: workout.dateTimestamp,
+                    exercises
+                };
+            })
+        );
+
+        const lastExercise = workoutsWithTime
+            .filter(e => e.exercises.some(e => e.name === exerciseName))
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .at(0)
+            ?.exercises.find(e => e.name === exerciseName);
+
+        if (lastExercise) {
+            const sets = await getSets(lastExercise.id);
+            return sets.find(set => set.setNumber === setNumber) ?? null;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error('Error while getting previous set:', error);
+        return null;
+    }
+}
 
 export async function deleteSet(setId: string): Promise<WorkoutSet | null> {
     try {

@@ -6,6 +6,7 @@ import { HomeTabScreenProps, Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { getPrevSet } from 'src/api/endpoints/sets';
 
 export default function HomeScreen(props: HomeTabScreenProps<'Home'>) {
     const shouldRenderSnackbar = props.route.params?.snackbarContent !== undefined;

@@ -192,7 +192,7 @@ export interface WorkoutSet {
  */
 export interface WorkoutExercise {
     id: string;
-    workoutId: string;
+    workoutId?: string;
     primaryMuscle: ExerciseMuscle;
     name: string;
     level: ExerciseLevel;
@@ -243,6 +243,7 @@ export interface ExerciseTableRow {
     id?: string;
     setNumber: number;
     weight: number | null;
+    weightPlaceholder: number;
     reps: number | null;
     repsPlaceholder: number;
     checked: boolean;

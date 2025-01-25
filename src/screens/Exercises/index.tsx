@@ -122,7 +122,7 @@ const getExerciseInstructions = (exercise: PredefinedExerciseType | null) => {
 };
 
 const toWorkoutScreenExercise = (exercise: PredefinedExerciseType): WorkoutScreenExercise => ({
-    exercise: exercise,
+    exercise: { ...exercise, id: exercise.id + '_' + Date.now() },
     rows: [],
     restTimeSeconds: null
 });

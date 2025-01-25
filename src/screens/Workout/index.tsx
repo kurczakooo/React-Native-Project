@@ -150,7 +150,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             .filter(e => e.rows.length > 0)
             .map(e => ({
                 exercise: {
-                    ...(editMode && { id: e.id as string }),
+                    ...(editMode && { id: e.id?.split('_').at(0) as string }),
                     workoutId: workoutId,
                     primaryMuscle: e.exercise.primaryMuscle,
                     name: e.exercise.name,

@@ -1,13 +1,14 @@
 import { Pressable, View, TextInput, Image, StyleSheet } from 'react-native';
 import { Table, Row, Rows } from 'react-native-reanimated-table';
 import { useTheme, Text, Checkbox } from 'react-native-paper';
-import { Theme, WorkoutScreenExercise } from 'src/types';
+import { Theme, WorkoutScreenExercise, WorkoutSet } from 'src/types';
 import { ExerciseTableRow } from 'src/types';
 import Card from 'src/components/Card';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import ThemedIcon from 'src/components/ThemedIcon';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { Dispatch, SetStateAction } from 'react';
+import { getPrevSet } from 'src/api/endpoints/sets';
 
 type ExerciseCardProps = {
     cardExercise: WorkoutScreenExercise;
@@ -25,6 +26,7 @@ function tabelarizeRowData(
     onRowUpdate: (updatedRow: ExerciseTableRow) => void,
     onRowDelete: (setNumber: number) => void
 ): (JSX.Element | null)[] {
+    console.log(row);
     return [
         editMode ? null : (
             <Pressable onPress={() => onRowDelete(row.setNumber)}>
@@ -40,7 +42,7 @@ function tabelarizeRowData(
         </Text>,
         <TextInput
             value={row.weight?.toString() ?? ''}
-            placeholder={row.prevWeight?.toString() ?? row.weight?.toString() ?? '0'}
+            placeholder={row.weightPlaceholder.toString()}
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
@@ -48,7 +50,7 @@ function tabelarizeRowData(
         />,
         <TextInput
             value={row.reps?.toString() ?? ''}
-            placeholder={row.prevReps?.toString() ?? row.repsPlaceholder.toString()}
+            placeholder={row.repsPlaceholder.toString()}
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
@@ -57,7 +59,14 @@ function tabelarizeRowData(
         <Checkbox
             status={row.checked ? 'checked' : 'unchecked'}
             disabled={editMode}
-            onPress={() => onRowUpdate({ ...row, checked: !row.checked })}
+            onPress={() => {
+                onRowUpdate({
+                    ...row,
+                    checked: !row.checked,
+                    reps: row.reps || row.repsPlaceholder,
+                    weight: row.weight || row.weightPlaceholder
+                });
+            }}
         />
     ];
 }
@@ -125,15 +134,25 @@ export default function ExerciseCard(props: ExerciseCardProps) {
         }));
     };
 
-    const handleAddSet = () => {
+    const handleAddSet = async () => {
         const newSetNumber = cardExercise.rows.length + 1;
+        const prevSet = await getPrevSet(userData.id, cardExercise.exercise.name, newSetNumber);
         const lastSet = cardExercise.rows.at(-1);
         const newRow: ExerciseTableRow = {
             setNumber: newSetNumber,
-            weight: lastSet?.weight ?? null,
+            weight: null,
             reps: null,
-            repsPlaceholder: lastSet?.reps ?? 0,
-            checked: false
+            checked: false,
+            prevReps: prevSet?.reps,
+            prevWeight: prevSet?.weight,
+            weightPlaceholder:
+                (newSetNumber === 1 ? prevSet?.weight : lastSet?.weight) ??
+                lastSet?.weightPlaceholder ??
+                0,
+            repsPlaceholder:
+                (newSetNumber === 1 ? prevSet?.reps : lastSet?.reps) ??
+                lastSet?.repsPlaceholder ??
+                0
         };
 
         setOrAppendUserSets(newRow);
