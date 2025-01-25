@@ -1,6 +1,16 @@
 import { PredefinedExercise, WorkoutExercise } from 'src/types';
 import { api } from '../config';
 
+export async function getPredefinedExercises(): Promise<PredefinedExercise[]> {
+    try {
+        const response = await api.get('/predefined-exercises');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching predefined exercises:', error);
+        return [];
+    }
+}
+
 export async function getExercises(workoutId: string | undefined): Promise<WorkoutExercise[]> {
     try {
         const response = await api.get(`/exercises?workoutId=${workoutId}`);

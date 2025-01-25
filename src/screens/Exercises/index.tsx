@@ -8,7 +8,6 @@ import {
     HomeTabScreenProps,
     WorkoutScreenExercise
 } from 'src/types';
-import { exercises as devExercises } from './exercises';
 import ScreenContainer from 'src/components/ScreenContainer';
 import PredefinedExercise from './components/PredefinedExercise';
 import Fuse from 'fuse.js';
@@ -18,6 +17,7 @@ import { CompositeScreenProps, useNavigation, useRoute } from '@react-navigation
 import React from 'react';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { getPredefinedExercises } from 'src/api/endpoints/exercises';
 
 enum ActionType {
     FETCH,
@@ -141,9 +141,9 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
     const isSelectMode = route.params?.mode === 'select';
 
     useEffect(() => {
-        // Fetch exercises...
         const fetchExercises = async () => {
-            dispatch({ type: ActionType.FETCH, payload: { exercises: devExercises } });
+            const exercises = await getPredefinedExercises();
+            dispatch({ type: ActionType.FETCH, payload: { exercises } });
         };
 
         fetchExercises();
