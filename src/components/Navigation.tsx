@@ -33,7 +33,7 @@ import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 const config = {
     settingsScreenName: 'Settings',
-    screensWithHeaderLogo: ['Home', 'Profile', 'Debug', 'Exercises']
+    screensWithHeaderLogo: ['Home', 'Profile', 'Debug', 'Exercises', 'Workout']
 };
 
 const tabNavigatorOptions: BottomTabNavigationOptions = {

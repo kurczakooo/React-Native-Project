@@ -203,6 +203,12 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
         props.navigation.navigate('Home', { snackbarContent: message });
     };
 
+    const handleWorkoutDiscard = () => {
+        delete userData.workout;
+        setDiscardDialogVisible(false);
+        props.navigation.navigate('Home');
+    };
+
     const handleMediaPick = async (source: 'images' | 'camera') => {
         setImageUri(await getMediaUri(source));
         setPickDialogVisible(false);
@@ -242,7 +248,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                                 : 'Are you sure you want to discard the session?'
                         }
                         visible={discardDialogVisible}
-                        onConfirm={() => setDiscardDialogVisible(false)}
+                        onConfirm={() => handleWorkoutDiscard()}
                         onCancel={() => setDiscardDialogVisible(false)}
                     />
                 </Portal>
