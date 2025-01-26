@@ -17,7 +17,6 @@ import {
 } from 'src/types';
 
 import TabBarIcon, { TabBarIconVariant } from './TabBarIcon';
-import DebugScreen from 'src/debug';
 import SettingsScreen from 'src/screens/Settings';
 import LoginScreen from 'src/screens/Login';
 import RegisterScreen from 'src/screens/Register';
@@ -94,16 +93,9 @@ function HomeStack() {
     };
 
     return (
-        <Stack.Navigator
-            screenOptions={getStackNavigatorOptions}
-            //initialRouteName='Workout'
-        >
+        <Stack.Navigator screenOptions={getStackNavigatorOptions}>
             <Stack.Screen name='Home' component={HomeScreen} />
-            <Stack.Screen
-                name='Workout'
-                component={WorkoutScreen}
-                //initialParams={{ workout }}
-            />
+            <Stack.Screen name='Workout' component={WorkoutScreen} />
             <Stack.Screen name='Settings' component={SettingsScreen} />
             <Stack.Screen name='Exercises' component={ExercisesScreen} />
             <Stack.Screen name='Workout Details' component={CompletedWorkoutScreen} />
@@ -116,7 +108,6 @@ function ExercisesStack() {
     return (
         <Stack.Navigator screenOptions={getStackNavigatorOptions}>
             <Stack.Screen name='Exercises' component={ExercisesScreen} />
-            <Stack.Screen name='Debug' component={DebugScreen} />
             <Stack.Screen name='Settings' component={SettingsScreen} />
         </Stack.Navigator>
     );
