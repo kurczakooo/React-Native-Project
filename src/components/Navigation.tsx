@@ -75,23 +75,6 @@ const getTabScreenOptions = (title: TabBarIconVariant): BottomTabNavigationOptio
 
 function HomeStack() {
     const Stack = createNativeStackNavigator<HomeStackParamList>();
-
-    const workout: Workout = {
-        id: 'w0',
-        userId: 'u0',
-        title: 'First workout',
-        imageUrl: 'https://picsum.photos/200/300',
-        dateTimestamp: 1736606424,
-        totalDuration: 3000,
-        totalSets: 9,
-        totalVolume: 4200,
-        targetMuscles: [
-            { muscleName: 'shoulders', numberOfSets: 3 },
-            { muscleName: 'biceps', numberOfSets: 3 },
-            { muscleName: 'chest', numberOfSets: 3 }
-        ]
-    };
-
     return (
         <Stack.Navigator screenOptions={getStackNavigatorOptions}>
             <Stack.Screen name='Home' component={HomeScreen} />

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { MediaType, launchImageLibraryAsync, launchCameraAsync } from 'expo-image-picker';
-import { StyleSheet, View, Vibration } from 'react-native';
+import { StyleSheet, View, Vibration, BackHandler } from 'react-native';
 import Card from 'src/components/Card';
 import Statistic from 'src/components/Statistic';
 import PhotoPicker from './components/PhotoPicker';
@@ -28,6 +28,7 @@ import {
     WorkoutExercise,
     WorkoutSet
 } from 'src/types';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -80,6 +81,7 @@ function getTotalVolume(exercises: WorkoutScreenExercise[]) {
 
 export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const theme = useTheme<Theme>();
+    const navigation = useNavigation();
     const tabBarHeight = useBottomTabBarHeight();
     const { userData, setUserData } = useCurrentUser();
     const { editMode, workout } = props.route.params ?? {};
@@ -96,6 +98,19 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [duration, setDuration] = useState(editMode ? (workout?.totalDuration as number) : 0);
 
     const exercises = userData.workout?.exercises ?? [];
+
+    useFocusEffect(
+        useCallback(() => {
+            const onBackPress = () => {
+                setDiscardDialogVisible(true);
+                return true;
+            };
+
+            const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+            return () => subscription.remove();
+        }, [])
+    );
 
     useEffect(() => {
         if (editMode) return;
@@ -200,13 +215,19 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             : 'The workout was successfully saved.';
 
         setSaveDialogVisible(false);
-        props.navigation.navigate('Home', { snackbarContent: message });
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'HomeTab', params: { screen: 'Home', snackbarContent: message } }]
+        });
     };
 
     const handleWorkoutDiscard = () => {
         delete userData.workout;
         setDiscardDialogVisible(false);
-        props.navigation.navigate('Home');
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'HomeTab', params: { screen: 'Home' } }]
+        });
     };
 
     const handleMediaPick = async (source: 'images' | 'camera') => {
@@ -215,7 +236,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     };
 
     const handleExerciseAdd = () => {
-        props.navigation.navigate('Exercises', { mode: 'select' });
+        navigation.navigate('HomeTab', { screen: 'Exercises', params: { mode: 'select' } });
     };
 
     const handleRestSkip = () => {

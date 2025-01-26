@@ -180,10 +180,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
             }
         });
 
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Workout' }]
-        });
+        navigation.navigate('Workout');
     };
 
     const isExerciseSelected = (id: string) => {
