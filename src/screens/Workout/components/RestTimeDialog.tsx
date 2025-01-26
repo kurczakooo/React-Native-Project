@@ -30,7 +30,9 @@ export default function RestTimeDialog(props: RestTimeDialogProps) {
 
         if (!changedExercise) return;
 
-        changedExercise.restTimeSeconds = parseInt(minutes || '0') * 60 + parseInt(seconds || '0');
+        const restTimeInput = parseInt(minutes || '0') * 60 + parseInt(seconds || '0');
+        const maxRestTime = 59 * 60 + 59;
+        changedExercise.restTimeSeconds = restTimeInput > maxRestTime ? maxRestTime : restTimeInput;
 
         setUserData(data => ({
             ...data,
@@ -51,7 +53,7 @@ export default function RestTimeDialog(props: RestTimeDialogProps) {
 
     return (
         <Dialog visible={visible} dismissable={false}>
-            <Dialog.Title>End Workout</Dialog.Title>
+            <Dialog.Title>Rest Timer</Dialog.Title>
             <Dialog.Content style={styles.inputContainer}>
                 <TextInput
                     label='Minutes'
