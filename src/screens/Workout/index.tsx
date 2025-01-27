@@ -103,24 +103,26 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
         editMode ? (workout?.totalDuration as number) : (userData.workout?.duration ?? 0)
     );
 
-    const exercises = userData.workout?.exercises ?? [];
+    const initialExercises = userData.workout?.exercises ?? [];
+    const exercises = editMode ? initialExercises.filter(e => e.rows.length > 0) : initialExercises;
 
     useFocusEffect(
         useCallback(() => {
             const onBackPress = () => {
-                setDiscardDialogVisible(true);
-                return true;
+                if (editMode) {
+                    return false;
+                } else {
+                    setDiscardDialogVisible(true);
+                    return true;
+                }
             };
 
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
             return () => subscription.remove();
         }, [])
     );
 
     useEffect(() => {
-        if (editMode) return;
-
         const interval = setInterval(() => {
             setDuration(prev => prev + 1);
         }, 1000);
@@ -334,7 +336,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
                     </View>
                 </Card>
                 <View style={styles.exercisesContainer}>
-                    {userData.workout?.exercises?.map((e, i) => (
+                    {exercises.map((e, i) => (
                         <ExerciseCard
                             key={e.exercise.name + i}
                             editMode={editMode}

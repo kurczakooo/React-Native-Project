@@ -26,7 +26,6 @@ function tabelarizeRowData(
     onRowUpdate: (updatedRow: ExerciseTableRow) => void,
     onRowDelete: (setNumber: number) => void
 ): (JSX.Element | null)[] {
-    console.log(row);
     return [
         editMode ? null : (
             <Pressable onPress={() => onRowDelete(row.setNumber)}>
@@ -46,7 +45,12 @@ function tabelarizeRowData(
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
-            onChangeText={text => onRowUpdate({ ...row, weight: parseFloat(text) || null })}
+            onChangeText={text =>
+                onRowUpdate({
+                    ...row,
+                    weight: Number.isNaN(parseFloat(text)) ? null : parseFloat(text)
+                })
+            }
         />,
         <TextInput
             value={row.reps?.toString() ?? ''}
@@ -54,7 +58,12 @@ function tabelarizeRowData(
             placeholderTextColor={theme.colors.fontInactive}
             style={{ ...styles.cell, color: theme.colors.fontPrimary }}
             keyboardType='decimal-pad'
-            onChangeText={text => onRowUpdate({ ...row, reps: parseInt(text) || null })}
+            onChangeText={text =>
+                onRowUpdate({
+                    ...row,
+                    reps: Number.isNaN(parseFloat(text)) ? null : parseFloat(text)
+                })
+            }
         />,
         <Checkbox
             status={row.checked ? 'checked' : 'unchecked'}

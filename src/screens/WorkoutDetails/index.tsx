@@ -37,7 +37,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
                 }))
             );
 
-            setWorkoutData(fetchedWorkoutData);
+            setWorkoutData(fetchedWorkoutData.filter(e => e.sets.length > 0));
         }
 
         fetchWorkoutData();
@@ -67,6 +67,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
         setUserData(prev => ({
             ...prev,
             workout: {
+                ...prev.workout,
                 exercises: workoutData.map(e => ({
                     id: e.exercise.id,
                     exercise: e.exercise,
@@ -74,6 +75,7 @@ export default function WorkoutDetailsScreen(props: HomeTabScreenProps<'Workout 
                         id: set.id,
                         setNumber: set.setNumber,
                         weight: set.weight,
+                        weightPlaceholder: set.weight,
                         reps: set.reps,
                         repsPlaceholder: set.reps,
                         checked: true
