@@ -11,7 +11,7 @@ const LogoutCard = () => {
     const { userData, setUserData } = useCurrentUser();
     const [logoutInidicator, setLogoutIndicator] = useState(false);
 
-    const onLogout = async () => {
+    const onLogout = () => {
         setLogoutIndicator(true);
         logout()
             .then(() => setUserData({}))

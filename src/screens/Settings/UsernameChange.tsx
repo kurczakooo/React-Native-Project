@@ -5,14 +5,13 @@ import { ToastAndroid, View } from 'react-native';
 import { Theme } from 'src/types';
 import { changePassword, changeUsername } from 'src/api/endpoints/settings';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
+import React from 'react';
+import LogoutDialog from './LogoutDialog';
 
-interface Props {
-    setDialogVisible: (isVisible: boolean) => {};
-}
-
-const UsernameChange = ({ setDialogVisible }: Props) => {
+const UsernameChange = () => {
     const theme = useTheme<Theme>();
     const [username, setUsername] = useState('');
+    const [dialogVisibile, setDialogVisible] = useState(false);
 
     const { userData } = useCurrentUser();
 
@@ -21,7 +20,6 @@ const UsernameChange = ({ setDialogVisible }: Props) => {
         if (uid === undefined) {
             throw new Error('User is not present');
         }
-        setDialogVisible(true);
         changeUsername(uid, username).catch(e => {
             ToastAndroid.show(e.message, ToastAndroid.SHORT);
             console.error(e);
@@ -29,26 +27,33 @@ const UsernameChange = ({ setDialogVisible }: Props) => {
     };
 
     return (
-        <View
-            style={{
-                ...styles.container,
-                backgroundColor: theme.colors.elevation.level5,
-                boxShadow: theme.shadowPrimary
-            }}
-        >
-            <Text variant='titleLarge'>Username</Text>
-            <TextInput
-                mode='outlined'
-                label='New username'
-                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
-                onChangeText={text => {
-                    setUsername(text);
-                }}
+        <>
+            <LogoutDialog
+                visible={dialogVisibile}
+                onCancel={() => setDialogVisible(false)}
+                onConfirm={onChangeUserName}
             />
-            <Button mode='contained' onPress={onChangeUserName}>
-                Change username
-            </Button>
-        </View>
+            <View
+                style={{
+                    ...styles.container,
+                    backgroundColor: theme.colors.elevation.level5,
+                    boxShadow: theme.shadowPrimary
+                }}
+            >
+                <Text variant='titleLarge'>Username</Text>
+                <TextInput
+                    mode='outlined'
+                    label='New username'
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+                    onChangeText={text => {
+                        setUsername(text);
+                    }}
+                />
+                <Button mode='contained' onPress={() => setDialogVisible(true)}>
+                    Change username
+                </Button>
+            </View>
+        </>
     );
 };
 

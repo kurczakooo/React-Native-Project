@@ -6,12 +6,15 @@ import { ToastAndroid, View } from 'react-native';
 import { Theme } from 'src/types';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import { saveCredentialsAsync } from 'src/api/endpoints/login';
+import React from 'react';
+import LogoutDialog from './LogoutDialog';
 
 export const PasswordChange = () => {
     const theme = useTheme<Theme>();
     const { userData, setUserData } = useCurrentUser();
     const [passwordError, setPasswordError] = useState('');
     const [newPasswordDoNotMatchError, setNewPasswordError] = useState('');
+    const [dialogVisibile, setDialogVisible] = useState(false);
 
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -76,68 +79,75 @@ export const PasswordChange = () => {
     }, [password]);
 
     return (
-        <View
-            style={{
-                ...styles.container,
-                backgroundColor: theme.colors.elevation.level5,
-                boxShadow: theme.shadowPrimary
-            }}
-        >
-            <Text variant='titleLarge'>Password</Text>
-            <View>
+        <>
+            <LogoutDialog
+                visible={dialogVisibile}
+                onConfirm={onChangePassword}
+                onCancel={() => setDialogVisible(false)}
+            />
+            <View
+                style={{
+                    ...styles.container,
+                    backgroundColor: theme.colors.elevation.level5,
+                    boxShadow: theme.shadowPrimary
+                }}
+            >
+                <Text variant='titleLarge'>Password</Text>
+                <View>
+                    <TextInput
+                        mode='outlined'
+                        label='Old password'
+                        onChangeText={setPassword}
+                        error={passwordError !== ''}
+                        secureTextEntry
+                        theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+                    />
+                    {passwordError !== '' && (
+                        <HelperText
+                            style={{ margin: 0, padding: 0 }}
+                            type='error'
+                            visible={passwordError !== ''}
+                        >
+                            {passwordError}
+                        </HelperText>
+                    )}
+                </View>
                 <TextInput
                     mode='outlined'
-                    label='Old password'
-                    onChangeText={setPassword}
-                    error={passwordError !== ''}
+                    label='New password'
+                    onChangeText={setNewPassword}
+                    value={newPassword}
                     secureTextEntry
                     theme={{ roundness: 5, colors: { background: theme.colors.form } }}
                 />
-                {passwordError !== '' && (
-                    <HelperText
-                        style={{ margin: 0, padding: 0 }}
-                        type='error'
-                        visible={passwordError !== ''}
-                    >
-                        {passwordError}
-                    </HelperText>
-                )}
-            </View>
-            <TextInput
-                mode='outlined'
-                label='New password'
-                onChangeText={setNewPassword}
-                value={newPassword}
-                secureTextEntry
-                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
-            />
 
-            <TextInput
-                mode='outlined'
-                label='Repeat new password'
-                onChangeText={setNewPasswordConfirm}
-                value={newPasswordConfirm}
-                secureTextEntry
-                theme={{ roundness: 5, colors: { background: theme.colors.form } }}
-            />
-            <View>
-                {newPasswordDoNotMatchError !== '' && (
-                    <HelperText
-                        style={{ margin: 0 }}
-                        type='error'
-                        visible={newPasswordDoNotMatchError !== ''}
+                <TextInput
+                    mode='outlined'
+                    label='Repeat new password'
+                    onChangeText={setNewPasswordConfirm}
+                    value={newPasswordConfirm}
+                    secureTextEntry
+                    theme={{ roundness: 5, colors: { background: theme.colors.form } }}
+                />
+                <View>
+                    {newPasswordDoNotMatchError !== '' && (
+                        <HelperText
+                            style={{ margin: 0 }}
+                            type='error'
+                            visible={newPasswordDoNotMatchError !== ''}
+                        >
+                            {newPasswordDoNotMatchError}
+                        </HelperText>
+                    )}
+                    <Button
+                        onPress={() => setDialogVisible(true)}
+                        mode='contained'
+                        loading={isPasswordChangePending}
                     >
-                        {newPasswordDoNotMatchError}
-                    </HelperText>
-                )}
-                <Button
-                    onPress={onChangePassword}
-                    mode='contained'
-                    loading={isPasswordChangePending}
-                >
-                    Change password
-                </Button>
+                        Change password
+                    </Button>
+                </View>
             </View>
-        </View>
+        </>
     );
 };
