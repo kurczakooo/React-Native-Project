@@ -56,7 +56,7 @@ export const PasswordChange = () => {
                 // to update local storage data
                 saveCredentialsAsync({ username: curUser, password: newPassword })
                     .then(e => {
-                        () => setDialogVisible(true);
+                        setDialogVisible(true);
                     })
                     .catch(e => {
                         console.error(e);
