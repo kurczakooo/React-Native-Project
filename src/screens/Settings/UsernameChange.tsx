@@ -6,7 +6,11 @@ import { Theme } from 'src/types';
 import { changePassword, changeUsername } from 'src/api/endpoints/settings';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
-const UsernameChange = () => {
+interface Props {
+    setDialogVisible: (isVisible: boolean) => {};
+}
+
+const UsernameChange = ({ setDialogVisible }: Props) => {
     const theme = useTheme<Theme>();
     const [username, setUsername] = useState('');
 
@@ -17,6 +21,7 @@ const UsernameChange = () => {
         if (uid === undefined) {
             throw new Error('User is not present');
         }
+        setDialogVisible(true);
         changeUsername(uid, username).catch(e => {
             ToastAndroid.show(e.message, ToastAndroid.SHORT);
             console.error(e);
