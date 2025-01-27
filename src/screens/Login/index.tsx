@@ -104,7 +104,7 @@ export default function Login({ navigation }: any) {
         <View
             style={{
                 ...styles.container,
-                backgroundColor: theme.colors.background,
+                backgroundColor: theme.colors.elevation.level5,
                 flex: 1,
                 borderRadius: 0
             }}
