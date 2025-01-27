@@ -93,9 +93,15 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     const [restDialogExerciseId, setRestDialogExerciseId] = useState<string>('');
     const [restSnackbarVisible, setRestSnackbarVisible] = useState(true);
     const [restTimeSeconds, setRestTimeSeconds] = useState<number | null>(null);
-    const [imageUri, setImageUri] = useState(editMode ? (workout?.imageUrl as string) : '');
-    const [title, setTitle] = useState(editMode ? (workout?.title as string) : '');
-    const [duration, setDuration] = useState(editMode ? (workout?.totalDuration as number) : 0);
+    const [imageUri, setImageUri] = useState(
+        editMode ? (workout?.imageUrl as string) : (userData.workout?.imageUri ?? '')
+    );
+    const [title, setTitle] = useState(
+        editMode ? (workout?.title as string) : (userData.workout?.title ?? '')
+    );
+    const [duration, setDuration] = useState(
+        editMode ? (workout?.totalDuration as number) : (userData.workout?.duration ?? 0)
+    );
 
     const exercises = userData.workout?.exercises ?? [];
 
@@ -236,6 +242,15 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     };
 
     const handleExerciseAdd = () => {
+        setUserData({
+            ...userData,
+            workout: {
+                ...(userData.workout ?? {}),
+                imageUri: imageUri,
+                duration: duration,
+                title: title
+            }
+        });
         navigation.navigate('HomeTab', { screen: 'Exercises', params: { mode: 'select' } });
     };
 

@@ -176,6 +176,7 @@ export default function ExercisesScreen(props: ExercisesScreenProps) {
         setUserData({
             ...userData,
             workout: {
+                ...userData.workout,
                 exercises: exercises
             }
         });

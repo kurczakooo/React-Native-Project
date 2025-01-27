@@ -236,6 +236,9 @@ export interface CurrentUser {
     username?: string;
     workout?: {
         exercises?: WorkoutScreenExercise[];
+        duration?: number;
+        imageUri?: string;
+        title?: string;
     };
 }
 
