@@ -56,7 +56,7 @@ export const PasswordChange = () => {
                 // to update local storage data
                 saveCredentialsAsync({ username: curUser, password: newPassword })
                     .then(e => {
-                        console.log('updated');
+                        () => setDialogVisible(true);
                     })
                     .catch(e => {
                         console.error(e);
@@ -80,11 +80,7 @@ export const PasswordChange = () => {
 
     return (
         <>
-            <LogoutDialog
-                visible={dialogVisibile}
-                onConfirm={onChangePassword}
-                onCancel={() => setDialogVisible(false)}
-            />
+            <LogoutDialog visible={dialogVisibile} onCancel={() => setDialogVisible(false)} />
             <View
                 style={{
                     ...styles.container,
@@ -140,7 +136,7 @@ export const PasswordChange = () => {
                         </HelperText>
                     )}
                     <Button
-                        onPress={() => setDialogVisible(true)}
+                        onPress={onChangePassword}
                         mode='contained'
                         loading={isPasswordChangePending}
                     >

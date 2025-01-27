@@ -70,7 +70,7 @@ export default function Login({ navigation }: any) {
             })
             .catch(e => {
                 console.error('Error during login ' + e);
-                setLoginFailed('' + e);
+                setLoginFailed('Błąd przy połączeniu z serwerem.');
             })
             .finally(() => {
                 setIsLoginPending(false);

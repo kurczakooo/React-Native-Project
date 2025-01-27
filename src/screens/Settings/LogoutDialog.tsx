@@ -5,15 +5,13 @@ import { useCurrentUser } from 'src/hooks/useCurrentUser';
 
 interface Props {
     visible: boolean;
-    onConfirm: () => void;
     onCancel: () => void;
 }
 
-function LogoutDialog({ visible, onConfirm, onCancel }: Props) {
+function LogoutDialog({ visible, onCancel }: Props) {
     const { setUserData } = useCurrentUser();
 
     const handleConfirm = async () => {
-        onConfirm();
         await logout();
         setUserData({});
         onCancel();
@@ -27,7 +25,6 @@ function LogoutDialog({ visible, onConfirm, onCancel }: Props) {
                     <Text variant='bodyMedium'>To complete the action you will be logged out.</Text>
                 </Dialog.Content>
                 <Dialog.Actions>
-                    <Button onPress={onCancel}>Cancel</Button>
                     <Button onPress={handleConfirm}>OK</Button>
                 </Dialog.Actions>
             </Dialog>

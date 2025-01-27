@@ -20,19 +20,19 @@ const UsernameChange = () => {
         if (uid === undefined) {
             throw new Error('User is not present');
         }
-        changeUsername(uid, username).catch(e => {
-            ToastAndroid.show(e.message, ToastAndroid.SHORT);
-            console.error(e);
-        });
+        changeUsername(uid, username)
+            .then(() => {
+                setDialogVisible(true);
+            })
+            .catch(e => {
+                ToastAndroid.show('Wystąpił błąd przy zmianie loginu.', ToastAndroid.SHORT);
+                console.error(e);
+            });
     };
 
     return (
         <>
-            <LogoutDialog
-                visible={dialogVisibile}
-                onCancel={() => setDialogVisible(false)}
-                onConfirm={onChangeUserName}
-            />
+            <LogoutDialog visible={dialogVisibile} onCancel={() => setDialogVisible(false)} />
             <View
                 style={{
                     ...styles.container,
@@ -49,7 +49,7 @@ const UsernameChange = () => {
                         setUsername(text);
                     }}
                 />
-                <Button mode='contained' onPress={() => setDialogVisible(true)}>
+                <Button mode='contained' onPress={onChangeUserName}>
                     Change username
                 </Button>
             </View>
