@@ -119,7 +119,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
 
             const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
             return () => subscription.remove();
-        }, [])
+        }, [editMode])
     );
 
     useEffect(() => {
