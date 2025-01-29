@@ -4,10 +4,11 @@ import { View } from 'react-native';
 import { useFont } from '@shopify/react-native-skia';
 import { useTheme } from 'react-native-paper';
 import { Theme, Workout } from 'src/types';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import dayjs from 'dayjs';
+import { useFocusEffect } from '@react-navigation/native';
 
 type BarGeneratorProps = {
     points: { totalHours: PointsArray };
@@ -46,7 +47,7 @@ function getWeeklyWorkoutData(workouts: Workout[]): WorkoutData[] {
 
     return weeks.map(week => ({
         week: week.start.format('MMM D'),
-        totalHours: Math.round(week.totalDuration / 3600)
+        totalHours: Math.round((week.totalDuration / 3600) * 100) / 100
     }));
 }
 
@@ -78,15 +79,17 @@ export default function WorkoutTimeChart(props: WorkoutTimeChartProps) {
         lineColor: theme.colors.fontSecondary
     };
 
-    useEffect(() => {
-        async function fetchChartData() {
-            const workouts = await getWorkouts(userData.id);
-            const data = getWeeklyWorkoutData(workouts);
-            setWorkoutData(data);
-        }
+    useFocusEffect(
+        useCallback(() => {
+            async function fetchChartData() {
+                const workouts = await getWorkouts(userData.id);
+                const data = getWeeklyWorkoutData(workouts);
+                setWorkoutData(data);
+            }
 
-        fetchChartData();
-    }, [userData.id]);
+            fetchChartData();
+        }, [userData.id])
+    );
 
     const chartBar = ({ points, chartBounds }: BarGeneratorProps) => (
         <Bar points={points.totalHours} chartBounds={chartBounds} color={theme.colors.primary} />

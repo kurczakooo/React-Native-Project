@@ -77,7 +77,6 @@ export default function CalendarScreen() {
         async function fetchWorkouts() {
             const workouts = await getWorkoutsFromLastMonths(userData.id, 3);
             const daysWithWorkouts = extractWorkoutDays(workouts);
-            console.log(workouts);
             const streakAndRest = calculateStreakAndRest(daysWithWorkouts);
             setStreak(streakAndRest.streak);
             setRestDays(streakAndRest.restDays);

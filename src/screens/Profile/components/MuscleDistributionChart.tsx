@@ -2,12 +2,13 @@ import { BoxShadow, Canvas, Circle, useFont, vec } from '@shopify/react-native-s
 import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
 import { Pie, PolarChart } from 'victory-native';
 import { Text, useTheme } from 'react-native-paper';
-import { useEffect, useLayoutEffect, useRef, useState, RefAttributes } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, RefAttributes, useCallback } from 'react';
 import { VariantProp } from 'react-native-paper/lib/typescript/components/Typography/types';
 import { Theme, Workout } from 'src/types';
 import { getWorkouts } from 'src/api/endpoints/workouts';
 import { useCurrentUser } from 'src/hooks/useCurrentUser';
 import dayjs from 'dayjs';
+import { useFocusEffect } from '@react-navigation/native';
 
 type MuscleDistributionChartProps = {
     height?: number;
@@ -93,19 +94,21 @@ export default function MuscleDistributionChart(props: MuscleDistributionChartPr
     const [chartData, setChartData] = useState<MuscleData[]>([]);
     const [chartShadowSizing, setChartShadowSizing] = useState({});
 
-    useEffect(() => {
-        async function fetchChartData() {
-            const workouts = await getWorkouts(userData.id);
-            const chartData = getMuscleChartData(
-                workouts,
-                theme.colors.primary,
-                theme.colors.onPrimary
-            );
-            setChartData(chartData);
-        }
+    useFocusEffect(
+        useCallback(() => {
+            async function fetchChartData() {
+                const workouts = await getWorkouts(userData.id);
+                const chartData = getMuscleChartData(
+                    workouts,
+                    theme.colors.primary,
+                    theme.colors.onPrimary
+                );
+                setChartData(chartData);
+            }
 
-        fetchChartData();
-    }, [theme.colors.primary, theme.colors.onPrimary, userData.id]);
+            fetchChartData();
+        }, [theme.colors.primary, theme.colors.onPrimary, userData.id])
+    );
 
     const handleChartLayout = (event: LayoutChangeEvent) => {
         const { width, height } = event.nativeEvent.layout;

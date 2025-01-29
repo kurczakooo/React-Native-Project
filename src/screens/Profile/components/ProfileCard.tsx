@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { getTotalWorkouts, getTotalWorkoutTime } from 'src/api/endpoints/workouts';
@@ -13,14 +14,16 @@ export default function ProfileCard() {
     const [totalWorkouts, setTotalWorkouts] = useState(0);
     const [totalTime, setTotalTime] = useState(0);
 
-    useEffect(() => {
-        async function fetchWorkoutData() {
-            setTotalWorkouts(await getTotalWorkouts(userData.id));
-            setTotalTime(await getTotalWorkoutTime(userData.id));
-        }
+    useFocusEffect(
+        useCallback(() => {
+            async function fetchWorkoutData() {
+                setTotalWorkouts(await getTotalWorkouts(userData.id));
+                setTotalTime(await getTotalWorkoutTime(userData.id));
+            }
 
-        fetchWorkoutData();
-    }, [userData.id]);
+            fetchWorkoutData();
+        }, [userData.id])
+    );
 
     return (
         <View
