@@ -29,6 +29,7 @@ import {
     WorkoutSet
 } from 'src/types';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import dayjs from 'dayjs';
 
 async function getMediaUri(source: 'images' | 'camera') {
     const options: { mediaTypes: MediaType[]; quality: number } = {
@@ -123,6 +124,8 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
     );
 
     useEffect(() => {
+        if (editMode) return;
+
         const interval = setInterval(() => {
             setDuration(prev => prev + 1);
         }, 1000);
@@ -153,7 +156,7 @@ export default function WorkoutScreen(props: HomeTabScreenProps<'Workout'>) {
             title: title || 'Untitled workout',
             imageUrl: imageUri || null,
             dateTimestamp: Math.floor(
-                (editMode ? (workout?.dateTimestamp as number) : Date.now()) / 1000
+                editMode ? (workout?.dateTimestamp as number) : dayjs().unix()
             ),
             totalDuration: duration,
             totalSets: getTotalSets(exercises),
